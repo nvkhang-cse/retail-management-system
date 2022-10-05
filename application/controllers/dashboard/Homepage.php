@@ -44,6 +44,7 @@ class Homepage extends CI_Controller {
 		// 	$this->data['msg'] = 'Sign in to K&K systems management';
 
 		$this->data["index"]= 1;
+		$this->data["index2"]= 0;
 		$this->load->view('cms/layout/main_error', $this->data);
 		// }
 
