@@ -871,6 +871,9 @@
           else if (index2==2){
             url_attr = "<?= site_url("api/dashboard/product/loadtrashpage") ?>";
           }
+          else if (index2==3){
+            url_attr = "<?= site_url("api/dashboard/product/loadaddpage") ?>";
+          }
           break;
       }
       // $.ajax({
@@ -935,70 +938,123 @@
           var index2 = <?php echo $index2 ?>;
           if (index2==1){
             url_attr = "<?= site_url("api/dashboard/product/loadtabledata") ?>";
+            var table;
+            var data_table;
+
+            $.ajax({
+              type: "POST",
+              url: url_attr,
+              dataType: "json",
+              encode: true,
+              async: false,
+              headers: {'Authorization': localStorage.getItem('auth_token')},
+              success: function(response) {
+                  // getResponse(response);
+                  data_table = response
+              },          
+            });
+
+            table = $('#example1').DataTable({
+                data: data_table.data,
+                columns: [
+                  { 
+                    // "targets": [0],
+                    'searchable': false,
+                    'orderable': false,
+                    'className': 'dt-body-center',
+                    'checkboxes': {
+                      'selectRow': true
+                    },
+                    data: 'id'
+                  },
+                  { data: 'title' },
+                  { data: 'product_code' },
+                  { data: 'brand' },
+                  { data: 'origin' },
+                  { data: 'capacity' },
+                  { data: 'quantity' },
+                  { data: 'price' },
+                  { data: null, 
+                    defaultContent: '<div class="btn-group"><button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown"></button><div class="dropdown-menu"><a class="dropdown-item" href="#">Dropdown link</a><a class="dropdown-item" href="#">Dropdown link</a></div></div>' ,
+                    'className': 'dt-body-center',
+                    'searchable': false,
+                    'orderable': false,
+                  }
+
+                ],
+                "order": [[1, 'asc']],
+                "responsive": true, 
+                "lengthChange": false, 
+                "autoWidth": false,
+                "buttons": [
+                  "copy", 
+                  "csv", 
+                  "excel", 
+                  "pdf", 
+                  "print", 
+                  "colvis"
+                ]
+              }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+
+            $('#delete_btn').on('click', function(){
+              // var selected_rows = table.api().column(0).checkboxes.selected();
+              // $.each(selected_rows, function(key, id){
+              //   console.log( id);
+              // });
+              console.log(table);
+
+            });
+
+
+
+            
           }
           else if (index2==2){
             url_attr = "";
+          }          
+          else if (index2==3){
+            url_attr = "";
           }
-          $.ajax({
-            type: "POST",
-            url: url_attr,
-            dataType: "json",
-            encode: true,
-            headers: {'Authorization': localStorage.getItem('auth_token')},
-            success: function(response) {
-                getResponse(response);
-            },          
-          });
 
-          var table;
-          function getResponse(response) {
-            table = $('#example1').DataTable({
-              data: response.data,
-              columns: [
-                { 
-                  "targets": [0],
-                  'searchable': false,
-                  'orderable': false,
-                  'className': 'dt-body-center',
-                  'checkboxes': {
-                    'selectRow': true
-                  },
-                  data: 'id'
-                },
-                { data: 'title' },
-                { data: 'product_code' },
-                { data: 'brand' },
-                { data: 'origin' },
-                { data: 'capacity' },
-                { data: 'quantity' },
-                { data: 'price' },
-                { data: null, 
-                  defaultContent: '<div class="btn-group"><button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown"></button><div class="dropdown-menu"><a class="dropdown-item" href="#">Dropdown link</a><a class="dropdown-item" href="#">Dropdown link</a></div></div>' ,
-                  'className': 'dt-body-center',
-                  'searchable': false,
-                  'orderable': false,
-                }
 
-              ],
-              "order": [[1, 'asc']],
-              "responsive": true, 
-              "lengthChange": false, 
-              "autoWidth": false,
-              "buttons": [
-                "copy", 
-                "csv", 
-                "excel", 
-                "pdf", 
-                "print", 
-                "colvis"
-              ]
-            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-          }
-          console.log(table);
 
-          // console.log(table_data);
-          // function fillProductTable(response){
-          // table = $('#example1').DataTable({
+
+
+
+          // var table;
+          // table = fillProductTable(url_attr);
+          // console.log(table);
+          
+          // $('#delete_btn').click(async () => {
+          //   const imgUrl = await findRandomImgPromise('cat');
+          //   $('#cat').attr('src', imgUrl);
+          // });
+
+          // async function test(ajaxurl) {
+          //   try {
+          //     const res = await getProductData(ajaxurl);
+          //     table = await fillProductTable(res);
+          //     console.log(table);
+
+          //   } catch(err) {
+          //     console.log(err);
+          //   }
+          // }
+          // test(url_attr);
+
+
+          // $('#request').click(async () => {
+          //   const imgUrl = await findRandomImgPromise('cat');
+          //   $('#cat').attr('src', imgUrl);
+          // });
+
+          // getProductData(url_attr).then((res) => {
+          //   table = res
+          // });
+          // console.log(table)
+
+          // function getResponse(response) {
+          //   table = $('#example1').DataTable({
           //     data: response.data,
           //     columns: [
           //       { 
@@ -1039,29 +1095,66 @@
           //       "colvis"
           //     ]
           //   }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-  
-            // console.log(table);
-
           // }
-          // console.log(table);
+          function fillProductTable(res){
+            // const res = getProductData(ajaxurl);
+            return $('#example1').DataTable({
+              data: res.data,
+              columns: [
+                { 
+                  "targets": [0],
+                  'searchable': false,
+                  'orderable': false,
+                  'className': 'dt-body-center',
+                  'checkboxes': {
+                    'selectRow': true
+                  },
+                  data: 'id'
+                },
+                { data: 'title' },
+                { data: 'product_code' },
+                { data: 'brand' },
+                { data: 'origin' },
+                { data: 'capacity' },
+                { data: 'quantity' },
+                { data: 'price' },
+                { data: null, 
+                  defaultContent: '<div class="btn-group"><button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown"></button><div class="dropdown-menu"><a class="dropdown-item" href="#">Dropdown link</a><a class="dropdown-item" href="#">Dropdown link</a></div></div>' ,
+                  'className': 'dt-body-center',
+                  'searchable': false,
+                  'orderable': false,
+                }
 
-          // $('#delete_btn').on('click', function(){
-          //   var selected_rows = table.column(0).checkboxes.selected();
-          //   $.each(selected_rows, function(key, id){
-          //     console.log(table);
+              ],
+              "order": [[1, 'asc']],
+              "responsive": true, 
+              "lengthChange": false, 
+              "autoWidth": false,
+              "buttons": [
+                "copy", 
+                "csv", 
+                "excel", 
+                "pdf", 
+                "print", 
+                "colvis"
+              ]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+          }
+
+          // function getProductData(ajaxurl) { 
+          //   return $.ajax({
+          //     type: "POST",
+          //     url: ajaxurl,
+          //     dataType: "json",
+          //     encode: true,
+          //     headers: {'Authorization': localStorage.getItem('auth_token')}, 
           //   });
-
-
-
-
-          // });
-          // $(function () {
-          //   $("#example1").DataTable({
-          //     "responsive": true, "lengthChange": false, "autoWidth": false,
-          //     "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-          //   }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-          // });
+          // };
           break;
+        case 3:
+          
+          break;
+
       }
   }
 </script>

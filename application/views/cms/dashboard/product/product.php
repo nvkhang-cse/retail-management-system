@@ -26,8 +26,12 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-              <button type="button" class="btn btn-primary btn-sm" id="delete_btn">Delete</button>
 
+              <button type="button" class="btn btn-primary btn-sm" id="delete_btn">Xóa sản phẩm</button>
+              
+              <a href="<?= site_url("dashboard/product/loadaddproduct") ?>">
+                <button type="button" class="btn btn-primary btn-sm" id="add_btn">Thêm sản phẩm</button>
+              </a>
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>

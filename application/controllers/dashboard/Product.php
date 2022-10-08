@@ -30,5 +30,11 @@ class Product extends CI_Controller {
 		$this->data["index2"]= 2;
 		$this->load->view('cms/layout/main_error', $this->data);
 	}
+	public function loadaddproduct()
+	{
+   		$this->data["index"]= 2;
+		$this->data["index2"]= 3;
+		$this->load->view('cms/layout/main_error', $this->data);
+	}
 
 }
