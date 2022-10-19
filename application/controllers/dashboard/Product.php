@@ -36,5 +36,12 @@ class Product extends CI_Controller {
 		$this->data["index2"]= 3;
 		$this->load->view('cms/layout/main_error', $this->data);
 	}
+	public function loadproductwarehouse()
+	{
+   		$this->data["index"]= 2;
+		$this->data["index2"]= 4;
+		$this->load->view('cms/layout/main_error', $this->data);
+	}
+	
 
 }

@@ -25,7 +25,7 @@ class Homepage extends RestController
 			// $this->data["headerview"]="cms/layout/main";
 			// $this->data["subview"]="cms/layout/main";
 
-			$return_data = $this->load->view('cms/dashboard/homepage', '', true);
+			$return_data = $this->load->view('cms/dashboard/homepage2', '', true);
             
             
             // $return_data = site_url('cms/layout/main.php');

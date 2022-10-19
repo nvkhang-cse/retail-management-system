@@ -2,12 +2,12 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>General Form</h1>
+          <h1>Thêm mới sản phẩm</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">General Form</li>
+            <li class="breadcrumb-item"><a href="#">Sản phẩm</a></li>
+            <li class="breadcrumb-item active">Thêm mới sản phẩm</li>
           </ol>
         </div>
       </div>
@@ -24,37 +24,58 @@
             <form>
               <div class="card-body">
                 <div class="form-group">
-                  <label for="">Tên sản phẩm*</label>
-                  <input type="text" class="form-control" id="" placeholder="Nhập tên sản phẩm">
+                  <label for="product_name">Tên sản phẩm*</label>
+                  <input type="text" class="form-control" id="product_name" placeholder="Nhập tên sản phẩm">
+                </div>
+                <div class="row">
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label for="product_code">Mã sản phẩm*</label>
+                      <input type="text" class="form-control" id="product_code" placeholder="Nhập mã sản phẩm">
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label for="product_brand">Thương hiệu*</label>
+                      <input type="text" class="form-control" id="product_brand" placeholder=""> 
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label for="product_ori">Xuất sứ*</label>
+                      <input type="text" class="form-control" id="product_ori" placeholder=""> 
+                    </div>
+                  </div>
                 </div>
                 <div class="row">
                   <div class="col-sm-6">
                     <div class="form-group">
-                      <label for="">Mã sản phẩm*</label>
-                      <input type="text" class="form-control" id="" placeholder="Nhập mã sản phẩm">
+                      <label for="product_barcode">Barcode*</label>
+                      <input type="text" class="form-control" id="product_barcode" placeholder="">
                     </div>
                   </div>
                   <div class="col-sm-6">
                     <div class="form-group">
-                      <label for="">Barcode*</label>
-                      <input type="text" class="form-control" id="" placeholder="">
+                      <label for="product_quantity">Số lượng*</label>
+                      <input type="text" class="form-control" id="product_quantity" placeholder="">
                     </div>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-sm-6">
                     <div class="form-group">
-                      <label for="">Dung tích</label>
-                      <input type="text" class="form-control" id="" placeholder="">
+                      <label for="product_capacity">Dung tích*</label>
+                      <input type="text" class="form-control" id="product_capacity" placeholder="">
                     </div>
                   </div>
                   <div class="col-sm-6">
                     <div class="form-group">
-                      <label for="">Đơn vị</label>
-                      <input type="text" class="form-control" id="" placeholder="">
+                      <label for="product_unit">Đơn vị*</label>
+                      <input type="text" class="form-control" id="product_unit" placeholder="">
                     </div>
                   </div>
                 </div>
+                
 
                 
               </div>
@@ -63,52 +84,62 @@
               </div> -->
             </form>
           </div>
-          <div class="card card-primary">
+
+
+          <div class="card card-secondary">
             <div class="card-header">
-              <h3 class="card-title">Different Styles</h3>
+              <h4 class="card-title">Giá sản phẩm</h4>
             </div>
             <div class="card-body">
-              <h4>Input</h4>
+               <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label for="product_cost">Giá nhập</label>
+                      <input type="text" class="form-control" id="product_cost" placeholder="Nhập mã sản phẩm">
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label for="product_wholesale">Giá bán sỉ</label>
+                      <input type="text" class="form-control" id="product_wholesale" placeholder="">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label for="product_retail">Giá bán lẻ</label>
+                      <input type="text" class="form-control" id="product_retail" placeholder="">
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <!-- <label for="">Đơn vị</label>
+                      <input type="text" class="form-control" id="" placeholder=""> -->
+                    </div>
+                  </div>
+                </div>
+            </div>
+          </div>
+
+          <div class="card card-secondary">
+            <div class="card-header">
+              <h4 class="card-title">Chi tiết sản phẩm</h4>
+            </div>
+            <div class="card-body">   
               <div class="form-group">
-                <label for="exampleInputBorder">Bottom Border only <code>.form-control-border</code></label>
-                <input type="text" class="form-control form-control-border" id="exampleInputBorder" placeholder=".form-control-border">
+                <label>Mô tả sản phẩm</label>
+                <textarea class="form-control" id="product_description" rows="3" placeholder="Enter ..."></textarea>
               </div>
               <div class="form-group">
-                <label for="exampleInputBorderWidth2">Bottom Border only 2px Border <code>.form-control-border.border-width-2</code></label>
-                <input type="text" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder=".form-control-border.border-width-2">
-              </div>
-              <div class="form-group">
-                <label for="exampleInputRounded0">Flat <code>.rounded-0</code></label>
-                <input type="text" class="form-control rounded-0" id="exampleInputRounded0" placeholder=".rounded-0">
-              </div>
-              <h4>Custom Select</h4>
-              <div class="form-group">
-                <label for="exampleSelectBorder">Bottom Border only <code>.form-control-border</code></label>
-                <select class="custom-select form-control-border" id="exampleSelectBorder">
-                  <option>Value 1</option>
-                  <option>Value 2</option>
-                  <option>Value 3</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="exampleSelectBorderWidth2">Bottom Border only <code>.form-control-border.border-width-2</code></label>
-                <select class="custom-select form-control-border border-width-2" id="exampleSelectBorderWidth2">
-                  <option>Value 1</option>
-                  <option>Value 2</option>
-                  <option>Value 3</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="exampleSelectRounded0">Flat <code>.rounded-0</code></label>
-                <select class="custom-select rounded-0" id="exampleSelectRounded0">
-                  <option>Value 1</option>
-                  <option>Value 2</option>
-                  <option>Value 3</option>
-                </select>
+                <label for="">Thành phần*</label>
+                <textarea class="form-control" id="product_ingred" rows="3" placeholder="Enter ..."></textarea>
               </div>
             </div>
           </div>
-          <div class="card card-info">
+
+
+          <!-- <div class="card card-info">
             <div class="card-header">
               <h3 class="card-title">Input Addon</h3>
             </div>
@@ -244,7 +275,7 @@
                 <button type="submit" class="btn btn-default float-right">Cancel</button>
               </div>
             </form>
-          </div>
+          </div> -->
         </div>
 
 
@@ -264,19 +295,145 @@
 
 
         <div class="col-md-4">
-          <div class="card card-success">
+          <div class="card card-secondary">
             <div class="card-header">
-              <h3 class="card-title">Different Height</h3>
+              <h3 class="card-title">Phân loại</h3>
             </div>
-            <div class="card-body">
-              <input class="form-control form-control-lg" type="text" placeholder=".form-control-lg">
-              <br>
-              <input class="form-control" type="text" placeholder="Default input">
-              <br>
-              <input class="form-control form-control-sm" type="text" placeholder=".form-control-sm">
+            <div class="card-body">    
+              <form>
+                <div class="form-group">
+                  <label>Loại sản phẩm</label>
+                  <select class="form-control">
+                    <option>option 1</option>
+                    <option>option 2</option>
+                    <option>option 3</option>
+                    <option>option 4</option>
+                    <option>option 5</option>
+                  </select>
+                </div>
+                
+                <div class="form-group">
+                  <label>Nhãn hiệu</label>
+                  <select class="form-control">
+                    <option>option 1</option>
+                    <option>option 2</option>
+                    <option>option 3</option>
+                    <option>option 4</option>
+                    <option>option 5</option>
+                  </select>
+                  
+                </div>
+
+                <!-- <div class="form-group">
+                  <label class="col-form-label" for="inputSuccess"><i class="fas fa-check"></i> Input with
+                  success</label>
+                  <input type="text" class="form-control is-valid" id="inputSuccess" placeholder="Enter ...">
+                </div>
+                <div class="form-group">
+                  <label class="col-form-label" for="inputWarning"><i class="far fa-bell"></i> Input with
+                  warning</label>
+                  <input type="text" class="form-control is-warning" id="inputWarning" placeholder="Enter ...">
+                </div>
+                <div class="form-group">
+                  <label class="col-form-label" for="inputError"><i class="far fa-times-circle"></i> Input with
+                  error</label>
+                  <input type="text" class="form-control is-invalid" id="inputError" placeholder="Enter ...">
+                </div> -->
+                
+                <!-- <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox">
+                        <label class="form-check-label">Checkbox</label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" checked="">
+                        <label class="form-check-label">Checkbox checked</label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" disabled="">
+                        <label class="form-check-label">Checkbox disabled</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="radio1">
+                        <label class="form-check-label">Radio</label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="radio1" checked="">
+                        <label class="form-check-label">Radio checked</label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" disabled="">
+                        <label class="form-check-label">Radio disabled</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>Select</label>
+                      <select class="form-control">
+                        <option>option 1</option>
+                        <option>option 2</option>
+                        <option>option 3</option>
+                        <option>option 4</option>
+                        <option>option 5</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>Select Disabled</label>
+                      <select class="form-control" disabled="">
+                        <option>option 1</option>
+                        <option>option 2</option>
+                        <option>option 3</option>
+                        <option>option 4</option>
+                        <option>option 5</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>Select Multiple</label>
+                      <select multiple="" class="form-control">
+                        <option>option 1</option>
+                        <option>option 2</option>
+                        <option>option 3</option>
+                        <option>option 4</option>
+                        <option>option 5</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>Select Multiple Disabled</label>
+                      <select multiple="" class="form-control" disabled="">
+                        <option>option 1</option>
+                        <option>option 2</option>
+                        <option>option 3</option>
+                        <option>option 4</option>
+                        <option>option 5</option>
+                      </select>
+                    </div>
+                  </div>
+                </div> -->
+              </form>
             </div>
           </div>
-          <div class="card card-danger">
+
+
+
+
+          <!-- <div class="card card-danger">
             <div class="card-header">
               <h3 class="card-title">Different Width</h3>
             </div>
@@ -581,7 +738,7 @@
                 <div class="form-group"></div>
               </form>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
