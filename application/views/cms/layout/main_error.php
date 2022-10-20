@@ -221,36 +221,13 @@
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-box"></i>
                 <p>
-                  Product
-                  <i class="right fas fa-angle-left"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="<?= site_url("dashboard/product") ?>" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Product List</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="<?= site_url("dashboard/product/loadProductTrash") ?>" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Product Trash</p>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-box"></i>
-                <p>
                   Sản phẩm
                   <i class="right fas fa-angle-left"></i>
                 </p>
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="#" class="nav-link">
+                  <a href="<?= site_url("dashboard/product") ?>" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Danh sách sản phẩm</p>
                   </a>
