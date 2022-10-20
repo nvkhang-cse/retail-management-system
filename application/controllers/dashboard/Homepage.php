@@ -1,8 +1,7 @@
 <?php
-defined('BASEPATH') or exit('No direct script access allowed');
+defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Homepage extends CI_Controller
-{
+class Homepage extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -21,16 +20,22 @@ class Homepage extends CI_Controller
 	 */
 	public function index()
 	{
-		/**
-		 * User Token Validation
-		 */
+        /**
+         * User Token Validation
+         */
 		// $this->load->library('Authorization_Token');
-		// /**
-		//  * User Token Validation
-		//  */
-		// $is_valid_token = $this->authorization_token->validateToken();
-		// if (!empty($is_valid_token) AND $is_valid_token['status'] === TRUE)
-		// {
+        // /**
+        //  * User Token Validation
+        //  */
+        // $is_valid_token = $this->authorization_token->validateToken();
+		// // var_dump($is_valid_token);
+        // if (!empty($is_valid_token) AND $is_valid_token['status'] === TRUE)
+        // {
+		// 	// $this->data["headerview"]="cms/layout/main";
+		// 	$this->data["subview"]="cms/layout/main";
+
+		// 	$this->load->view('cms/layout/main');
+
 		// }
 		// else
 		// {
