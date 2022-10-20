@@ -7,7 +7,8 @@
 <script src="<?php echo base_url(); ?>/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- overlayScrollbars -->
 <script src="<?php echo base_url(); ?>/assets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-
+<!-- AdminLTE App -->
+<!-- <script src="<?php echo base_url(); ?>/assets/dist/js/adminlte.js"></script> -->
 
 <!-- PAGE PLUGINS -->
 <!-- jQuery Mapael -->
@@ -30,6 +31,7 @@
 <script src="<?php echo base_url(); ?>/assets/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
 <script src="<?php echo base_url(); ?>/assets/plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="<?php echo base_url(); ?>/assets/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/dist/js/adminlte.min.js"></script>
 <script type="text/javascript" src="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.12/js/dataTables.checkboxes.min.js"></script>
 <!-- <script src="https://cdn.datatables.net/select/1.4.0/js/dataTables.select.min.js"></script> -->
 
@@ -37,7 +39,4 @@
 <!-- <script src="<?php echo base_url(); ?>/assets/dist/js/demo.js"></script> -->
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <!-- <script src="<?php echo base_url(); ?>/assets/dist/js/pages/dashboard2.js"></script> -->
-
-<!-- AdminLTE App -->
-<script src="<?php echo base_url(); ?>/assets/dist/js/adminlte.js"></script>
 

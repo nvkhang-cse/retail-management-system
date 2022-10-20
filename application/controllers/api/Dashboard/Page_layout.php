@@ -3,7 +3,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 require APPPATH . 'libraries/RestController.php';
 use chriskacerguis\RestServer\RestController;
 
-class Homepage extends RestController
+class Page_layout extends RestController
 {
     public function __construct()
     {
@@ -12,7 +12,7 @@ class Homepage extends RestController
 
     }
     
-    public function loadhomepage_post()
+    public function loadpagelayout_post()
     {
         $this->load->library('Authorization_Token');
         /**
@@ -25,14 +25,12 @@ class Homepage extends RestController
 			// $this->data["headerview"]="cms/layout/main";
 			// $this->data["subview"]="cms/layout/main";
 
-			$return_data = $this->load->view('cms/dashboard/homepage2', '', true);
-            
-            
-            // $return_data = site_url('cms/layout/main.php');
+			// $this->load->view('cms/layout/main');
+            $return_data = $this->load->view('cms/layout/all_page_contents', '', true);
             $message = [
                 'status' => true,
                 'data' => $return_data,
-                'message' => "Load dashboard successful"
+                'message' => "Load page layout successful"
             ];
             $this->response($message, RestController::HTTP_OK);
 		}
@@ -41,7 +39,7 @@ class Homepage extends RestController
             // Login Error
             $message = [
                 'status' => FALSE,
-                'message' => "Can't load dashboard"
+                'message' => "Can't load page layout"
             ];
             $this->response($message, RestController::HTTP_NOT_FOUND);
         }

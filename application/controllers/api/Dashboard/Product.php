@@ -12,7 +12,7 @@ class Product extends RestController
 
     }
     
-    public function loadProductList_post()
+    public function loadproductpage_post()
     {
         $this->load->library('Authorization_Token');
         /**
@@ -25,7 +25,7 @@ class Product extends RestController
 			// $this->data["headerview"]="cms/layout/main";
 			// $this->data["subview"]="cms/layout/main";
 
-			$return_data = $this->load->view('cms/dashboard/product/product_list', '', true);
+			$return_data = $this->load->view('cms/dashboard/product/product', '', true);
             
             
             // $return_data = site_url('cms/layout/main.php');
@@ -46,7 +46,7 @@ class Product extends RestController
             $this->response($message, RestController::HTTP_NOT_FOUND);
         }
     }
-    public function loadProductTrash_post()
+    public function loadtrashpage_post()
     {
         $this->load->library('Authorization_Token');
         /**
@@ -59,7 +59,7 @@ class Product extends RestController
 			// $this->data["headerview"]="cms/layout/main";
 			// $this->data["subview"]="cms/layout/main";
 
-			$return_data = $this->load->view('cms/dashboard/product/product_trash', '', true);
+			$return_data = $this->load->view('cms/dashboard/product/trash', '', true);
             
             
             // $return_data = site_url('cms/layout/main.php');
@@ -82,7 +82,7 @@ class Product extends RestController
     }
 
 
-    public function loadProductAdd_post()
+    public function loadaddpage_post()
     {
         $this->load->library('Authorization_Token');
         /**
@@ -95,7 +95,7 @@ class Product extends RestController
 			// $this->data["headerview"]="cms/layout/main";
 			// $this->data["subview"]="cms/layout/main";
 
-			$return_data = $this->load->view('cms/dashboard/product/product_add', '', true);
+			$return_data = $this->load->view('cms/dashboard/product/add', '', true);
             
             
             // $return_data = site_url('cms/layout/main.php');
@@ -116,7 +116,7 @@ class Product extends RestController
             $this->response($message, RestController::HTTP_NOT_FOUND);
         }
     }
-    public function loadTableData_post()
+    public function loadtabledata_post()
     {
         $this->load->library('Authorization_Token');
         /**
@@ -147,6 +147,41 @@ class Product extends RestController
         }
 
     }
+    public function loadwarehouse_post()
+    {
+        $this->load->library('Authorization_Token');
+        /**
+         * User Token Validation
+         */
+        $is_valid_token = $this->authorization_token->validateToken();
+		// var_dump($is_valid_token);
+        if (!empty($is_valid_token) AND $is_valid_token['status'] === TRUE)
+        {
+			// $this->data["headerview"]="cms/layout/main";
+			// $this->data["subview"]="cms/layout/main";
+
+			$return_data = $this->load->view('cms/dashboard/product/warehouse', '', true);
+            
+            
+            // $return_data = site_url('cms/layout/main.php');
+            $message = [
+                'status' => true,
+                'data' => $return_data,
+                'message' => "Load product warehouse successful"
+            ];
+            $this->response($message, RestController::HTTP_OK);
+		}
+		else
+		{
+            // Login Error
+            $message = [
+                'status' => FALSE,
+                'message' => "Can't load product warehouse"
+            ];
+            $this->response($message, RestController::HTTP_NOT_FOUND);
+        }
+    }
+    
 
 
 
