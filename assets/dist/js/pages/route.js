@@ -91,10 +91,10 @@ function add_script(index, index2, site_url){
   }
   else if(index==2){
     if(index2==1){
-
+      productpage(index2, site_url);
     }
     else if(index2==2){
-
+      
     }
     else if(index2==3){
 
