@@ -3,16 +3,17 @@ defined('BASEPATH') or exit('No direct script access allowed');
 require APPPATH . 'libraries/RestController.php';
 use chriskacerguis\RestServer\RestController;
 
-class Navbar extends RestController
+class Sales extends RestController
 {
     public function __construct()
     {
         parent::__construct();
-        // $this->load->model('cms/UserModel');
+        $this->load->model('cms/ProductModel');
+        $this->load->model('cms/UserModel');
 
     }
     
-    public function loadnavbar_post()
+    public function loadSalePage_post()
     {
         $this->load->library('Authorization_Token');
         /**
@@ -25,12 +26,14 @@ class Navbar extends RestController
 			// $this->data["headerview"]="cms/layout/main";
 			// $this->data["subview"]="cms/layout/main";
 
-			// $this->load->view('cms/layout/main');
-            $return_data = $this->load->view('cms/layout/nav_bar', '', true);
+			$return_data = $this->load->view('cms/dashboard/salepage', '', true);
+            
+            
+            // $return_data = site_url('cms/layout/main.php');
             $message = [
                 'status' => true,
                 'data' => $return_data,
-                'message' => "Load navigation bar successful"
+                'message' => "Load dashboard successful"
             ];
             $this->response($message, RestController::HTTP_OK);
 		}
@@ -39,7 +42,7 @@ class Navbar extends RestController
             // Login Error
             $message = [
                 'status' => FALSE,
-                'message' => "Can't load navigation bar"
+                'message' => "Can't load dashboard"
             ];
             $this->response($message, RestController::HTTP_NOT_FOUND);
         }

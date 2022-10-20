@@ -79,11 +79,4 @@ class Signin extends RestController
             }
         }
     }
-
-
-
-
-
-
 }
-?>
