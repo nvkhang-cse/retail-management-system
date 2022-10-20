@@ -1,6 +1,6 @@
 /* global Chart:false */
 
-$(function () {
+function productpage(index2, site_url) {
   'use strict'
 
   /* ChartJS
@@ -14,7 +14,7 @@ $(function () {
 
   // Get context with jQuery - using jQuery's .get() method.
   if (index2==1){
-    url_attr = site_url + "api/dashboard/product/loadtabledata";
+    var url_attr = site_url + "api/dashboard/product/loadtabledata";
     var table;
     var data_table;
 
@@ -85,6 +85,7 @@ $(function () {
       console.log(selected_rows);
 
     });
+    table.buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 
 
 
@@ -143,6 +144,6 @@ $(function () {
   }
 
   
-})
+}
 
 // lgtm [js/unused-local-variable]
