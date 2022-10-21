@@ -348,7 +348,7 @@
             <div class="card-header border-transparent">
               <h5 class="card-title">TOP SẢN PHẨM</h5>
               <div class="card-tools">
-                <button type="button" class="btn btn-tool btn-primary dropdown-toggle" data-toggle="dropdown">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                   7 ngày qua
                 </button>
                 <div class="dropdown-menu dropdown-menu-right" role="menu">
@@ -367,79 +367,50 @@
                 <table class="table m-0">
                   <thead>
                     <tr>
-                      <th>Order ID</th>
-                      <th>Item</th>
-                      <th>Status</th>
-                      <th>Popularity</th>
+                      <th>Mã sản phẩm</th>
+                      <th>Tên sản phẩm</th>
+                      <th>Tổng</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
+                      <td class="text-primary">204900013</td>
+                      <td>Kem Chống Nắng La Roche-Posay Kiểm Soát Dầu SPF50+ 50ml</td>
+                      <td>2,250,000</td>
+                    </tr>
+                    <tr>
+                      <td class="text-primary">422208972</td>
+                      <td>Sữa Rửa Mặt CeraVe Sạch Sâu Cho Da Thường Đến Da Dầu 236ml Foaming Cleanser</td>
+                      <td>2,216,000</td>
+                    </tr>
+                    <tr>
+                      <td class="text-primary">422208973</td>
+                      <td>Sữa Rửa Mặt CeraVe Sạch Sâu Cho Da Thường Đến Da Dầu 473ml Foaming Cleanser</td>
+                      <td>2,000,000</td>
+                    </tr>
+                    <tr>
+                      <td class="text-primary">422208974</td>
+                      <td>Sữa Rửa Mặt CeraVe Sạch Sâu Cho Da Thường Đến Da Dầu 500ml Foaming Cleanser</td>
+                      <td>1,560,000</td>
+                    </tr>
+                    <!-- <tr>
                       <td><a href="<?php echo base_url(); ?>/assets/pages/examples/invoice.html">OR9842</a></td>
                       <td>Call of Duty IV</td>
                       <td><span class="badge badge-success">Shipped</span></td>
                       <td>
                         <div class="sparkbar" data-color="#00a65a" data-height="20">90,80,90,-70,61,-83,63</div>
                       </td>
-                    </tr>
-                    <tr>
-                      <td><a href="<?php echo base_url(); ?>/assets/pages/examples/invoice.html">OR1848</a></td>
-                      <td>Samsung Smart TV</td>
-                      <td><span class="badge badge-warning">Pending</span></td>
-                      <td>
-                        <div class="sparkbar" data-color="#f39c12" data-height="20">90,80,-90,70,61,-83,68</div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><a href="<?php echo base_url(); ?>/assets/pages/examples/invoice.html">OR7429</a></td>
-                      <td>iPhone 6 Plus</td>
-                      <td><span class="badge badge-danger">Delivered</span></td>
-                      <td>
-                        <div class="sparkbar" data-color="#f56954" data-height="20">90,-80,90,70,-61,83,63</div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><a href="<?php echo base_url(); ?>/assets/pages/examples/invoice.html">OR7429</a></td>
-                      <td>Samsung Smart TV</td>
-                      <td><span class="badge badge-info">Processing</span></td>
-                      <td>
-                        <div class="sparkbar" data-color="#00c0ef" data-height="20">90,80,-90,70,-61,83,63</div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><a href="<?php echo base_url(); ?>/assets/pages/examples/invoice.html">OR1848</a></td>
-                      <td>Samsung Smart TV</td>
-                      <td><span class="badge badge-warning">Pending</span></td>
-                      <td>
-                        <div class="sparkbar" data-color="#f39c12" data-height="20">90,80,-90,70,61,-83,68</div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><a href="<?php echo base_url(); ?>/assets/pages/examples/invoice.html">OR7429</a></td>
-                      <td>iPhone 6 Plus</td>
-                      <td><span class="badge badge-danger">Delivered</span></td>
-                      <td>
-                        <div class="sparkbar" data-color="#f56954" data-height="20">90,-80,90,70,-61,83,63</div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><a href="<?php echo base_url(); ?>/assets/pages/examples/invoice.html">OR9842</a></td>
-                      <td>Call of Duty IV</td>
-                      <td><span class="badge badge-success">Shipped</span></td>
-                      <td>
-                        <div class="sparkbar" data-color="#00a65a" data-height="20">90,80,90,-70,61,-83,63</div>
-                      </td>
-                    </tr>
+                    </tr> -->
                   </tbody>
                 </table>
               </div>
               <!-- /.table-responsive -->
             </div>
             <!-- /.card-body -->
-            <div class="card-footer clearfix">
+            <!-- <div class="card-footer clearfix">
               <a href="javascript:void(0)" class="btn btn-sm btn-info float-left">Place New Order</a>
               <a href="javascript:void(0)" class="btn btn-sm btn-secondary float-right">View All Orders</a>
-            </div>
+            </div> -->
             <!-- /.card-footer -->
           </div>
           <!-- /.card -->
@@ -453,7 +424,7 @@
               <h3 class="card-title">THÔNG TIN KHO</h3>
 
               <div class="card-tools">
-                <button type="button" class="btn btn-tool btn-primary dropdown-toggle" data-toggle="dropdown">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                   Tất cả chi nhánh
                 </button>
                 <div class="dropdown-menu dropdown-menu-right" role="menu">
@@ -468,58 +439,29 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body p-0">
-              <ul class="products-list product-list-in-card pl-2 pr-2">
+              <ul class="products-list product-list-in-card pl-3 pr-3">
                 <li class="item">
-                  <div class="product-img">
+                  <!-- <div class="product-img">
                     <img src="<?php echo base_url(); ?>/assets/dist/img/default-150x150.png" alt="Product Image" class="img-size-50">
-                  </div>
-                  <div class="product-info">
-                    <a href="<?php echo base_url(); ?>/assets/javascript:void(0)" class="product-title">Samsung TV
-                      <span class="badge badge-warning float-right">$1800</span></a>
+                  </div> -->
+                  <div class="">
+                    <a href="<?php echo base_url(); ?>/assets/javascript:void(0)" class="product-title">Sản phẩm tồn kho
+                      <span class="badge badge-info float-right">Xem chi tiết</span></a>
                     <span class="product-description">
-                      Samsung 32" 1080p 60Hz LED Smart HDTV.
+                      400
                     </span>
                   </div>
                 </li>
                 <!-- /.item -->
                 <li class="item">
-                  <div class="product-img">
+                  <!-- <div class="product-img">
                     <img src="<?php echo base_url(); ?>/assets/dist/img/default-150x150.png" alt="Product Image" class="img-size-50">
-                  </div>
-                  <div class="product-info">
-                    <a href="<?php echo base_url(); ?>/assets/javascript:void(0)" class="product-title">Bicycle
-                      <span class="badge badge-info float-right">$700</span></a>
+                  </div> -->
+                  <div class="">
+                    <a href="<?php echo base_url(); ?>/assets/javascript:void(0)" class="product-title">Giá trị
+                      <span class="badge badge-info float-right">Xem chi tiết</span></a>
                     <span class="product-description">
-                      26" Mongoose Dolomite Men's 7-speed, Navy Blue.
-                    </span>
-                  </div>
-                </li>
-                <!-- /.item -->
-                <li class="item">
-                  <div class="product-img">
-                    <img src="<?php echo base_url(); ?>/assets/dist/img/default-150x150.png" alt="Product Image" class="img-size-50">
-                  </div>
-                  <div class="product-info">
-                    <a href="<?php echo base_url(); ?>/assets/javascript:void(0)" class="product-title">
-                      Xbox One <span class="badge badge-danger float-right">
-                        $350
-                      </span>
-                    </a>
-                    <span class="product-description">
-                      Xbox One Console Bundle with Halo Master Chief Collection.
-                    </span>
-                  </div>
-                </li>
-                <!-- /.item -->
-                <li class="item">
-                  <div class="product-img">
-                    <img src="<?php echo base_url(); ?>/assets/dist/img/default-150x150.png" alt="Product Image" class="img-size-50">
-                  </div>
-                  <div class="product-info">
-                    <a href="<?php echo base_url(); ?>/assets/javascript:void(0)" class="product-title">PlayStation 4
-                      <span class="badge badge-success float-right">$399</span></a>
-                    <span class="product-description">
-                      PlayStation 4 500GB Console (PS4)
+                      149,800,000
                     </span>
                   </div>
                 </li>
@@ -527,9 +469,9 @@
               </ul>
             </div>
             <!-- /.card-body -->
-            <div class="card-footer text-center">
+            <!-- <div class="card-footer text-center">
               <a href="javascript:void(0)" class="uppercase">View All Products</a>
-            </div>
+            </div> -->
             <!-- /.card-footer -->
           </div>
           <!-- /.card -->
