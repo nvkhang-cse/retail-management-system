@@ -3,12 +3,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>DataTables</h1>
+            <h1>Sản phẩm</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">DataTables</li>
+              <li class="breadcrumb-item active">Sản phẩm</li>
             </ol>
           </div>
         </div>
@@ -22,15 +22,14 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">DataTable with default features</h3>
+                <h3 class="card-title">Tất cả sản phẩm</h3>
               </div>
               <!-- /.card-header -->
-              <div class="card-body">
-
-              <button type="button" class="btn btn-primary btn-sm" id="delete_btn">Xóa sản phẩm</button>
-              
-              <a href="<?= site_url("dashboard/product/addCustomer") ?>">
-                <button type="button" class="btn btn-primary btn-sm" id="add_btn">Thêm sản phẩm</button>
+              <div class="card-body">              
+              <a href="<?= site_url("dashboard/product/loadaddproduct") ?>">
+                <button type="button" class="btn btn-primary btn-sm" id="add_btn">
+                  <i class="fa fa-plus"></i>&nbsp; Thêm sản phẩm
+                </button>
               </a>
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>

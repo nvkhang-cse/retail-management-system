@@ -20,5 +20,7 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
+		$this->data["subview"]="cms/layout/main";
+		$this->load->view('cms/layout/main_page', $this->data);
 	}
 }
