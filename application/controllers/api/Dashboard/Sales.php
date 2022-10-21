@@ -3,16 +3,17 @@ defined('BASEPATH') or exit('No direct script access allowed');
 require APPPATH . 'libraries/RestController.php';
 use chriskacerguis\RestServer\RestController;
 
-class Homepage extends RestController
+class Sales extends RestController
 {
     public function __construct()
     {
         parent::__construct();
-        // $this->load->model('cms/UserModel');
+        $this->load->model('cms/ProductModel');
+        $this->load->model('cms/UserModel');
 
     }
     
-    public function loadHomePage_post()
+    public function loadSalePage_post()
     {
         $this->load->library('Authorization_Token');
         /**
@@ -25,7 +26,7 @@ class Homepage extends RestController
 			// $this->data["headerview"]="cms/layout/main";
 			// $this->data["subview"]="cms/layout/main";
 
-			$return_data = $this->load->view('cms/dashboard/homepage', '', true);
+			$return_data = $this->load->view('cms/dashboard/salepage', '', true);
             
             
             // $return_data = site_url('cms/layout/main.php');

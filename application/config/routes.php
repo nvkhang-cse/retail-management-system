@@ -57,4 +57,4 @@ $route['api/demo'] = 'api/ApiController/index';
 
 $route['api/authentication/login'] = 'api/authentication/signin/login';
 $route['api/authentication/register'] = 'api/authentication/signup/insertUser';
-$route['msystem/login'] = 'authentication/signin';
+$route['login'] = 'authentication/signin';
