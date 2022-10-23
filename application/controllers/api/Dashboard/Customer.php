@@ -8,7 +8,7 @@ class Customer extends RestController
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('cms/ProductModel');
+        $this->load->model('cms/CustomerModel');
 
     }
     
@@ -32,7 +32,7 @@ class Customer extends RestController
             $message = [
                 'status' => true,
                 'data' => $return_data,
-                'message' => "Load product page successful"
+                'message' => "Load customer page successful"
             ];
             $this->response($message, RestController::HTTP_OK);
 		}
@@ -41,7 +41,7 @@ class Customer extends RestController
             // Login Error
             $message = [
                 'status' => FALSE,
-                'message' => "Can't load product page"
+                'message' => "Can't load customer page"
             ];
             $this->response($message, RestController::HTTP_NOT_FOUND);
         }
@@ -66,7 +66,7 @@ class Customer extends RestController
             $message = [
                 'status' => true,
                 'data' => $return_data,
-                'message' => "Load product add page successful"
+                'message' => "Load customer add page successful"
             ];
             $this->response($message, RestController::HTTP_OK);
 		}
@@ -75,7 +75,7 @@ class Customer extends RestController
             // Login Error
             $message = [
                 'status' => FALSE,
-                'message' => "Can't load add product page"
+                'message' => "Can't load add customer page"
             ];
             $this->response($message, RestController::HTTP_NOT_FOUND);
         }
@@ -90,7 +90,7 @@ class Customer extends RestController
 		// var_dump($is_valid_token);
         if (!empty($is_valid_token) AND $is_valid_token['status'] === TRUE)
         {
-            $return_data = $this->ProductModel->get_product();
+            $return_data = $this->CustomerModel->get_customer();
             $message = [
                 'status' => true,
                 'data' => $return_data,

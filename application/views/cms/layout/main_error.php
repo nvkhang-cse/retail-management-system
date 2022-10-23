@@ -435,6 +435,7 @@
   <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
   <script src="<?php echo base_url(); ?>/assets/dist/js/pages/route.js"></script>
   <script src="<?php echo base_url(); ?>/assets/dist/js/pages/product.js"></script>
+  <script src="<?php echo base_url(); ?>/assets/dist/js/pages/customer.js"></script>
 </body>
 
 </html>

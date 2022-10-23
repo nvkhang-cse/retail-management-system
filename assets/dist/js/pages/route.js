@@ -79,6 +79,9 @@ function add_script(index, index2, site_url) {
 		} else if (index2 == 4) {
 		}
 	} else if (index == 3) {
+		if (index2 == 1) {
+			customerTable(index2, site_url);
+		}
 	} else if (index == 4) {
 	}
 }
