@@ -181,6 +181,104 @@ class Product extends RestController
             $this->response($message, RestController::HTTP_NOT_FOUND);
         }
     }
+
+    public function storenewproduct_post()
+    {
+        $this->load->library('Authorization_Token');
+        /**
+         * User Token Validation
+         */
+        $is_valid_token = $this->authorization_token->validateToken();
+		// var_dump($is_valid_token);
+        if (!empty($is_valid_token) AND $is_valid_token['status'] === TRUE)
+        {
+			// $this->data["headerview"]="cms/layout/main";
+			// $this->data["subview"]="cms/layout/main";
+
+            $data = $this->security->xss_clean($this->post());
+
+            // Form validation
+            $this->form_validation->set_data($data);
+            $this->form_validation->set_rules('product_name', 'Tên sản phẩm', 'trim|required');
+            $this->form_validation->set_rules('product_code', 'Mã sản phẩm', 'trim|required');
+            $this->form_validation->set_rules('product_brand', 'Thương hiệu', 'trim|required');
+            $this->form_validation->set_rules('product_ori', 'Xuất xứ', 'trim|required');
+            $this->form_validation->set_rules('product_barcode', 'Barcode', 'trim|required'); 
+            $this->form_validation->set_rules('product_quantity', 'Số lượng', 'trim|required'); 
+            $this->form_validation->set_rules('product_capacity', 'Dung tích', 'trim|required'); 
+            $this->form_validation->set_rules('product_unit', 'Đơn vị', 'trim|required'); 
+            $this->form_validation->set_rules('product_cost', 'Giá nhập', 'trim|required'); 
+            $this->form_validation->set_rules('product_wholesale', 'Giá bán sỉ', 'trim|required');
+            $this->form_validation->set_rules('product_retail', 'Giá bán lẻ', 'trim|required'); 
+            $this->form_validation->set_rules('product_description', 'Mô tả sản phẩm', 'trim|required'); 
+            $this->form_validation->set_rules('product_ingred', 'Bảng thành phần', 'trim|required');
+            // $this->form_validation->set_rules('product_file', 'Ảnh sản phẩm', 'trim|required');
+          
+
+            if($this->form_validation->run() == FALSE)
+            {
+                //Form validation error
+                $message = array(
+                    'status'    =>  false,
+                    'error'     =>  $this->form_validation->error_array(),
+                    'message'   =>  validation_errors()
+                );
+                $this->response($message, RestController::HTTP_NOT_FOUND);
+            }
+            else
+            {
+                $product_data = [
+                    'product_code'      =>$data['product_code'],
+                    'barcode'           =>$data['product_barcode'],
+                    'title'             =>$data['product_name'],
+                    'brand'             =>$data['product_brand'],
+                    'origin'            =>$data['product_ori'],
+                    // 'image'=>
+                    'price'             =>$data['product_retail'],
+                    'goods_cost'        =>$data['product_cost'],
+                    'retail_price'      =>$data['product_retail'],
+                    'wholesale_price'   =>$data['product_wholesale'],
+                    'quantity'          =>$data['product_quantity'],
+                    'capacity'          =>$data['product_capacity'],
+                    'unit'              =>$data['product_unit'],
+                    'ingredient'        =>$data['product_ingred'],
+                    'description'       =>$data['product_description'],
+                    // 'warehouse'=>$data->product_branch,
+                       
+                ];  
+                // $config['upload_path']          = 'assets/upload_img/product/';
+                // $config['allowed_types']        = 'gif|jpg|png';
+                // $config['max_size']             = 100;
+                // $config['max_width']            = 1024;
+                // $config['max_height']           = 768;
+                // $this->load->library('upload', $config);
+                // // if($this->security->xss_clean($this->request->getFile('product_file'), TRUE))
+                // // {
+                //     if ($this->upload->do_upload('product_file'))
+                //     {
+                //         $product_data['image'] = $this->upload->data('full_path');
+                //     } 
+                // // }
+                $this->ProductModel->insert_product($product_data);
+                $message = [
+                    'status' => true,
+                    'data' => 'success',
+                    'message' => "Save product successful"
+                ];
+                $this->response($message, RestController::HTTP_OK);
+                                     
+            }
+		}
+		else
+		{
+            // Login Error
+            $message = [
+                'status' => FALSE,
+                'message' => "Can't save new product"
+            ];
+            $this->response($message, RestController::HTTP_NOT_FOUND);
+        }
+    }
     
 
 

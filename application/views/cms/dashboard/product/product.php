@@ -22,15 +22,21 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Tất cả sản phẩm</h3>
+                <div class="row">
+                  <div class="col-6"> 
+                    <h3 class="card-title">Tất cả sản phẩm</h3>
+                  </div>
+                  <div class="col-6">            
+                    <a href="<?= site_url("dashboard/product/loadaddproduct") ?>">
+                      <button type="button" class="btn btn-primary btn-sm float-right" id="add_btn">
+                        <i class="fa fa-plus"></i>&nbsp; Thêm sản phẩm
+                      </button>
+                    </a>
+                  </div> 
+                </div>
               </div>
               <!-- /.card-header -->
-              <div class="card-body">              
-              <a href="<?= site_url("dashboard/product/loadaddproduct") ?>">
-                <button type="button" class="btn btn-primary btn-sm" id="add_btn">
-                  <i class="fa fa-plus"></i>&nbsp; Thêm sản phẩm
-                </button>
-              </a>
+              <div class="card-body">  
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>

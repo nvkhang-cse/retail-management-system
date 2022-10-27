@@ -10,11 +10,10 @@ class ProductModel extends CI_Model
         return $query->result();
     }
 
-    // public function insert_user($data)
-    // {
-    //     $this->db->insert($this->user_table, $data);
-    //     return $this->db->insert_id();
-    // }
+    public function insert_product($data)
+    {
+        $this->db->insert($this->product_table, $data);
+    }
 
     // public function user_login($email, $password)
     // {

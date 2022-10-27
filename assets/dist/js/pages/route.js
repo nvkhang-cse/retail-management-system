@@ -7,6 +7,7 @@ $(function () {
     {
       var index = $("#idx1").val();
       var index2 = $("#idx2").val();
+
       var site_url = window.location.origin + '/LVTNCI-3/';
       var url_attr;
 
@@ -57,6 +58,7 @@ $(function () {
         headers: {'Authorization': localStorage.getItem('auth_token')},
         success: function(response){
           $("#page_content").html(response.data);
+
           $("#page_content").on("load", add_script(index, index2, site_url));
         }
       });
@@ -86,6 +88,8 @@ function load_maincontent(url_attr){
 
 function add_script(index, index2, site_url){
   // console.log('success');
+  // console.log('success');
+
   if(index==1){
     $.getScript(site_url + "/assets/dist/js/pages/dashboard2.js");
   }
@@ -97,6 +101,35 @@ function add_script(index, index2, site_url){
       
     }
     else if(index2==3){
+      // console.log('success');
+      $('#product_file').on('change', function(){
+        const choosedFile = this.files[0];
+        if (choosedFile) {
+          const reader = new FileReader();
+          reader.addEventListener('load', function(){
+            $('#product_photo').attr('src', reader.result);
+          });
+          reader.readAsDataURL(choosedFile);
+        }
+      });
+
+      $("form#product_data").submit(function(e) {
+        e.preventDefault();    
+        var formData = new FormData(this);
+    
+        $.ajax({
+            url: site_url + 'api/dashboard/product/storenewproduct',
+            type: 'POST',
+            data: formData,
+            headers: {'Authorization': localStorage.getItem('auth_token')},
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                console.log(data.data);
+            },
+            
+        });
+    });
 
     }
     else if(index2==4){
