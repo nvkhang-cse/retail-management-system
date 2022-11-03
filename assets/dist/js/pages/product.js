@@ -43,7 +43,7 @@ function productTable(index2, site_url) {
 				},
 			],
 			columns: [
-				{ data: "id" },
+				{ data: null },
 				{ data: "title" },
 				{ data: "product_code" },
 				{ data: "brand" },

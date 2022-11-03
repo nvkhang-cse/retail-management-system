@@ -26,6 +26,12 @@ $(function () {
 					url_attr = site_url + "api/dashboard/customer/loadCustomerList";
 				} else if (index2 == 2) {
 					url_attr = site_url + "api/dashboard/customer/loadCustomerAdd";
+				} else if (index2 == 3) {
+					url_attr =
+						site_url + "api/dashboard/customergroup/loadCustomerGroupList";
+				} else if (index2 == 4) {
+					url_attr =
+						site_url + "api/dashboard/customergroup/loadCustomerGroupAdd";
 				}
 			} else if (index == 4) {
 				url_attr = site_url + "api/dashboard/sales/loadSalePage";
@@ -54,19 +60,19 @@ $(function () {
 	});
 });
 
-function load_main_content(url_attr) {
-	$.ajax({
-		type: "POST",
-		url: url_attr,
-		dataType: "json",
-		encode: true,
-		headers: { Authorization: localStorage.getItem("auth_token") },
-		success: function (response) {
-			$("#page_content").html(response.data);
-			$("#page_content").on("load", add_script());
-		},
-	});
-}
+// function load_main_content(url_attr) {
+// 	$.ajax({
+// 		type: "POST",
+// 		url: url_attr,
+// 		dataType: "json",
+// 		encode: true,
+// 		headers: { Authorization: localStorage.getItem("auth_token") },
+// 		success: function (response) {
+// 			$("#page_content").html(response.data);
+// 			$("#page_content").on("load", add_script());
+// 		},
+// 	});
+// }
 
 function add_script(index, index2, site_url) {
 	if (index == 1) {
@@ -108,6 +114,10 @@ function add_script(index, index2, site_url) {
 	} else if (index == 3) {
 		if (index2 == 1) {
 			customerTable(index2, site_url);
+		} else if (index2 == 2) {
+		} else if (index2 == 3) {
+			customerGroupTable(index2, site_url);
+		} else if (index2 == 4) {
 		}
 	} else if (index == 4) {
 	}

@@ -26,33 +26,31 @@ function customerTable(index2, site_url) {
 			async: false,
 			headers: { Authorization: localStorage.getItem("auth_token") },
 			success: function (response) {
-				// getResponse(response);
 				data_table = response;
 			},
 		});
 
 		table = $("#customerListTable").DataTable({
 			data: data_table.data,
-			// columnDefs: [ {
-			//     orderable: false,
-			//     className: 'select-checkbox',
-			//     data: 'id',
-			//     targets:   0
-			// } ],
-			columns: [
+			columnDefs: [
 				{
-					// "targets": [0],
-					searchable: false,
 					orderable: false,
-					// 'className': 'select-checkbox',
-					data: "id",
+					searchable: false,
+					checkboxes: {
+						selectRow: true,
+					},
+					targets: 0,
 				},
+			],
+			columns: [
+				{ data: null },
+				{ data: "id" },
 				{ data: "name" },
 				{ data: "phone" },
 				{ data: "group_id" },
 				{ data: "debt" },
 				{ data: "spend" },
-				{ data: "gender" },
+				{ data: null, defaultContent: "0" },
 				{
 					data: null,
 					defaultContent:
@@ -64,11 +62,36 @@ function customerTable(index2, site_url) {
 			],
 			order: [[1, "asc"]],
 			responsive: true,
-			lengthChange: false,
+			lengthMenu: [5, 10],
 			autoWidth: false,
-			buttons: ["copy", "csv", "excel", "pdf", "print", "colvis"],
+			buttons: [
+				{
+					extend: "copy",
+					className: "btn btn-sm",
+				},
+				{
+					extend: "csv",
+					className: "btn btn-sm",
+				},
+				{
+					extend: "excel",
+					className: "btn btn-sm",
+				},
+				{
+					extend: "pdf",
+					className: "btn btn-sm",
+				},
+				{
+					extend: "print",
+					className: "btn btn-sm",
+				},
+				{
+					extend: "colvis",
+					columns: [1, 2, 3, 4, 5, 6, 7],
+					text: "Hiển thị",
+				},
+			],
 		});
-		// .buttons().container().appendTo('#customer-wrapper .col-md-6:eq(0)')
 
 		$("#delete_btn").on("click", function () {
 			var selected_rows = table.column(0).data();
@@ -82,47 +105,6 @@ function customerTable(index2, site_url) {
 		url_attr = "";
 	} else if (index2 == 3) {
 		url_attr = "";
-	}
-
-	function fillCustomerTable(res) {
-		return $("#customerListTable")
-			.DataTable({
-				data: res.data,
-				columns: [
-					{
-						targets: [0],
-						searchable: false,
-						orderable: false,
-						className: "dt-body-center",
-						checkboxes: {
-							selectRow: true,
-						},
-						data: "id",
-					},
-					{ data: "name" },
-					{ data: "phone" },
-					{ data: "group_id" },
-					{ data: "debt" },
-					{ data: "spend" },
-					{ data: "" },
-					{
-						data: null,
-						defaultContent:
-							'<div class="btn-group"><button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown"></button><div class="dropdown-menu"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Delete</a></div></div>',
-						className: "dt-body-center",
-						searchable: false,
-						orderable: false,
-					},
-				],
-				order: [[1, "asc"]],
-				responsive: true,
-				lengthChange: false,
-				autoWidth: false,
-				buttons: ["copy", "csv", "excel", "pdf", "print", "colvis"],
-			})
-			.buttons()
-			.container()
-			.appendTo("#customer-wrapper .col-md-6:eq(0)");
 	}
 }
 
