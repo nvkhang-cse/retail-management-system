@@ -19,8 +19,9 @@
   <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
   <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
   <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/plugins/datatables-select/css/select.bootstrap4.min.css">
+  <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/dist/css/product/product.css">
 
-  <!-- <link type="text/css" href="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.12/css/dataTables.checkboxes.css" rel="stylesheet" /> -->
+  <link type="text/css" href="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.12/css/dataTables.checkboxes.css" rel="stylesheet" />
   <!-- <link type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" rel="stylesheet" /> -->
   <!-- <link type="text/css" href="https://cdn.datatables.net/select/1.4.0/css/select.dataTables.min.css" rel="stylesheet" /> -->
 
@@ -45,14 +46,13 @@
         <!-- Navbar Search -->
 
         <!-- Messages Dropdown Menu -->
-        <li class="nav-item dropdown">
+        <!-- <li class="nav-item dropdown">
           <a class="nav-link" data-toggle="dropdown" href="<?php echo base_url(); ?>/assets/#">
             <i class="far fa-comments"></i>
             <span class="badge badge-danger navbar-badge">3</span>
           </a>
           <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
             <a href="javascript:void(0)" class="dropdown-item">
-              <!-- Message Start -->
               <div class="media">
                 <img src="<?php echo base_url(); ?>/assets/dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
                 <div class="media-body">
@@ -63,11 +63,9 @@
                   <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
                 </div>
               </div>
-              <!-- Message End -->
             </a>
             <div class="dropdown-divider"></div>
             <a href="javascript:void(0)" class="dropdown-item">
-              <!-- Message Start -->
               <div class="media">
                 <img src="<?php echo base_url(); ?>/assets/dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
                 <div class="media-body">
@@ -78,11 +76,9 @@
                   <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
                 </div>
               </div>
-              <!-- Message End -->
             </a>
             <div class="dropdown-divider"></div>
             <a href="javascript:void(0)" class="dropdown-item">
-              <!-- Message Start -->
               <div class="media">
                 <img src="<?php echo base_url(); ?>/assets/dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
                 <div class="media-body">
@@ -93,14 +89,13 @@
                   <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
                 </div>
               </div>
-              <!-- Message End -->
             </a>
             <div class="dropdown-divider"></div>
             <a href="javascript:void(0)" class="dropdown-item dropdown-footer">See All Messages</a>
           </div>
-        </li>
+        </li> -->
         <!-- Notifications Dropdown Menu -->
-        <li class="nav-item dropdown">
+        <!-- <li class="nav-item dropdown">
           <a class="nav-link" data-toggle="dropdown" href="<?php echo base_url(); ?>/assets/">
             <i class="far fa-bell"></i>
             <span class="badge badge-warning navbar-badge">15</span>
@@ -125,7 +120,7 @@
             <div class="dropdown-divider"></div>
             <a href="javascript:void(0)" class="dropdown-item dropdown-footer">See All Notifications</a>
           </div>
-        </li>
+        </li> -->
         <li class="nav-item">
           <a class="nav-link" data-widget="fullscreen" href="#" role="button">
             <i class="fas fa-expand-arrows-alt"></i>
@@ -426,7 +421,7 @@
   <script src="<?php echo base_url(); ?>/assets/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
   <script src="<?php echo base_url(); ?>/assets/plugins/datatables-buttons/js/buttons.print.min.js"></script>
   <script src="<?php echo base_url(); ?>/assets/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-  <!-- <script type="text/javascript" src="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.12/js/dataTables.checkboxes.min.js"></script> -->
+  <script type="text/javascript" src="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.12/js/dataTables.checkboxes.min.js"></script>
   <!-- <script src="<?php echo base_url(); ?>/assets/plugins/datatables-select/js/dataTables.select.min.js"></script> -->
   <!-- AdminLTE App -->
   <script src="<?php echo base_url(); ?>/assets/dist/js/adminlte.js"></script>

@@ -14,27 +14,4 @@ class ProductModel extends CI_Model
     {
         $this->db->insert($this->product_table, $data);
     }
-
-    // public function user_login($email, $password)
-    // {
-    //     // Query users
-    //     $query = $this->db
-    //     ->from($this->user_table)
-    //     ->where(['email' => $email, 'pwd' => md5($password)])
-    //     ->get();
-    //     if ($query->num_rows() > 0) 
-    //     {
-    //         // $object = $query->row();
-    //         // return (object) ['type' => 'user', 'object' => $object];
-    //         return $query->row();
-    //     }
-    //     // Not found
-    //     return false;      
-    // }
-
-
-  
-    
 }
-
-?>

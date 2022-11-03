@@ -76,34 +76,33 @@ function add_script(index, index2, site_url) {
 			productTable(index2, site_url);
 		} else if (index2 == 2) {
 		} else if (index2 == 3) {
-      $('#product_file').on('change', function(){
-        const choosedFile = this.files[0];
-        if (choosedFile) {
-          const reader = new FileReader();
-          reader.addEventListener('load', function(){
-            $('#product_photo').attr('src', reader.result);
-          });
-          reader.readAsDataURL(choosedFile);
-        }
-      });
+			$("#product_file").on("change", function () {
+				const choosedFile = this.files[0];
+				if (choosedFile) {
+					const reader = new FileReader();
+					reader.addEventListener("load", function () {
+						$("#product_photo").attr("src", reader.result);
+					});
+					reader.readAsDataURL(choosedFile);
+				}
+			});
 
-      $("form#product_data").submit(function(e) {
-        e.preventDefault();    
-        var formData = new FormData(this);
-    
-        $.ajax({
-            url: site_url + 'api/dashboard/product/storeNewProduct',
-            type: 'POST',
-            data: formData,
-            headers: {'Authorization': localStorage.getItem('auth_token')},
-            contentType: false,
-            processData: false,
-            success: function (data) {
-                console.log(data.data);
-            },
-            
-        });
-    });
+			$("form#product_data").submit(function (e) {
+				e.preventDefault();
+				var formData = new FormData(this);
+
+				$.ajax({
+					url: site_url + "api/dashboard/product/storeNewProduct",
+					type: "POST",
+					data: formData,
+					headers: { Authorization: localStorage.getItem("auth_token") },
+					contentType: false,
+					processData: false,
+					success: function (data) {
+						console.log(data.data);
+					},
+				});
+			});
 		} else if (index2 == 4) {
 		}
 	} else if (index == 3) {

@@ -16,12 +16,12 @@
   <section class="content">
     <div class="container-fluid">
       <!-- Info boxes -->
-      <div class="row mb-3">
-        <!-- Custom filter -->
-        <div class="col-12">
+
+      <div class="card">
+        <div class="card-header">
           <h5 class="d-md-inline">KẾT QUẢ KINH DOANH TRONG NGÀY</h5>
           <div class="btn-group d-inline-block float-md-right">
-            <button type="button" class="btn btn-block btn-primary dropdown-toggle" data-toggle="dropdown">
+            <button type="button" class="btn btn-block btn-outline-primary dropdown-toggle" data-toggle="dropdown">
               Tất cả chi nhánh
             </button>
             <div class="dropdown-menu dropdown-menu-right" role="menu">
@@ -31,73 +31,71 @@
             </div>
           </div>
         </div>
-        <!-- /.end custom filter -->
-        <div class="col-12 col-sm-6 col-md-3">
-          <div class="info-box mb-3">
-            <span class="info-box-icon bg-info elevation-1"><i class="fas fa-dollar-sign"></i></span>
+        <div class="card-body row">
+          <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-box">
+              <span class="info-box-icon bg-info elevation-1"><i class="fas fa-dollar-sign"></i></span>
 
-            <div class="info-box-content">
-              <span class="info-box-text">Doanh thu</span>
-              <span class="info-box-number">
-                0
-              </span>
+              <div class="info-box-content">
+                <span class="info-box-text">Doanh thu</span>
+                <span class="info-box-number">
+                  0
+                </span>
+              </div>
+              <!-- /.info-box-content -->
             </div>
-            <!-- /.info-box-content -->
+            <!-- /.info-box -->
           </div>
-          <!-- /.info-box -->
-        </div>
-        <!-- /.col -->
-        <div class="col-12 col-sm-6 col-md-3">
-          <div class="info-box mb-3">
-            <span class="info-box-icon bg-success elevation-1"><i class="fas fa-cart-plus"></i></span>
+          <!-- /.col -->
+          <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-box">
+              <span class="info-box-icon bg-success elevation-1"><i class="fas fa-cart-plus"></i></span>
 
-            <div class="info-box-content">
-              <span class="info-box-text">Đơn hàng mới</span>
-              <span class="info-box-number">10</span>
+              <div class="info-box-content">
+                <span class="info-box-text">Đơn hàng mới</span>
+                <span class="info-box-number">10</span>
+              </div>
+              <!-- /.info-box-content -->
             </div>
-            <!-- /.info-box-content -->
+            <!-- /.info-box -->
           </div>
-          <!-- /.info-box -->
-        </div>
-        <!-- /.col -->
+          <!-- /.col -->
 
-        <!-- fix for small devices only -->
-        <div class="clearfix hidden-md-up"></div>
+          <!-- fix for small devices only -->
+          <div class="clearfix hidden-md-up"></div>
 
-        <div class="col-12 col-sm-6 col-md-3">
-          <div class="info-box mb-3">
-            <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-cart-arrow-down"></i></span>
+          <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-box">
+              <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-cart-arrow-down"></i></span>
 
-            <div class="info-box-content">
-              <span class="info-box-text">Đơn trả hàng</span>
-              <span class="info-box-number">0</span>
+              <div class="info-box-content">
+                <span class="info-box-text">Đơn trả hàng</span>
+                <span class="info-box-number">0</span>
+              </div>
+              <!-- /.info-box-content -->
             </div>
-            <!-- /.info-box-content -->
+            <!-- /.info-box -->
           </div>
-          <!-- /.info-box -->
-        </div>
-        <!-- /.col -->
-        <div class="col-12 col-sm-6 col-md-3">
-          <div class="info-box mb-3">
-            <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-times-circle"></i></span>
+          <!-- /.col -->
+          <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-box">
+              <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-times-circle"></i></span>
 
-            <div class="info-box-content">
-              <span class="info-box-text">Đơn huỷ</span>
-              <span class="info-box-number">0</span>
+              <div class="info-box-content">
+                <span class="info-box-text">Đơn huỷ</span>
+                <span class="info-box-number">0</span>
+              </div>
+              <!-- /.info-box-content -->
             </div>
-            <!-- /.info-box-content -->
+            <!-- /.info-box -->
           </div>
-          <!-- /.info-box -->
         </div>
-        <!-- /.col -->
       </div>
-      <!-- /.row -->
-
-      <div class="row mb-3">
-        <div class="col-12">
+      <div class="card">
+        <div class="card-header">
           <h5 class="d-md-inline">DOANH THU BÁN HÀNG</h5>
           <div class="btn-group d-inline-block float-md-right ml-md-3">
-            <button type="button" class="btn btn-block btn-primary dropdown-toggle" data-toggle="dropdown">
+            <button type="button" class="btn btn-block btn-outline-primary dropdown-toggle" data-toggle="dropdown">
               Tất cả chi nhánh
             </button>
             <div class="dropdown-menu dropdown-menu-right" role="menu">
@@ -107,7 +105,7 @@
             </div>
           </div>
           <div class="btn-group d-inline-block float-md-right">
-            <button type="button" class="btn btn-block btn-primary dropdown-toggle" data-toggle="dropdown">
+            <button type="button" class="btn btn-block btn-outline-primary dropdown-toggle" data-toggle="dropdown">
               7 ngày qua
             </button>
             <div class="dropdown-menu dropdown-menu-right" role="menu">
@@ -117,130 +115,110 @@
             </div>
           </div>
         </div>
-        <div class="col-md-12">
-          <div class="card">
-            <div class="card-header">
-              <div class="card-tools">
-                <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                  <i class="fas fa-minus"></i>
-                </button>
+        <!-- /.card-header -->
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-8">
+              <p class="text-center">
+                <strong>Sales: 1 Jan, 2012 - 30 Jul, 2022</strong>
+              </p>
+
+              <div class="chart">
+                <!-- Sales Chart Canvas -->
+                <canvas id="salesChart" height="180" style="height: 180px;"></canvas>
               </div>
+              <!-- /.chart-responsive -->
             </div>
-            <!-- /.card-header -->
-            <div class="card-body">
-              <div class="row">
-                <div class="col-md-8">
-                  <p class="text-center">
-                    <strong>Sales: 1 Jan, 2014 - 30 Jul, 2014</strong>
-                  </p>
+            <!-- /.col -->
+            <div class="col-md-4">
+              <p class="text-center">
+                <strong>Kết quả kinh doanh</strong>
+              </p>
 
-                  <div class="chart">
-                    <!-- Sales Chart Canvas -->
-                    <canvas id="salesChart" height="180" style="height: 180px;"></canvas>
-                  </div>
-                  <!-- /.chart-responsive -->
-                </div>
-                <!-- /.col -->
-                <div class="col-md-4">
-                  <p class="text-center">
-                    <strong>Goal Completion</strong>
-                  </p>
-
-                  <div class="progress-group">
-                    Add Products to Cart
-                    <span class="float-right"><b>160</b>/200</span>
-                    <div class="progress progress-sm">
-                      <div class="progress-bar bg-primary" style="width: 80%"></div>
-                    </div>
-                  </div>
-                  <!-- /.progress-group -->
-
-                  <div class="progress-group">
-                    Complete Purchase
-                    <span class="float-right"><b>310</b>/400</span>
-                    <div class="progress progress-sm">
-                      <div class="progress-bar bg-danger" style="width: 75%"></div>
-                    </div>
-                  </div>
-
-                  <!-- /.progress-group -->
-                  <div class="progress-group">
-                    <span class="progress-text">Visit Premium Page</span>
-                    <span class="float-right"><b>480</b>/800</span>
-                    <div class="progress progress-sm">
-                      <div class="progress-bar bg-success" style="width: 60%"></div>
-                    </div>
-                  </div>
-
-                  <!-- /.progress-group -->
-                  <div class="progress-group">
-                    Send Inquiries
-                    <span class="float-right"><b>250</b>/500</span>
-                    <div class="progress progress-sm">
-                      <div class="progress-bar bg-warning" style="width: 50%"></div>
-                    </div>
-                  </div>
-                  <!-- /.progress-group -->
-                </div>
-                <!-- /.col -->
-              </div>
-              <!-- /.row -->
-            </div>
-            <!-- ./card-body -->
-            <div class="card-footer">
-              <div class="row">
-                <div class="col-sm-3 col-6">
-                  <div class="description-block border-right">
-                    <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> 17%</span>
-                    <h5 class="description-header">$35,210.43</h5>
-                    <span class="description-text">TOTAL REVENUE</span>
-                  </div>
-                  <!-- /.description-block -->
-                </div>
-                <!-- /.col -->
-                <div class="col-sm-3 col-6">
-                  <div class="description-block border-right">
-                    <span class="description-percentage text-warning"><i class="fas fa-caret-left"></i> 0%</span>
-                    <h5 class="description-header">$10,390.90</h5>
-                    <span class="description-text">TOTAL COST</span>
-                  </div>
-                  <!-- /.description-block -->
-                </div>
-                <!-- /.col -->
-                <div class="col-sm-3 col-6">
-                  <div class="description-block border-right">
-                    <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> 20%</span>
-                    <h5 class="description-header">$24,813.53</h5>
-                    <span class="description-text">TOTAL PROFIT</span>
-                  </div>
-                  <!-- /.description-block -->
-                </div>
-                <!-- /.col -->
-                <div class="col-sm-3 col-6">
-                  <div class="description-block">
-                    <span class="description-percentage text-danger"><i class="fas fa-caret-down"></i> 18%</span>
-                    <h5 class="description-header">1200</h5>
-                    <span class="description-text">GOAL COMPLETIONS</span>
-                  </div>
-                  <!-- /.description-block -->
+              <div class="progress-group">
+                Doanh thu
+                <span class="float-right"><b>3000000</b>/3000000</span>
+                <div class="progress progress-sm">
+                  <div class="progress-bar bg-primary" style="width: 100%"></div>
                 </div>
               </div>
-              <!-- /.row -->
+              <!-- /.progress-group -->
+
+              <div class="progress-group">
+                Đơn huỷ
+                <span class="float-right"><b>5</b>/20</span>
+                <div class="progress progress-sm">
+                  <div class="progress-bar bg-danger" style="width: 25%"></div>
+                </div>
+              </div>
+
+              <!-- /.progress-group -->
+              <div class="progress-group">
+                Đơn mới
+                <span class="float-right"><b>500</b>/2000</span>
+                <div class="progress progress-sm">
+                  <div class="progress-bar bg-success" style="width: 25%"></div>
+                </div>
+              </div>
+
+              <!-- /.progress-group -->
+              <div class="progress-group">
+                Đơn trả hàng
+                <span class="float-right"><b>10</b>/20</span>
+                <div class="progress progress-sm">
+                  <div class="progress-bar bg-warning" style="width: 50%"></div>
+                </div>
+              </div>
+              <!-- /.progress-group -->
             </div>
-            <!-- /.card-footer -->
+            <!-- /.col -->
           </div>
-          <!-- /.card -->
+          <!-- /.row -->
         </div>
-        <!-- /.col -->
+        <!-- ./card-body -->
+        <!-- <div class="card-footer">
+          <div class="row">
+            <div class="col-sm-3 col-6">
+              <div class="description-block border-right">
+                <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> 17%</span>
+                <h5 class="description-header">$35,210.43</h5>
+                <span class="description-text">TOTAL REVENUE</span>
+              </div>
+            </div>
+            <div class="col-sm-3 col-6">
+              <div class="description-block border-right">
+                <span class="description-percentage text-warning"><i class="fas fa-caret-left"></i> 0%</span>
+                <h5 class="description-header">$10,390.90</h5>
+                <span class="description-text">TOTAL COST</span>
+              </div>
+            </div>
+            <div class="col-sm-3 col-6">
+              <div class="description-block border-right">
+                <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> 20%</span>
+                <h5 class="description-header">$24,813.53</h5>
+                <span class="description-text">TOTAL PROFIT</span>
+              </div>
+            </div>
+            <div class="col-sm-3 col-6">
+              <div class="description-block">
+                <span class="description-percentage text-danger"><i class="fas fa-caret-down"></i> 18%</span>
+                <h5 class="description-header">1200</h5>
+                <span class="description-text">GOAL COMPLETIONS</span>
+              </div>
+            </div>
+          </div>
+        </div> -->
+        <!-- /.card-footer -->
       </div>
+      <!-- /.card -->
+
       <!-- /.row -->
 
-      <div class="row mb-3">
-        <!-- Custom filter -->
-        <div class="col-12">
+      <div class="card">
+        <div class="card-header">
           <h5 class="d-md-inline">ĐƠN HÀNG CHỜ XỬ LÝ</h5>
           <div class="btn-group d-inline-block float-md-right">
-            <button type="button" class="btn btn-block btn-primary dropdown-toggle" data-toggle="dropdown">
+            <button type="button" class="btn btn-block btn-outline-primary dropdown-toggle" data-toggle="dropdown">
               7 ngày qua
             </button>
             <div class="dropdown-menu dropdown-menu-right" role="menu">
@@ -251,92 +229,94 @@
           </div>
         </div>
         <!-- /.end custom filter -->
-        <div class="col-12 col-sm-6 col-md-2">
-          <div class="info-box mb-3">
-            <span class="info-box-icon elevation-1"><i class="text-primary fas fa-dollar-sign"></i></span>
+        <div class="card-body row">
+          <div class="col-12 col-sm-6 col-md-2">
+            <div class="info-box mb-3">
+              <span class="info-box-icon elevation-1"><i class="text-primary fas fa-dollar-sign"></i></span>
 
-            <div class="info-box-content">
-              <span class="info-box-text">Chờ duyệt</span>
-              <span class="info-box-number">
-                0
-              </span>
+              <div class="info-box-content">
+                <span class="info-box-text">Chờ duyệt</span>
+                <span class="info-box-number">
+                  0
+                </span>
+              </div>
+              <!-- /.info-box-content -->
             </div>
-            <!-- /.info-box-content -->
+            <!-- /.info-box -->
           </div>
-          <!-- /.info-box -->
-        </div>
-        <!-- /.col -->
-        <div class="col-12 col-sm-6 col-md-2">
-          <div class="info-box mb-3">
-            <span class="info-box-icon elevation-1"><i class="text-primary fas fa-cart-plus"></i></span>
+          <!-- /.col -->
+          <div class="col-12 col-sm-6 col-md-2">
+            <div class="info-box mb-3">
+              <span class="info-box-icon elevation-1"><i class="text-primary fas fa-cart-plus"></i></span>
 
-            <div class="info-box-content">
-              <span class="info-box-text">Chờ thanh toán</span>
-              <span class="info-box-number">0</span>
+              <div class="info-box-content">
+                <span class="info-box-text">Chờ thanh toán</span>
+                <span class="info-box-number">0</span>
+              </div>
+              <!-- /.info-box-content -->
             </div>
-            <!-- /.info-box-content -->
+            <!-- /.info-box -->
           </div>
-          <!-- /.info-box -->
-        </div>
-        <!-- /.col -->
+          <!-- /.col -->
 
-        <!-- fix for small devices only -->
-        <div class="clearfix hidden-md-up"></div>
+          <!-- fix for small devices only -->
+          <div class="clearfix hidden-md-up"></div>
 
-        <div class="col-12 col-sm-6 col-md-2">
-          <div class="info-box mb-3">
-            <span class="info-box-icon elevation-1"><i class="text-primary fas fa-cart-arrow-down"></i></span>
+          <div class="col-12 col-sm-6 col-md-2">
+            <div class="info-box mb-3">
+              <span class="info-box-icon elevation-1"><i class="text-primary fas fa-cart-arrow-down"></i></span>
 
-            <div class="info-box-content">
-              <span class="info-box-text">Chờ đóng gói</span>
-              <span class="info-box-number">0</span>
+              <div class="info-box-content">
+                <span class="info-box-text">Chờ đóng gói</span>
+                <span class="info-box-number">0</span>
+              </div>
+              <!-- /.info-box-content -->
             </div>
-            <!-- /.info-box-content -->
+            <!-- /.info-box -->
           </div>
-          <!-- /.info-box -->
-        </div>
-        <!-- /.col -->
-        <div class="col-12 col-sm-6 col-md-2">
-          <div class="info-box mb-3">
-            <span class="info-box-icon elevation-1"><i class="text-primary fas fa-times-circle"></i></span>
+          <!-- /.col -->
+          <div class="col-12 col-sm-6 col-md-2">
+            <div class="info-box mb-3">
+              <span class="info-box-icon elevation-1"><i class="text-primary fas fa-times-circle"></i></span>
 
-            <div class="info-box-content">
-              <span class="info-box-text">Chờ lấy hàng</span>
-              <span class="info-box-number">0</span>
+              <div class="info-box-content">
+                <span class="info-box-text">Chờ lấy hàng</span>
+                <span class="info-box-number">0</span>
+              </div>
+              <!-- /.info-box-content -->
             </div>
-            <!-- /.info-box-content -->
+            <!-- /.info-box -->
           </div>
-          <!-- /.info-box -->
-        </div>
-        <!-- /.col -->
-        <div class="clearfix hidden-md-up"></div>
+          <!-- /.col -->
+          <div class="clearfix hidden-md-up"></div>
 
-        <div class="col-12 col-sm-6 col-md-2">
-          <div class="info-box mb-3">
-            <span class="info-box-icon elevation-1"><i class="text-primary fas fa-cart-arrow-down"></i></span>
+          <div class="col-12 col-sm-6 col-md-2">
+            <div class="info-box mb-3">
+              <span class="info-box-icon elevation-1"><i class="text-primary fas fa-cart-arrow-down"></i></span>
 
-            <div class="info-box-content">
-              <span class="info-box-text">Đang giao hàng</span>
-              <span class="info-box-number">0</span>
+              <div class="info-box-content">
+                <span class="info-box-text">Đang giao hàng</span>
+                <span class="info-box-number">0</span>
+              </div>
+              <!-- /.info-box-content -->
             </div>
-            <!-- /.info-box-content -->
+            <!-- /.info-box -->
           </div>
-          <!-- /.info-box -->
-        </div>
-        <!-- /.col -->
-        <div class="col-12 col-sm-6 col-md-2">
-          <div class="info-box mb-3">
-            <span class="info-box-icon elevation-1"><i class="text-primary fas fa-times-circle"></i></span>
+          <!-- /.col -->
+          <div class="col-12 col-sm-6 col-md-2">
+            <div class="info-box mb-3">
+              <span class="info-box-icon elevation-1"><i class="text-primary fas fa-times-circle"></i></span>
 
-            <div class="info-box-content">
-              <span class="info-box-text">Huỷ đơn hàng</span>
-              <span class="info-box-number">0</span>
+              <div class="info-box-content">
+                <span class="info-box-text">Huỷ đơn hàng</span>
+                <span class="info-box-number">0</span>
+              </div>
+              <!-- /.info-box-content -->
             </div>
-            <!-- /.info-box-content -->
+            <!-- /.info-box -->
           </div>
-          <!-- /.info-box -->
+          <!-- /.col -->
         </div>
-        <!-- /.col -->
       </div>
 
       <!-- Main row -->
@@ -348,7 +328,7 @@
             <div class="card-header border-transparent">
               <h5 class="card-title">TOP SẢN PHẨM</h5>
               <div class="card-tools">
-                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown">
                   7 ngày qua
                 </button>
                 <div class="dropdown-menu dropdown-menu-right" role="menu">
@@ -424,7 +404,7 @@
               <h3 class="card-title">THÔNG TIN KHO</h3>
 
               <div class="card-tools">
-                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown">
                   Tất cả chi nhánh
                 </button>
                 <div class="dropdown-menu dropdown-menu-right" role="menu">
