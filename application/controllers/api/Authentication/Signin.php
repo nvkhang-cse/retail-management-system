@@ -1,6 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 require APPPATH . 'libraries/RestController.php';
+
 use chriskacerguis\RestServer\RestController;
 
 class Signin extends RestController
@@ -9,35 +10,27 @@ class Signin extends RestController
     {
         parent::__construct();
         $this->load->model('cms/UserModel');
-
     }
-    
+
     public function login_post()
     {
         $data = $this->security->xss_clean($this->post());
-        //Form validation
+        //Form Validation
         $this->form_validation->set_data($data);
-        $this->form_validation->set_rules('email', 'Email', 'trim|required');
-        $this->form_validation->set_rules('password', 'Password', 'trim|required|max_length[100]');
-        // $this->form_validation->set_rules('fullname', 'Full name', 'trim|required|max_length[50]');
-        // $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|max_length[80]|is_unique[user.email]',
-        // array('is_unique' => 'This %s already exists please enter another email address.'));
+        $this->form_validation->set_rules('email', 'Email', 'trim');
+        $this->form_validation->set_rules('password', 'Password', 'trim');
 
-        if($this->form_validation->run() == FALSE)
-        {
-            //Form validation error
+        if ($this->form_validation->run() == FALSE) {
+            //Error Validation
             $message = array(
                 'status'    =>  false,
                 'error'     =>  $this->form_validation->error_array(),
                 'message'   =>  validation_errors()
             );
             $this->response($message, RestController::HTTP_NOT_FOUND);
-        }
-        else
-        {
+        } else {
             $output = $this->UserModel->user_login($this->post('email'), $this->post('password'));
-            if (!empty($output) && $output != FALSE)
-            {
+            if (!empty($output) && $output != FALSE) {
                 // Load Authorization Token Library
                 $this->load->library('Authorization_Token');
 
@@ -64,26 +57,17 @@ class Signin extends RestController
                 $message = [
                     'status' => true,
                     'data' => $return_data,
-                    'message' => "User login successful"
+                    'message' => "Đăng nhập thành công"
                 ];
                 $this->response($message, RestController::HTTP_OK);
-            } 
-            else
-            {
+            } else {
                 // Login Error
                 $message = [
                     'status' => FALSE,
-                    'message' => "Invalid Username or Password"
+                    'message' => "Thông tin đăng nhập không chính xác"
                 ];
                 $this->response($message, RestController::HTTP_NOT_FOUND);
             }
         }
     }
-
-
-
-
-
-
 }
-?>
