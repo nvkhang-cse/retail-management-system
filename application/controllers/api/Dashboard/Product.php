@@ -194,7 +194,7 @@ class Product extends RestController
             $this->form_validation->set_rules('product_retail', 'Giá bán lẻ', 'trim|required');
             $this->form_validation->set_rules('product_description', 'Mô tả sản phẩm', 'trim|required');
             $this->form_validation->set_rules('product_ingred', 'Bảng thành phần', 'trim|required');
-            $this->form_validation->set_rules('product_file', 'Ảnh sản phẩm', 'trim|required');
+            $this->form_validation->set_rules('product_file', 'Ảnh sản phẩm', 'trim');
 
 
             if ($this->form_validation->run() == FALSE) {
@@ -212,7 +212,7 @@ class Product extends RestController
                     'title'             => $data['product_name'],
                     'brand'             => $data['product_brand'],
                     'origin'            => $data['product_ori'],
-                    // 'image'=>
+                    // 'image'
                     'price'             => $data['product_retail'],
                     'goods_cost'        => $data['product_cost'],
                     'retail_price'      => $data['product_retail'],
@@ -231,11 +231,11 @@ class Product extends RestController
                 $config['max_width']            = 1024;
                 $config['max_height']           = 768;
                 $this->load->library('upload', $config);
-                if ($this->security->xss_clean($this->request->getFile('product_file'), TRUE)) {
-                    if ($this->upload->do_upload('product_file')) {
-                        $product_data['image'] = $this->upload->data('full_path');
-                    }
+                // if ($this->security->xss_clean($this->request->getFile('product_file'), TRUE)) {
+                if ($this->upload->do_upload('product_file')) {
+                    $product_data['image'] = $this->upload->data('full_path');
                 }
+                // }
                 $this->ProductModel->insert_product($product_data);
                 $message = [
                     'status' => true,
@@ -254,4 +254,3 @@ class Product extends RestController
         }
     }
 }
-?>
