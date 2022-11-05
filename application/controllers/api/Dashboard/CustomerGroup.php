@@ -4,7 +4,7 @@ require APPPATH . 'libraries/RestController.php';
 
 use chriskacerguis\RestServer\RestController;
 
-class CustomerGroup extends RestController
+class Customergroup extends RestController
 {
     public function __construct()
     {
