@@ -32,3 +32,4 @@ class CustomerGroup extends CI_Controller
         $this->load->view('cms/layout/main_error', $this->data);
     }
 }
+?>

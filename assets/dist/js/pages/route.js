@@ -105,7 +105,7 @@ function add_script(index, index2, site_url) {
 					contentType: false,
 					processData: false,
 					success: function (data) {
-						console.log(data.data);
+						window.location.href = site_url + "dashboard/product";
 					},
 				});
 			});
@@ -115,9 +115,41 @@ function add_script(index, index2, site_url) {
 		if (index2 == 1) {
 			customerTable(index2, site_url);
 		} else if (index2 == 2) {
+			$("form#customer_data").submit(function (e) {
+				e.preventDefault();
+				var formData = new FormData(this);
+
+				$.ajax({
+					url: site_url + "api/dashboard/customer/storeNewCustomer",
+					type: "POST",
+					data: formData,
+					headers: { Authorization: localStorage.getItem("auth_token") },
+					contentType: false,
+					processData: false,
+					success: function (data) {
+						window.location.href = site_url + "dashboard/customer";
+					},
+				});
+			});
 		} else if (index2 == 3) {
 			customerGroupTable(index2, site_url);
 		} else if (index2 == 4) {
+			$("form#customer_group_data").submit(function (e) {
+				e.preventDefault();
+				var formData = new FormData(this);
+
+				$.ajax({
+					url: site_url + "api/dashboard/customergroup/storeNewCustomerGroup",
+					type: "POST",
+					data: formData,
+					headers: { Authorization: localStorage.getItem("auth_token") },
+					contentType: false,
+					processData: false,
+					success: function (data) {
+						window.location.href = site_url + "dashboard/customergroup";
+					},
+				});
+			});
 		}
 	} else if (index == 4) {
 	}

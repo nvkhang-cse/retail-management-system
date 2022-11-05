@@ -188,10 +188,6 @@
           <button type="button" class="btn btn-secondary">Hủy</button>
         </a>
       </div>
-
-      <br>
-      <br>
-
     </form>
   </div>
 </section>

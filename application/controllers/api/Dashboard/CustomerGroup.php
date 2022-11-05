@@ -99,4 +99,56 @@ class CustomerGroup extends RestController
             $this->response($message, RestController::HTTP_NOT_FOUND);
         }
     }
+
+    public function storeNewCustomerGroup_post()
+    {
+        $this->load->library('Authorization_Token');
+        /**
+         * User Token Validation
+         */
+        $is_valid_token = $this->authorization_token->validateToken();
+        // var_dump($is_valid_token);
+        if (!empty($is_valid_token) and $is_valid_token['status'] === TRUE) {
+            // $this->data["headerview"]="cms/layout/main";
+            // $this->data["subview"]="cms/layout/main";
+
+            $data = $this->security->xss_clean($this->post());
+
+            // Form validation
+            $this->form_validation->set_data($data);
+            $this->form_validation->set_rules('customer_group_name', 'Tên nhóm khách hàng', 'trim|required');
+            $this->form_validation->set_rules('customer_group_code', 'Mã nhóm khách hàng', 'trim|required');
+            $this->form_validation->set_rules('customer_group_description', 'Mô tả', 'trim');
+
+            if ($this->form_validation->run() == FALSE) {
+                //Form validation error
+                $message = array(
+                    'status'    =>  false,
+                    'error'     =>  $this->form_validation->error_array(),
+                    'message'   =>  validation_errors()
+                );
+                $this->response($message, RestController::HTTP_NOT_FOUND);
+            } else {
+                $customer_group_data = [
+                    'group_name'              => $data['customer_group_name'],
+                    'id'                => $data['customer_group_code'],
+                    'description'          => $data['customer_group_description'],
+                ];
+                $this->CustomerGroupModel->insert_customer_group    ($customer_group_data);
+                $message = [
+                    'status' => true,
+                    'data' => 'success',
+                    'message' => "Save customer group successful"
+                ];
+                $this->response($message, RestController::HTTP_OK);
+            }
+        } else {
+            // Login Error
+            $message = [
+                'status' => FALSE,
+                'message' => "Can't save new customer group"
+            ];
+            $this->response($message, RestController::HTTP_NOT_FOUND);
+        }
+    }
 }

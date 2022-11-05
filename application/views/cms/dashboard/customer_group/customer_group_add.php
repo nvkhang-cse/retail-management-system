@@ -26,13 +26,13 @@
                 <div class="col-sm-6">
                   <div class="form-group">
                     <label for="customer_group_name">Tên nhóm khách hàng*</label>
-                    <input type="text" class="form-control" id="customer_group_name" name="customer_group_name" placeholder="Nhập tên khách hàng" required>
+                    <input type="text" class="form-control" id="customer_group_name" name="customer_group_name" placeholder="Nhập tên nhóm khách hàng" required>
                   </div>
                 </div>
                 <div class="col-sm-6">
                   <div class="form-group">
                     <label for="customer_group_code">Mã nhóm khách hàng*</label>
-                    <input type="text" class="form-control" id="customer_group_code" name="customer_group_code" placeholder="Nhập mã khách hàng" required>
+                    <input type="text" class="form-control" id="customer_group_code" name="customer_group_code" placeholder="Nhập mã nhóm khách hàng" required>
                   </div>
                 </div>
               </div>
