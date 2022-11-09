@@ -43,7 +43,20 @@ function productTable(index2, site_url) {
 				},
 			],
 			columns: [
-				{ data: null },
+				{ data: "id" },
+				{
+					data: "image",
+					searchable: false,
+					orderable: false,
+					render: function (data, type, row, meta) {
+						if (row.image != "") {
+							var a = `<img src="${site_url}/assets/upload_img/${row.image}" width="120" height="120"/>`;
+						} else {
+							var a = `<img src="${site_url}/assets/upload_img/default_photo.jpg" width="120" height="120"/>`;
+						}
+						return a;
+					},
+				},
 				{ data: "title" },
 				{ data: "product_code" },
 				{ data: "brand" },

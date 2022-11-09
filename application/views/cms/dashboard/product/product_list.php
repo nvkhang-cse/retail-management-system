@@ -29,6 +29,7 @@
               <thead>
                 <tr>
                   <th></th>
+                  <th>Ảnh sản phẩm</th>
                   <th>Tên sản phẩm</th>
                   <th>Mã sản phẩm</th>
                   <th>Thương hiệu</th>
