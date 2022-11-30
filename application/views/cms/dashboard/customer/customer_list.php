@@ -7,7 +7,7 @@
       </div>
       <div class="col-sm-6">
         <a href="<?= site_url("dashboard/customer/loadCustomerAdd") ?>">
-          <button type="button" class="btn btn-primary float-right" style="background-color:#0087C2" id="add_btn">+ Thêm khách hàng</button>
+          <button type="button" class="btn btn-primary float-right" id="add_btn">+ Thêm khách hàng</button>
         </a>
       </div>
     </div>

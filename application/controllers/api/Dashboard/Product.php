@@ -189,11 +189,14 @@ class Product extends RestController
             $this->form_validation->set_rules('product_quantity', 'Số lượng', 'trim|required');
             $this->form_validation->set_rules('product_capacity', 'Dung tích', 'trim|required');
             $this->form_validation->set_rules('product_unit', 'Đơn vị', 'trim|required');
+            $this->form_validation->set_rules('expired_date', 'Ngày hết hạn', 'trim|required');
+            $this->form_validation->set_rules('published', 'Trạng thái', 'required');
             $this->form_validation->set_rules('product_cost', 'Giá nhập', 'trim|required');
             $this->form_validation->set_rules('product_wholesale', 'Giá bán sỉ', 'trim|required');
             $this->form_validation->set_rules('product_retail', 'Giá bán lẻ', 'trim|required');
             $this->form_validation->set_rules('product_description', 'Mô tả sản phẩm', 'trim|required');
             $this->form_validation->set_rules('product_ingred', 'Bảng thành phần', 'trim|required');
+            $this->form_validation->set_rules('category', 'Loại', 'required');
             $this->form_validation->set_rules('product_file', 'Ảnh sản phẩm', 'trim');
 
 
@@ -207,30 +210,32 @@ class Product extends RestController
                 $this->response($message, RestController::HTTP_NOT_FOUND);
             } else {
                 $product_data = [
-                    'product_code'      => $data['product_code'],
-                    'barcode'           => $data['product_barcode'],
                     'title'             => $data['product_name'],
+                    'product_code'      => $data['product_code'],
                     'brand'             => $data['product_brand'],
                     'origin'            => $data['product_ori'],
-                    'price'             => $data['product_retail'],
-                    'goods_cost'        => $data['product_cost'],
-                    'retail_price'      => $data['product_retail'],
-                    'wholesale_price'   => $data['product_wholesale'],
+                    'barcode'           => $data['product_barcode'],
                     'quantity'          => $data['product_quantity'],
                     'capacity'          => $data['product_capacity'],
                     'unit'              => $data['product_unit'],
-                    'ingredient'        => $data['product_ingred'],
+                    'expired_date'      => $data['expired_date'],
+                    'published'         => $data['published'],
+                    'goods_cost'        => $data['product_cost'],
+                    'retail_price'      => $data['product_retail'],
+                    'wholesale_price'   => $data['product_wholesale'],
+                    'price'             => $data['product_retail'],
                     'description'       => $data['product_description'],
-
+                    'ingredient'        => $data['product_ingred'],
+                    'category'          => $data['category']
                 ];
                 $config['upload_path']          = 'assets/upload_img/product/';
                 $config['allowed_types']        = 'gif|jpg|png';
-                $config['max_size']             = 100;
-                $config['max_width']            = 1024;
-                $config['max_height']           = 768;
+                // $config['max_size']             = 100;
+                // $config['max_width']            = 1024;
+                // $config['max_height']           = 768;
                 $this->load->library('upload', $config);
                 if ($this->upload->do_upload('product_file')) {
-                    $product_data['image'] = $this->upload->data('full_path');
+                    $product_data['image'] = $this->upload->data('file_name');
                 }
                 $this->ProductModel->insert_product($product_data);
                 $message = [

@@ -11,6 +11,14 @@ div.dt-button-collection .dt-button {
 }
 
 div.dt-button-collection .dt-button.active {
-	background-color: #6495ed;
+	background-color: #0087c2;
+	font-size: 100%;
+}
+
+div.dataTables_length select {
 	font-size: 90%;
+}
+
+#productListTable tbody td .btn-group .dropdown-menu {
+	min-width: 0;
 }

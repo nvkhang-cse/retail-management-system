@@ -6,8 +6,11 @@
         <h1 class="m-0">Danh sách sản phẩm</h1>
       </div>
       <div class="col-sm-6">
+        <a href="<?= site_url("dashboard/product/loadProductCategory") ?>">
+          <button type="button" class="btn btn-outline-primary float-sm-right mr-2 ml-2">Quản lý loại sản phẩm</button>
+        </a>
         <a href="<?= site_url("dashboard/product/loadProductAdd") ?>">
-          <button type="button" class="btn btn-primary float-right" style="background-color:#0087C2" id="add_btn">+ Thêm sản phẩm</button>
+          <button type="button" class="btn btn-primary float-sm-right" id="add_btn">+ Thêm sản phẩm</button>
         </a>
       </div>
     </div>
@@ -31,13 +34,17 @@
                   <th></th>
                   <th>Ảnh sản phẩm</th>
                   <th>Tên sản phẩm</th>
-                  <th>Mã sản phẩm</th>
+                  <th>Loại</th>
                   <th>Thương hiệu</th>
-                  <th>Xuất sứ</th>
+                  <th>Barcode</th>
                   <th>Dung tích</th>
+                  <th>Đơn vị</th>
                   <th>Số lượng</th>
                   <th>Giá tiền</th>
+                  <th>Hạn sử dụng</th>
                   <th>Thao tác</th>
+                  <!-- <th>Trạng thái</th> -->
+                  <!-- <th>Mã sản phẩm</th> -->
                 </tr>
               </thead>
             </table>

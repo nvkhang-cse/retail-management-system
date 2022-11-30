@@ -3,11 +3,14 @@
   <div class="container-fluid">
     <div class="row mb-3">
       <div class="col-sm-6">
-        <h1 class="m-0">Danh sách nhóm khách hàng</h1>
+        <h1 class="m-0">Danh sách loại sản phẩm</h1>
       </div>
       <div class="col-sm-6">
-        <a href="<?= site_url("dashboard/customergroup/loadCustomerGroupAdd") ?>">
-          <button type="button" class="btn btn-primary float-right" id="add_btn">+ Thêm nhóm khách hàng</button>
+        <a href="<?= site_url("dashboard/product") ?>">
+          <button type="button" class="btn btn-outline-primary float-sm-right mr-2 ml-2">Danh sách sản phẩm</button>
+        </a>
+        <a href="<?= site_url("dashboard/product/loadProductCategoryAdd") ?>">
+          <button type="button" class="btn btn-primary float-sm-right" id="add_btn">+ Thêm loại sản phẩm</button>
         </a>
       </div>
     </div>
@@ -21,18 +24,17 @@
       <div class="col-12">
         <div class="card">
           <div class="card-header">
-            <h5 class="card-title text-primary">Thông tin nhóm khách hàng</h5>
+            <h5 class="card-title text-primary">Thông tin loại sản phẩm</h5>
           </div>
           <!-- /.card-header -->
-          <div class="card-body" id="customer-group-wrapper">
-            <table id="customerGroupListTable" class="table table-bordered table-striped">
+          <div class="card-body" id="product-category-wrapper">
+            <table id="productCategoryListTable" class="table table-bordered table-striped">
               <thead>
                 <tr>
                   <th></th>
-                  <th>Tên nhóm</th>
-                  <th>Mã nhóm</th>
+                  <th>Tên danh mục</th>
+                  <th>Mã danh mục</th>
                   <th>Mô tả</th>
-                  <th>Số lượng khách hàng</th>
                   <th>Ngày tạo</th>
                   <th>Thao tác</th>
                 </tr>

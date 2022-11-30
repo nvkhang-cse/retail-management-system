@@ -155,7 +155,7 @@
         </div>
 
         <!-- SidebarSearch Form -->
-        <div class="form-inline">
+        <!-- <div class="form-inline">
           <div class="input-group" data-widget="sidebar-search">
             <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
             <div class="input-group-append">
@@ -164,7 +164,7 @@
               </button>
             </div>
           </div>
-        </div>
+        </div> -->
 
         <!-- Sidebar Menu -->
         <nav class="mt-2">
@@ -183,7 +183,7 @@
               <a href="<?= site_url("dashboard/sales") ?>" class="nav-link">
                 <i class="nav-icon fas fa-hand-holding"></i>
                 <p>
-                  Bán hàng
+                  Bán tại quầy
                 </p>
               </a>
             </li>
@@ -192,10 +192,10 @@
                 <i class="nav-icon fas fa-clipboard-list"></i>
                 <p>
                   Đơn hàng
-                  <i class="fas fa-angle-left right"></i>
+                  <!-- <i class="fas fa-angle-left right"></i> -->
                 </p>
               </a>
-              <ul class="nav nav-treeview">
+              <!-- <ul class="nav nav-treeview">
                 <li class="nav-item">
                   <a href="#" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
@@ -208,7 +208,7 @@
                     <p>Tạo đơn hàng</p>
                   </a>
                 </li>
-              </ul>
+              </ul> -->
             </li>
             <li class="nav-item">
               <a href="#" class="nav-link">
@@ -274,7 +274,7 @@
                 </li>
               </ul>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-truck"></i>
                 <p>
@@ -296,15 +296,15 @@
                   </a>
                 </li>
               </ul>
-            </li>
-            <li class="nav-item">
+            </li> -->
+            <!-- <li class="nav-item">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-flag"></i>
                 <p>
                   Marketing
                 </p>
               </a>
-            </li>
+            </li> -->
             <li class="nav-item">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-money-check-alt"></i>
@@ -355,8 +355,23 @@
                 <i class="nav-icon fas fa-cogs"></i>
                 <p>
                   Quản lý hệ thống
+                  <i class="fas fa-angle-left right"></i>
                 </p>
               </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="#" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Chi nhánh</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="#" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Nhân viên</p>
+                  </a>
+                </li>
+              </ul>
             </li>
           </ul>
         </nav>
@@ -375,7 +390,7 @@
     <aside id="right_sidebar_content" class="control-sidebar control-sidebar-dark">
       <!-- Control sidebar content goes here -->
       <div class="row ml-4 mt-2 ">
-        <a href="#" class="col-12">
+        <a href="<?= site_url("api/authentication/signout/logout") ?>" class="col-12">
           <i class="fas fa-sign-out-alt mr-2"></i> Sign out
         </a>
       </div>

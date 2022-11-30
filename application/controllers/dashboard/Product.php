@@ -1,7 +1,8 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Product extends CI_Controller {
+class Product extends CI_Controller
+{
 
 	/**
 	 * Index Page for this controller.
@@ -20,27 +21,38 @@ class Product extends CI_Controller {
 	 */
 	public function index()
 	{
-   		$this->data["index"]= 2;
-		$this->data["index2"]= 1;
+		$this->data["index"] = 2;
+		$this->data["index2"] = 1;
 		$this->load->view('cms/layout/main_error', $this->data);
 	}
 	public function loadProductTrash()
 	{
-   		$this->data["index"]= 2;
-		$this->data["index2"]= 2;
+		$this->data["index"] = 2;
+		$this->data["index2"] = 2;
 		$this->load->view('cms/layout/main_error', $this->data);
 	}
 	public function loadProductAdd()
 	{
-   		$this->data["index"]= 2;
-		$this->data["index2"]= 3;
+		$this->data["index"] = 2;
+		$this->data["index2"] = 3;
 		$this->load->view('cms/layout/main_error', $this->data);
 	}
 	public function loadProductWareHouse()
 	{
-   		$this->data["index"]= 2;
-		$this->data["index2"]= 4;
+		$this->data["index"] = 2;
+		$this->data["index2"] = 4;
+		$this->load->view('cms/layout/main_error', $this->data);
+	}
+	public function loadProductCategory()
+	{
+		$this->data["index"] = 2;
+		$this->data["index2"] = 5;
+		$this->load->view('cms/layout/main_error', $this->data);
+	}
+	public function loadProductCategoryAdd()
+	{
+		$this->data["index"] = 2;
+		$this->data["index2"] = 6;
 		$this->load->view('cms/layout/main_error', $this->data);
 	}
 }
-?>

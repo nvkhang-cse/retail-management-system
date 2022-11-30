@@ -6,7 +6,7 @@
       </div>
       <div class="col-sm-6">
         <a href="<?= site_url("dashboard/product") ?>">
-          <button type="button" class="btn btn-primary float-right" id="add_btn" style="background-color: #0087C2">Xem danh sách sản phẩm</button>
+          <button type="button" class="btn btn-primary float-right" id="add_btn">Xem danh sách sản phẩm</button>
         </a>
       </div>
     </div>
@@ -74,6 +74,23 @@
                   </div>
                 </div>
               </div>
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="expired_date">Ngày hết hạn*</label>
+                    <input type="text" class="form-control" id="expired_date" name="expired_date" placeholder="20-10-2025">
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="product_published">Trạng thái*</label>
+                    <select class="form-control" id="product_published" name="published">
+                      <option value="0">Không được bán</option>
+                      <option value="1">Được bán</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -130,23 +147,9 @@
             </div>
             <div class="card-body">
               <div class="form-group">
-                <label>Loại sản phẩm</label>
-                <select class="form-control">
-                  <option>option 1</option>
-                  <option>option 2</option>
-                  <option>option 3</option>
-                  <option>option 4</option>
-                  <option>option 5</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label>Nhãn hiệu</label>
-                <select class="form-control">
-                  <option>option 1</option>
-                  <option>option 2</option>
-                  <option>option 3</option>
-                  <option>option 4</option>
-                  <option>option 5</option>
+                <label for="product_category">Loại sản phẩm</label>
+                <select class="form-control" id="product_category" name="category">
+                  <option value="0">Chưa phân loại</option>
                 </select>
               </div>
             </div>
