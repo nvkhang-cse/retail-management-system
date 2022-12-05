@@ -39,8 +39,10 @@
               <div class="row">
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label for="customer_group">Nhóm khách hàng*</label>
-                    <input type="text" class="form-control" id="customer_group" name="customer_group" placeholder="Chọn nhóm khách hàng" required>
+                    <label for="customer_group">Nhóm khách hàng</label>
+                    <select class="form-control" id="customer_group" name="customer_group">
+                      <option value="0">Chưa phân nhóm</option>
+                    </select>
                   </div>
                 </div>
                 <div class="col-sm-6">
@@ -57,39 +59,10 @@
                     <input type="text" class="form-control" id="customer_email" name="customer_email" placeholder="Email của khách hàng">
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
-          <div class="card card-lightblue">
-            <div class="card-header">
-              <h5 class="card-title">Thông tin địa chỉ</h5>
-            </div>
-            <div class="card-body">
-              <div class="row">
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label for="customer_cities">Khu vực</label>
-                    <input type="text" class="form-control" id="customer_cities" name="customer_cities" placeholder="Khu vực, thành phố">
-                  </div>
-                </div>
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for="customer_district">Quận/Huyện</label>
-                    <input type="text" class="form-control" id="customer_district" name="customer_district" placeholder="Quận, huyện">
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for="customer_village">Phường/Xã</label>
-                    <input type="text" class="form-control" id="customer_village" name="customer_village" placeholder="Phường, xã">
-                  </div>
-                </div>
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for="customer_address">Địa chỉ</label>
-                    <input type="text" class="form-control" id="customer_address" name="customer_address" placeholder="Số nhà">
+                    <label for="customer_birthday">Sinh nhật</label>
+                    <input type="text" class="form-control" id="customer_birthday" name="customer_birthday" placeholder="Ngày sinh khách hàng">
                   </div>
                 </div>
               </div>
@@ -103,36 +76,16 @@
             </div>
             <div class="card-body">
               <div class="form-group">
-                <label>Chính sách giá</label>
-                <select class="form-control">
-                  <option>option 1</option>
-                  <option>option 2</option>
-                  <option>option 3</option>
-                  <option>option 4</option>
-                  <option>option 5</option>
-                </select>
-              </div>
-
-              <div class="form-group">
-                <label>Thuế</label>
-                <select class="form-control">
-                  <option>option 1</option>
-                  <option>option 2</option>
-                  <option>option 3</option>
-                  <option>option 4</option>
-                  <option>option 5</option>
-                </select>
-
+                <label for="customer_address">Địa chỉ cụ thể</label>
+                <input type="text" class="form-control" id="customer_address" name="customer_address" placeholder="Số nhà">
               </div>
               <div class="form-group">
-                <label>Chiết khấu</label>
-                <select class="form-control">
-                  <option>option 1</option>
-                  <option>option 2</option>
-                  <option>option 3</option>
-                  <option>option 4</option>
-                  <option>option 5</option>
-                </select>
+                <label for="customer_cities">Khu vực</label>
+                <input type="text" class="form-control" id="customer_cities" name="customer_city" placeholder="Khu vực, thành phố">
+              </div>
+              <div class="form-group">
+                <label for="customer_district">Quận/Huyện</label>
+                <input type="text" class="form-control" id="customer_district" name="customer_district" placeholder="Quận, huyện">
               </div>
             </div>
           </div>

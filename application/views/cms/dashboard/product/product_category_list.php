@@ -9,7 +9,7 @@
         <a href="<?= site_url("dashboard/product") ?>">
           <button type="button" class="btn btn-outline-primary float-sm-right mr-2 ml-2">Danh sách sản phẩm</button>
         </a>
-        <a href="<?= site_url("dashboard/product/loadProductCategoryAdd") ?>">
+        <a href="<?= site_url("dashboard/product/loadproductcategoryadd") ?>">
           <button type="button" class="btn btn-primary float-sm-right" id="add_btn">+ Thêm loại sản phẩm</button>
         </a>
       </div>
@@ -35,7 +35,6 @@
                   <th>Tên danh mục</th>
                   <th>Mã danh mục</th>
                   <th>Mô tả</th>
-                  <th>Ngày tạo</th>
                   <th>Thao tác</th>
                 </tr>
               </thead>

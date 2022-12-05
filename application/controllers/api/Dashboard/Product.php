@@ -12,7 +12,7 @@ class Product extends RestController
         $this->load->model('cms/ProductModel');
     }
 
-    public function loadProductList_post()
+    public function loadproductlist_post()
     {
         $this->load->library('Authorization_Token');
         /**
@@ -43,7 +43,7 @@ class Product extends RestController
             $this->response($message, RestController::HTTP_NOT_FOUND);
         }
     }
-    public function loadProductTrash_post()
+    public function loadproducttrash_post()
     {
         $this->load->library('Authorization_Token');
         /**
@@ -76,7 +76,7 @@ class Product extends RestController
     }
 
 
-    public function loadProductAdd_post()
+    public function loadproductadd_post()
     {
         $this->load->library('Authorization_Token');
         /**
@@ -107,7 +107,7 @@ class Product extends RestController
             $this->response($message, RestController::HTTP_NOT_FOUND);
         }
     }
-    public function loadTableData_post()
+    public function loadtabledata_post()
     {
         $this->load->library('Authorization_Token');
         /**
@@ -133,7 +133,7 @@ class Product extends RestController
         }
     }
 
-    public function loadProductWareHouse_post()
+    public function loadproductwarehouse_post()
     {
         $this->load->library('Authorization_Token');
         /**
@@ -165,7 +165,7 @@ class Product extends RestController
         }
     }
 
-    public function storeNewProduct_post()
+    public function storenewproduct_post()
     {
         $this->load->library('Authorization_Token');
         /**
@@ -226,7 +226,8 @@ class Product extends RestController
                     'price'             => $data['product_retail'],
                     'description'       => $data['product_description'],
                     'ingredient'        => $data['product_ingred'],
-                    'category'          => $data['category']
+                    'category'          => $data['category'],
+                    'warehouse'         => $data['warehouse']
                 ];
                 $config['upload_path']          = 'assets/upload_img/product/';
                 $config['allowed_types']        = 'gif|jpg|png';

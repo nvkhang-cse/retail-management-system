@@ -13,7 +13,7 @@ class Sales extends RestController
 
     }
     
-    public function loadSalePage_post()
+    public function loadsalepage_post()
     {
         $this->load->library('Authorization_Token');
         /**
@@ -47,11 +47,4 @@ class Sales extends RestController
             $this->response($message, RestController::HTTP_NOT_FOUND);
         }
     }
-
-
-
-
-
-
 }
-?>

@@ -24,7 +24,7 @@ class Customer extends CI_Controller {
 		$this->data["index2"]= 1;
 		$this->load->view('cms/layout/main_error', $this->data);
 	}
-	public function loadCustomerAdd()
+	public function loadcustomeradd()
 	{
    		$this->data["index"]= 3;
 		$this->data["index2"]= 2;

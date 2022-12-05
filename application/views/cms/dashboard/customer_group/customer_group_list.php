@@ -6,7 +6,7 @@
         <h1 class="m-0">Danh sách nhóm khách hàng</h1>
       </div>
       <div class="col-sm-6">
-        <a href="<?= site_url("dashboard/customergroup/loadCustomerGroupAdd") ?>">
+        <a href="<?= site_url("dashboard/customergroup/loadcustomergroupadd") ?>">
           <button type="button" class="btn btn-primary float-right" id="add_btn">+ Thêm nhóm khách hàng</button>
         </a>
       </div>

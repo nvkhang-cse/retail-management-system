@@ -12,7 +12,7 @@ class Customergroup extends RestController
         $this->load->model('cms/CustomerGroupModel');
     }
 
-    public function loadCustomerGroupList_post()
+    public function loadcustomergrouplist_post()
     {
         $this->load->library('Authorization_Token');
         /**
@@ -43,7 +43,7 @@ class Customergroup extends RestController
             $this->response($message, RestController::HTTP_NOT_FOUND);
         }
     }
-    public function loadCustomerGroupAdd_post()
+    public function loadcustomergroupadd_post()
     {
         $this->load->library('Authorization_Token');
         /**
@@ -74,7 +74,7 @@ class Customergroup extends RestController
             $this->response($message, RestController::HTTP_NOT_FOUND);
         }
     }
-    public function loadTableData_post()
+    public function loadtabledata_post()
     {
         $this->load->library('Authorization_Token');
         /**
@@ -100,7 +100,7 @@ class Customergroup extends RestController
         }
     }
 
-    public function storeNewCustomerGroup_post()
+    public function storenewcustomergroup_post()
     {
         $this->load->library('Authorization_Token');
         /**
@@ -119,6 +119,7 @@ class Customergroup extends RestController
             $this->form_validation->set_rules('customer_group_name', 'Tên nhóm khách hàng', 'trim|required');
             $this->form_validation->set_rules('customer_group_code', 'Mã nhóm khách hàng', 'trim|required');
             $this->form_validation->set_rules('customer_group_description', 'Mô tả', 'trim');
+            $this->form_validation->set_rules('customer_group_discount', 'Chiết khấu nhóm', 'trim');
 
             if ($this->form_validation->run() == FALSE) {
                 //Form validation error
@@ -130,11 +131,12 @@ class Customergroup extends RestController
                 $this->response($message, RestController::HTTP_NOT_FOUND);
             } else {
                 $customer_group_data = [
-                    'group_name'              => $data['customer_group_name'],
+                    'name'              => $data['customer_group_name'],
                     'id'                => $data['customer_group_code'],
-                    'description'          => $data['customer_group_description'],
+                    'description'       => $data['customer_group_description'],
+                    'discount'          => $data['customer_group_discount'],
                 ];
-                $this->CustomerGroupModel->insert_customer_group    ($customer_group_data);
+                $this->CustomerGroupModel->insert_customer_group($customer_group_data);
                 $message = [
                     'status' => true,
                     'data' => 'success',

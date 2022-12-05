@@ -12,7 +12,7 @@ class ProductCategory extends RestController
         $this->load->model('cms/ProductCategoryModel');
     }
 
-    public function loadProductCategory_post()
+    public function loadproductcategory_post()
     {
         $this->load->library('Authorization_Token');
         /**
@@ -44,7 +44,7 @@ class ProductCategory extends RestController
         }
     }
 
-    public function loadProductCategoryAdd_post()
+    public function loadproductcategoryadd_post()
     {
         $this->load->library('Authorization_Token');
         /**
@@ -76,7 +76,7 @@ class ProductCategory extends RestController
         }
     }
 
-    public function loadProductCategoryData_post()
+    public function loadproductcategorydata_post()
     {
         $this->load->library('Authorization_Token');
         /**
@@ -102,7 +102,7 @@ class ProductCategory extends RestController
         }
     }
 
-    public function storeNewProductCategory_post()
+    public function storenewproductcategory_post()
     {
         $this->load->library('Authorization_Token');
         /**

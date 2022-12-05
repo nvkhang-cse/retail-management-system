@@ -5,7 +5,7 @@
         <h1>Thêm mới loại sản phẩm</h1>
       </div>
       <div class="col-sm-6">
-        <a href="<?= site_url("dashboard/product/loadProductCategory") ?>">
+        <a href="<?= site_url("dashboard/product/loadproductcategory") ?>">
           <button type="button" class="btn btn-outline-primary float-sm-right mr-2 ml-2">Danh sách loại sản phẩm</button>
         </a>
         <a href="<?= site_url("dashboard/product") ?>">
@@ -45,7 +45,7 @@
       </div>
       <div>
         <button type="submit" class="btn btn-primary mr-2">Lưu</button>
-        <a href="<?= site_url("dashboard/product/loadProductCategory") ?>">
+        <a href="<?= site_url("dashboard/product/loadproductcategory") ?>">
           <button type="button" class="btn btn-secondary">Hủy</button>
         </a>
       </div>

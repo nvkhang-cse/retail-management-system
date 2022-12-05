@@ -37,7 +37,7 @@
                 </div>
               </div>
               <div class="form-group">
-                <label>Mô tả</label>
+                <label for="customer_group_description">Mô tả</label>
                 <textarea class="form-control" id="customer_group_description" name="customer_group_description" rows="5" placeholder=""></textarea>
               </div>
             </div>
@@ -50,24 +50,8 @@
             </div>
             <div class="card-body">
               <div class="form-group">
-                <label>Chính sách giá</label>
-                <select class="form-control">
-                  <option>option 1</option>
-                  <option>option 2</option>
-                  <option>option 3</option>
-                  <option>option 4</option>
-                  <option>option 5</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label>Chiết khấu</label>
-                <select class="form-control">
-                  <option>option 1</option>
-                  <option>option 2</option>
-                  <option>option 3</option>
-                  <option>option 4</option>
-                  <option>option 5</option>
-                </select>
+                <label for="customer_group_discount">Chiết khấu (%)</label>
+                <input type="text" class="form-control" id="customer_group_discount" name="customer_group_discount" placeholder="">
               </div>
             </div>
           </div>

@@ -160,13 +160,8 @@
             </div>
             <div class="card-body">
               <div class="form-group">
-                <label>Chọn chi nhánh</label>
-                <select class="form-control">
-                  <option>option 1</option>
-                  <option>option 2</option>
-                  <option>option 3</option>
-                  <option>option 4</option>
-                  <option>option 5</option>
+                <label for="product_warehouse">Chọn chi nhánh</label>
+                <select class="form-control" id="product_warehouse" name="warehouse">
                 </select>
               </div>
             </div>

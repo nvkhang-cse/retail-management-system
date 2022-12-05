@@ -1,24 +1,24 @@
-function customerGroupTable(index2, site_url) {
+function brandTable(index2, site_url) {
 	"use strict";
 
-	if (index2 == 3) {
+	if (index2 == 1) {
 		var table;
-		var customer_group_data;
+		var brand_data;
 
 		$.ajax({
 			type: "POST",
-			url: site_url + "api/dashboard/customergroup/loadtabledata",
+			url: site_url + "api/dashboard/brand/loadbranddata",
 			dataType: "json",
 			encode: true,
 			async: false,
 			headers: { Authorization: localStorage.getItem("auth_token") },
 			success: function (response) {
-				customer_group_data = response;
+				brand_data = response;
 			},
 		});
 
-		table = $("#customerGroupListTable").DataTable({
-			data: customer_group_data.data,
+		table = $("#brandListTable").DataTable({
+			data: brand_data.data,
 			columnDefs: [
 				{
 					orderable: false,
@@ -31,14 +31,24 @@ function customerGroupTable(index2, site_url) {
 			],
 			columns: [
 				{ data: "id" },
-				{ data: "name" },
 				{ data: "code" },
-				{ data: "description" },
+				{ data: "name" },
+				{ data: "address" },
+				{ data: "district" },
+				{ data: "city" },
+				{ data: "phone" },
 				{
-					data: null,
-					defaultContent: "0",
+					data: "central",
+					render: function (data, type, row, meta) {
+						if (row.central == "1") {
+							return "Chi nhánh trung tâm";
+						} else if (row.central == "2") {
+							return "Chi nhánh phụ";
+						} else {
+							return "Chưa thiết lập";
+						}
+					},
 				},
-				{ data: "created_date" },
 				{
 					data: null,
 					defaultContent: `<div class="btn-group"><button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown"></button><div class="dropdown-menu"><a class="dropdown-item" href="#">Chi tiết</a><a class="dropdown-item" href="#">Sửa</a><a class="dropdown-item" href="#">Xoá</a></div></div>`,
@@ -51,8 +61,8 @@ function customerGroupTable(index2, site_url) {
 			responsive: true,
 			autoWidth: false,
 			language: {
-				lengthMenu: "Hiển thị _MENU_ nhóm khách hàng",
-				info: "Hiển thị _START_ - _END_ trên tổng _TOTAL_ nhóm khách hàng",
+				lengthMenu: "Hiển thị _MENU_ chi nhánh",
+				info: "Hiển thị _START_ - _END_ trên tổng _TOTAL_ chi nhánh",
 				paginate: {
 					first: '<i class="fa fa-angle-double-left" ></i> Đầu tiên',
 					previous: '<i class="fa fa-angle-double-left" ></i> Trước',
@@ -88,17 +98,15 @@ function customerGroupTable(index2, site_url) {
 				},
 				{
 					extend: "colvis",
-					columns: [1, 2, 3, 4, 5],
+					columns: [1, 2, 3, 4, 5, 6, 7],
 					text: "Hiển thị",
 				},
 			],
 		});
 
-		table
-			.buttons()
-			.container()
-			.appendTo("#customer-group-wrapper .col-md-6:eq(0)");
-	} else if (index2 == 4) {
+		table.buttons().container().appendTo("#brand-wrapper .col-md-6:eq(0)");
+	} else if (index2 == 2) {
+		url_attr = "";
 	}
 }
 

@@ -1,37 +1,37 @@
-/* global Chart:false */
-
 function customerTable(index2, site_url) {
 	"use strict";
 
-	/* ChartJS
-	 * -------
-	 * Here we will create a few charts using ChartJS
-	 */
-
-	//-----------------------
-	// - MONTHLY SALES CHART -
-	//-----------------------
-
-	// Get context with jQuery - using jQuery's .get() method.
 	if (index2 == 1) {
-		var url_attr = site_url + "api/dashboard/customer/loadTableData";
 		var table;
-		var data_table;
+		var customer_data;
+		var customer_group_data;
 
 		$.ajax({
 			type: "POST",
-			url: url_attr,
+			url: site_url + "api/dashboard/customer/loadtabledata",
 			dataType: "json",
 			encode: true,
 			async: false,
 			headers: { Authorization: localStorage.getItem("auth_token") },
 			success: function (response) {
-				data_table = response;
+				customer_data = response;
+			},
+		});
+
+		$.ajax({
+			type: "POST",
+			url: site_url + "api/dashboard/customergroup/loadtabledata",
+			dataType: "json",
+			encode: true,
+			async: false,
+			headers: { Authorization: localStorage.getItem("auth_token") },
+			success: function (response) {
+				customer_group_data = response;
 			},
 		});
 
 		table = $("#customerListTable").DataTable({
-			data: data_table.data,
+			data: customer_data.data,
 			columnDefs: [
 				{
 					orderable: false,
@@ -43,18 +43,32 @@ function customerTable(index2, site_url) {
 				},
 			],
 			columns: [
-				{ data: null },
 				{ data: "id" },
+				{ data: "customer_code" },
 				{ data: "name" },
 				{ data: "phone" },
-				{ data: "group_id" },
+				{
+					data: "group_code",
+					render: function (data, type, row, meta) {
+						let result = customer_group_data.data.find(
+							(item) => item.code == row.group_code
+						);
+						if (result == undefined) {
+							return "Chưa phân nhóm";
+						} else {
+							return `${result.name}`;
+						}
+					},
+				},
 				{ data: "debt" },
 				{ data: "spend" },
-				{ data: null, defaultContent: "0" },
 				{
 					data: null,
-					defaultContent:
-						'<div class="btn-group"><button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown"></button><div class="dropdown-menu"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Delete</a></div></div>',
+					defaultContent: "0",
+				},
+				{
+					data: null,
+					defaultContent: `<div class="btn-group"><button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown"></button><div class="dropdown-menu"><a class="dropdown-item" href="#">Chi tiết</a><a class="dropdown-item" href="#">Sửa</a><a class="dropdown-item" href="#">Xoá</a></div></div>`,
 					className: "dt-body-center",
 					searchable: false,
 					orderable: false,
@@ -62,8 +76,22 @@ function customerTable(index2, site_url) {
 			],
 			order: [[1, "asc"]],
 			responsive: true,
-			lengthMenu: [5, 10],
 			autoWidth: false,
+			language: {
+				lengthMenu: "Hiển thị _MENU_ khách hàng",
+				info: "Hiển thị _START_ - _END_ trên tổng _TOTAL_ khách hàng",
+				paginate: {
+					first: '<i class="fa fa-angle-double-left" ></i> Đầu tiên',
+					previous: '<i class="fa fa-angle-double-left" ></i> Trước',
+					next: 'Sau <i class="fa fa-angle-double-right" ></i>',
+					last: 'Cuối cùng <i class="fa fa-angle-double-right" ></i>',
+				},
+				search: "Tìm kiếm",
+			},
+			lengthMenu: [
+				[5, 10, -1],
+				["5", "10", "Tất cả"],
+			],
 			buttons: [
 				{
 					extend: "copy",
@@ -93,17 +121,8 @@ function customerTable(index2, site_url) {
 			],
 		});
 
-		$("#delete_btn").on("click", function () {
-			var selected_rows = table.column(0).data();
-			// $.each(selected_rows, function(key, id){
-			//   console.log( id);
-			// });
-			console.log(selected_rows);
-		});
 		table.buttons().container().appendTo("#customer-wrapper .col-md-6:eq(0)");
 	} else if (index2 == 2) {
-		url_attr = "";
-	} else if (index2 == 3) {
 		url_attr = "";
 	}
 }

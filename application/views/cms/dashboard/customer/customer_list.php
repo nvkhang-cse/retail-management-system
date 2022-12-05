@@ -6,7 +6,7 @@
         <h1 class="m-0">Danh sách khách hàng</h1>
       </div>
       <div class="col-sm-6">
-        <a href="<?= site_url("dashboard/customer/loadCustomerAdd") ?>">
+        <a href="<?= site_url("dashboard/customer/loadcustomeradd") ?>">
           <button type="button" class="btn btn-primary float-right" id="add_btn">+ Thêm khách hàng</button>
         </a>
       </div>

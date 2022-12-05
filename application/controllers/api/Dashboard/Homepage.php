@@ -12,7 +12,7 @@ class Homepage extends RestController
 
     }
     
-    public function loadHomePage_post()
+    public function loadhomepage_post()
     {
         $this->load->library('Authorization_Token');
         /**
@@ -46,11 +46,5 @@ class Homepage extends RestController
             $this->response($message, RestController::HTTP_NOT_FOUND);
         }
     }
-
-
-
-
-
-
 }
 ?>

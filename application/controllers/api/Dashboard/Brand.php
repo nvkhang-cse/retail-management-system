@@ -4,15 +4,15 @@ require APPPATH . 'libraries/RestController.php';
 
 use chriskacerguis\RestServer\RestController;
 
-class Customer extends RestController
+class Brand extends RestController
 {
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('cms/CustomerModel');
+        $this->load->model('cms/BrandModel');
     }
 
-    public function loadcustomerlist_post()
+    public function loadbrandlist_post()
     {
         $this->load->library('Authorization_Token');
         /**
@@ -24,26 +24,27 @@ class Customer extends RestController
             // $this->data["headerview"]="cms/layout/main";
             // $this->data["subview"]="cms/layout/main";
 
-            $return_data = $this->load->view('cms/dashboard/customer/customer_list', '', true);
+            $return_data = $this->load->view('cms/dashboard/brand/brand_list', '', true);
 
 
             // $return_data = site_url('cms/layout/main.php');
             $message = [
                 'status' => true,
                 'data' => $return_data,
-                'message' => "Load customer page successful"
+                'message' => "Load product page successful"
             ];
             $this->response($message, RestController::HTTP_OK);
         } else {
             // Login Error
             $message = [
                 'status' => FALSE,
-                'message' => "Can't load customer page"
+                'message' => "Can't load product page"
             ];
             $this->response($message, RestController::HTTP_NOT_FOUND);
         }
     }
-    public function loadcustomeradd_post()
+
+    public function loadbrandadd_post()
     {
         $this->load->library('Authorization_Token');
         /**
@@ -55,26 +56,27 @@ class Customer extends RestController
             // $this->data["headerview"]="cms/layout/main";
             // $this->data["subview"]="cms/layout/main";
 
-            $return_data = $this->load->view('cms/dashboard/customer/customer_add', '', true);
+            $return_data = $this->load->view('cms/dashboard/brand/brand_add', '', true);
 
 
             // $return_data = site_url('cms/layout/main.php');
             $message = [
                 'status' => true,
                 'data' => $return_data,
-                'message' => "Load customer add page successful"
+                'message' => "Load product category add page successful"
             ];
             $this->response($message, RestController::HTTP_OK);
         } else {
             // Login Error
             $message = [
                 'status' => FALSE,
-                'message' => "Can't load add customer page"
+                'message' => "Can't load add product category page"
             ];
             $this->response($message, RestController::HTTP_NOT_FOUND);
         }
     }
-    public function loadtabledata_post()
+
+    public function loadbranddata_post()
     {
         $this->load->library('Authorization_Token');
         /**
@@ -83,7 +85,7 @@ class Customer extends RestController
         $is_valid_token = $this->authorization_token->validateToken();
         // var_dump($is_valid_token);
         if (!empty($is_valid_token) and $is_valid_token['status'] === TRUE) {
-            $return_data = $this->CustomerModel->get_customer();
+            $return_data = $this->BrandModel->get_brand();
             $message = [
                 'status' => true,
                 'data' => $return_data,
@@ -100,7 +102,7 @@ class Customer extends RestController
         }
     }
 
-    public function storenewcustomer_post()
+    public function storenewbrand_post()
     {
         $this->load->library('Authorization_Token');
         /**
@@ -116,15 +118,14 @@ class Customer extends RestController
 
             // Form validation
             $this->form_validation->set_data($data);
-            $this->form_validation->set_rules('customer_name', 'Tên khách hàng', 'trim|required');
-            $this->form_validation->set_rules('customer_code', 'Mã khách hàng', 'trim|required');
-            $this->form_validation->set_rules('customer_group', 'Mã nhóm khách hàng', 'trim|required');
-            $this->form_validation->set_rules('customer_phone', 'Số điện thoại', 'trim');
-            $this->form_validation->set_rules('customer_email', 'Email', 'trim');
-            $this->form_validation->set_rules('customer_birthday', 'Sinh nhật', 'trim');
-            $this->form_validation->set_rules('customer_city', 'Khu vực', 'trim');
-            $this->form_validation->set_rules('customer_district', 'Quận huyện', 'trim');
-            $this->form_validation->set_rules('customer_address', 'Địa chỉ cụ thể', 'trim');
+            $this->form_validation->set_rules('brand_name', 'Tên chi nhánh', 'trim|required');
+            $this->form_validation->set_rules('brand_code', 'Mã chi nhánh', 'trim|required');
+            $this->form_validation->set_rules('brand_address', 'Địa chỉ', 'trim|required');
+            $this->form_validation->set_rules('brand_city', 'Thành phố', 'trim|required');
+            $this->form_validation->set_rules('brand_district', 'Quận huyện', 'trim|required');
+            $this->form_validation->set_rules('brand_phone', 'Số điện thoại', 'trim|required');
+            $this->form_validation->set_rules('brand_central', 'Vai trò', 'trim|required');
+
 
             if ($this->form_validation->run() == FALSE) {
                 //Form validation error
@@ -135,22 +136,21 @@ class Customer extends RestController
                 );
                 $this->response($message, RestController::HTTP_NOT_FOUND);
             } else {
-                $customer_data = [
-                    'name'              => $data['customer_name'],
-                    'customer_code'     => $data['customer_code'],
-                    'group_code'        => $data['customer_group'],
-                    'phone'             => $data['customer_phone'],
-                    'email'             => $data['customer_email'],
-                    'city'              => $data['customer_city'],
-                    'district'          => $data['customer_district'],
-                    'address'           => $data['customer_address'],
-                    'birthday'          => $data['customer_birthday']
+                $category_data = [
+                    'name'             => $data['brand_name'],
+                    'code'             => $data['brand_code'],
+                    'address'          > $data['brand_address'],
+                    'city'             => $data['brand_city'],
+                    'district'         => $data['brand_district'],
+                    'phone'            => $data['brand_phone'],
+                    'central'          => $data['brand_central']
                 ];
-                $this->CustomerModel->insert_customer($customer_data);
+
+                $this->ProductCategoryModel->insert_product_category($category_data);
                 $message = [
                     'status' => true,
                     'data' => 'success',
-                    'message' => "Save customer successful"
+                    'message' => "Save product successful"
                 ];
                 $this->response($message, RestController::HTTP_OK);
             }
@@ -158,7 +158,7 @@ class Customer extends RestController
             // Login Error
             $message = [
                 'status' => FALSE,
-                'message' => "Can't save new customer"
+                'message' => "Can't save new product"
             ];
             $this->response($message, RestController::HTTP_NOT_FOUND);
         }

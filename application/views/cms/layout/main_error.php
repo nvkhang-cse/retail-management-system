@@ -20,11 +20,7 @@
   <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
   <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
   <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/plugins/datatables-select/css/select.bootstrap4.min.css">
-  <link type="text/css" href="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.12/css/dataTables.checkboxes.css" rel="stylesheet" />
   <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/dist/css/style/style.css">
-
-  <!-- <link type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" rel="stylesheet" /> -->
-  <!-- <link type="text/css" href="https://cdn.datatables.net/select/1.4.0/css/select.dataTables.min.css" rel="stylesheet" /> -->
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
@@ -155,22 +151,20 @@
         </div>
 
         <!-- SidebarSearch Form -->
-        <!-- <div class="form-inline">
+        <div class="form-inline">
           <div class="input-group" data-widget="sidebar-search">
-            <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
-            <div class="input-group-append">
+            <input class="form-control form-control-sidebar" id="sidebar-search-input" type="search" placeholder="Search" aria-label="Search">
+            <div class="input-group-append" id="sidebar-search">
               <button class="btn btn-sidebar">
                 <i class="fas fa-search fa-fw"></i>
               </button>
             </div>
           </div>
-        </div> -->
+        </div>
 
         <!-- Sidebar Menu -->
         <nav class="mt-2">
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-            <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
             <li class="nav-item">
               <a href="<?= site_url("dashboard/homepage") ?>" class="nav-link">
                 <i class="nav-icon fas fa-home"></i>
@@ -360,7 +354,7 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="#" class="nav-link">
+                  <a href="<?= site_url("dashboard/brand") ?>" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Chi nhánh</p>
                   </a>
@@ -390,8 +384,8 @@
     <aside id="right_sidebar_content" class="control-sidebar control-sidebar-dark">
       <!-- Control sidebar content goes here -->
       <div class="row ml-4 mt-2 ">
-        <a href="<?= site_url("api/authentication/signout/logout") ?>" class="col-12">
-          <i class="fas fa-sign-out-alt mr-2"></i> Sign out
+        <a id="logout" class="col-12">
+          <i class="fas fa-sign-out-alt mr-2"></i> Đăng xuất
         </a>
       </div>
 
@@ -433,7 +427,7 @@
   <script src="<?php echo base_url(); ?>/assets/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
   <script src="<?php echo base_url(); ?>/assets/plugins/datatables-buttons/js/buttons.print.min.js"></script>
   <script src="<?php echo base_url(); ?>/assets/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-  <script type="text/javascript" src="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.12/js/dataTables.checkboxes.min.js"></script>
+  <script src="<?php echo base_url(); ?>/assets/plugins/datatables-checkboxes/js/dataTables.checkboxes.min.js"></script>
   <!-- AdminLTE App -->
   <script src="<?php echo base_url(); ?>/assets/dist/js/adminlte.js"></script>
   <!-- My Script -->
@@ -441,6 +435,8 @@
   <script src="<?php echo base_url(); ?>/assets/dist/js/pages/product.js"></script>
   <script src="<?php echo base_url(); ?>/assets/dist/js/pages/customer.js"></script>
   <script src="<?php echo base_url(); ?>/assets/dist/js/pages/customergroup.js"></script>
+  <script src="<?php echo base_url(); ?>/assets/dist/js/pages/brand.js"></script>
+  <script src="<?php echo base_url(); ?>/assets/dist/js/pages/logout.js"></script>
 </body>
 
 </html>

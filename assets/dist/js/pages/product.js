@@ -1,55 +1,37 @@
-/* global Chart:false */
-
 function productTable(index2, site_url) {
 	"use strict";
 
-	/* ChartJS
-	 * -------
-	 * Here we will create a few charts using ChartJS
-	 */
-
-	//-----------------------
-	// - MONTHLY SALES CHART -
-	//-----------------------
-
-	// Get context with jQuery - using jQuery's .get() method.
 	if (index2 == 1) {
-		var url_attr = site_url + "api/dashboard/product/loadTableData";
 		var table;
-		var data_table;
-		var category_table;
-
-		// $("#productListTable thead tr")
-		// 	.clone(true)
-		// 	.addClass("filters")
-		// 	.prependTo("#productListTable thead");
+		var product_data;
+		var category_data;
 
 		$.ajax({
 			type: "POST",
-			url: url_attr,
+			url: site_url + "api/dashboard/product/loadtabledata",
 			dataType: "json",
 			encode: true,
 			async: false,
 			headers: { Authorization: localStorage.getItem("auth_token") },
 			success: function (response) {
-				data_table = response;
+				product_data = response;
 			},
 		});
 
 		$.ajax({
 			type: "POST",
-			url: site_url + "api/dashboard/productcategory/loadProductCategoryData",
+			url: site_url + "api/dashboard/productcategory/loadproductcategorydata",
 			dataType: "json",
 			encode: true,
 			async: false,
 			headers: { Authorization: localStorage.getItem("auth_token") },
 			success: function (response) {
-				category_table = response;
+				category_data = response;
 			},
 		});
 
 		table = $("#productListTable").DataTable({
-			data: data_table.data,
+			data: product_data.data,
 			columnDefs: [
 				{
 					orderable: false,
@@ -83,13 +65,13 @@ function productTable(index2, site_url) {
 				{
 					data: "category",
 					render: function (data, type, row, meta) {
-						let result = category_table.data.find(
-							(o) => o.code == row.category
+						let result = category_data.data.find(
+							(item) => item.code == row.category
 						);
 						if (result == undefined) {
 							return "Chưa phân loại";
 						} else {
-							return result.title + "";
+							return `${result.title}`;
 						}
 					},
 				},
@@ -142,9 +124,6 @@ function productTable(index2, site_url) {
 				{
 					extend: "pdf",
 					className: "btn btn-sm",
-					exportOptions: {
-						columns: [2, 3, 4, 5, 6, 7, 8, 9, 10],
-					},
 				},
 				{
 					extend: "print",
@@ -223,11 +202,6 @@ function productTable(index2, site_url) {
 		// $("#clearFilter").on("click", function () {
 		// 	$("#productListTable thead input").val("").change();
 		// });
-
-		// $("#delete_btn").on("click", function () {
-		// 	var selected_rows = table.column(0).data();
-		// 	console.log(selected_rows);
-		// });
 	} else if (index2 == 2) {
 		url_attr = "";
 	} else if (index2 == 3) {
@@ -235,25 +209,23 @@ function productTable(index2, site_url) {
 	} else if (index2 == 4) {
 		url_attr = "";
 	} else if (index2 == 5) {
-		var url_attr =
-			site_url + "api/dashboard/productcategory/loadProductCategoryData";
 		var table;
-		var data_table;
+		var category_data;
 
 		$.ajax({
 			type: "POST",
-			url: url_attr,
+			url: site_url + "api/dashboard/productcategory/loadproductcategorydata",
 			dataType: "json",
 			encode: true,
 			async: false,
 			headers: { Authorization: localStorage.getItem("auth_token") },
 			success: function (response) {
-				data_table = response;
+				category_data = response;
 			},
 		});
 
 		table = $("#productCategoryListTable").DataTable({
-			data: data_table.data,
+			data: category_data.data,
 			columnDefs: [
 				{
 					orderable: false,
@@ -269,7 +241,6 @@ function productTable(index2, site_url) {
 				{ data: "title" },
 				{ data: "code" },
 				{ data: "description" },
-				{ data: "created_at" },
 				{
 					data: null,
 					defaultContent: `<div class="btn-group"><button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown"></button><div class="dropdown-menu"><a class="dropdown-item" href="#">Chi tiết</a><a class="dropdown-item" href="#">Sửa</a><a class="dropdown-item" href="#">Xoá</a></div></div>`,
@@ -319,7 +290,7 @@ function productTable(index2, site_url) {
 				},
 				{
 					extend: "colvis",
-					columns: [1, 2, 3, 4],
+					columns: [1, 2, 3],
 					text: "Hiển thị",
 				},
 			],
@@ -389,6 +360,7 @@ function productTable(index2, site_url) {
 			.buttons()
 			.container()
 			.appendTo("#product-category-wrapper .col-md-6:eq(0)");
+	} else if (index2 == 6) {
 	}
 }
 

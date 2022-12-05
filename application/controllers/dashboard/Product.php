@@ -25,31 +25,31 @@ class Product extends CI_Controller
 		$this->data["index2"] = 1;
 		$this->load->view('cms/layout/main_error', $this->data);
 	}
-	public function loadProductTrash()
+	public function loadproducttrash()
 	{
 		$this->data["index"] = 2;
 		$this->data["index2"] = 2;
 		$this->load->view('cms/layout/main_error', $this->data);
 	}
-	public function loadProductAdd()
+	public function loadproductadd()
 	{
 		$this->data["index"] = 2;
 		$this->data["index2"] = 3;
 		$this->load->view('cms/layout/main_error', $this->data);
 	}
-	public function loadProductWareHouse()
+	public function loadproductwarehouse()
 	{
 		$this->data["index"] = 2;
 		$this->data["index2"] = 4;
 		$this->load->view('cms/layout/main_error', $this->data);
 	}
-	public function loadProductCategory()
+	public function loadproductcategory()
 	{
 		$this->data["index"] = 2;
 		$this->data["index2"] = 5;
 		$this->load->view('cms/layout/main_error', $this->data);
 	}
-	public function loadProductCategoryAdd()
+	public function loadproductcategoryadd()
 	{
 		$this->data["index"] = 2;
 		$this->data["index2"] = 6;

@@ -6,10 +6,10 @@
         <h1 class="m-0">Danh sách sản phẩm</h1>
       </div>
       <div class="col-sm-6">
-        <a href="<?= site_url("dashboard/product/loadProductCategory") ?>">
+        <a href="<?= site_url("dashboard/product/loadproductcategory") ?>">
           <button type="button" class="btn btn-outline-primary float-sm-right mr-2 ml-2">Quản lý loại sản phẩm</button>
         </a>
-        <a href="<?= site_url("dashboard/product/loadProductAdd") ?>">
+        <a href="<?= site_url("dashboard/product/loadproductadd") ?>">
           <button type="button" class="btn btn-primary float-sm-right" id="add_btn">+ Thêm sản phẩm</button>
         </a>
       </div>
@@ -43,8 +43,6 @@
                   <th>Giá tiền</th>
                   <th>Hạn sử dụng</th>
                   <th>Thao tác</th>
-                  <!-- <th>Trạng thái</th> -->
-                  <!-- <th>Mã sản phẩm</th> -->
                 </tr>
               </thead>
             </table>
