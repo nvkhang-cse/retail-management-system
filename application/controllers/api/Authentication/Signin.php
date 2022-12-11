@@ -46,10 +46,6 @@ class Signin extends RestController
                 $user_token = $this->authorization_token->generateToken($token_data);
 
                 $return_data = [
-                    'user_id' => $output->id,
-                    'full_name' => $output->fullname,
-                    'email' => $output->email,
-                    'created_at' => $output->created_at,
                     'token' => $user_token,
                 ];
 

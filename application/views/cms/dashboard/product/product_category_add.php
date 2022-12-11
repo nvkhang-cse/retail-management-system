@@ -6,10 +6,7 @@
       </div>
       <div class="col-sm-6">
         <a href="<?= site_url("dashboard/product/loadproductcategory") ?>">
-          <button type="button" class="btn btn-outline-primary float-sm-right mr-2 ml-2">Danh sách loại sản phẩm</button>
-        </a>
-        <a href="<?= site_url("dashboard/product") ?>">
-          <button type="button" class="btn btn-outline-primary float-sm-right" id="add_btn">Danh sách sản phẩm</button>
+          <button type="button" class="btn btn-outline-primary float-sm-right">Danh sách loại sản phẩm</button>
         </a>
       </div>
     </div>
@@ -26,19 +23,19 @@
           <div class="row">
             <div class="col-sm-6">
               <div class="form-group">
-                <label for="category_name">Tên danh mục*</label>
-                <input type="text" class="form-control" id="category_name" name="category_name" placeholder="" required>
+                <label for="category_name">Tên danh mục</label>
+                <input type="text" class="form-control" id="category_name" name="category_name" placeholder="">
               </div>
             </div>
             <div class="col-sm-6">
               <div class="form-group">
-                <label for="category_code">Mã danh mục*</label>
-                <input type="text" class="form-control" id="category_code" name="category_code" placeholder="" required>
+                <label for="category_code">Mã danh mục</label>
+                <input type="text" class="form-control" id="category_code" name="category_code" placeholder="">
               </div>
             </div>
           </div>
           <div class="form-group">
-            <label>Mô tả</label>
+            <label for="category_description">Mô tả</label>
             <textarea class="form-control" id="category_description" name="category_description" rows="5" placeholder=""></textarea>
           </div>
         </div>

@@ -3,11 +3,11 @@
     <div class="container-fluid">
         <div class="row mb-3">
             <div class="col-sm-6">
-                <h1 class="m-0">Danh sách chi nhánh</h1>
+                <h1 class="m-0">Danh sách khuyến mãi</h1>
             </div>
             <div class="col-sm-6">
-                <a href="<?= site_url("dashboard/brand/loadbrandadd") ?>">
-                    <button type="button" class="btn btn-primary float-right">+ Thêm chi nhánh</button>
+                <a href="<?= site_url("dashboard/promotion/loadpromotionadd") ?>">
+                    <button type="button" class="btn btn-primary float-right">+ Tạo khuyến mãi</button>
                 </a>
             </div>
         </div>
@@ -21,20 +21,18 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h5 class="card-title text-primary">Thông tin chi nhánh</h5>
+                        <h5 class="card-title text-primary">Thông tin các chương trình khuyến mãi</h5>
                     </div>
                     <!-- /.card-header -->
-                    <div class="card-body" id="brand_wrapper">
-                        <table id="brand_list_table" class="table table-bordered table-striped">
+                    <div class="card-body" id="promotion_wrapper">
+                        <table id="promotion_list_table" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
                                     <th></th>
-                                    <th>Tên chi nhánh</th>
-                                    <th>Địa chỉ</th>
-                                    <th>Quận huyện</th>
-                                    <th>Thành phố</th>
-                                    <th>Số điện thoại</th>
-                                    <th>Vai trò</th>
+                                    <th>Tên khuyến mãi</th>
+                                    <th>Loại khuyến mãi</th>
+                                    <th>Ngày bắt đầu</th>
+                                    <th>Ngày kết thúc</th>
                                     <th>Thao tác</th>
                                 </tr>
                             </thead>

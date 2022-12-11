@@ -1,24 +1,24 @@
-function brandTable(index2, site_url) {
+function promotionTable(index2, site_url) {
 	"use strict";
 
 	if (index2 == 1) {
 		var table;
-		var brand_data;
+		var promotion_data;
 
 		$.ajax({
 			type: "POST",
-			url: site_url + "api/dashboard/brand/loadbranddata",
+			url: site_url + "api/dashboard/promotion/loadpromotiondata",
 			dataType: "json",
 			encode: true,
 			async: false,
 			headers: { Authorization: localStorage.getItem("auth_token") },
 			success: function (response) {
-				brand_data = response;
+				promotion_data = response;
 			},
 		});
 
-		table = $("#brand_list_table").DataTable({
-			data: brand_data.data,
+		table = $("#promotion_list_table").DataTable({
+			data: promotion_data.data,
 			columnDefs: [
 				{
 					orderable: false,
@@ -32,20 +32,20 @@ function brandTable(index2, site_url) {
 			columns: [
 				{ data: "code" },
 				{ data: "name" },
-				{ data: "address" },
-				{ data: "district" },
-				{ data: "city" },
-				{ data: "phone" },
 				{
-					data: "central",
+					data: "type",
 					render: function (data, type, row, meta) {
-						if (row.central == "1") {
-							return "Chi nhánh trung tâm";
-						} else if (row.central == "2") {
-							return "Chi nhánh phụ";
+						if (row.type == "1") {
+							return "Hóa đơn";
+						} else if (row.type == "2") {
+							return "Quà tặng sản phẩm";
+						} else if (row.type == "3") {
+							return "Loại sản phẩm";
 						}
 					},
 				},
+				{ data: "start_date" },
+				{ data: "end_date" },
 				{
 					data: null,
 					defaultContent: `<div class="btn-group"><button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown"></button><div class="dropdown-menu"><a class="dropdown-item" href="#">Chi tiết</a><a class="dropdown-item" href="#">Sửa</a><a class="dropdown-item" href="#">Xoá</a></div></div>`,
@@ -58,8 +58,8 @@ function brandTable(index2, site_url) {
 			responsive: true,
 			autoWidth: false,
 			language: {
-				lengthMenu: "Hiển thị _MENU_ chi nhánh",
-				info: "Hiển thị _START_ - _END_ trên tổng _TOTAL_ chi nhánh",
+				lengthMenu: "Hiển thị _MENU_ khuyến mãi",
+				info: "Hiển thị _START_ - _END_ trên tổng _TOTAL_ khuyến mãi",
 				paginate: {
 					first: '<i class="fa fa-angle-double-left" ></i> Đầu tiên',
 					previous: '<i class="fa fa-angle-double-left" ></i> Trước',
@@ -99,27 +99,64 @@ function brandTable(index2, site_url) {
 				},
 				{
 					extend: "colvis",
-					columns: [1, 2, 3, 4, 5, 6],
+					columns: [1, 2, 3, 4],
 					text: "Hiển thị",
 				},
 			],
 		});
 
-		table.buttons().container().appendTo("#brand_wrapper .col-md-6:eq(0)");
+		table.buttons().container().appendTo("#promotion_wrapper .col-md-6:eq(0)");
 	} else if (index2 == 2) {
-		$("form#brand_data").submit(function (e) {
+		var brand_data;
+		var promotion_type = $("#promotion_type");
+		var promotion_total_bill_wrapper = $("#promotion_total_bill_wrapper");
+		var promotion_product_wrapper = $("#promotion_product_wrapper");
+
+		promotion_type.on("change", function () {
+			if (promotion_type.val() == 1) {
+				promotion_total_bill_wrapper.toggleClass("d-none");
+				if (!promotion_product_wrapper.hasClass("d-none")) {
+					promotion_product_wrapper.addClass("d-none");
+				}
+			} else if (promotion_type.val() == 2) {
+				promotion_product_wrapper.toggleClass("d-none");
+				if (!promotion_total_bill_wrapper.hasClass("d-none")) {
+					promotion_total_bill_wrapper.addClass("d-none");
+				}
+			}
+		});
+
+		$.ajax({
+			type: "POST",
+			url: site_url + "api/dashboard/brand/loadbranddata",
+			dataType: "json",
+			encode: true,
+			async: false,
+			headers: { Authorization: localStorage.getItem("auth_token") },
+			success: function (response) {
+				brand_data = response.data;
+			},
+		});
+
+		brand_data.forEach((row) => {
+			$("#promotion_brand").append(
+				'<option value="' + row.code + '">' + row.name + "</option>"
+			);
+		});
+
+		$("form#promotion_data").submit(function (e) {
 			e.preventDefault();
 			var formData = new FormData(this);
 
 			$.ajax({
-				url: site_url + "api/dashboard/brand/storenewbrand",
+				url: site_url + "api/dashboard/promotion/storenewpromotion",
 				type: "POST",
 				data: formData,
 				headers: { Authorization: localStorage.getItem("auth_token") },
 				contentType: false,
 				processData: false,
 				success: function (data) {
-					window.location.href = site_url + "dashboard/brand";
+					window.location.href = site_url + "dashboard/promotion";
 				},
 			});
 		});

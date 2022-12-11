@@ -7,7 +7,7 @@
       </div>
       <div class="col-sm-6">
         <a href="<?= site_url("dashboard/customergroup/loadcustomergroupadd") ?>">
-          <button type="button" class="btn btn-primary float-right" id="add_btn">+ Thêm nhóm khách hàng</button>
+          <button type="button" class="btn btn-primary float-right">+ Thêm nhóm khách hàng</button>
         </a>
       </div>
     </div>
@@ -24,16 +24,15 @@
             <h5 class="card-title text-primary">Thông tin nhóm khách hàng</h5>
           </div>
           <!-- /.card-header -->
-          <div class="card-body" id="customer-group-wrapper">
-            <table id="customerGroupListTable" class="table table-bordered table-striped">
+          <div class="card-body" id="customer_group_wrapper">
+            <table id="customer_group_list_table" class="table table-bordered table-striped">
               <thead>
                 <tr>
                   <th></th>
                   <th>Tên nhóm</th>
-                  <th>Mã nhóm</th>
                   <th>Mô tả</th>
+                  <th>Chiết khấu (%)</th>
                   <th>Số lượng khách hàng</th>
-                  <th>Ngày tạo</th>
                   <th>Thao tác</th>
                 </tr>
               </thead>

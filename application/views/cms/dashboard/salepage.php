@@ -2,14 +2,14 @@
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <div class="btn-group">
-          <button class="btn btn-primary">Đơn 1</button>
-          <button class="btn btn-outline-primary"><i class="fas fa-times-circle"></i></button>
-          <button class="btn ml-2"><i class="fas fa-plus"></i></button>
-        </div>
+        <button class="btn btn-primary">Đơn 1</button>
+        <button class="btn"><i class="fas fa-plus"></i></button>
       </div>
       <div class="col-sm-6">
-        <span class="float-sm-right text-primary">Chi nhánh mặc định</span>
+        <div class="float-right">
+          <select id="warehouse_code" class="custom-select border border-primary">
+          </select>
+        </div>
       </div>
     </div>
   </div>
@@ -22,12 +22,10 @@
         <div class="card">
           <div class="card-header">
             <div class="form-inline">
-              <div class="input-group" data-widget="">
-                <button class="btn">
-                  <i class="fas fa-search"></i>
-                </button>
-                <input class="form-control" type="search" placeholder="Tìm kiếm sản phẩm" aria-label="Search">
-              </div>
+              <button class="btn">
+                <i class="fas fa-search"></i>
+              </button>
+              <input class="form-control" type="search" placeholder="Tìm kiếm sản phẩm" aria-label="Search">
             </div>
           </div>
           <!-- /.card-header -->
@@ -39,12 +37,12 @@
               <thead>
                 <tr>
                   <th></th>
-                  <th>STT</th>
                   <th>Mã sản phẩm</th>
                   <th>Tên sản phẩm</th>
                   <th>Đơn vị</th>
                   <th>Số lượng</th>
                   <th>Đơn giá</th>
+                  <th>Chiết khấu</th>
                   <th>Thành tiền</th>
                 </tr>
               </thead>
@@ -59,16 +57,12 @@
         <div class="card">
           <div class="card-header">
             <div class="form-inline">
-              <div class="input-group" data-widget="">
-                <div class="input-group-append">
-                  <button class="btn">
-                    <i class="fas fa-search"></i>
-                  </button>
-                </div>
-                <input class="form-control" type="search" placeholder="Tìm kiếm khách hàng" aria-label="Search">
-                <button class="btn float-right"><i class="fas fa-plus"></i></button>
-              </div>
+              <button class="btn">
+                <i class="fas fa-search"></i>
+              </button>
+              <input class="form-control" type="search" placeholder="Tìm kiếm khách hàng" aria-label="Search">
             </div>
+
           </div>
           <!-- /.card-header -->
           <div class="card-body" id="">
@@ -78,44 +72,43 @@
             <div class="customer-address">Địa chỉ
               <span class="float-right">Thủ Đức, TP.HCM</span>
             </div>
-            <div class="customer-money">Công nợ
-              <span class="float-right">0</span>
+            <div class="customer-money">Nhóm
+              <span class="float-right">Đồng</span>
             </div>
           </div>
           <!-- /.card-body -->
         </div>
         <div class="card">
           <div class="card-header">
-            <span>Thanh toán</span>
+            <h5>Thanh toán</h5>
           </div>
           <!-- /.card-header -->
           <div class="card-body" id="">
             <div class="">Tổng tiền thanh toán
-              <span class="float-right">1.500.000</span>
-            </div>
-            <div class="">Thuế
               <span class="float-right">0</span>
             </div>
-            <div class="">Chiết khấu
+            <div class="mt-2">Chiết khấu (%)
               <span class="float-right">0</span>
             </div>
           </div>
           <div class="dropdown-divider"></div>
-          <div class="card-body" id="">
+          <div class="card-body">
             <div class="">Khách phải trả
-              <span class="float-right">1.500.000</span>
+              <span class="float-right">0</span>
             </div>
-            <div class="">Khách đưa
-              <input type="text" class="float-right" name="" id="" pattern="" value="" data-type="" placeholder="Nhập tiền khách đưa">
+            <div class="mt-2">
+              <input type="number" class="form-control" name="" placeholder="Nhập tiền khách đưa">
             </div>
-            <div class="" style="clear:both">Tiền thừa
+            <div class="mt-2">Tiền thừa
               <span class="float-right">0</span>
             </div>
           </div>
           <div class="dropdown-divider"></div>
           <div class="p-3">
-            <button class="btn btn-info">Chọn hình thức thanh toán</button>
-            <button class="btn btn-lg btn-primary float-right">Thanh toán</button>
+            <div class="float-right">
+              <button class="btn btn-lg btn-secondary mr-2">Hủy</button>
+              <button class="btn btn-lg btn-primary">Thanh toán</button>
+            </div>
           </div>
           <!-- /.card-body -->
         </div>

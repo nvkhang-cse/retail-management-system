@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class CustomerGroup extends CI_Controller
+class Employee extends CI_Controller
 {
 
     /**
@@ -21,15 +21,14 @@ class CustomerGroup extends CI_Controller
      */
     public function index()
     {
-        $this->data["index"] = 3;
+        $this->data["index"] = 9;
         $this->data["index2"] = 3;
         $this->load->view('cms/layout/main_error', $this->data);
     }
-    public function loadcustomergroupadd()
+    public function loademployeeadd()
     {
-        $this->data["index"] = 3;
+        $this->data["index"] = 9;
         $this->data["index2"] = 4;
         $this->load->view('cms/layout/main_error', $this->data);
     }
 }
-?>

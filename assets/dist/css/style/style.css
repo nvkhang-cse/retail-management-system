@@ -30,6 +30,18 @@ div.dataTables_length select {
 	font-size: 90%;
 }
 
-#productListTable tbody td .btn-group .dropdown-menu {
+#left_sidebar_content ul.nav-treeview li {
+	margin-left: 0.5em;
+}
+
+#product_list_table tbody td .btn-group .dropdown-menu,
+#product_category_list_table tbody td .btn-group .dropdown-menu,
+#warehouse_table tbody td .btn-group .dropdown-menu,
+#trash_list_table tbody td .btn-group .dropdown-menu,
+#customer_list_table tbody td .btn-group .dropdown-menu,
+#customer_group_list_table tbody td .btn-group .dropdown-menu,
+#brand_list_table tbody td .btn-group .dropdown-menu,
+#employee_list_table tbody td .btn-group .dropdown-menu,
+#promotion_list_table tbody td .btn-group .dropdown-menu {
 	min-width: 0;
 }

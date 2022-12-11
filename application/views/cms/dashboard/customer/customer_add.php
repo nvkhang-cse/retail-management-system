@@ -6,7 +6,7 @@
       </div>
       <div class="col-sm-6">
         <a href="<?= site_url("dashboard/customer") ?>">
-          <button type="button" class="btn btn-primary float-right" id="add_btn" style="background-color: #0087C2">Xem danh sách khách hàng</button>
+          <button type="button" class="btn btn-outline-primary float-right">Xem danh sách khách hàng</button>
         </a>
       </div>
     </div>
@@ -25,14 +25,14 @@
               <div class="row">
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label for="customer_name">Tên khách hàng*</label>
-                    <input type="text" class="form-control" id="customer_name" name="customer_name" placeholder="Nhập tên khách hàng" required>
+                    <label for="customer_name">Tên khách hàng</label>
+                    <input type="text" class="form-control" id="customer_name" name="customer_name" placeholder="Nhập tên khách hàng">
                   </div>
                 </div>
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label for="customer_code">Mã khách hàng*</label>
-                    <input type="text" class="form-control" id="customer_code" name="customer_code" placeholder="Nhập mã khách hàng" required>
+                    <label for="customer_code">Mã khách hàng</label>
+                    <input type="text" class="form-control" id="customer_code" name="customer_code" placeholder="">
                   </div>
                 </div>
               </div>
@@ -47,8 +47,8 @@
                 </div>
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label for="customer_phone">Số điện thoại*</label>
-                    <input type="text" class="form-control" id="customer_phone" name="customer_phone" placeholder="Thêm số điện thoại">
+                    <label for="customer_phone">Số điện thoại</label>
+                    <input type="text" class="form-control" id="customer_phone" name="customer_phone" placeholder="">
                   </div>
                 </div>
               </div>
@@ -56,13 +56,13 @@
                 <div class="col-sm-6">
                   <div class="form-group">
                     <label for="customer_email">Email</label>
-                    <input type="text" class="form-control" id="customer_email" name="customer_email" placeholder="Email của khách hàng">
+                    <input type="text" class="form-control" id="customer_email" name="customer_email" placeholder="">
                   </div>
                 </div>
                 <div class="col-sm-6">
                   <div class="form-group">
                     <label for="customer_birthday">Sinh nhật</label>
-                    <input type="text" class="form-control" id="customer_birthday" name="customer_birthday" placeholder="Ngày sinh khách hàng">
+                    <input type="text" class="form-control" id="customer_birthday" name="customer_birthday" placeholder="20-01-2000">
                   </div>
                 </div>
               </div>
@@ -72,12 +72,12 @@
         <div class="col-md-4">
           <div class="card card-lightblue">
             <div class="card-header">
-              <h5 class="card-title">Cài đặt</h5>
+              <h5 class="card-title">Địa chỉ khách hàng</h5>
             </div>
             <div class="card-body">
               <div class="form-group">
                 <label for="customer_address">Địa chỉ cụ thể</label>
-                <input type="text" class="form-control" id="customer_address" name="customer_address" placeholder="Số nhà">
+                <input type="text" class="form-control" id="customer_address" name="customer_address" placeholder="Số nhà, phường xã">
               </div>
               <div class="form-group">
                 <label for="customer_cities">Khu vực</label>

@@ -3,11 +3,11 @@
     <div class="container-fluid">
         <div class="row mb-3">
             <div class="col-sm-6">
-                <h1 class="m-0">Danh sách chi nhánh</h1>
+                <h1 class="m-0">Thùng rác sản phẩm</h1>
             </div>
             <div class="col-sm-6">
-                <a href="<?= site_url("dashboard/brand/loadbrandadd") ?>">
-                    <button type="button" class="btn btn-primary float-right">+ Thêm chi nhánh</button>
+                <a href="<?= site_url("dashboard/product") ?>">
+                    <button type="button" class="btn btn-outline-primary float-sm-right ml-2">Danh sách sản phẩm</button>
                 </a>
             </div>
         </div>
@@ -21,20 +21,18 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h5 class="card-title text-primary">Thông tin chi nhánh</h5>
+                        <h5 class="card-title text-primary">Danh sách sản phẩm trong thùng rác</h5>
                     </div>
                     <!-- /.card-header -->
-                    <div class="card-body" id="brand_wrapper">
-                        <table id="brand_list_table" class="table table-bordered table-striped">
+                    <div class="card-body" id="trash_wrapper">
+                        <table id="trash_list_table" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
                                     <th></th>
-                                    <th>Tên chi nhánh</th>
-                                    <th>Địa chỉ</th>
-                                    <th>Quận huyện</th>
-                                    <th>Thành phố</th>
-                                    <th>Số điện thoại</th>
-                                    <th>Vai trò</th>
+                                    <th>Ảnh sản phẩm</th>
+                                    <th>Tên sản phẩm</th>
+                                    <th>Loại</th>
+                                    <th>Barcode</th>
                                     <th>Thao tác</th>
                                 </tr>
                             </thead>

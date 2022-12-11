@@ -6,7 +6,7 @@
       </div>
       <div class="col-sm-6">
         <a href="<?= site_url("dashboard/customergroup") ?>">
-          <button type="button" class="btn btn-primary float-right" id="add_btn" style="background-color: #0087C2">Xem danh sách nhóm khách hàng</button>
+          <button type="button" class="btn btn-primary float-right">Xem danh sách nhóm khách hàng</button>
         </a>
       </div>
     </div>
@@ -25,14 +25,14 @@
               <div class="row">
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label for="customer_group_name">Tên nhóm khách hàng*</label>
-                    <input type="text" class="form-control" id="customer_group_name" name="customer_group_name" placeholder="Nhập tên nhóm khách hàng" required>
+                    <label for="customer_group_name">Tên nhóm khách hàng</label>
+                    <input type="text" class="form-control" id="customer_group_name" name="customer_group_name" placeholder="Nhập tên nhóm khách hàng">
                   </div>
                 </div>
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label for="customer_group_code">Mã nhóm khách hàng*</label>
-                    <input type="text" class="form-control" id="customer_group_code" name="customer_group_code" placeholder="Nhập mã nhóm khách hàng" required>
+                    <label for="customer_group_code">Mã nhóm khách hàng</label>
+                    <input type="text" class="form-control" id="customer_group_code" name="customer_group_code" placeholder="">
                   </div>
                 </div>
               </div>
@@ -51,7 +51,15 @@
             <div class="card-body">
               <div class="form-group">
                 <label for="customer_group_discount">Chiết khấu (%)</label>
-                <input type="text" class="form-control" id="customer_group_discount" name="customer_group_discount" placeholder="">
+                <input type="number" class="form-control" id="customer_group_discount" name="customer_group_discount" placeholder="">
+              </div>
+              <div class="form-group">
+                <label for="customer_spend_from">Từ</label>
+                <input type="number" class="form-control" id="customer_spend_from" name="customer_spend_from" placeholder="Thiết lập số tiền đã mua từ">
+              </div>
+              <div class="form-group">
+                <label for="customer_spend_to">Đến</label>
+                <input type="number" class="form-control" id="customer_spend_to" name="customer_spend_to" placeholder="Thiết lập số tiền đã mua đến">
               </div>
             </div>
           </div>

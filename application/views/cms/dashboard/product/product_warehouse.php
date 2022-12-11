@@ -3,12 +3,13 @@
     <div class="container-fluid">
         <div class="row mb-3">
             <div class="col-sm-6">
-                <h1 class="m-0">Danh sách chi nhánh</h1>
+                <h1 class="m-0">Quản lý kho</h1>
             </div>
             <div class="col-sm-6">
-                <a href="<?= site_url("dashboard/brand/loadbrandadd") ?>">
-                    <button type="button" class="btn btn-primary float-right">+ Thêm chi nhánh</button>
-                </a>
+                <div class="float-sm-right">
+                    <select id="warehouse_code" class="custom-select border border-primary">
+                    </select>
+                </div>
             </div>
         </div>
     </div><!-- /.container-fluid -->
@@ -21,20 +22,22 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h5 class="card-title text-primary">Thông tin chi nhánh</h5>
+                        <h5 class="card-title text-primary">Thông tin sản phẩm trong kho</h5>
                     </div>
                     <!-- /.card-header -->
-                    <div class="card-body" id="brand_wrapper">
-                        <table id="brand_list_table" class="table table-bordered table-striped">
+                    <div class="card-body" id="warehouse_wrapper">
+                        <table id="warehouse_table" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
                                     <th></th>
-                                    <th>Tên chi nhánh</th>
-                                    <th>Địa chỉ</th>
-                                    <th>Quận huyện</th>
-                                    <th>Thành phố</th>
-                                    <th>Số điện thoại</th>
-                                    <th>Vai trò</th>
+                                    <th>Ảnh sản phẩm</th>
+                                    <th>Tên sản phẩm</th>
+                                    <th>Số lượng được bán</th>
+                                    <th>Tồn kho</th>
+                                    <th>Giá bán lẻ</th>
+                                    <th>Giá nhập</th>
+                                    <th>Giá bán buôn</th>
+                                    <th>Trạng thái</th>
                                     <th>Thao tác</th>
                                 </tr>
                             </thead>

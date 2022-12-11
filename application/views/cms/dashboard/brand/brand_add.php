@@ -6,7 +6,7 @@
             </div>
             <div class="col-sm-6">
                 <a href="<?= site_url("dashboard/brand") ?>">
-                    <button type="button" class="btn btn-primary float-right" id="add_btn" style="background-color: #0087C2">Danh sách chi nhánh</button>
+                    <button type="button" class="btn btn-outline-primary float-right">Danh sách chi nhánh</button>
                 </a>
             </div>
         </div>
@@ -26,31 +26,31 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for="brand_name">Tên chi nhánh</label>
-                                        <input type="text" class="form-control" id="brand_name" name="brand_name" placeholder="" required>
+                                        <input type="text" class="form-control" id="brand_name" name="brand_name" placeholder="">
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for="brand_code">Mã chi nhánh</label>
-                                        <input type="text" class="form-control" id="brand_code" name="brand_code" placeholder="" required>
+                                        <input type="text" class="form-control" id="brand_code" name="brand_code" placeholder="">
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="brand_address">Địa chỉ</label>
-                                <input type="text" class="form-control" id="brand_address" name="brand_address" placeholder="" required>
+                                <input type="text" class="form-control" id="brand_address" name="brand_address" placeholder="">
                             </div>
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for="brand_city">Thành phố</label>
-                                        <input type="text" class="form-control" id="brand_city" name="brand_city" placeholder="" required>
+                                        <input type="text" class="form-control" id="brand_city" name="brand_city" placeholder="">
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for="brand_district">Quận huyện</label>
-                                        <input type="text" class="form-control" id="brand_district" name="brand_district" placeholder="" required>
+                                        <input type="text" class="form-control" id="brand_district" name="brand_district" placeholder="">
                                     </div>
                                 </div>
                             </div>
@@ -58,7 +58,7 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for="brand_phone">Số điện thoại chi nhánh</label>
-                                        <input type="text" class="form-control" id="brand_phone" name="brand_phone" placeholder="" required>
+                                        <input type="text" class="form-control" id="brand_phone" name="brand_phone" placeholder="">
                                     </div>
                                 </div>
                             </div>
@@ -74,7 +74,6 @@
                             <div class="form-group">
                                 <label for="brand_central">Vai trò chi nhánh</label>
                                 <select class="form-control" id="brand_central" name="brand_central">
-                                    <option value="0">Chưa phân loại</option>
                                     <option value="1">Chi nhánh trung tâm</option>
                                     <option value="2">Chi nhánh phụ</option>
                                 </select>

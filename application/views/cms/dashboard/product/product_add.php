@@ -6,7 +6,7 @@
       </div>
       <div class="col-sm-6">
         <a href="<?= site_url("dashboard/product") ?>">
-          <button type="button" class="btn btn-primary float-right" id="add_btn">Xem danh sách sản phẩm</button>
+          <button type="button" class="btn btn-outline-primary float-right">Xem danh sách sản phẩm</button>
         </a>
       </div>
     </div>
@@ -23,68 +23,81 @@
             </div>
             <div class="card-body">
               <div class="form-group">
-                <label for="product_name">Tên sản phẩm*</label>
-                <input type="text" class="form-control" id="product_name" name="product_name" placeholder="" required>
+                <label for="product_name">Tên sản phẩm</label>
+                <input type="text" class="form-control" id="product_name" name="product_name" placeholder="Nhập tên sản phẩm">
               </div>
               <div class="row">
-                <div class="col-sm-4">
+                <div class="col-sm-6">
                   <div class="form-group">
-                    <label for="product_code">Mã sản phẩm / SKU*</label>
-                    <input type="text" class="form-control" id="product_code" name="product_code" placeholder="" required>
+                    <label for="product_code">Mã sản phẩm</label>
+                    <input type="text" class="form-control" id="product_code" name="product_code" placeholder="">
                   </div>
                 </div>
-                <div class="col-sm-4">
+                <div class="col-sm-6">
                   <div class="form-group">
-                    <label for="product_brand">Thương hiệu*</label>
-                    <input type="text" class="form-control" id="product_brand" name="product_brand" placeholder="" required>
-                  </div>
-                </div>
-                <div class="col-sm-4">
-                  <div class="form-group">
-                    <label for="product_ori">Xuất sứ*</label>
-                    <input type="text" class="form-control" id="product_ori" name="product_ori" placeholder="" required>
+                    <label for="product_barcode">Barcode</label>
+                    <input type="text" class="form-control" id="product_barcode" name="product_barcode" placeholder="Mã vạch sản phẩm">
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label for="product_barcode">Barcode*</label>
-                    <input type="text" class="form-control" id="product_barcode" name="product_barcode" placeholder="" required>
+                    <label for="product_brand">Thương hiệu</label>
+                    <input type="text" class="form-control" id="product_brand" name="product_brand" placeholder="">
                   </div>
                 </div>
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label for="product_quantity">Số lượng*</label>
-                    <input type="text" class="form-control" id="product_quantity" name="product_quantity" placeholder="" required>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for="product_capacity">Dung tích*</label>
-                    <input type="text" class="form-control" id="product_capacity" name="product_capacity" placeholder="" required>
-                  </div>
-                </div>
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for="product_unit">Đơn vị*</label>
-                    <input type="text" class="form-control" id="product_unit" name="product_unit" placeholder="" required>
+                    <label for="product_origin">Xuất sứ</label>
+                    <input type="text" class="form-control" id="product_origin" name="product_origin" placeholder="">
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label for="expired_date">Ngày hết hạn*</label>
-                    <input type="text" class="form-control" id="expired_date" name="expired_date" placeholder="20-10-2025">
+                    <label for="product_quantity_warehouse">Số lượng trong kho</label>
+                    <input type="number" class="form-control" id="product_quantity_warehouse" name="product_quantity_warehouse" placeholder="Số lượng khởi tạo ban đầu">
                   </div>
                 </div>
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label for="product_published">Trạng thái*</label>
-                    <select class="form-control" id="product_published" name="published">
+                    <label for="product_quantity_sale">Số lượng được bán</label>
+                    <input type="number" class="form-control" id="product_quantity_sale" name="product_quantity_sale" placeholder="Số lượng cho phép bán">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="product_capacity">Dung tích</label>
+                    <input type="number" class="form-control" id="product_capacity" name="product_capacity" placeholder="">
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="product_unit">Đơn vị</label>
+                    <select class="form-control" id="product_unit" name="product_unit">
+                      <option value="ml">ml</option>
+                      <option value="l">L</option>
+                      <option value="g">g</option>
+                      <option value="kg">Kg</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="product_expired_date">Ngày hết hạn</label>
+                    <input type="text" class="form-control" id="product_expired_date" name="product_expired_date" placeholder="01-01-2025">
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="product_published">Trạng thái</label>
+                    <select class="form-control" id="product_published" name="product_published">
                       <option value="0">Không được bán</option>
                       <option value="1">Được bán</option>
                     </select>
@@ -93,8 +106,6 @@
               </div>
             </div>
           </div>
-
-
           <div class="card card-lightblue">
             <div class="card-header">
               <h5 class="card-title">Giá sản phẩm</h5>
@@ -103,22 +114,22 @@
               <div class="row">
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label for="product_cost">Giá nhập*</label>
-                    <input type="text" class="form-control" id="product_cost" name="product_cost" placeholder="" required>
+                    <label for="product_cost">Giá nhập</label>
+                    <input type="number" class="form-control" id="product_cost" name="product_cost" placeholder="">
                   </div>
                 </div>
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label for="product_wholesale">Giá bán buôn*</label>
-                    <input type="text" class="form-control" id="product_wholesale" name="product_wholesale" placeholder="" required>
+                    <label for="product_wholesale">Giá bán buôn</label>
+                    <input type="number" class="form-control" id="product_wholesale" name="product_wholesale" placeholder="">
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label for="product_retail">Giá bán lẻ*</label>
-                    <input type="text" class="form-control" id="product_retail" name="product_retail" placeholder="" required>
+                    <label for="product_retail">Giá bán lẻ</label>
+                    <input type="number" class="form-control" id="product_retail" name="product_retail" placeholder="">
                   </div>
                 </div>
               </div>
@@ -130,11 +141,11 @@
             </div>
             <div class="card-body">
               <div class="form-group">
-                <label>Mô tả sản phẩm</label>
-                <textarea class="form-control" id="product_description" name="product_description" rows="5" placeholder=""></textarea>
+                <label for="product_description">Mô tả sản phẩm</label>
+                <textarea class="form-control" id="product_description" name="product_description" rows="5" placeholder="Mô tả về công dụng, thương hiệu, chi tiết,..."></textarea>
               </div>
               <div class="form-group">
-                <label for="">Thành phần</label>
+                <label for="product_ingred">Thành phần</label>
                 <textarea class="form-control" id="product_ingred" name="product_ingred" rows="5" placeholder=""></textarea>
               </div>
             </div>
@@ -148,7 +159,7 @@
             <div class="card-body">
               <div class="form-group">
                 <label for="product_category">Loại sản phẩm</label>
-                <select class="form-control" id="product_category" name="category">
+                <select class="form-control" id="product_category" name="product_category">
                   <option value="0">Chưa phân loại</option>
                 </select>
               </div>
@@ -161,7 +172,7 @@
             <div class="card-body">
               <div class="form-group">
                 <label for="product_warehouse">Chọn chi nhánh</label>
-                <select class="form-control" id="product_warehouse" name="warehouse">
+                <select class="form-control" id="product_warehouse" name="product_warehouse">
                 </select>
               </div>
             </div>
@@ -172,8 +183,8 @@
             </div>
             <div class="card-body">
               <div class="form-group">
-                <input type="file" id="product_file" name="product_file" style="display:none">
-                <label for="product_file" id="uploadBtn" class="text-primary">+ Thêm ảnh</label><br>
+                <input type="file" id="product_file" name="product_file" class="d-none">
+                <label for="product_file" class="text-primary">+ Thêm ảnh</label><br>
                 <img src="<?php echo base_url(); ?>/assets/dist/img/product/default_photo.jpg" id="product_photo" class="img-rounded img-fluid">
               </div>
             </div>

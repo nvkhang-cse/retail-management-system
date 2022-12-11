@@ -7,10 +7,10 @@
       </div>
       <div class="col-sm-6">
         <a href="<?= site_url("dashboard/product") ?>">
-          <button type="button" class="btn btn-outline-primary float-sm-right mr-2 ml-2">Danh sách sản phẩm</button>
+          <button type="button" class="btn btn-outline-primary float-sm-right ml-2">Danh sách sản phẩm</button>
         </a>
         <a href="<?= site_url("dashboard/product/loadproductcategoryadd") ?>">
-          <button type="button" class="btn btn-primary float-sm-right" id="add_btn">+ Thêm loại sản phẩm</button>
+          <button type="button" class="btn btn-primary float-sm-right ">+ Thêm loại sản phẩm</button>
         </a>
       </div>
     </div>
@@ -27,8 +27,8 @@
             <h5 class="card-title text-primary">Thông tin loại sản phẩm</h5>
           </div>
           <!-- /.card-header -->
-          <div class="card-body" id="product-category-wrapper">
-            <table id="productCategoryListTable" class="table table-bordered table-striped">
+          <div class="card-body" id="product_category_wrapper">
+            <table id="product_category_list_table" class="table table-bordered table-striped">
               <thead>
                 <tr>
                   <th></th>

@@ -38,84 +38,6 @@
 
       <!-- Right navbar links -->
       <ul class="navbar-nav ml-auto">
-        <!-- Navbar Search -->
-
-        <!-- Messages Dropdown Menu -->
-        <!-- <li class="nav-item dropdown">
-          <a class="nav-link" data-toggle="dropdown" href="<?php echo base_url(); ?>/assets/#">
-            <i class="far fa-comments"></i>
-            <span class="badge badge-danger navbar-badge">3</span>
-          </a>
-          <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-            <a href="javascript:void(0)" class="dropdown-item">
-              <div class="media">
-                <img src="<?php echo base_url(); ?>/assets/dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
-                <div class="media-body">
-                  <h3 class="dropdown-item-title">
-                    Nguyễn Văn Khang
-                  </h3>
-                  <p class="text-sm">Cập nhật tính năng thêm khách hàng</p>
-                  <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                </div>
-              </div>
-            </a>
-            <div class="dropdown-divider"></div>
-            <a href="javascript:void(0)" class="dropdown-item">
-              <div class="media">
-                <img src="<?php echo base_url(); ?>/assets/dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-                <div class="media-body">
-                  <h3 class="dropdown-item-title">
-                    Nguyễn Duy Kiên
-                  </h3>
-                  <p class="text-sm">Thêm tính năng thêm sản phẩm</p>
-                  <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                </div>
-              </div>
-            </a>
-            <div class="dropdown-divider"></div>
-            <a href="javascript:void(0)" class="dropdown-item">
-              <div class="media">
-                <img src="<?php echo base_url(); ?>/assets/dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-                <div class="media-body">
-                  <h3 class="dropdown-item-title">
-                    Nguyễn Duy Kiên
-                  </h3>
-                  <p class="text-sm">Thêm tính năng quản lý kho</p>
-                  <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                </div>
-              </div>
-            </a>
-            <div class="dropdown-divider"></div>
-            <a href="javascript:void(0)" class="dropdown-item dropdown-footer">See All Messages</a>
-          </div>
-        </li> -->
-        <!-- Notifications Dropdown Menu -->
-        <!-- <li class="nav-item dropdown">
-          <a class="nav-link" data-toggle="dropdown" href="<?php echo base_url(); ?>/assets/">
-            <i class="far fa-bell"></i>
-            <span class="badge badge-warning navbar-badge">15</span>
-          </a>
-          <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-            <span class="dropdown-item dropdown-header">15 Notifications</span>
-            <div class="dropdown-divider"></div>
-            <a href="javascript:void(0)" class="dropdown-item">
-              <i class="fas fa-envelope mr-2"></i> 4 new messages
-              <span class="float-right text-muted text-sm">3 mins</span>
-            </a>
-            <div class="dropdown-divider"></div>
-            <a href="javascript:void(0)" class="dropdown-item">
-              <i class="fas fa-users mr-2"></i> 8 friend requests
-              <span class="float-right text-muted text-sm">12 hours</span>
-            </a>
-            <div class="dropdown-divider"></div>
-            <a href="javascript:void(0)" class="dropdown-item">
-              <i class="fas fa-file mr-2"></i> 3 new reports
-              <span class="float-right text-muted text-sm">2 days</span>
-            </a>
-            <div class="dropdown-divider"></div>
-            <a href="javascript:void(0)" class="dropdown-item dropdown-footer">See All Notifications</a>
-          </div>
-        </li> -->
         <li class="nav-item">
           <a class="nav-link" data-widget="fullscreen" href="#" role="button">
             <i class="fas fa-expand-arrows-alt"></i>
@@ -186,61 +108,46 @@
                 <i class="nav-icon fas fa-clipboard-list"></i>
                 <p>
                   Đơn hàng
-                  <!-- <i class="fas fa-angle-left right"></i> -->
                 </p>
               </a>
-              <!-- <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Danh sách đơn hàng</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Tạo đơn hàng</p>
-                  </a>
-                </li>
-              </ul> -->
             </li>
             <li class="nav-item">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-box"></i>
                 <p>
                   Sản phẩm
-                  <i class="right fas fa-angle-left"></i>
+                  <i class="fas fa-angle-right right"></i>
                 </p>
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
                   <a href="<?= site_url("dashboard/product") ?>" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
+                    <i class="fas fa-angle-right nav-icon"></i>
                     <p>Danh sách sản phẩm</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
+                  <a href="<?= site_url("dashboard/product/loadproductwarehouse") ?>" class="nav-link">
+                    <i class="fas fa-angle-right nav-icon"></i>
                     <p>Quản lý kho</p>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a href="#" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
+                    <i class="fas fa-angle-right nav-icon"></i>
                     <p>Nhập hàng</p>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a href="#" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
+                    <i class="fas fa-angle-right nav-icon"></i>
                     <p>Chuyển hàng</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Kiểm hàng</p>
+                  <a href="<?= site_url("dashboard/product/loadproducttrash") ?>" class="nav-link">
+                    <i class="fas fa-angle-right nav-icon"></i>
+                    <p>Thùng rác</p>
                   </a>
                 </li>
               </ul>
@@ -250,79 +157,48 @@
                 <i class="nav-icon fas fa-user"></i>
                 <p>
                   Khách hàng
-                  <i class="fas fa-angle-left right"></i>
+                  <i class="fas fa-angle-right right"></i>
                 </p>
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
                   <a href="<?= site_url("dashboard/customer") ?>" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
+                    <i class="fas fa-angle-right nav-icon"></i>
                     <p>Khách hàng</p>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a href="<?= site_url("dashboard/customergroup") ?>" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
+                    <i class="fas fa-angle-right nav-icon"></i>
                     <p>Nhóm khách hàng</p>
                   </a>
                 </li>
               </ul>
             </li>
-            <!-- <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-truck"></i>
-                <p>
-                  Vận chuyển
-                  <i class="fas fa-angle-left right"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Quản lý giao hàng</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Đối tác vận chuyển</p>
-                  </a>
-                </li>
-              </ul>
-            </li> -->
-            <!-- <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-flag"></i>
-                <p>
-                  Marketing
-                </p>
-              </a>
-            </li> -->
             <li class="nav-item">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-money-check-alt"></i>
                 <p>
                   Sổ quỹ
-                  <i class="fas fa-angle-left right"></i>
+                  <i class="fas fa-angle-right right"></i>
                 </p>
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
+                  <a href="<?= site_url("dashboard/cashbook") ?>" class="nav-link">
+                    <i class="fas fa-angle-right nav-icon"></i>
                     <p>Tổng hợp sổ quỹ</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
+                  <a href="<?= site_url("dashboard/cashbook/loadreceiptincome") ?>" class="nav-link">
+                    <i class="fas fa-angle-right nav-icon"></i>
                     <p>Phiếu thu</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
+                  <a href="<?= site_url("dashboard/cashbook/loadreceiptoutcome") ?>" class="nav-link">
+                    <i class="fas fa-angle-right nav-icon"></i>
                     <p>Phiếu chi</p>
                   </a>
                 </li>
@@ -337,7 +213,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="#" class="nav-link">
+              <a href="<?= site_url("dashboard/promotion") ?>" class="nav-link">
                 <i class="nav-icon fas fa-share-alt-square"></i>
                 <p>
                   Khuyến mãi
@@ -349,19 +225,19 @@
                 <i class="nav-icon fas fa-cogs"></i>
                 <p>
                   Quản lý hệ thống
-                  <i class="fas fa-angle-left right"></i>
+                  <i class="fas fa-angle-right right"></i>
                 </p>
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
                   <a href="<?= site_url("dashboard/brand") ?>" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
+                    <i class="fas fa-angle-right nav-icon"></i>
                     <p>Chi nhánh</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
+                  <a href="<?= site_url("dashboard/employee") ?>" class="nav-link">
+                    <i class="fas fa-angle-right nav-icon"></i>
                     <p>Nhân viên</p>
                   </a>
                 </li>
@@ -390,19 +266,9 @@
       </div>
 
     </aside>
-    <!-- /.control-sidebar -->
-    <!-- Main Footer -->
-    <!-- <footer id="footer_content" class="main-footer">
-      <strong>Copyright &copy; 2014-2021 <a href="<?php echo base_url(); ?>/assets/https://adminlte.io">AdminLTE.io</a>.</strong>
-      All rights reserved.
-      <div class="float-right d-none d-sm-inline-block">
-        <b>Version</b> 3.2.0
-      </div>
-    </footer> -->
   </div>
-  <input type="hidden" id="idx1" value="<?php echo $index ?>" />
-  <input type="hidden" id="idx2" value="<?php echo $index2 ?>" />
-
+  <input type="hidden" id="index" value="<?php echo $index ?>" />
+  <input type="hidden" id="index2" value="<?php echo $index2 ?>" />
   <!-- ./wrapper -->
 
   <!-- REQUIRED SCRIPTS -->
@@ -432,11 +298,15 @@
   <script src="<?php echo base_url(); ?>/assets/dist/js/adminlte.js"></script>
   <!-- My Script -->
   <script src="<?php echo base_url(); ?>/assets/dist/js/pages/route.js"></script>
+  <script src="<?php echo base_url(); ?>/assets/dist/js/pages/logout.js"></script>
+
+  <script src="<?php echo base_url(); ?>/assets/dist/js/pages/sale.js"></script>
   <script src="<?php echo base_url(); ?>/assets/dist/js/pages/product.js"></script>
   <script src="<?php echo base_url(); ?>/assets/dist/js/pages/customer.js"></script>
-  <script src="<?php echo base_url(); ?>/assets/dist/js/pages/customergroup.js"></script>
+  <script src="<?php echo base_url(); ?>/assets/dist/js/pages/cashbook.js"></script>
+  <script src="<?php echo base_url(); ?>/assets/dist/js/pages/promotion.js"></script>
   <script src="<?php echo base_url(); ?>/assets/dist/js/pages/brand.js"></script>
-  <script src="<?php echo base_url(); ?>/assets/dist/js/pages/logout.js"></script>
+  <script src="<?php echo base_url(); ?>/assets/dist/js/pages/employee.js"></script>
 </body>
 
 </html>

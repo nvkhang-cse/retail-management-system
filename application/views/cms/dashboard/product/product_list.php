@@ -7,10 +7,10 @@
       </div>
       <div class="col-sm-6">
         <a href="<?= site_url("dashboard/product/loadproductcategory") ?>">
-          <button type="button" class="btn btn-outline-primary float-sm-right mr-2 ml-2">Quản lý loại sản phẩm</button>
+          <button type="button" class="btn btn-outline-primary float-sm-right ml-2">Quản lý loại sản phẩm</button>
         </a>
         <a href="<?= site_url("dashboard/product/loadproductadd") ?>">
-          <button type="button" class="btn btn-primary float-sm-right" id="add_btn">+ Thêm sản phẩm</button>
+          <button type="button" class="btn btn-primary float-sm-right">+ Thêm sản phẩm</button>
         </a>
       </div>
     </div>
@@ -27,8 +27,8 @@
             <h5 class="card-title text-primary">Thông tin sản phẩm</h5>
           </div>
           <!-- /.card-header -->
-          <div class="card-body" id="product-wrapper">
-            <table id="productListTable" class="table table-bordered table-striped">
+          <div class="card-body" id="product_wrapper">
+            <table id="product_list_table" class="table table-bordered table-striped">
               <thead>
                 <tr>
                   <th></th>
@@ -36,6 +36,7 @@
                   <th>Tên sản phẩm</th>
                   <th>Loại</th>
                   <th>Thương hiệu</th>
+                  <th>Xuất sứ</th>
                   <th>Barcode</th>
                   <th>Dung tích</th>
                   <th>Đơn vị</th>

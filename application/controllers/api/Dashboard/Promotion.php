@@ -4,15 +4,15 @@ require APPPATH . 'libraries/RestController.php';
 
 use chriskacerguis\RestServer\RestController;
 
-class CustomerGroup extends RestController
+class Promotion extends RestController
 {
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('cms/CustomerGroupModel');
+        $this->load->model('cms/PromotionModel');
     }
 
-    public function loadcustomergrouplist_post()
+    public function loadpromotionlist_post()
     {
         $this->load->library('Authorization_Token');
         /**
@@ -21,23 +21,24 @@ class CustomerGroup extends RestController
         $is_valid_token = $this->authorization_token->validateToken();
         if (!empty($is_valid_token) and $is_valid_token['status'] === TRUE) {
 
-            $return_data = $this->load->view('cms/dashboard/customer_group/customer_group_list', '', true);
+            $return_data = $this->load->view('cms/dashboard/promotion/promotion_list', '', true);
 
             $message = [
                 'status' => true,
                 'data' => $return_data,
-                'message' => "Load customer group page successful"
+                'message' => "Load promotion list page successful"
             ];
             $this->response($message, RestController::HTTP_OK);
         } else {
             $message = [
                 'status' => false,
-                'message' => "Can't load customer group page"
+                'message' => "Can't load promotion list page"
             ];
             $this->response($message, RestController::HTTP_NOT_FOUND);
         }
     }
-    public function loadcustomergroupadd_post()
+
+    public function loadpromotionadd_post()
     {
         $this->load->library('Authorization_Token');
         /**
@@ -46,23 +47,24 @@ class CustomerGroup extends RestController
         $is_valid_token = $this->authorization_token->validateToken();
         if (!empty($is_valid_token) and $is_valid_token['status'] === TRUE) {
 
-            $return_data = $this->load->view('cms/dashboard/customer_group/customer_group_add', '', true);
+            $return_data = $this->load->view('cms/dashboard/promotion/promotion_add', '', true);
 
             $message = [
                 'status' => true,
                 'data' => $return_data,
-                'message' => "Load customer group add page successful"
+                'message' => "Load promotion add page successful"
             ];
             $this->response($message, RestController::HTTP_OK);
         } else {
             $message = [
                 'status' => false,
-                'message' => "Can't load customer group add page"
+                'message' => "Can't load promotion add page"
             ];
             $this->response($message, RestController::HTTP_NOT_FOUND);
         }
     }
-    public function loadcustomergroupdata_post()
+
+    public function loadpromotiondata_post()
     {
         $this->load->library('Authorization_Token');
         /**
@@ -70,8 +72,16 @@ class CustomerGroup extends RestController
          */
         $is_valid_token = $this->authorization_token->validateToken();
         if (!empty($is_valid_token) and $is_valid_token['status'] === TRUE) {
+            $this->load->model('cms/UserModel');
 
-            $return_data = $this->CustomerGroupModel->get_customer_group();
+            $data = $this->authorization_token->userData();
+            $brand_code_data = $this->UserModel->get_brandcode_of_user($data->id);
+
+            if ($brand_code_data[0]->brand_code == "ALL") {
+                $return_data = $this->PromotionModel->get_promotion();
+            } else {
+                $return_data = $this->PromotionModel->get_promotion_by_user($brand_code_data[0]->brand_code);
+            }
 
             $message = [
                 'status' => true,
@@ -88,7 +98,7 @@ class CustomerGroup extends RestController
         }
     }
 
-    public function storenewcustomergroup_post()
+    public function storenewpromotion_post()
     {
         $this->load->library('Authorization_Token');
         /**
@@ -101,7 +111,8 @@ class CustomerGroup extends RestController
 
             // Form Validation
             $this->form_validation->set_data($data);
-            $this->form_validation->set_rules('customer_group_name', 'Tên nhóm khách hàng', 'trim|required');
+            $this->form_validation->set_rules('promotion_name', 'Tên khuyến mãi', 'trim|required');
+
 
             if ($this->form_validation->run() == FALSE) {
                 $message = array(
@@ -111,24 +122,35 @@ class CustomerGroup extends RestController
                 );
                 $this->response($message, RestController::HTTP_NOT_FOUND);
             } else {
-                $customer_group_data = [
-                    'name'              => $data['customer_group_name'],
-                    'id'                => $data['customer_group_code'],
-                    'description'       => $data['customer_group_description'],
-                    'discount'          => $data['customer_group_discount'],
+                $promotion_data = [
+                    'name'              => $data['promotion_name'],
+                    'code'              => $data['promotion_code'],
+                    'type'              => $data['promotion_type'],
+                    'start_date'        => $data['promotion_start_date'],
+                    'end_date'          => $data['promotion_end_date'],
+                    'brand'             => $data['promotion_brand']
                 ];
-                $this->CustomerGroupModel->insert_customer_group($customer_group_data);
+                if ($data['promotion_type'] == 1) {
+                    $promotion_data['bill_from']    = $data['promotion_total_bill_from'];
+                    $promotion_data['bill_to']      = $data['promotion_total_bill_to'];
+                    $promotion_data['bill_type']    = $data['promotion_discount_type'];
+                    $promotion_data['bill_value']   = $data['promotion_discount_value'];
+                } else if ($data['promotion_type'] == 2) {
+                    $promotion_data['product_code']         = $data['promotion_product_code'];
+                    $promotion_data['product_discount']    = $data['promotion_product_discount'];
+                }
+                $this->PromotionModel->insert_promotion($promotion_data);
                 $message = [
                     'status' => true,
                     'data' => 'success',
-                    'message' => "Save customer group successful"
+                    'message' => "Save promotion successful"
                 ];
                 $this->response($message, RestController::HTTP_OK);
             }
         } else {
             $message = [
                 'status' => false,
-                'message' => "Can't save new customer group"
+                'message' => "Can't save new promotion"
             ];
             $this->response($message, RestController::HTTP_NOT_FOUND);
         }

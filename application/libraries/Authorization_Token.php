@@ -230,7 +230,7 @@ class Authorization_Token
                  * Token Decode
                  */
                 try {
-                    $token_decode = JWT::decode($headers[$token_data['key']], $this->token_key, array($this->token_algorithm));
+                    $token_decode = JWT::decode($headers[$token_data['key']], new Key($this->token_key, $this->token_algorithm));
                 } catch (Exception $e) {
                     return ['status' => FALSE, 'message' => $e->getMessage()];
                 }
