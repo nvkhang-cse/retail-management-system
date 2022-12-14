@@ -26,13 +26,7 @@ class Signin extends CI_Controller
 		 * User Token Validation
 		 */
 		$is_valid_token = $this->authorization_token->validateToken();
-		// var_dump($is_valid_token);
 		if (!empty($is_valid_token) and $is_valid_token['status'] === TRUE) {
-
-			// $this->data["headerview"]="cms/layout/main";
-			// $this->data["subview"]="cms/layout/main";
-			// $this->data["footerview"]="cms/layout/main";
-			// $this->load->view('cms/layout/main_page', $this->data);
 			return;
 		} else {
 			$this->data['before_head'] = '<title>Login | CMS</title>';

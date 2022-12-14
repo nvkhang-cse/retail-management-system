@@ -116,6 +116,8 @@ class CustomerGroup extends RestController
                     'id'                => $data['customer_group_code'],
                     'description'       => $data['customer_group_description'],
                     'discount'          => $data['customer_group_discount'],
+                    'spend_from'        => $data['customer_spend_from'],
+                    'spend_to'        => $data['customer_spend_to']
                 ];
                 $this->CustomerGroupModel->insert_customer_group($customer_group_data);
                 $message = [

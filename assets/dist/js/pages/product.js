@@ -437,7 +437,7 @@ function productTable(index2, site_url) {
 				{ data: "barcode" },
 				{
 					data: null,
-					defaultContent: `<div class="btn-group"><button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown"></button><div class="dropdown-menu"><a class="dropdown-item">Chi tiết</a><a class="dropdown-item">Sửa</a><a class="dropdown-item">Xoá</a></div></div>`,
+					defaultContent: `<div class="btn-group"><button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown"></button><div class="dropdown-menu"><a class="dropdown-item">Khôi phục</a><a class="dropdown-item">Xóa</a></div></div>`,
 					className: "dt-body-center",
 					searchable: false,
 					orderable: false,

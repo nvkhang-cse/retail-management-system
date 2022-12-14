@@ -119,6 +119,7 @@ function brandTable(index2, site_url) {
 				contentType: false,
 				processData: false,
 				success: function (data) {
+					// toastr.success(data.message);
 					window.location.href = site_url + "dashboard/brand";
 				},
 			});

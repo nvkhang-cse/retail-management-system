@@ -39,8 +39,8 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label for="employee_username">Tên đăng nhập</label>
-                                        <input type="text" class="form-control" id="employee_username" name="employee_username" placeholder="">
+                                        <label for="employee_email">Email đăng nhập</label>
+                                        <input type="text" class="form-control" id="employee_email" name="employee_email" placeholder="">
                                     </div>
                                     <div class="form-group">
                                         <label for="employee_password">Mật khẩu</label>

@@ -123,7 +123,7 @@ class Employee extends RestController
             } else {
                 $employee_data = [
                     'fullname'             => $data['employee_name'],
-                    'username'             => $data['employee_username'],
+                    'email'                => $data['employee_email'],
                     'pwd'                  => $data['employee_password'],
                     'phone'                => $data['employee_phone'],
                     'birthday'             => $data['employee_birthday'],

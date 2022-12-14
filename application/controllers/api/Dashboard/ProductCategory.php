@@ -124,7 +124,7 @@ class ProductCategory extends RestController
                 $message = [
                     'status' => true,
                     'data' => 'success',
-                    'message' => "Save product successful"
+                    'message' => "Save product category successful"
                 ];
                 $this->response($message, RestController::HTTP_OK);
             }

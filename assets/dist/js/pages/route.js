@@ -78,10 +78,7 @@ $(function () {
 				},
 			});
 		} else {
-			$("#nav_content").hide();
-			$("#left_sidebar_content").hide();
-			$("#right_sidebar_content").hide();
-			$("#footer_content").hide();
+			redirectLoginPage();
 		}
 	});
 });

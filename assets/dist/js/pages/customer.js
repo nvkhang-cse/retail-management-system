@@ -192,7 +192,7 @@ function customerTable(index2, site_url) {
 				{ data: "discount" },
 				{
 					data: null,
-					defaultContent: "0",
+					defaultContent: "2",
 				},
 				{
 					data: null,

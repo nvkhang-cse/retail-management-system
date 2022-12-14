@@ -21,6 +21,7 @@
   <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
   <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/plugins/datatables-select/css/select.bootstrap4.min.css">
   <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/dist/css/style/style.css">
+  <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/dist/css/toastr.min.css">
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
@@ -294,6 +295,7 @@
   <script src="<?php echo base_url(); ?>/assets/plugins/datatables-buttons/js/buttons.print.min.js"></script>
   <script src="<?php echo base_url(); ?>/assets/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
   <script src="<?php echo base_url(); ?>/assets/plugins/datatables-checkboxes/js/dataTables.checkboxes.min.js"></script>
+  <script src="<?php echo base_url(); ?>/assets/dist/js/toastr.min.js"></script>
   <!-- AdminLTE App -->
   <script src="<?php echo base_url(); ?>/assets/dist/js/adminlte.js"></script>
   <!-- My Script -->

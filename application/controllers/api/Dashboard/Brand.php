@@ -110,7 +110,7 @@ class Brand extends RestController
 
             // Form Validation
             $this->form_validation->set_data($data);
-            $this->form_validation->set_rules('brand_name', 'Tên chi nhánh', 'trim|required');
+            $this->form_validation->set_rules('brand_name', 'Tên chi nhánh', 'trim|required',  array('required' => 'Điền thông tin cho trường %s'));
 
             if ($this->form_validation->run() == FALSE) {
                 $message = array(
