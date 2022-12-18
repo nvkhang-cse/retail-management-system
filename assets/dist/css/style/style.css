@@ -40,8 +40,30 @@ div.dataTables_length select {
 #trash_list_table tbody td .btn-group .dropdown-menu,
 #customer_list_table tbody td .btn-group .dropdown-menu,
 #customer_group_list_table tbody td .btn-group .dropdown-menu,
+#cashbook_list_table tbody td .btn-group .dropdown-menu,
 #brand_list_table tbody td .btn-group .dropdown-menu,
 #employee_list_table tbody td .btn-group .dropdown-menu,
 #promotion_list_table tbody td .btn-group .dropdown-menu {
 	min-width: 0;
+}
+
+.mark {
+	background-color: #d7ffe7 !important;
+}
+
+.mark .gsearch {
+	font-size: 20px;
+}
+
+.unmark {
+	background-color: #e8e8e8 !important;
+}
+
+.unmark .gsearch {
+	font-size: 10px;
+}
+
+.marktext {
+	font-weight: bold;
+	background-color: antiquewhite;
 }

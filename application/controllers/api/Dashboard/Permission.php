@@ -22,8 +22,8 @@ class Permission extends RestController
         if (!empty($is_valid_token) and $is_valid_token['status'] === TRUE) {
             $this->load->model('cms/UserModel');
 
-            $data = $this->authorization_token->userData();
-            $permission_data = $this->UserModel->get_permission_of_user($data->id);
+            $user_data = $this->authorization_token->userData();
+            $permission_data = $this->UserModel->get_permission_of_user($user_data->id);
 
             if ($permission_data[0]->permission == "1") {
                 $return_data = $this->PermissionModel->get_permission_list_by_admin();

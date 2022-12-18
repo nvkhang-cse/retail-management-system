@@ -26,13 +26,13 @@
                 <div class="col-sm-6">
                   <div class="form-group">
                     <label for="customer_group_name">Tên nhóm khách hàng</label>
-                    <input type="text" class="form-control" id="customer_group_name" name="customer_group_name" placeholder="Nhập tên nhóm khách hàng">
+                    <input type="text" class="form-control" id="customer_group_name" name="customer_group_name" placeholder="" required maxlength="50">
                   </div>
                 </div>
                 <div class="col-sm-6">
                   <div class="form-group">
                     <label for="customer_group_code">Mã nhóm khách hàng</label>
-                    <input type="text" class="form-control" id="customer_group_code" name="customer_group_code" placeholder="">
+                    <input type="text" class="form-control" id="customer_group_code" name="customer_group_code" placeholder="" required maxlength="5">
                   </div>
                 </div>
               </div>
@@ -51,15 +51,15 @@
             <div class="card-body">
               <div class="form-group">
                 <label for="customer_group_discount">Chiết khấu (%)</label>
-                <input type="number" class="form-control" id="customer_group_discount" name="customer_group_discount" placeholder="">
+                <input type="number" class="form-control" id="customer_group_discount" name="customer_group_discount" placeholder="" min="0" max="1000">
               </div>
               <div class="form-group">
                 <label for="customer_spend_from">Từ</label>
-                <input type="number" class="form-control" id="customer_spend_from" name="customer_spend_from" placeholder="Thiết lập số tiền đã mua từ">
+                <input type="number" class="form-control" id="customer_spend_from" name="customer_spend_from" placeholder="Thiết lập số tiền đã mua từ" min="0">
               </div>
               <div class="form-group">
                 <label for="customer_spend_to">Đến</label>
-                <input type="number" class="form-control" id="customer_spend_to" name="customer_spend_to" placeholder="Thiết lập số tiền đã mua đến">
+                <input type="number" class="form-control" id="customer_spend_to" name="customer_spend_to" placeholder="Thiết lập số tiền đã mua đến" min="0">
               </div>
             </div>
           </div>

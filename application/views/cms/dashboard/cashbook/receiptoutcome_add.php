@@ -26,13 +26,13 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for="receipt_code">Mã phiếu</label>
-                                        <input type="text" class="form-control" id="receipt_code" name="receipt_code" placeholder="">
+                                        <input type="text" class="form-control" id="receipt_code" name="receipt_code" placeholder="" required maxlength="20">
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for="receipt_customer_code">Người nhận</label>
-                                        <input type="text" class="form-control" id="receipt_customer_code" name="receipt_customer_code" placeholder="">
+                                        <input type="text" class="form-control" id="receipt_customer_code" name="receipt_customer_code" placeholder="" required maxlength="20">
                                     </div>
                                 </div>
                             </div>
@@ -40,7 +40,7 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for="receipt_value">Giá trị ghi nhận</label>
-                                        <input type="text" class="form-control" id="receipt_value" name="receipt_value" placeholder="">
+                                        <input type="number" class="form-control" id="receipt_value" name="receipt_value" placeholder="" required min="0">
                                     </div>
                                 </div>
                             </div>
@@ -55,7 +55,7 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="receipt_brand">Chọn chi nhánh</label>
-                                <select class="form-control" id="receipt_brand" name="receipt_brand">
+                                <select class="form-control" id="receipt_brand" name="receipt_brand" required>
                                 </select>
                             </div>
                         </div>

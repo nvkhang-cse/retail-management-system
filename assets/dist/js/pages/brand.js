@@ -121,6 +121,7 @@ function brandTable(index2, site_url) {
 				success: function (data) {
 					// toastr.success(data.message);
 					window.location.href = site_url + "dashboard/brand";
+					
 				},
 			});
 		});

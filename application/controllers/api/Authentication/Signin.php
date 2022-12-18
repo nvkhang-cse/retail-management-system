@@ -17,8 +17,25 @@ class Signin extends RestController
         $data = $this->security->xss_clean($this->post());
         //Form Validation
         $this->form_validation->set_data($data);
-        $this->form_validation->set_rules('email', 'Email', 'trim');
-        $this->form_validation->set_rules('password', 'Password', 'trim');
+        $this->form_validation->set_error_delimiters('', '');
+        $this->form_validation->set_rules(
+            'email',
+            'Email',
+            'trim|required|valid_email',
+            array(
+                'required' => 'Phải nhập thông tin %s',
+                'valid_email' => '%s không hợp lệ!'
+            )
+        );
+        $this->form_validation->set_rules(
+            'password',
+            'Mật khẩu',
+            'trim|required|alpha_numeric',
+            array(
+                'required' => 'Phải nhập thông tin %s',
+                'alpha_numeric' => '%s chỉ chứa chữ không dấu hoặc số!'
+            )
+        );
 
         if ($this->form_validation->run() == FALSE) {
             //Error Validation
@@ -59,7 +76,7 @@ class Signin extends RestController
             } else {
                 // Login Error
                 $message = [
-                    'status' => FALSE,
+                    'status' => false,
                     'message' => "Thông tin đăng nhập không chính xác"
                 ];
                 $this->response($message, RestController::HTTP_NOT_FOUND);

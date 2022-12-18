@@ -24,19 +24,19 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="promotion_name">Tên khuyến mãi</label>
-                                <input type="text" class="form-control" id="promotion_name" name="promotion_name" placeholder="">
+                                <input type="text" class="form-control" id="promotion_name" name="promotion_name" placeholder="" required maxlength="250">
                             </div>
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for="promotion_code">Mã khuyến mãi</label>
-                                        <input type="text" class="form-control" id="promotion_code" name="promotion_code" placeholder="">
+                                        <input type="text" class="form-control" id="promotion_code" name="promotion_code" placeholder="" required maxlength="10">
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for="promotion_type">Loại khuyến mãi</label>
-                                        <select class="form-control" id="promotion_type" name="promotion_type">
+                                        <select class="form-control" id="promotion_type" name="promotion_type" required>
                                             <option value="1">Hóa đơn</option>
                                             <option value="2">Giảm giá sản phẩm</option>
                                         </select>
@@ -47,13 +47,13 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for="promotion_start_date">Ngày bắt đầu</label>
-                                        <input type="text" class="form-control" id="promotion_start_date" name="promotion_start_date" placeholder="15-01-2022">
+                                        <input type="date" pattern="\d{4}-\d{2}-\d{2}" class="form-control" id="promotion_start_date" name="promotion_start_date" placeholder="15-01-2022" required>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for="promotion_end_date">Ngày kết thúc</label>
-                                        <input type="text" class="form-control" id="promotion_end_date" name="promotion_end_date" placeholder="30-01-2022">
+                                        <input type="date" pattern="\d{4}-\d{2}-\d{2}" class="form-control" id="promotion_end_date" name="promotion_end_date" placeholder="30-01-2022" required>
                                     </div>
                                 </div>
                             </div>
@@ -68,13 +68,13 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for="promotion_total_bill_from">Từ</label>
-                                        <input type="number" class="form-control" id="promotion_total_bill_from" name="promotion_total_bill_from" placeholder="">
+                                        <input type="number" class="form-control" id="promotion_total_bill_from" name="promotion_total_bill_from" placeholder="" min="0">
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for="promotion_total_bill_to">Đến</label>
-                                        <input type="number" class="form-control" id="promotion_total_bill_to" name="promotion_total_bill_to" placeholder="">
+                                        <input type="number" class="form-control" id="promotion_total_bill_to" name="promotion_total_bill_to" placeholder="" min="0">
                                     </div>
                                 </div>
                             </div>
@@ -91,14 +91,14 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for="promotion_discount_value">Giá trị</label>
-                                        <input type="number" class="form-control" id="promotion_discount_value" name="promotion_discount_value" placeholder="">
+                                        <input type="number" class="form-control" id="promotion_discount_value" name="promotion_discount_value" placeholder="" min="0">
                                     </div>
                                 </div>
 
                             </div>
                         </div>
                     </div>
-                    <div class="card card-lightblue d-none" id="promotion_product_wrapper">
+                    <div class=" card card-lightblue d-none" id="promotion_product_wrapper">
                         <div class="card-header">
                             <h5 class="card-title">Giảm giá sản phẩm</h5>
                         </div>
@@ -107,13 +107,13 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for="promotion_product_code">Mã sản phẩm</label>
-                                        <input type="text" class="form-control" id="promotion_product_code" name="promotion_product_code" placeholder="Tìm kiếm sản phẩm">
+                                        <input type="text" class="form-control" id="promotion_product_code" name="promotion_product_code" placeholder="Tìm kiếm sản phẩm" maxlength="20">
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for="promotion_product_discount">Giảm giá (%)</label>
-                                        <input type="number" class="form-control" id="promotion_product_discount" name="promotion_product_discount" placeholder="">
+                                        <input type="number" class="form-control" id="promotion_product_discount" name="promotion_product_discount" placeholder="" min="0">
                                     </div>
                                 </div>
                             </div>
@@ -128,7 +128,7 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="promotion_brand">Chọn chi nhánh áp dụng</label>
-                                <select class="form-control" id="promotion_brand" name="promotion_brand">
+                                <select class="form-control" id="promotion_brand" name="promotion_brand" required>
                                     <option value="ALL">Tất cả chi nhánh</option>
                                 </select>
                             </div>

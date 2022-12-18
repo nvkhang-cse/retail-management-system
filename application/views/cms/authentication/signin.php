@@ -29,7 +29,7 @@
 					<div class="login-wrap p-0">
 						<form action="<?= site_url("api/authentication/signin/login") ?>">
 							<div id="email-group" class="form-group">
-								<input id="email-field" name="Email" type="text" class="form-control" placeholder="Email" required>
+								<input id="email-field" name="Email" type="email" class="form-control" placeholder="Email" required>
 							</div>
 							<div id="password-group" class="form-group">
 								<input id="password-field" name="Password" type="password" class="form-control" placeholder="Mật khẩu đăng nhập" required>
@@ -42,7 +42,9 @@
 						<div class="text-center mt-2">
 							<a href="#" class="text-primary">Quên mật khẩu</a>
 						</div>
-						<div id="login-message" class="text-danger text-center"></div>
+						<div class="text-danger text-center">
+							<p id="login_message"></p>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -68,7 +70,7 @@
 					dataType: "json",
 					encode: true,
 					error: function(error) {
-						$("#login-message").text(error.responseJSON.message);
+						$("#login_message").text(error.responseJSON.message);
 					},
 					success: function(data) {
 						localStorage.setItem('auth_token', data.data.token);
@@ -79,7 +81,7 @@
 			});
 
 			$("#email-group, #password-group").change(function() {
-				$("#login-message").text("");
+				$("#login_message").text("");
 			});
 		});
 	</script>

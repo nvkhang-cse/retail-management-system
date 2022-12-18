@@ -3,21 +3,9 @@ function employeeTable(index2, site_url) {
 
 	if (index2 == 3) {
 		var table;
-		var employee_data;
 		var brand_data;
+		var employee_data;
 		var permission_data;
-
-		$.ajax({
-			type: "POST",
-			url: site_url + "api/dashboard/employee/loademployeedata",
-			dataType: "json",
-			encode: true,
-			async: false,
-			headers: { Authorization: localStorage.getItem("auth_token") },
-			success: function (response) {
-				employee_data = response;
-			},
-		});
 
 		$.ajax({
 			type: "POST",
@@ -27,7 +15,26 @@ function employeeTable(index2, site_url) {
 			async: false,
 			headers: { Authorization: localStorage.getItem("auth_token") },
 			success: function (response) {
-				brand_data = response;
+				brand_data = response.data;
+			},
+		});
+
+		brand_data.forEach((row) => {
+			$("#brand_code").append(
+				'<option value="' + row.code + '">' + row.name + "</option>"
+			);
+		});
+
+		$.ajax({
+			type: "POST",
+			url: site_url + "api/dashboard/employee/loademployeedata",
+			dataType: "json",
+			data: { brand_code: $("#brand_code").val() },
+			encode: true,
+			async: false,
+			headers: { Authorization: localStorage.getItem("auth_token") },
+			success: function (response) {
+				employee_data = response;
 			},
 		});
 
@@ -91,19 +98,6 @@ function employeeTable(index2, site_url) {
 					},
 				},
 				{
-					data: "brand_code",
-					render: function (data, type, row, meta) {
-						let result = brand_data.data.find(
-							(item) => item.code == row.brand_code
-						);
-						if (result == undefined) {
-							return "Chưa phân chi nhánh";
-						} else {
-							return `${result.name}`;
-						}
-					},
-				},
-				{
 					data: null,
 					defaultContent: `<div class="btn-group"><button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown"></button><div class="dropdown-menu"><a class="dropdown-item" href="#">Chi tiết</a><a class="dropdown-item" href="#">Sửa</a><a class="dropdown-item" href="#">Xoá</a></div></div>`,
 					className: "dt-body-center",
@@ -156,12 +150,29 @@ function employeeTable(index2, site_url) {
 				},
 				{
 					extend: "colvis",
-					columns: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+					columns: [1, 2, 3, 4, 5, 6, 7, 8],
 					text: "Hiển thị",
 				},
 			],
 		});
 		table.buttons().container().appendTo("#employee_wrapper .col-md-6:eq(0)");
+
+		$("#brand_code").on("change", function () {
+			$.ajax({
+				type: "POST",
+				url: site_url + "api/dashboard/employee/loademployeedata",
+				dataType: "json",
+				data: { brand_code: $("#brand_code").val() },
+				encode: true,
+				async: false,
+				headers: { Authorization: localStorage.getItem("auth_token") },
+				success: function (response) {
+					employee_data = response;
+				},
+			});
+
+			table.clear().rows.add(employee_data.data).draw();
+		});
 	} else if (index2 == 4) {
 		var brand_data;
 		var permission_data;

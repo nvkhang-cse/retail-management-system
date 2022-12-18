@@ -3,13 +3,33 @@ function cashBookTable(index2, site_url) {
 
 	if (index2 == 1) {
 		var table;
+		var brand_data;
 		var cashbook_data;
 		var customer_data;
 
 		$.ajax({
 			type: "POST",
+			url: site_url + "api/dashboard/brand/loadbranddata",
+			dataType: "json",
+			encode: true,
+			async: false,
+			headers: { Authorization: localStorage.getItem("auth_token") },
+			success: function (response) {
+				brand_data = response.data;
+			},
+		});
+
+		brand_data.forEach((row) => {
+			$("#brand_code").append(
+				'<option value="' + row.code + '">' + row.name + "</option>"
+			);
+		});
+
+		$.ajax({
+			type: "POST",
 			url: site_url + "api/dashboard/cashbook/loadcashbookdata",
 			dataType: "json",
+			data: { brand_code: $("#brand_code").val() },
 			encode: true,
 			async: false,
 			headers: { Authorization: localStorage.getItem("auth_token") },
@@ -131,6 +151,23 @@ function cashBookTable(index2, site_url) {
 		});
 
 		table.buttons().container().appendTo("#cashbook_wrapper .col-md-6:eq(0)");
+
+		$("#brand_code").on("change", function () {
+			$.ajax({
+				type: "POST",
+				url: site_url + "api/dashboard/cashbook/loadcashbookdata",
+				dataType: "json",
+				data: { brand_code: $("#brand_code").val() },
+				encode: true,
+				async: false,
+				headers: { Authorization: localStorage.getItem("auth_token") },
+				success: function (response) {
+					cashbook_data = response;
+				},
+			});
+
+			table.clear().rows.add(cashbook_data.data).draw();
+		});
 	} else if (index2 == 2) {
 		var brand_data;
 
@@ -151,6 +188,23 @@ function cashBookTable(index2, site_url) {
 				'<option value="' + row.code + '">' + row.name + "</option>"
 			);
 		});
+
+		$("form#receipt_data").submit(function (e) {
+			e.preventDefault();
+			var formData = new FormData(this);
+
+			$.ajax({
+				url: site_url + "api/dashboard/cashbook/storenewreceiptincome",
+				type: "POST",
+				data: formData,
+				headers: { Authorization: localStorage.getItem("auth_token") },
+				contentType: false,
+				processData: false,
+				success: function (data) {
+					window.location.href = site_url + "dashboard/cashbook";
+				},
+			});
+		});
 	} else if (index2 == 3) {
 		var brand_data;
 
@@ -170,6 +224,23 @@ function cashBookTable(index2, site_url) {
 			$("#receipt_brand").append(
 				'<option value="' + row.code + '">' + row.name + "</option>"
 			);
+		});
+
+		$("form#receipt_data").submit(function (e) {
+			e.preventDefault();
+			var formData = new FormData(this);
+
+			$.ajax({
+				url: site_url + "api/dashboard/cashbook/storenewreceiptoutcome",
+				type: "POST",
+				data: formData,
+				headers: { Authorization: localStorage.getItem("auth_token") },
+				contentType: false,
+				processData: false,
+				success: function (data) {
+					window.location.href = site_url + "dashboard/cashbook";
+				},
+			});
 		});
 	}
 }

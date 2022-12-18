@@ -3,12 +3,32 @@ function promotionTable(index2, site_url) {
 
 	if (index2 == 1) {
 		var table;
+		var brand_data;
 		var promotion_data;
+
+		$.ajax({
+			type: "POST",
+			url: site_url + "api/dashboard/brand/loadbranddata",
+			dataType: "json",
+			encode: true,
+			async: false,
+			headers: { Authorization: localStorage.getItem("auth_token") },
+			success: function (response) {
+				brand_data = response.data;
+			},
+		});
+
+		brand_data.forEach((row) => {
+			$("#brand_code").append(
+				'<option value="' + row.code + '">' + row.name + "</option>"
+			);
+		});
 
 		$.ajax({
 			type: "POST",
 			url: site_url + "api/dashboard/promotion/loadpromotiondata",
 			dataType: "json",
+			data: { brand_code: $("#brand_code").val() },
 			encode: true,
 			async: false,
 			headers: { Authorization: localStorage.getItem("auth_token") },
@@ -106,6 +126,23 @@ function promotionTable(index2, site_url) {
 		});
 
 		table.buttons().container().appendTo("#promotion_wrapper .col-md-6:eq(0)");
+
+		$("#brand_code").on("change", function () {
+			$.ajax({
+				type: "POST",
+				url: site_url + "api/dashboard/promotion/loadpromotiondata",
+				dataType: "json",
+				data: { brand_code: $("#brand_code").val() },
+				encode: true,
+				async: false,
+				headers: { Authorization: localStorage.getItem("auth_token") },
+				success: function (response) {
+					promotion_data = response;
+				},
+			});
+
+			table.clear().rows.add(promotion_data.data).draw();
+		});
 	} else if (index2 == 2) {
 		var brand_data;
 		var promotion_type = $("#promotion_type");

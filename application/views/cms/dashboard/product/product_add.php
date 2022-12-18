@@ -24,19 +24,19 @@
             <div class="card-body">
               <div class="form-group">
                 <label for="product_name">Tên sản phẩm</label>
-                <input type="text" class="form-control" id="product_name" name="product_name" placeholder="Nhập tên sản phẩm">
+                <input type="text" class="form-control" id="product_name" name="product_name" placeholder="" required maxlength="250">
               </div>
               <div class="row">
                 <div class="col-sm-6">
                   <div class="form-group">
                     <label for="product_code">Mã sản phẩm</label>
-                    <input type="text" class="form-control" id="product_code" name="product_code" placeholder="">
+                    <input type="text" class="form-control" id="product_code" name="product_code" placeholder="" required maxlength="20">
                   </div>
                 </div>
                 <div class="col-sm-6">
                   <div class="form-group">
                     <label for="product_barcode">Barcode</label>
-                    <input type="text" class="form-control" id="product_barcode" name="product_barcode" placeholder="Mã vạch sản phẩm">
+                    <input type="text" class="form-control" id="product_barcode" name="product_barcode" placeholder="Mã vạch sản phẩm" maxlength="30">
                   </div>
                 </div>
               </div>
@@ -44,13 +44,13 @@
                 <div class="col-sm-6">
                   <div class="form-group">
                     <label for="product_brand">Thương hiệu</label>
-                    <input type="text" class="form-control" id="product_brand" name="product_brand" placeholder="">
+                    <input type="text" class="form-control" id="product_brand" name="product_brand" placeholder="" maxlength="30">
                   </div>
                 </div>
                 <div class="col-sm-6">
                   <div class="form-group">
                     <label for="product_origin">Xuất sứ</label>
-                    <input type="text" class="form-control" id="product_origin" name="product_origin" placeholder="">
+                    <input type="text" class="form-control" id="product_origin" name="product_origin" placeholder="" maxlength="30">
                   </div>
                 </div>
               </div>
@@ -58,13 +58,13 @@
                 <div class="col-sm-6">
                   <div class="form-group">
                     <label for="product_quantity_warehouse">Số lượng trong kho</label>
-                    <input type="number" class="form-control" id="product_quantity_warehouse" name="product_quantity_warehouse" placeholder="Số lượng khởi tạo ban đầu">
+                    <input type="number" class="form-control" id="product_quantity_warehouse" name="product_quantity_warehouse" placeholder="Số lượng khởi tạo ban đầu" required min="0">
                   </div>
                 </div>
                 <div class="col-sm-6">
                   <div class="form-group">
                     <label for="product_quantity_sale">Số lượng được bán</label>
-                    <input type="number" class="form-control" id="product_quantity_sale" name="product_quantity_sale" placeholder="Số lượng cho phép bán">
+                    <input type="number" class="form-control" id="product_quantity_sale" name="product_quantity_sale" placeholder="Số lượng cho phép bán" required min="0">
                   </div>
                 </div>
               </div>
@@ -72,13 +72,14 @@
                 <div class="col-sm-6">
                   <div class="form-group">
                     <label for="product_capacity">Dung tích</label>
-                    <input type="number" class="form-control" id="product_capacity" name="product_capacity" placeholder="">
+                    <input type="number" class="form-control" id="product_capacity" name="product_capacity" placeholder="" min="0">
                   </div>
                 </div>
                 <div class="col-sm-6">
                   <div class="form-group">
                     <label for="product_unit">Đơn vị</label>
                     <select class="form-control" id="product_unit" name="product_unit">
+                      <option value="Không">Không</option>
                       <option value="ml">ml</option>
                       <option value="l">L</option>
                       <option value="g">g</option>
@@ -91,7 +92,7 @@
                 <div class="col-sm-6">
                   <div class="form-group">
                     <label for="product_expired_date">Ngày hết hạn</label>
-                    <input type="text" class="form-control" id="product_expired_date" name="product_expired_date" placeholder="01-01-2025">
+                    <input type="date" class="form-control" pattern="\d{4}-\d{2}-\d{2}" id="product_expired_date" name="product_expired_date" placeholder="2025-01-30">
                   </div>
                 </div>
                 <div class="col-sm-6">
@@ -115,13 +116,13 @@
                 <div class="col-sm-6">
                   <div class="form-group">
                     <label for="product_cost">Giá nhập</label>
-                    <input type="number" class="form-control" id="product_cost" name="product_cost" placeholder="">
+                    <input type="number" class="form-control" id="product_cost" name="product_cost" placeholder="" min="0">
                   </div>
                 </div>
                 <div class="col-sm-6">
                   <div class="form-group">
                     <label for="product_wholesale">Giá bán buôn</label>
-                    <input type="number" class="form-control" id="product_wholesale" name="product_wholesale" placeholder="">
+                    <input type="number" class="form-control" id="product_wholesale" name="product_wholesale" placeholder="" min="0">
                   </div>
                 </div>
               </div>
@@ -129,7 +130,7 @@
                 <div class="col-sm-6">
                   <div class="form-group">
                     <label for="product_retail">Giá bán lẻ</label>
-                    <input type="number" class="form-control" id="product_retail" name="product_retail" placeholder="">
+                    <input type="number" class="form-control" id="product_retail" name="product_retail" placeholder="" min="0">
                   </div>
                 </div>
               </div>

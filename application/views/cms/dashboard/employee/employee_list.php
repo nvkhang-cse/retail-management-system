@@ -22,6 +22,10 @@
                 <div class="card">
                     <div class="card-header">
                         <h5 class="card-title text-primary">Thông tin nhân viên</h5>
+                        <div class="float-sm-right">
+                            <select id="brand_code" class="custom-select border-primary">
+                            </select>
+                        </div>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body" id="employee_wrapper">
@@ -37,7 +41,6 @@
                                     <th>Thành phố</th>
                                     <th>Số điện thoại</th>
                                     <th>Vai trò</th>
-                                    <th>Chi nhánh</th>
                                     <th>Thao tác</th>
                                 </tr>
                             </thead>

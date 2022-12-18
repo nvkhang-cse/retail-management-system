@@ -4,7 +4,7 @@ require APPPATH . 'libraries/RestController.php';
 
 use chriskacerguis\RestServer\RestController;
 
-class CashBook extends RestController
+class Cashbook extends RestController
 {
     public function __construct()
     {
@@ -20,8 +20,17 @@ class CashBook extends RestController
          */
         $is_valid_token = $this->authorization_token->validateToken();
         if (!empty($is_valid_token) and $is_valid_token['status'] === TRUE) {
+            $this->load->model('cms/UserModel');
 
-            $return_data = $this->load->view('cms/dashboard/cashbook/cashbook_list', '', true);
+            $user_data = $this->authorization_token->userData();
+            $permission_data = $this->UserModel->get_permission_of_user($user_data->id);
+
+            if ($permission_data[0]->permission == "1" || $permission_data[0]->permission == "2") {
+
+                $return_data = $this->load->view('cms/dashboard/cashbook/cashbook_list', '', true);
+            } else {
+                $return_data = [];
+            }
 
             $message = [
                 'status' => true,
@@ -46,8 +55,16 @@ class CashBook extends RestController
          */
         $is_valid_token = $this->authorization_token->validateToken();
         if (!empty($is_valid_token) and $is_valid_token['status'] === TRUE) {
+            $this->load->model('cms/UserModel');
 
-            $return_data = $this->load->view('cms/dashboard/cashbook/receiptincome_add', '', true);
+            $user_data = $this->authorization_token->userData();
+            $permission_data = $this->UserModel->get_permission_of_user($user_data->id);
+
+            if ($permission_data[0]->permission == "1" || $permission_data[0]->permission == "2") {
+                $return_data = $this->load->view('cms/dashboard/cashbook/receiptincome_add', '', true);
+            } else {
+                $return_data = [];
+            }
 
             $message = [
                 'status' => true,
@@ -72,8 +89,17 @@ class CashBook extends RestController
          */
         $is_valid_token = $this->authorization_token->validateToken();
         if (!empty($is_valid_token) and $is_valid_token['status'] === TRUE) {
+            $this->load->model('cms/UserModel');
 
-            $return_data = $this->load->view('cms/dashboard/cashbook/receiptoutcome_add', '', true);
+            $user_data = $this->authorization_token->userData();
+            $permission_data = $this->UserModel->get_permission_of_user($user_data->id);
+
+            if ($permission_data[0]->permission == "1" || $permission_data[0]->permission == "2") {
+
+                $return_data = $this->load->view('cms/dashboard/cashbook/receiptoutcome_add', '', true);
+            } else {
+                $return_data = [];
+            }
 
             $message = [
                 'status' => true,
@@ -98,23 +124,38 @@ class CashBook extends RestController
          */
         $is_valid_token = $this->authorization_token->validateToken();
         if (!empty($is_valid_token) and $is_valid_token['status'] === TRUE) {
+            $data = $this->security->xss_clean($this->post());
             $this->load->model('cms/UserModel');
 
-            $data = $this->authorization_token->userData();
-            $brand_code_data = $this->UserModel->get_brandcode_of_user($data->id);
+            $user_data = $this->authorization_token->userData();
+            $brand_code_data = $this->UserModel->get_brandcode_of_user($user_data->id);
+            $permission_data = $this->UserModel->get_permission_of_user($user_data->id);
 
-            if ($brand_code_data[0]->brand_code == "ALL") {
-                $return_data = $this->CashBookModel->get_cashbook();
+            if ($permission_data[0]->permission == "1" || $permission_data[0]->permission == "2") {
+
+                if ($brand_code_data[0]->brand_code == "ALL") {
+                    $return_data = $this->CashBookModel->get_cashbook_by_brandcode($data["brand_code"]);
+                } else {
+                    if ($brand_code_data[0]->brand_code == $data["brand_code"]) {
+                        $return_data = $this->CashBookModel->get_cashbook_by_brandcode($data["brand_code"]);
+                    } else {
+                        $return_data = [];
+                    }
+                }
+
+                $message = [
+                    'status' => true,
+                    'data' => $return_data,
+                    'message' => "Load data successful"
+                ];
+                $this->response($message, RestController::HTTP_OK);
             } else {
-                $return_data = $this->CashBookModel->get_cashbook_by_user($brand_code_data[0]->brand_code);
+                $message = [
+                    'status' => false,
+                    'message' => "Not allowed!"
+                ];
+                $this->response($message, RestController::HTTP_METHOD_NOT_ALLOWED);
             }
-
-            $message = [
-                'status' => true,
-                'data' => $return_data,
-                'message' => "Load data successful"
-            ];
-            $this->response($message, RestController::HTTP_OK);
         } else {
             $message = [
                 'status' => false,
@@ -124,61 +165,149 @@ class CashBook extends RestController
         }
     }
 
-    // public function storenewpromotion_post()
-    // {
-    //     $this->load->library('Authorization_Token');
-    //     /**
-    //      * User Token Validation
-    //      */
-    //     $is_valid_token = $this->authorization_token->validateToken();
-    //     if (!empty($is_valid_token) and $is_valid_token['status'] === TRUE) {
+    public function storenewreceiptincome_post()
+    {
+        $this->load->library('Authorization_Token');
+        /**
+         * User Token Validation
+         */
+        $is_valid_token = $this->authorization_token->validateToken();
+        if (!empty($is_valid_token) and $is_valid_token['status'] === TRUE) {
 
-    //         $data = $this->security->xss_clean($this->post());
+            $data = $this->security->xss_clean($this->post());
+            $this->load->model('cms/UserModel');
 
-    //         // Form Validation
-    //         $this->form_validation->set_data($data);
-    //         $this->form_validation->set_rules('promotion_name', 'Tên khuyến mãi', 'trim|required');
+            $user_data = $this->authorization_token->userData();
+            $brand_code_data = $this->UserModel->get_brandcode_of_user($user_data->id);
+            $permission_data = $this->UserModel->get_permission_of_user($user_data->id);
 
+            if ($permission_data[0]->permission == "1" || $permission_data[0]->permission == "2") {
 
-    //         if ($this->form_validation->run() == FALSE) {
-    //             $message = array(
-    //                 'status'    =>  false,
-    //                 'error'     =>  $this->form_validation->error_array(),
-    //                 'message'   =>  validation_errors()
-    //             );
-    //             $this->response($message, RestController::HTTP_NOT_FOUND);
-    //         } else {
-    //             $promotion_data = [
-    //                 'name'              => $data['promotion_name'],
-    //                 'code'              => $data['promotion_code'],
-    //                 'type'              => $data['promotion_type'],
-    //                 'start_date'        => $data['promotion_start_date'],
-    //                 'end_date'          => $data['promotion_end_date'],
-    //                 'brand'             => $data['promotion_brand']
-    //             ];
-    //             if ($data['promotion_type'] == 1) {
-    //                 $promotion_data['bill_from']    = $data['promotion_total_bill_from'];
-    //                 $promotion_data['bill_to']      = $data['promotion_total_bill_to'];
-    //                 $promotion_data['bill_type']    = $data['promotion_discount_type'];
-    //                 $promotion_data['bill_value']   = $data['promotion_discount_value'];
-    //             } else if ($data['promotion_type'] == 2) {
-    //                 $promotion_data['product_code']         = $data['promotion_product_code'];
-    //                 $promotion_data['product_discount']    = $data['promotion_product_discount'];
-    //             }
-    //             $this->PromotionModel->insert_promotion($promotion_data);
-    //             $message = [
-    //                 'status' => true,
-    //                 'data' => 'success',
-    //                 'message' => "Save promotion successful"
-    //             ];
-    //             $this->response($message, RestController::HTTP_OK);
-    //         }
-    //     } else {
-    //         $message = [
-    //             'status' => false,
-    //             'message' => "Can't save new promotion"
-    //         ];
-    //         $this->response($message, RestController::HTTP_NOT_FOUND);
-    //     }
-    // }
+                // Form Validation
+                $this->form_validation->set_data($data);
+                $this->form_validation->set_error_delimiters('', '');
+                $this->form_validation->set_rules('receipt_code', 'Mã phiếu thu', 'trim|required|max_length[20]|alpha_numeric');
+                $this->form_validation->set_rules('receipt_customer_code', 'Mã khách hàng', 'trim|required|max_length[20]|alpha_numeric');
+                $this->form_validation->set_rules('receipt_value', 'Giá trị ghi nhận', 'trim|required|integer|greater_than_equal_to[0]');
+                $this->form_validation->set_rules('receipt_brand', 'Mã chi nhánh', 'trim|required|max_length[5]|alpha_numeric');
+                if ($this->form_validation->run() == FALSE) {
+                    $message = array(
+                        'status'    =>  false,
+                        'error'     =>  $this->form_validation->error_array(),
+                        'message'   =>  validation_errors()
+                    );
+                    $this->response($message, RestController::HTTP_NOT_FOUND);
+                } else {
+                    if ($brand_code_data[0]->brand_code == "ALL" || $brand_code_data[0]->brand_code == $data['recipt_brand']) {
+                        $receipt_data = [
+                            'code'                      => $data['receipt_code'],
+                            'customer_code'             => $data['receipt_customer_code'],
+                            'value'                     => $data['receipt_value'],
+                            'brand'                     => $data['receipt_brand'],
+                            'created_by'                => $user_data->full_name,
+                            'type'                      => 1
+                        ];
+                        $this->CashBookModel->insert_receipt($receipt_data);
+                        $message = [
+                            'status' => true,
+                            'data' => 'success',
+                            'message' => "Save customer group successful"
+                        ];
+                        $this->response($message, RestController::HTTP_OK);
+                    } else {
+                        $message = [
+                            'status' => false,
+                            'message' => "Not allowed!"
+                        ];
+                        $this->response($message, RestController::HTTP_METHOD_NOT_ALLOWED);
+                    }
+                }
+            } else {
+                $message = [
+                    'status' => false,
+                    'message' => "Not allowed!"
+                ];
+                $this->response($message, RestController::HTTP_METHOD_NOT_ALLOWED);
+            }
+        } else {
+            $message = [
+                'status' => false,
+                'message' => "Can't save new customer group"
+            ];
+            $this->response($message, RestController::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function storenewreceiptoutcome_post()
+    {
+        $this->load->library('Authorization_Token');
+        /**
+         * User Token Validation
+         */
+        $is_valid_token = $this->authorization_token->validateToken();
+        if (!empty($is_valid_token) and $is_valid_token['status'] === TRUE) {
+
+            $data = $this->security->xss_clean($this->post());
+            $this->load->model('cms/UserModel');
+
+            $user_data = $this->authorization_token->userData();
+            $brand_code_data = $this->UserModel->get_brandcode_of_user($user_data->id);
+            $permission_data = $this->UserModel->get_permission_of_user($user_data->id);
+
+            if ($permission_data[0]->permission == "1" || $permission_data[0]->permission == "2") {
+
+                // Form Validation
+                $this->form_validation->set_data($data);
+                $this->form_validation->set_error_delimiters('', '');
+                $this->form_validation->set_rules('receipt_code', 'Mã phiếu thu', 'trim|required|max_length[20]|alpha_numeric');
+                $this->form_validation->set_rules('receipt_customer_code', 'Mã khách hàng', 'trim|required|max_length[20]|alpha_numeric');
+                $this->form_validation->set_rules('receipt_value', 'Giá trị ghi nhận', 'trim|required|integer|greater_than_equal_to[0]');
+                $this->form_validation->set_rules('receipt_brand', 'Mã chi nhánh', 'trim|required|max_length[5]|alpha_numeric');
+                if ($this->form_validation->run() == FALSE) {
+                    $message = array(
+                        'status'    =>  false,
+                        'error'     =>  $this->form_validation->error_array(),
+                        'message'   =>  validation_errors()
+                    );
+                    $this->response($message, RestController::HTTP_NOT_FOUND);
+                } else {
+                    if ($brand_code_data[0]->brand_code == "ALL" || $brand_code_data[0]->brand_code == $data['recipt_brand']) {
+                        $receipt_data = [
+                            'code'                      => $data['receipt_code'],
+                            'customer_code'             => $data['receipt_customer_code'],
+                            'value'                     => $data['receipt_value'],
+                            'brand'                     => $data['receipt_brand'],
+                            'created_by'                => $user_data->full_name,
+                            'type'                      => 2
+                        ];
+                        $this->CashBookModel->insert_receipt($receipt_data);
+                        $message = [
+                            'status' => true,
+                            'data' => 'success',
+                            'message' => "Save customer group successful"
+                        ];
+                        $this->response($message, RestController::HTTP_OK);
+                    } else {
+                        $message = [
+                            'status' => false,
+                            'message' => "Not allowed!"
+                        ];
+                        $this->response($message, RestController::HTTP_METHOD_NOT_ALLOWED);
+                    }
+                }
+            } else {
+                $message = [
+                    'status' => false,
+                    'message' => "Not allowed!"
+                ];
+                $this->response($message, RestController::HTTP_METHOD_NOT_ALLOWED);
+            }
+        } else {
+            $message = [
+                'status' => false,
+                'message' => "Can't save new customer group"
+            ];
+            $this->response($message, RestController::HTTP_NOT_FOUND);
+        }
+    }
 }

@@ -5,13 +5,16 @@ class BrandModel extends CI_Model
 {
     protected $brand_table = 'brand';
 
-    public function get_brand()
+    public function get_all_brand()
     {
         $query = $this->db->get($this->brand_table);
-        return $query->result();
+
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        }
     }
 
-    public function get_brand_by_user($brand_code)
+    public function get_brand_by_brandcode($brand_code)
     {
         $query = $this->db->from($this->brand_table)
             ->where(['code' => $brand_code])

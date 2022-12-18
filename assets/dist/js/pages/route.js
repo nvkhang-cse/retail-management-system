@@ -38,7 +38,7 @@ $(function () {
 						site_url + "api/dashboard/customergroup/loadcustomergroupadd";
 				}
 			} else if (index == 4) {
-				url_attr = site_url + "api/dashboard/sales/loadsalepage";
+				url_attr = site_url + "api/dashboard/sale/loadsalepage";
 			} else if (index == 5) {
 			} else if (index == 6) {
 				if (index2 == 1) {
@@ -85,7 +85,8 @@ $(function () {
 
 function add_script(index, index2, site_url) {
 	if (index == 1) {
-		$.getScript(site_url + "assets/dist/js/pages/barChart.js");
+		$.getScript(site_url + "assets/dist/js/barChart.js");
+		homepage(index2, site_url);
 	} else if (index == 2) {
 		productTable(index2, site_url);
 	} else if (index == 3) {

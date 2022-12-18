@@ -11,20 +11,21 @@ class UserModel extends CI_Model
         return $query->result();
     }
 
-    public function get_user_list_by_admin()
+    public function get_user_list_by_admin($brand_code)
     {
         $query = $this->db
             ->from($this->user_table)
-            ->where(['permission !=' => 1])
+            ->where(['permission !=' => 1, 'brand_code' => $brand_code])
             ->get();
         return $query->result();
     }
 
-    public function get_user_list_by_manager()
+    public function get_user_list_by_manager($brand_code)
     {
         $query = $this->db
             ->from($this->user_table)
             ->where_not_in('permission', [1, 2])
+            ->where(['brand_code' => $brand_code])
             ->get();
         return $query->result();
     }

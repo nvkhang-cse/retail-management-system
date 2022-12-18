@@ -97,7 +97,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="<?= site_url("dashboard/sales") ?>" class="nav-link">
+              <a href="<?= site_url("dashboard/sale") ?>" class="nav-link">
                 <i class="nav-icon fas fa-hand-holding"></i>
                 <p>
                   Bán tại quầy
@@ -296,12 +296,15 @@
   <script src="<?php echo base_url(); ?>/assets/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
   <script src="<?php echo base_url(); ?>/assets/plugins/datatables-checkboxes/js/dataTables.checkboxes.min.js"></script>
   <script src="<?php echo base_url(); ?>/assets/dist/js/toastr.min.js"></script>
+  <script src="<?php echo base_url(); ?>/assets/plugins/jslocalsearch/JsLocalSearch.js"></script>
   <!-- AdminLTE App -->
   <script src="<?php echo base_url(); ?>/assets/dist/js/adminlte.js"></script>
   <!-- My Script -->
   <script src="<?php echo base_url(); ?>/assets/dist/js/pages/route.js"></script>
   <script src="<?php echo base_url(); ?>/assets/dist/js/pages/logout.js"></script>
 
+  <script src="<?php echo base_url(); ?>/assets/dist/js/pages/homepage.js"></script>
+  <script src="<?php echo base_url(); ?>/assets/dist/js/pages/cart.js"></script>
   <script src="<?php echo base_url(); ?>/assets/dist/js/pages/sale.js"></script>
   <script src="<?php echo base_url(); ?>/assets/dist/js/pages/product.js"></script>
   <script src="<?php echo base_url(); ?>/assets/dist/js/pages/customer.js"></script>

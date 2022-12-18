@@ -21,10 +21,7 @@
         <div class="card-header">
           <h5 class="d-md-inline">KẾT QUẢ KINH DOANH TRONG NGÀY</h5>
           <div class="d-inline-block float-md-right">
-            <select class="custom-select border border-primary">
-              <option value="">Tất cả chi nhánh</option>
-              <option value="">Chi nhánh Quận 10</option>
-              <option value="">Chi nhánh Thủ Đức</option>
+            <select id="brand_code_for_statistic_in_date" class="custom-select border border-primary">
             </select>
           </div>
         </div>
@@ -80,17 +77,14 @@
         <div class="card-header">
           <h5 class="d-md-inline">DOANH THU BÁN HÀNG</h5>
           <div class="d-inline-block float-md-right ml-md-2">
-            <select class="custom-select border border-primary">
-              <option value="">Tất cả chi nhánh</option>
-              <option value="">Chi nhánh Quận 10</option>
-              <option value="">Chi nhánh Thủ Đức</option>
+            <select id="brand_code_for_statistic_in_time" class="custom-select border border-primary">
             </select>
           </div>
           <div class="d-inline-block float-md-right mt-md-0 mt-2">
-            <select class="custom-select border border-primary">
-              <option value="">7 ngày qua</option>
-              <option value="">2 tuần qua</option>
-              <option value="">1 tháng qua</option>
+            <select id="time_value_for_statistic_in_time" class="custom-select border border-primary">
+              <option value="week">7 ngày qua</option>
+              <option value="this_month">Tháng này</option>
+              <option value="last_month">Tháng trước</option>
             </select>
           </div>
         </div>
@@ -159,17 +153,12 @@
           <div class="card">
             <div class="card-header border-transparent">
               <h5 class="d-md-inline">TOP SẢN PHẨM</h5>
-              <div class="card-tools">
-                <div class="d-inline-block">
-                  <select class="custom-select border border-primary">
-                    <option value="">7 ngày qua</option>
-                    <option value="">2 tuần qua</option>
-                    <option value="">1 tháng qua</option>
-                  </select>
-                </div>
-                <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                  <i class="fas fa-minus"></i>
-                </button>
+              <div class="d-inline-block float-md-right">
+                <select class="custom-select border border-primary">
+                  <option value="7">7 ngày qua</option>
+                  <option value="14">2 tuần qua</option>
+                  <option value="30">1 tháng qua</option>
+                </select>
               </div>
             </div>
             <!-- /.card-header -->
@@ -220,17 +209,8 @@
           <div class="card">
             <div class="card-header">
               <h5 class="d-md-inline">THÔNG TIN KHO</h5>
-              <div class="card-tools">
-                <div class="d-inline-block">
-                  <select class="custom-select border border-primary">
-                    <option value="">Tất cả chi nhánh</option>
-                    <option value="">Chi nhánh Quận 10</option>
-                    <option value="">Chi nhánh Thủ Đức</option>
-                  </select>
-                </div>
-                <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                  <i class="fas fa-minus"></i>
-                </button>
+              <div class="d-inline-block float-md-right">
+                <select id="brand_code_for_warehouse_report" class="custom-select border border-primary"> </select>
               </div>
             </div>
             <!-- /.card-header -->

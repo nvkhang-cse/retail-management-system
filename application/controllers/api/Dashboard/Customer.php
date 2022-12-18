@@ -10,11 +10,11 @@ class Customer extends RestController
     {
         parent::__construct();
         $this->load->model('cms/CustomerModel');
+        $this->load->library('Authorization_Token');
     }
 
     public function loadcustomerlist_post()
     {
-        $this->load->library('Authorization_Token');
         /**
          * User Token Validation
          */
@@ -37,9 +37,32 @@ class Customer extends RestController
             $this->response($message, RestController::HTTP_NOT_FOUND);
         }
     }
+
+    public function loadcustomerdata_post()
+    {
+        /**
+         * User Token Validation
+         */
+        $is_valid_token = $this->authorization_token->validateToken();
+        if (!empty($is_valid_token) and $is_valid_token['status'] === TRUE) {
+            $return_data = $this->CustomerModel->get_customer();
+            $message = [
+                'status' => true,
+                'data' => $return_data,
+                'message' => "Load data successful"
+            ];
+            $this->response($message, RestController::HTTP_OK);
+        } else {
+            $message = [
+                'status' => false,
+                'message' => "Can't load data"
+            ];
+            $this->response($message, RestController::HTTP_NOT_FOUND);
+        }
+    }
+
     public function loadcustomeradd_post()
     {
-        $this->load->library('Authorization_Token');
         /**
          * User Token Validation
          */
@@ -62,33 +85,9 @@ class Customer extends RestController
             $this->response($message, RestController::HTTP_NOT_FOUND);
         }
     }
-    public function loadcustomerdata_post()
-    {
-        $this->load->library('Authorization_Token');
-        /**
-         * User Token Validation
-         */
-        $is_valid_token = $this->authorization_token->validateToken();
-        if (!empty($is_valid_token) and $is_valid_token['status'] === TRUE) {
-            $return_data = $this->CustomerModel->get_customer();
-            $message = [
-                'status' => true,
-                'data' => $return_data,
-                'message' => "Load data successful"
-            ];
-            $this->response($message, RestController::HTTP_OK);
-        } else {
-            $message = [
-                'status' => false,
-                'message' => "Can't load data"
-            ];
-            $this->response($message, RestController::HTTP_NOT_FOUND);
-        }
-    }
 
     public function storenewcustomer_post()
     {
-        $this->load->library('Authorization_Token');
         /**
          * User Token Validation
          */
@@ -97,9 +96,19 @@ class Customer extends RestController
 
             $data = $this->security->xss_clean($this->post());
 
+            $user_data = $this->authorization_token->userData();
+
             // Form Validation
             $this->form_validation->set_data($data);
-            $this->form_validation->set_rules('customer_name', 'Tên khách hàng', 'trim|required');
+            $this->form_validation->set_error_delimiters('', '');
+            $this->form_validation->set_rules('customer_name', 'Tên khách hàng', 'trim|required|max_length[100]');
+            $this->form_validation->set_rules('customer_code', 'Mã khách hàng', 'trim|required|max_length[20]|alpha_numeric');
+            $this->form_validation->set_rules('customer_group', 'Mã nhóm khách hàng', 'trim|max_length[5]|alpha_numeric');
+            $this->form_validation->set_rules('customer_phone', 'Số điện thoại', 'trim|required|max_length[20]|numeric');
+            $this->form_validation->set_rules('customer_email', 'Email', 'trim|max_length[100]|valid_email');
+            $this->form_validation->set_rules('customer_city', 'Khu vực', 'trim|max_length[50]');
+            $this->form_validation->set_rules('customer_district', 'Quận huyện', 'trim|max_length[50]');
+            $this->form_validation->set_rules('customer_address', 'Địa chỉ cụ thể', 'trim|max_length[250]');
 
             if ($this->form_validation->run() == FALSE) {
                 $message = array(
@@ -115,10 +124,10 @@ class Customer extends RestController
                     'group_code'        => $data['customer_group'],
                     'phone'             => $data['customer_phone'],
                     'email'             => $data['customer_email'],
-                    'birthday'          => $data['customer_birthday'],
                     'city'              => $data['customer_city'],
                     'district'          => $data['customer_district'],
-                    'address'           => $data['customer_address']
+                    'address'           => $data['customer_address'],
+                    'created_by'        => $user_data->id
                 ];
                 $this->CustomerModel->insert_customer($customer_data);
                 $message = [
@@ -132,6 +141,84 @@ class Customer extends RestController
             $message = [
                 'status' => false,
                 'message' => "Can't save new customer"
+            ];
+            $this->response($message, RestController::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function searchcustomer_post()
+    {
+        /**
+         * User Token Validation
+         */
+        $data = $this->security->xss_clean($this->post());
+
+        $is_valid_token = $this->authorization_token->validateToken();
+        if (!empty($is_valid_token) and $is_valid_token['status'] === TRUE) {
+
+            $result = $this->CustomerModel->search_customer($data['query']);
+            $message = [
+                'status' => true,
+                'data' => $result,
+                'message' => "Load customer successful"
+            ];
+            $this->response($message, RestController::HTTP_OK);
+        } else {
+            // Login Error
+            $message = [
+                'status' => FALSE,
+                'message' => "Can't load customer"
+            ];
+            $this->response($message, RestController::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function getCustomerInfo_post()
+    {
+        /**
+         * User Token Validation
+         */
+        $data = $this->security->xss_clean($this->post());
+
+        $is_valid_token = $this->authorization_token->validateToken();
+        if (!empty($is_valid_token) and $is_valid_token['status'] === TRUE) {
+
+            $result = $this->CustomerModel->search_customer_byId($data['id']);
+            $message = [
+                'status' => true,
+                'data' => $result,
+                'message' => "Load customer successful"
+            ];
+            $this->response($message, RestController::HTTP_OK);
+        } else {
+            // Login Error
+            $message = [
+                'status' => FALSE,
+                'message' => "Can't load customer"
+            ];
+            $this->response($message, RestController::HTTP_NOT_FOUND);
+        }
+    }
+    public function getCustomerDiscount_post()
+    {
+        $data = $this->security->xss_clean($this->post());
+
+        $is_valid_token = $this->authorization_token->validateToken();
+        if (!empty($is_valid_token) and $is_valid_token['status'] === TRUE) {
+            $this->load->model('cms/CustomerGroupModel');
+
+            $result = $this->CustomerGroupModel->getCusGroupDiscount($data['group_code']);
+            $message = [
+                'status' => true,
+                'data' => $result,
+                'message' => "Load customer discount successful"
+            ];
+            $this->response($message, RestController::HTTP_OK);
+        } else {
+            // Login Error
+            $message = [
+                'status' => FALSE,
+                'message' => "Can't load customer discount"
             ];
             $this->response($message, RestController::HTTP_NOT_FOUND);
         }

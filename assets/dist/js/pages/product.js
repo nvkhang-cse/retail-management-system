@@ -3,13 +3,33 @@ function productTable(index2, site_url) {
 
 	if (index2 == 1) {
 		var table;
+		var brand_data;
 		var product_data;
 		var category_data;
 
 		$.ajax({
 			type: "POST",
+			url: site_url + "api/dashboard/brand/loadbranddata",
+			dataType: "json",
+			encode: true,
+			async: false,
+			headers: { Authorization: localStorage.getItem("auth_token") },
+			success: function (response) {
+				brand_data = response.data;
+			},
+		});
+
+		brand_data.forEach((row) => {
+			$("#brand_code").append(
+				'<option value="' + row.code + '">' + row.name + "</option>"
+			);
+		});
+
+		$.ajax({
+			type: "POST",
 			url: site_url + "api/dashboard/product/loadproductdata",
 			dataType: "json",
+			data: { brand_code: $("#brand_code").val() },
 			encode: true,
 			async: false,
 			headers: { Authorization: localStorage.getItem("auth_token") },
@@ -143,9 +163,28 @@ function productTable(index2, site_url) {
 		});
 
 		table.buttons().container().appendTo("#product_wrapper .col-md-6:eq(0)");
+
+		$("#brand_code").on("change", function () {
+			$.ajax({
+				type: "POST",
+				url: site_url + "api/dashboard/product/loadproductdata",
+				dataType: "json",
+				data: { brand_code: $("#brand_code").val() },
+				encode: true,
+				async: false,
+				headers: { Authorization: localStorage.getItem("auth_token") },
+				success: function (response) {
+					product_data = response;
+				},
+			});
+
+			table.clear().rows.add(product_data.data).draw();
+		});
 	} else if (index2 == 2) {
+		var table;
+		var brand_data;
 		var warehouse_data;
-		var product_data;
+		var category_data;
 
 		$.ajax({
 			type: "POST",
@@ -155,12 +194,12 @@ function productTable(index2, site_url) {
 			async: false,
 			headers: { Authorization: localStorage.getItem("auth_token") },
 			success: function (response) {
-				warehouse_data = response.data;
+				brand_data = response.data;
 			},
 		});
 
-		warehouse_data.forEach((row) => {
-			$("#warehouse_code").append(
+		brand_data.forEach((row) => {
+			$("#brand_code").append(
 				'<option value="' + row.code + '">' + row.name + "</option>"
 			);
 		});
@@ -169,17 +208,29 @@ function productTable(index2, site_url) {
 			type: "POST",
 			url: site_url + "api/dashboard/product/loadproductwarehousedata",
 			dataType: "json",
-			data: { warehouse_code: $("#warehouse_code").val() },
+			data: { brand_code: $("#brand_code").val() },
 			encode: true,
 			async: false,
 			headers: { Authorization: localStorage.getItem("auth_token") },
 			success: function (response) {
-				product_data = response;
+				warehouse_data = response;
+			},
+		});
+
+		$.ajax({
+			type: "POST",
+			url: site_url + "api/dashboard/productcategory/loadproductcategorydata",
+			dataType: "json",
+			encode: true,
+			async: false,
+			headers: { Authorization: localStorage.getItem("auth_token") },
+			success: function (response) {
+				category_data = response;
 			},
 		});
 
 		table = $("#warehouse_table").DataTable({
-			data: product_data.data,
+			data: warehouse_data.data,
 			columnDefs: [
 				{
 					orderable: false,
@@ -281,21 +332,21 @@ function productTable(index2, site_url) {
 		});
 		table.buttons().container().appendTo("#warehouse_wrapper .col-md-6:eq(0)");
 
-		$("#warehouse_code").on("change", function () {
+		$("#brand_code").on("change", function () {
 			$.ajax({
 				type: "POST",
 				url: site_url + "api/dashboard/product/loadproductwarehousedata",
 				dataType: "json",
-				data: { warehouse_code: $("#warehouse_code").val() },
+				data: { brand_code: $("#brand_code").val() },
 				encode: true,
 				async: false,
 				headers: { Authorization: localStorage.getItem("auth_token") },
 				success: function (response) {
-					product_data = response;
+					warehouse_data = response;
 				},
 			});
 
-			table.clear().rows.add(product_data.data).draw();
+			table.clear().rows.add(warehouse_data.data).draw();
 		});
 	} else if (index2 == 3) {
 		var category_data;
@@ -366,13 +417,33 @@ function productTable(index2, site_url) {
 		});
 	} else if (index2 == 4) {
 		var table;
+		var brand_data;
 		var trash_data;
 		var category_data;
 
 		$.ajax({
 			type: "POST",
+			url: site_url + "api/dashboard/brand/loadbranddata",
+			dataType: "json",
+			encode: true,
+			async: false,
+			headers: { Authorization: localStorage.getItem("auth_token") },
+			success: function (response) {
+				brand_data = response.data;
+			},
+		});
+
+		brand_data.forEach((row) => {
+			$("#brand_code").append(
+				'<option value="' + row.code + '">' + row.name + "</option>"
+			);
+		});
+
+		$.ajax({
+			type: "POST",
 			url: site_url + "api/dashboard/product/loadproducttrashdata",
 			dataType: "json",
+			data: { brand_code: $("#brand_code").val() },
 			encode: true,
 			async: false,
 			headers: { Authorization: localStorage.getItem("auth_token") },
@@ -495,6 +566,23 @@ function productTable(index2, site_url) {
 		});
 
 		table.buttons().container().appendTo("#trash_wrapper .col-md-6:eq(0)");
+
+		$("#brand_code").on("change", function () {
+			$.ajax({
+				type: "POST",
+				url: site_url + "api/dashboard/product/loadproducttrashdata",
+				dataType: "json",
+				data: { brand_code: $("#brand_code").val() },
+				encode: true,
+				async: false,
+				headers: { Authorization: localStorage.getItem("auth_token") },
+				success: function (response) {
+					warehouse_data = response;
+				},
+			});
+
+			table.clear().rows.add(warehouse_data.data).draw();
+		});
 	} else if (index2 == 5) {
 		var table;
 		var category_data;
@@ -594,6 +682,7 @@ function productTable(index2, site_url) {
 	} else if (index2 == 6) {
 		$("form#product_category_data").submit(function (e) {
 			e.preventDefault();
+
 			var formData = new FormData(this);
 			$.ajax({
 				url: site_url + "api/dashboard/productcategory/storenewproductcategory",

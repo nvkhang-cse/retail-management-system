@@ -24,13 +24,13 @@
             <div class="col-sm-6">
               <div class="form-group">
                 <label for="category_name">Tên danh mục</label>
-                <input type="text" class="form-control" id="category_name" name="category_name" placeholder="">
+                <input type="text" class="form-control" id="category_name" name="category_name" placeholder="" required>
               </div>
             </div>
             <div class="col-sm-6">
               <div class="form-group">
                 <label for="category_code">Mã danh mục</label>
-                <input type="text" class="form-control" id="category_code" name="category_code" placeholder="">
+                <input type="text" class="form-control" id="category_code" name="category_code" placeholder="" required>
               </div>
             </div>
           </div>

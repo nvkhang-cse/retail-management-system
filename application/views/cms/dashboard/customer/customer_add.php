@@ -26,13 +26,13 @@
                 <div class="col-sm-6">
                   <div class="form-group">
                     <label for="customer_name">Tên khách hàng</label>
-                    <input type="text" class="form-control" id="customer_name" name="customer_name" placeholder="Nhập tên khách hàng">
+                    <input type="text" class="form-control" id="customer_name" name="customer_name" placeholder="" required>
                   </div>
                 </div>
                 <div class="col-sm-6">
                   <div class="form-group">
                     <label for="customer_code">Mã khách hàng</label>
-                    <input type="text" class="form-control" id="customer_code" name="customer_code" placeholder="">
+                    <input type="text" class="form-control" id="customer_code" name="customer_code" placeholder="" required>
                   </div>
                 </div>
               </div>
@@ -48,7 +48,7 @@
                 <div class="col-sm-6">
                   <div class="form-group">
                     <label for="customer_phone">Số điện thoại</label>
-                    <input type="text" class="form-control" id="customer_phone" name="customer_phone" placeholder="">
+                    <input type="text" class="form-control" id="customer_phone" name="customer_phone" placeholder="" required>
                   </div>
                 </div>
               </div>
@@ -56,13 +56,7 @@
                 <div class="col-sm-6">
                   <div class="form-group">
                     <label for="customer_email">Email</label>
-                    <input type="text" class="form-control" id="customer_email" name="customer_email" placeholder="">
-                  </div>
-                </div>
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for="customer_birthday">Sinh nhật</label>
-                    <input type="text" class="form-control" id="customer_birthday" name="customer_birthday" placeholder="20-01-2000">
+                    <input type="email" class="form-control" id="customer_email" name="customer_email" placeholder="">
                   </div>
                 </div>
               </div>

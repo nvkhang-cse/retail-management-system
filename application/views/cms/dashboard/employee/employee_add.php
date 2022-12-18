@@ -26,44 +26,44 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for="employee_name">Tên nhân viên</label>
-                                        <input type="text" class="form-control" id="employee_name" name="employee_name" placeholder="">
+                                        <input type="text" class="form-control" id="employee_name" name="employee_name" placeholder="" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="employee_phone">Số điện thoại</label>
-                                        <input type="text" class="form-control" id="employee_phone" name="employee_phone" placeholder="">
+                                        <input type="text" class="form-control" id="employee_phone" name="employee_phone" placeholder="" maxlength="20">
                                     </div>
                                     <div class="form-group">
                                         <label for="employee_birthday">Ngày sinh</label>
-                                        <input type="text" class="form-control" id="employee_birthday" name="employee_birthday" placeholder="01-01-2000">
+                                        <input type="date" pattern="\d{4}-\d{2}-\d{2}" class="form-control" id="employee_birthday" name="employee_birthday" placeholder="">
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for="employee_email">Email đăng nhập</label>
-                                        <input type="text" class="form-control" id="employee_email" name="employee_email" placeholder="">
+                                        <input type="email" class="form-control" id="employee_email" name="employee_email" placeholder="" maxlength="100" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="employee_password">Mật khẩu</label>
-                                        <input type="text" class="form-control" id="employee_password" name="employee_password" placeholder="">
+                                        <input type="text" class="form-control" id="employee_password" name="employee_password" placeholder="" minlength="6" maxlength="150" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="employee_confirm">Nhập lại mật khẩu</label>
-                                        <input type="text" class="form-control" id="employee_confirm" name="employee_confirm" placeholder="">
+                                        <input type="text" class="form-control" id="employee_confirm" name="employee_confirm" placeholder="" minlength="6" maxlength="150" required>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="employee_address">Địa chỉ</label>
-                                <input type="text" class="form-control" id="employee_address" name="employee_address" placeholder="">
+                                <input type="text" class="form-control" id="employee_address" name="employee_address" placeholder="" maxlength="250">
                             </div>
                             <div class="row">
                                 <div class="col-sm-6">
                                     <label for="employee_city">Thành phố</label>
-                                    <input type="text" class="form-control" id="employee_city" name="employee_city" placeholder="">
+                                    <input type="text" class="form-control" id="employee_city" name="employee_city" placeholder="" maxlength="50">
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="employee_district">Quận huyện</label>
-                                    <input type="text" class="form-control" id="employee_district" name="employee_district" placeholder="">
+                                    <input type="text" class="form-control" id="employee_district" name="employee_district" placeholder="" maxlength="50">
                                 </div>
                             </div>
                         </div>
@@ -77,11 +77,11 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="employee_brand">Chi nhánh</label>
-                                <select class="form-control" id="employee_brand" name="employee_brand"></select>
+                                <select class="form-control" id="employee_brand" name="employee_brand" required></select>
                             </div>
                             <div class="form-group">
                                 <label for="employee_permission">Vai trò</label>
-                                <select class="form-control" id="employee_permission" name="employee_permission"></select>
+                                <select class="form-control" id="employee_permission" name="employee_permission" required></select>
                             </div>
                         </div>
                     </div>

@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class CustomerGroup extends CI_Controller
+class Customergroup extends CI_Controller
 {
 
     /**

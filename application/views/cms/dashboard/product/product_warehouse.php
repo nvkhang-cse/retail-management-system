@@ -6,10 +6,7 @@
                 <h1 class="m-0">Quản lý kho</h1>
             </div>
             <div class="col-sm-6">
-                <div class="float-sm-right">
-                    <select id="warehouse_code" class="custom-select border border-primary">
-                    </select>
-                </div>
+
             </div>
         </div>
     </div><!-- /.container-fluid -->
@@ -23,6 +20,10 @@
                 <div class="card">
                     <div class="card-header">
                         <h5 class="card-title text-primary">Thông tin sản phẩm trong kho</h5>
+                        <div class="float-sm-right">
+                            <select id="brand_code" class="custom-select border border-primary">
+                            </select>
+                        </div>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body" id="warehouse_wrapper">
