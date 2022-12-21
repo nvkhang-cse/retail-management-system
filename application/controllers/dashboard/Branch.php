@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Brand extends CI_Controller
+class Branch extends CI_Controller
 {
 
     /**
@@ -25,7 +25,7 @@ class Brand extends CI_Controller
         $this->data["index2"] = 1;
         $this->load->view('cms/layout/main_error', $this->data);
     }
-    public function loadbrandadd()
+    public function loadbranchadd()
     {
         $this->data["index"] = 9;
         $this->data["index2"] = 2;

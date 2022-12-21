@@ -3,24 +3,24 @@ function employeeTable(index2, site_url) {
 
 	if (index2 == 3) {
 		var table;
-		var brand_data;
+		var branch_data;
 		var employee_data;
 		var permission_data;
 
 		$.ajax({
 			type: "POST",
-			url: site_url + "api/dashboard/brand/loadbranddata",
+			url: site_url + "api/dashboard/branch/loadbranchdata",
 			dataType: "json",
 			encode: true,
 			async: false,
 			headers: { Authorization: localStorage.getItem("auth_token") },
 			success: function (response) {
-				brand_data = response.data;
+				branch_data = response.data;
 			},
 		});
 
-		brand_data.forEach((row) => {
-			$("#brand_code").append(
+		branch_data.forEach((row) => {
+			$("#branch_code").append(
 				'<option value="' + row.code + '">' + row.name + "</option>"
 			);
 		});
@@ -29,7 +29,7 @@ function employeeTable(index2, site_url) {
 			type: "POST",
 			url: site_url + "api/dashboard/employee/loademployeedata",
 			dataType: "json",
-			data: { brand_code: $("#brand_code").val() },
+			data: { branch_code: $("#branch_code").val() },
 			encode: true,
 			async: false,
 			headers: { Authorization: localStorage.getItem("auth_token") },
@@ -157,12 +157,12 @@ function employeeTable(index2, site_url) {
 		});
 		table.buttons().container().appendTo("#employee_wrapper .col-md-6:eq(0)");
 
-		$("#brand_code").on("change", function () {
+		$("#branch_code").on("change", function () {
 			$.ajax({
 				type: "POST",
 				url: site_url + "api/dashboard/employee/loademployeedata",
 				dataType: "json",
-				data: { brand_code: $("#brand_code").val() },
+				data: { branch_code: $("#branch_code").val() },
 				encode: true,
 				async: false,
 				headers: { Authorization: localStorage.getItem("auth_token") },
@@ -174,18 +174,18 @@ function employeeTable(index2, site_url) {
 			table.clear().rows.add(employee_data.data).draw();
 		});
 	} else if (index2 == 4) {
-		var brand_data;
+		var branch_data;
 		var permission_data;
 
 		$.ajax({
 			type: "POST",
-			url: site_url + "api/dashboard/brand/loadbranddata",
+			url: site_url + "api/dashboard/branch/loadbranchdata",
 			dataType: "json",
 			encode: true,
 			async: false,
 			headers: { Authorization: localStorage.getItem("auth_token") },
 			success: function (response) {
-				brand_data = response;
+				branch_data = response;
 			},
 		});
 
@@ -201,8 +201,8 @@ function employeeTable(index2, site_url) {
 			},
 		});
 
-		brand_data.data.forEach((row) => {
-			$("#employee_brand").append(
+		branch_data.data.forEach((row) => {
+			$("#employee_branch").append(
 				'<option value="' + row.code + '">' + row.name + "</option>"
 			);
 		});

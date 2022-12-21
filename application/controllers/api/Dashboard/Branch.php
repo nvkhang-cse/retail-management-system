@@ -4,15 +4,15 @@ require APPPATH . 'libraries/RestController.php';
 
 use chriskacerguis\RestServer\RestController;
 
-class Brand extends RestController
+class Branch extends RestController
 {
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('cms/BrandModel');
+        $this->load->model('cms/BranchModel');
     }
 
-    public function loadbrandlist_post()
+    public function loadbranchlist_post()
     {
         $this->load->library('Authorization_Token');
         /**
@@ -26,7 +26,7 @@ class Brand extends RestController
             $permission_data = $this->UserModel->get_permission_of_user($user_data->id);
 
             if ($permission_data[0]->permission == "1") {
-                $return_data = $this->load->view('cms/dashboard/brand/brand_list', '', true);
+                $return_data = $this->load->view('cms/dashboard/branch/branch_list', '', true);
             } else {
                 $return_data = [];
             }
@@ -34,19 +34,19 @@ class Brand extends RestController
             $message = [
                 'status' => true,
                 'data' => $return_data,
-                'message' => "Load brand list successful"
+                'message' => "Load branch list successful"
             ];
             $this->response($message, RestController::HTTP_OK);
         } else {
             $message = [
                 'status' => false,
-                'message' => "Can't load brand list"
+                'message' => "Can't load branch list"
             ];
             $this->response($message, RestController::HTTP_NOT_FOUND);
         }
     }
 
-    public function loadbrandadd_post()
+    public function loadbranchadd_post()
     {
         $this->load->library('Authorization_Token');
         /**
@@ -60,26 +60,26 @@ class Brand extends RestController
             $permission_data = $this->UserModel->get_permission_of_user($user_data->id);
 
             if ($permission_data[0]->permission == "1") {
-                $return_data = $this->load->view('cms/dashboard/brand/brand_add', '', true);
+                $return_data = $this->load->view('cms/dashboard/branch/branch_add', '', true);
             } else {
                 $return_data  = [];
             }
             $message = [
                 'status' => true,
                 'data' => $return_data,
-                'message' => "Load brand add page successful"
+                'message' => "Load branch add page successful"
             ];
             $this->response($message, RestController::HTTP_OK);
         } else {
             $message = [
                 'status' => false,
-                'message' => "Can't load brand add page"
+                'message' => "Can't load branch add page"
             ];
             $this->response($message, RestController::HTTP_NOT_FOUND);
         }
     }
 
-    public function loadbranddata_post()
+    public function loadbranchdata_post()
     {
         $this->load->library('Authorization_Token');
         /**
@@ -90,12 +90,12 @@ class Brand extends RestController
             $this->load->model('cms/UserModel');
 
             $user_data = $this->authorization_token->userData();
-            $brand_code_data = $this->UserModel->get_brandcode_of_user($user_data->id);
+            $branch_code_data = $this->UserModel->get_branchcode_of_user($user_data->id);
 
-            if ($brand_code_data[0]->brand_code == "ALL") {
-                $return_data = $this->BrandModel->get_all_brand();
+            if ($branch_code_data[0]->branch_code == "ALL") {
+                $return_data = $this->BranchModel->get_all_branch();
             } else {
-                $return_data = $this->BrandModel->get_brand_by_brandcode($brand_code_data[0]->brand_code);
+                $return_data = $this->BranchModel->get_branch_by_branchcode($branch_code_data[0]->branch_code);
             }
             $message = [
                 'status' => true,
@@ -112,7 +112,7 @@ class Brand extends RestController
         }
     }
 
-    public function storenewbrand_post()
+    public function storenewbranch_post()
     {
         $this->load->library('Authorization_Token');
         /**
@@ -132,13 +132,13 @@ class Brand extends RestController
                 // Form Validation
                 $this->form_validation->set_data($data);
                 $this->form_validation->set_error_delimiters('', '');
-                $this->form_validation->set_rules('brand_name', 'Tên chi nhánh', 'trim|required|max_length[50]');
-                $this->form_validation->set_rules('brand_code', 'Mã chi nhánh', 'trim|required|max_length[5]|alpha_numeric');
-                $this->form_validation->set_rules('brand_address', 'Địa chỉ', 'trim|max_length[250]');
-                $this->form_validation->set_rules('brand_city', 'Khu vực', 'trim|max_length[50]');
-                $this->form_validation->set_rules('brand_district', 'Quận huyện', 'trim|max_length[50]');
-                $this->form_validation->set_rules('brand_phone', 'Số điện thoại', 'trim|max_length[20]|numeric');
-                $this->form_validation->set_rules('brand_central', 'Trung tâm', 'trim|required|in_list[1,2]');
+                $this->form_validation->set_rules('branch_name', 'Tên chi nhánh', 'trim|required|max_length[50]');
+                $this->form_validation->set_rules('branch_code', 'Mã chi nhánh', 'trim|required|max_length[5]|alpha_numeric');
+                $this->form_validation->set_rules('branch_address', 'Địa chỉ', 'trim|max_length[250]');
+                $this->form_validation->set_rules('branch_city', 'Khu vực', 'trim|max_length[50]');
+                $this->form_validation->set_rules('branch_district', 'Quận huyện', 'trim|max_length[50]');
+                $this->form_validation->set_rules('branch_phone', 'Số điện thoại', 'trim|max_length[20]|numeric');
+                $this->form_validation->set_rules('branch_central', 'Trung tâm', 'trim|required|in_list[1,2]');
 
                 if ($this->form_validation->run() == FALSE) {
                     $message = array(
@@ -148,22 +148,22 @@ class Brand extends RestController
                     );
                     $this->response($message, RestController::HTTP_NOT_FOUND);
                 } else {
-                    $brand_data = [
-                        'name'             => $data['brand_name'],
-                        'code'             => $data['brand_code'],
-                        'address'          => $data['brand_address'],
-                        'city'             => $data['brand_city'],
-                        'district'         => $data['brand_district'],
-                        'phone'            => $data['brand_phone'],
-                        'central'          => $data['brand_central'],
+                    $branch_data = [
+                        'name'             => $data['branch_name'],
+                        'code'             => $data['branch_code'],
+                        'address'          => $data['branch_address'],
+                        'city'             => $data['branch_city'],
+                        'district'         => $data['branch_district'],
+                        'phone'            => $data['branch_phone'],
+                        'central'          => $data['branch_central'],
                         'created_by'       => $user_data->id
                     ];
 
-                    $this->BrandModel->insert_brand($brand_data);
+                    $this->branchModel->insert_branch($branch_data);
                     $message = [
                         'status' => true,
                         'data' => 'success',
-                        'message' => "Save brand successful"
+                        'message' => "Save branch successful"
                     ];
                     $this->response($message, RestController::HTTP_OK);
                 }
@@ -177,7 +177,7 @@ class Brand extends RestController
         } else {
             $message = [
                 'status' => false,
-                'message' => "Can't save new brand"
+                'message' => "Can't save new branch"
             ];
             $this->response($message, RestController::HTTP_NOT_FOUND);
         }

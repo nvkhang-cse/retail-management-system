@@ -11,28 +11,28 @@ class UserModel extends CI_Model
         return $query->result();
     }
 
-    public function get_user_list_by_admin($brand_code)
+    public function get_user_list_by_admin($branch_code)
     {
         $query = $this->db
             ->from($this->user_table)
-            ->where(['permission !=' => 1, 'brand_code' => $brand_code])
+            ->where(['permission !=' => 1, 'branch_code' => $branch_code])
             ->get();
         return $query->result();
     }
 
-    public function get_user_list_by_manager($brand_code)
+    public function get_user_list_by_manager($branch_code)
     {
         $query = $this->db
             ->from($this->user_table)
             ->where_not_in('permission', [1, 2])
-            ->where(['brand_code' => $brand_code])
+            ->where(['branch_code' => $branch_code])
             ->get();
         return $query->result();
     }
 
-    public function get_brandcode_of_user($id)
+    public function get_branchcode_of_user($id)
     {
-        $query = $this->db->select('brand_code')->from($this->user_table)
+        $query = $this->db->select('branch_code')->from($this->user_table)
             ->where(['id' => $id])
             ->get();
         return $query->result();

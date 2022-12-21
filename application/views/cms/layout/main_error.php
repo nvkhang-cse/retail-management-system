@@ -231,7 +231,7 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item" id="branch_list_page">
-                  <a href="<?= site_url("dashboard/brand") ?>" class="nav-link">
+                  <a href="<?= site_url("dashboard/branch") ?>" class="nav-link">
                     <i class="fas fa-angle-right nav-icon"></i>
                     <p>Chi nhánh</p>
                   </a>
@@ -312,7 +312,7 @@
   <script src="<?php echo base_url(); ?>/assets/dist/js/pages/customer.js"></script>
   <script src="<?php echo base_url(); ?>/assets/dist/js/pages/cashbook.js"></script>
   <script src="<?php echo base_url(); ?>/assets/dist/js/pages/promotion.js"></script>
-  <script src="<?php echo base_url(); ?>/assets/dist/js/pages/brand.js"></script>
+  <script src="<?php echo base_url(); ?>/assets/dist/js/pages/branch.js"></script>
   <script src="<?php echo base_url(); ?>/assets/dist/js/pages/employee.js"></script>
 </body>
 

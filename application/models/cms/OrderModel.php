@@ -5,10 +5,10 @@ class OrderModel extends CI_Model
 {
     protected $order_table = 'order';
 
-    public function get_order_by_brandcode($brand_code)
+    public function get_order_by_branchcode($branch_code)
     {
         $query = $this->db->from($this->order_table)
-            ->where('brand_code', $brand_code)
+            ->where('branch_code', $branch_code)
             ->get();
         return $query->result();
     }

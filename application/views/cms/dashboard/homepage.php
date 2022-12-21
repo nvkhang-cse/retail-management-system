@@ -21,7 +21,7 @@
         <div class="card-header">
           <h5 class="d-md-inline">KẾT QUẢ KINH DOANH TRONG NGÀY</h5>
           <div class="d-inline-block float-md-right">
-            <select id="brand_code_for_statistic_in_date" class="custom-select border border-primary">
+            <select id="branch_code_for_statistic_in_date" class="custom-select border border-primary">
             </select>
           </div>
         </div>
@@ -77,7 +77,7 @@
         <div class="card-header">
           <h5 class="d-md-inline">DOANH THU BÁN HÀNG</h5>
           <div class="d-inline-block float-md-right ml-md-2">
-            <select id="brand_code_for_statistic_in_time" class="custom-select border border-primary">
+            <select id="branch_code_for_statistic_in_time" class="custom-select border border-primary">
             </select>
           </div>
           <div class="d-inline-block float-md-right mt-md-0 mt-2">
@@ -210,7 +210,7 @@
             <div class="card-header">
               <h5 class="d-md-inline">THÔNG TIN KHO</h5>
               <div class="d-inline-block float-md-right">
-                <select id="brand_code_for_warehouse_report" class="custom-select border border-primary"> </select>
+                <select id="branch_code_for_warehouse_report" class="custom-select border border-primary"> </select>
               </div>
             </div>
             <!-- /.card-header -->

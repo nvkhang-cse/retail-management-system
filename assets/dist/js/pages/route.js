@@ -84,9 +84,9 @@ $(function () {
 				}
 			} else if (index == 9) {
 				if (index2 == 1) {
-					url_attr = site_url + "api/dashboard/brand/loadbrandlist";
+					url_attr = site_url + "api/dashboard/branch/loadbranchlist";
 				} else if (index2 == 2) {
-					url_attr = site_url + "api/dashboard/brand/loadbrandadd";
+					url_attr = site_url + "api/dashboard/branch/loadbranchadd";
 				} else if (index2 == 3) {
 					url_attr = site_url + "api/dashboard/employee/loademployeelist";
 				} else if (index2 == 4) {
@@ -129,7 +129,7 @@ function add_script(index, index2, site_url) {
 		promotionTable(index2, site_url);
 	} else if (index == 9) {
 		if (index2 == 1 || index2 == 2) {
-			brandTable(index2, site_url);
+			branchTable(index2, site_url);
 		} else if (index2 == 3 || index2 == 4) {
 			employeeTable(index2, site_url);
 		}

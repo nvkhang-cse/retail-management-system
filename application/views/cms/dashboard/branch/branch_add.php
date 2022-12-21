@@ -5,7 +5,7 @@
                 <h1>Thêm chi nhánh mới</h1>
             </div>
             <div class="col-sm-6">
-                <a href="<?= site_url("dashboard/brand") ?>">
+                <a href="<?= site_url("dashboard/branch") ?>">
                     <button type="button" class="btn btn-outline-primary float-right">Danh sách chi nhánh</button>
                 </a>
             </div>
@@ -14,7 +14,7 @@
 </section>
 <section class="content">
     <div class="container-fluid">
-        <form id="brand_data" method="post" enctype="multipart/form-data">
+        <form id="branch_data" method="post" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-md-8">
                     <div class="card card-lightblue">
@@ -25,40 +25,40 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label for="brand_name">Tên chi nhánh</label>
-                                        <input type="text" class="form-control" id="brand_name" name="brand_name" placeholder="" required maxlength="50">
+                                        <label for="branch_name">Tên chi nhánh</label>
+                                        <input type="text" class="form-control" id="branch_name" name="branch_name" placeholder="" required maxlength="50">
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label for="brand_code">Mã chi nhánh</label>
-                                        <input type="text" class="form-control" id="brand_code" name="brand_code" placeholder="" required maxlength="5">
+                                        <label for="branch_code">Mã chi nhánh</label>
+                                        <input type="text" class="form-control" id="branch_code" name="branch_code" placeholder="" required maxlength="5">
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="brand_address">Địa chỉ</label>
-                                <input type="text" class="form-control" id="brand_address" name="brand_address" placeholder="" maxlength="250">
+                                <label for="branch_address">Địa chỉ</label>
+                                <input type="text" class="form-control" id="branch_address" name="branch_address" placeholder="" maxlength="250">
                             </div>
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label for="brand_city">Thành phố</label>
-                                        <input type="text" class="form-control" id="brand_city" name="brand_city" placeholder="" maxlength="50">
+                                        <label for="branch_city">Thành phố</label>
+                                        <input type="text" class="form-control" id="branch_city" name="branch_city" placeholder="" maxlength="50">
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label for="brand_district">Quận huyện</label>
-                                        <input type="text" class="form-control" id="brand_district" name="brand_district" placeholder="" maxlength="50">
+                                        <label for="branch_district">Quận huyện</label>
+                                        <input type="text" class="form-control" id="branch_district" name="branch_district" placeholder="" maxlength="50">
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label for="brand_phone">Số điện thoại chi nhánh</label>
-                                        <input type="text" class="form-control" id="brand_phone" name="brand_phone" placeholder="" maxlength="20">
+                                        <label for="branch_phone">Số điện thoại chi nhánh</label>
+                                        <input type="text" class="form-control" id="branch_phone" name="branch_phone" placeholder="" maxlength="20">
                                     </div>
                                 </div>
                             </div>
@@ -72,8 +72,8 @@
                         </div>
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="brand_central">Vai trò chi nhánh</label>
-                                <select class="form-control" id="brand_central" name="brand_central" required>
+                                <label for="branch_central">Vai trò chi nhánh</label>
+                                <select class="form-control" id="branch_central" name="branch_central" required>
                                     <option value="1">Chi nhánh trung tâm</option>
                                     <option value="2">Chi nhánh phụ</option>
                                 </select>
@@ -84,7 +84,7 @@
             </div>
             <div>
                 <button type="submit" class="btn btn-primary mr-2">Lưu</button>
-                <a href="<?= site_url("dashboard/brand") ?>">
+                <a href="<?= site_url("dashboard/branch") ?>">
                     <button type="button" class="btn btn-secondary">Hủy</button>
                 </a>
             </div>

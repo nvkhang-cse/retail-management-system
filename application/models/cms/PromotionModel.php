@@ -5,10 +5,10 @@ class PromotionModel extends CI_Model
 {
     protected $promotion_table = 'promotion';
 
-    public function get_promotion_by_brandcode($brand_code)
+    public function get_promotion_by_branchcode($branch_code)
     {
         $query = $this->db->from($this->promotion_table)
-            ->where_in('brand', ['ALL', $brand_code])
+            ->where_in('branch', ['ALL', $branch_code])
             ->get();
         return $query->result();
     }

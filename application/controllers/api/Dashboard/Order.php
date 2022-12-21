@@ -50,13 +50,13 @@ class Order extends RestController
             $this->load->model('cms/UserModel');
 
             $user_data = $this->authorization_token->userData();
-            $brand_code_data = $this->UserModel->get_brandcode_of_user($user_data->id);
+            $branch_code_data = $this->UserModel->get_branchcode_of_user($user_data->id);
 
-            if ($brand_code_data[0]->brand_code == "ALL") {
-                $return_data = $this->OrderModel->get_order_by_brandcode($data["brand_code"]);
+            if ($branch_code_data[0]->branch_code == "ALL") {
+                $return_data = $this->OrderModel->get_order_by_branchcode($data["branch_code"]);
             } else {
-                if ($brand_code_data[0]->brand_code == $data["brand_code"]) {
-                    $return_data = $this->OrderModel->get_order_by_brandcode($data["brand_code"]);
+                if ($branch_code_data[0]->branch_code == $data["branch_code"]) {
+                    $return_data = $this->OrderModel->get_order_by_branchcode($data["branch_code"]);
                 } else {
                     $return_data = [];
                 }

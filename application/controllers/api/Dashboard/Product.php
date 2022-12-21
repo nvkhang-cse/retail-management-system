@@ -50,15 +50,15 @@ class Product extends RestController
             $this->load->model('cms/UserModel');
 
             $user_data = $this->authorization_token->userData();
-            $brand_code_data = $this->UserModel->get_brandcode_of_user($user_data->id);
+            $branch_code_data = $this->UserModel->get_branchcode_of_user($user_data->id);
 
             $trash = "0";
             $published =  "1";
-            if ($brand_code_data[0]->brand_code == "ALL") {
-                $return_data = $this->ProductModel->get_product_by_brandcode($data["brand_code"], $trash, $published);
+            if ($branch_code_data[0]->branch_code == "ALL") {
+                $return_data = $this->ProductModel->get_product_by_branchcode($data["branch_code"], $trash, $published);
             } else {
-                if ($brand_code_data[0]->brand_code == $data["brand_code"]) {
-                    $return_data = $this->ProductModel->get_product_by_brandcode($data["brand_code"], $trash, $published);
+                if ($branch_code_data[0]->branch_code == $data["branch_code"]) {
+                    $return_data = $this->ProductModel->get_product_by_branchcode($data["branch_code"], $trash, $published);
                 } else {
                     $return_data = [];
                 }
@@ -125,16 +125,16 @@ class Product extends RestController
             $this->load->model('cms/UserModel');
 
             $user_data = $this->authorization_token->userData();
-            $brand_code_data = $this->UserModel->get_brandcode_of_user($user_data->id);
+            $branch_code_data = $this->UserModel->get_branchcode_of_user($user_data->id);
             $permission_data = $this->UserModel->get_permission_of_user($user_data->id);
 
             if ($permission_data[0]->permission == "1" || $permission_data[0]->permission == "2") {
                 $trash = "0";
-                if ($brand_code_data[0]->brand_code == "ALL") {
-                    $return_data = $this->ProductModel->get_warehouse_product_by_brandcode($data["brand_code"], $trash);
+                if ($branch_code_data[0]->branch_code == "ALL") {
+                    $return_data = $this->ProductModel->get_warehouse_product_by_branchcode($data["branch_code"], $trash);
                 } else {
-                    if ($brand_code_data[0]->brand_code == $data["brand_code"]) {
-                        $return_data = $this->ProductModel->get_warehouse_product_by_brandcode($data["brand_code"], $trash);
+                    if ($branch_code_data[0]->branch_code == $data["branch_code"]) {
+                        $return_data = $this->ProductModel->get_warehouse_product_by_branchcode($data["branch_code"], $trash);
                     } else {
                         $return_data = [];
                     }
@@ -200,14 +200,14 @@ class Product extends RestController
             $this->load->model('cms/UserModel');
 
             $user_data = $this->authorization_token->userData();
-            $brand_code_data = $this->UserModel->get_brandcode_of_user($user_data->id);
+            $branch_code_data = $this->UserModel->get_branchcode_of_user($user_data->id);
 
             $trash = "1";
-            if ($brand_code_data[0]->brand_code == "ALL") {
-                $return_data = $this->ProductModel->get_trash_product_by_brandcode($data["brand_code"], $trash);
+            if ($branch_code_data[0]->branch_code == "ALL") {
+                $return_data = $this->ProductModel->get_trash_product_by_branchcode($data["branch_code"], $trash);
             } else {
-                if ($brand_code_data[0]->brand_code == $data["brand_code"]) {
-                    $return_data = $this->ProductModel->get_trash_product_by_brandcode($data["brand_code"], $trash);
+                if ($branch_code_data[0]->branch_code == $data["branch_code"]) {
+                    $return_data = $this->ProductModel->get_trash_product_by_branchcode($data["branch_code"], $trash);
                 } else {
                     $return_data = [];
                 }
@@ -275,7 +275,7 @@ class Product extends RestController
 
 
             $user_data = $this->authorization_token->userData();
-            $brand_code_data = $this->UserModel->get_brandcode_of_user($user_data->id);
+            $branch_code_data = $this->UserModel->get_branchcode_of_user($user_data->id);
             $permission_data = $this->UserModel->get_permission_of_user($user_data->id);
 
             if ($permission_data[0]->permission == "1" || $permission_data[0]->permission == "2") {
@@ -310,7 +310,7 @@ class Product extends RestController
                     );
                     $this->response($message, RestController::HTTP_NOT_FOUND);
                 } else {
-                    if ($brand_code_data[0]->brand_code == "ALL" || $brand_code_data[0]->brand_code == $data['product_warehouse']) {
+                    if ($branch_code_data[0]->branch_code == "ALL" || $branch_code_data[0]->branch_code == $data['product_warehouse']) {
                         $product_data = [
                             'title'                 => $data['product_name'],
                             'product_code'          => $data['product_code'],

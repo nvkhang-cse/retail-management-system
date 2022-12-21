@@ -12,19 +12,19 @@ class SaleModel extends CI_Model
         $this->db->insert_batch($this->order_detail_table, $order_detail);
     }
 
-    public function get_new_order_by_day($brand_code, $date, $status)
+    public function get_new_order_by_day($branch_code, $date, $status)
     {
         $query = $this->db->from($this->order_table)
-            ->where(array('brand_code' => $brand_code, 'status' => $status))
+            ->where(array('branch_code' => $branch_code, 'status' => $status))
             ->like('created_at', $date)
             ->get();
         return $query->result();
     }
 
-    public function get_return_order_by_day($brand_code, $date, $status)
+    public function get_return_order_by_day($branch_code, $date, $status)
     {
         $query = $this->db->from($this->order_table)
-            ->where(array('brand_code' => $brand_code, 'status' => $status))
+            ->where(array('branch_code' => $branch_code, 'status' => $status))
             ->like('created_at', $date)
             ->get();
         return $query->result();

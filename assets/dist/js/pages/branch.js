@@ -1,24 +1,24 @@
-function brandTable(index2, site_url) {
+function branchTable(index2, site_url) {
 	"use strict";
 
 	if (index2 == 1) {
 		var table;
-		var brand_data;
+		var branch_data;
 
 		$.ajax({
 			type: "POST",
-			url: site_url + "api/dashboard/brand/loadbranddata",
+			url: site_url + "api/dashboard/branch/loadbranchdata",
 			dataType: "json",
 			encode: true,
 			async: false,
 			headers: { Authorization: localStorage.getItem("auth_token") },
 			success: function (response) {
-				brand_data = response;
+				branch_data = response;
 			},
 		});
 
-		table = $("#brand_list_table").DataTable({
-			data: brand_data.data,
+		table = $("#branch_list_table").DataTable({
+			data: branch_data.data,
 			columnDefs: [
 				{
 					orderable: false,
@@ -105,14 +105,14 @@ function brandTable(index2, site_url) {
 			],
 		});
 
-		table.buttons().container().appendTo("#brand_wrapper .col-md-6:eq(0)");
+		table.buttons().container().appendTo("#branch_wrapper .col-md-6:eq(0)");
 	} else if (index2 == 2) {
-		$("form#brand_data").submit(function (e) {
+		$("form#branch_data").submit(function (e) {
 			e.preventDefault();
 			var formData = new FormData(this);
 
 			$.ajax({
-				url: site_url + "api/dashboard/brand/storenewbrand",
+				url: site_url + "api/dashboard/branch/storenewbranch",
 				type: "POST",
 				data: formData,
 				headers: { Authorization: localStorage.getItem("auth_token") },
@@ -120,7 +120,7 @@ function brandTable(index2, site_url) {
 				processData: false,
 				success: function (data) {
 					// toastr.success(data.message);
-					window.location.href = site_url + "dashboard/brand";
+					window.location.href = site_url + "dashboard/branch";
 					
 				},
 			});

@@ -3,23 +3,23 @@ function promotionTable(index2, site_url) {
 
 	if (index2 == 1) {
 		var table;
-		var brand_data;
+		var branch_data;
 		var promotion_data;
 
 		$.ajax({
 			type: "POST",
-			url: site_url + "api/dashboard/brand/loadbranddata",
+			url: site_url + "api/dashboard/branch/loadbranchdata",
 			dataType: "json",
 			encode: true,
 			async: false,
 			headers: { Authorization: localStorage.getItem("auth_token") },
 			success: function (response) {
-				brand_data = response.data;
+				branch_data = response.data;
 			},
 		});
 
-		brand_data.forEach((row) => {
-			$("#brand_code").append(
+		branch_data.forEach((row) => {
+			$("#branch_code").append(
 				'<option value="' + row.code + '">' + row.name + "</option>"
 			);
 		});
@@ -28,7 +28,7 @@ function promotionTable(index2, site_url) {
 			type: "POST",
 			url: site_url + "api/dashboard/promotion/loadpromotiondata",
 			dataType: "json",
-			data: { brand_code: $("#brand_code").val() },
+			data: { branch_code: $("#branch_code").val() },
 			encode: true,
 			async: false,
 			headers: { Authorization: localStorage.getItem("auth_token") },
@@ -127,12 +127,12 @@ function promotionTable(index2, site_url) {
 
 		table.buttons().container().appendTo("#promotion_wrapper .col-md-6:eq(0)");
 
-		$("#brand_code").on("change", function () {
+		$("#branch_code").on("change", function () {
 			$.ajax({
 				type: "POST",
 				url: site_url + "api/dashboard/promotion/loadpromotiondata",
 				dataType: "json",
-				data: { brand_code: $("#brand_code").val() },
+				data: { branch_code: $("#branch_code").val() },
 				encode: true,
 				async: false,
 				headers: { Authorization: localStorage.getItem("auth_token") },
@@ -144,7 +144,7 @@ function promotionTable(index2, site_url) {
 			table.clear().rows.add(promotion_data.data).draw();
 		});
 	} else if (index2 == 2) {
-		var brand_data;
+		var branch_data;
 		var promotion_type = $("#promotion_type");
 		var promotion_total_bill_wrapper = $("#promotion_total_bill_wrapper");
 		var promotion_product_wrapper = $("#promotion_product_wrapper");
@@ -165,18 +165,18 @@ function promotionTable(index2, site_url) {
 
 		$.ajax({
 			type: "POST",
-			url: site_url + "api/dashboard/brand/loadbranddata",
+			url: site_url + "api/dashboard/branch/loadbranchdata",
 			dataType: "json",
 			encode: true,
 			async: false,
 			headers: { Authorization: localStorage.getItem("auth_token") },
 			success: function (response) {
-				brand_data = response.data;
+				branch_data = response.data;
 			},
 		});
 
-		brand_data.forEach((row) => {
-			$("#promotion_brand").append(
+		branch_data.forEach((row) => {
+			$("#promotion_branch").append(
 				'<option value="' + row.code + '">' + row.name + "</option>"
 			);
 		});

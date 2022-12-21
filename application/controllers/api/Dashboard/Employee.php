@@ -99,13 +99,13 @@ class Employee extends RestController
 
             $user_data = $this->authorization_token->userData();
             $permission_data = $this->UserModel->get_permission_of_user($user_data->id);
-            $brand_code_data = $this->UserModel->get_brandcode_of_user($user_data->id);
+            $branch_code_data = $this->UserModel->get_branchcode_of_user($user_data->id);
 
             if ($permission_data[0]->permission == "1") {
-                $return_data = $this->UserModel->get_user_list_by_admin($data["brand_code"]);
+                $return_data = $this->UserModel->get_user_list_by_admin($data["branch_code"]);
             } else if ($permission_data[0]->permission == 2) {
-                if ($brand_code_data[0]->brand_code == $data["brand_code"]) {
-                    $return_data = $this->UserModel->get_user_list_by_manager($data["brand_code"]);
+                if ($branch_code_data[0]->branch_code == $data["branch_code"]) {
+                    $return_data = $this->UserModel->get_user_list_by_manager($data["branch_code"]);
                 } else {
                     $return_data = [];
                 }
@@ -141,7 +141,7 @@ class Employee extends RestController
             $this->load->model('cms/UserModel');
 
             $user_data = $this->authorization_token->userData();
-            $brand_code_data = $this->UserModel->get_brandcode_of_user($user_data->id);
+            $branch_code_data = $this->UserModel->get_branchcode_of_user($user_data->id);
             $permission_data = $this->UserModel->get_permission_of_user($user_data->id);
 
 
@@ -158,7 +158,7 @@ class Employee extends RestController
                 $this->form_validation->set_rules('employee_address', 'Địa chỉ', 'trim|max_length[250]');
                 $this->form_validation->set_rules('employee_city', 'Khu vực', 'trim|max_length[50]');
                 $this->form_validation->set_rules('employee_district', 'Quận huyện', 'trim|max_length[50]');
-                $this->form_validation->set_rules('employee_brand', 'Chi nhánh', 'trim|required|max_length[5]|alpha_numeric');
+                $this->form_validation->set_rules('employee_branch', 'Chi nhánh', 'trim|required|max_length[5]|alpha_numeric');
 
                 if ($permission_data[0]->permission == 1) {
                     $this->form_validation->set_rules('employee_permission', 'Phân quyền', 'trim|required|max_length[50]|in_list[2,3]');
@@ -174,7 +174,7 @@ class Employee extends RestController
                     );
                     $this->response($message, RestController::HTTP_NOT_FOUND);
                 } else {
-                    if ($brand_code_data[0]->brand_code == "ALL" || $brand_code_data[0]->brand_code == $data['employee_brand']) {
+                    if ($branch_code_data[0]->branch_code == "ALL" || $branch_code_data[0]->branch_code == $data['employee_branch']) {
                         $employee_data = [
                             'fullname'             => $data['employee_name'],
                             'email'                => $data['employee_email'],
@@ -184,7 +184,7 @@ class Employee extends RestController
                             'address'              => $data['employee_address'],
                             'city'                 => $data['employee_city'],
                             'district'             => $data['employee_district'],
-                            'brand_code'           => $data['employee_brand'],
+                            'branch_code'           => $data['employee_branch'],
                             'permission'           => $data['employee_permission'],
                             'state'                => 1,
                             'created_by'           => $user_data->id

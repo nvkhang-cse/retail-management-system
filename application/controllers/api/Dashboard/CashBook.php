@@ -128,16 +128,16 @@ class Cashbook extends RestController
             $this->load->model('cms/UserModel');
 
             $user_data = $this->authorization_token->userData();
-            $brand_code_data = $this->UserModel->get_brandcode_of_user($user_data->id);
+            $branch_code_data = $this->UserModel->get_branchcode_of_user($user_data->id);
             $permission_data = $this->UserModel->get_permission_of_user($user_data->id);
 
             if ($permission_data[0]->permission == "1" || $permission_data[0]->permission == "2") {
 
-                if ($brand_code_data[0]->brand_code == "ALL") {
-                    $return_data = $this->CashBookModel->get_cashbook_by_brandcode($data["brand_code"]);
+                if ($branch_code_data[0]->branch_code == "ALL") {
+                    $return_data = $this->CashBookModel->get_cashbook_by_branchcode($data["branch_code"]);
                 } else {
-                    if ($brand_code_data[0]->brand_code == $data["brand_code"]) {
-                        $return_data = $this->CashBookModel->get_cashbook_by_brandcode($data["brand_code"]);
+                    if ($branch_code_data[0]->branch_code == $data["branch_code"]) {
+                        $return_data = $this->CashBookModel->get_cashbook_by_branchcode($data["branch_code"]);
                     } else {
                         $return_data = [];
                     }
@@ -178,7 +178,7 @@ class Cashbook extends RestController
             $this->load->model('cms/UserModel');
 
             $user_data = $this->authorization_token->userData();
-            $brand_code_data = $this->UserModel->get_brandcode_of_user($user_data->id);
+            $branch_code_data = $this->UserModel->get_branchcode_of_user($user_data->id);
             $permission_data = $this->UserModel->get_permission_of_user($user_data->id);
 
             if ($permission_data[0]->permission == "1" || $permission_data[0]->permission == "2") {
@@ -189,7 +189,7 @@ class Cashbook extends RestController
                 $this->form_validation->set_rules('receipt_code', 'Mã phiếu thu', 'trim|required|max_length[20]|alpha_numeric');
                 $this->form_validation->set_rules('receipt_customer_code', 'Mã khách hàng', 'trim|required|max_length[20]|alpha_numeric');
                 $this->form_validation->set_rules('receipt_value', 'Giá trị ghi nhận', 'trim|required|integer|greater_than_equal_to[0]');
-                $this->form_validation->set_rules('receipt_brand', 'Mã chi nhánh', 'trim|required|max_length[5]|alpha_numeric');
+                $this->form_validation->set_rules('receipt_branch', 'Mã chi nhánh', 'trim|required|max_length[5]|alpha_numeric');
                 if ($this->form_validation->run() == FALSE) {
                     $message = array(
                         'status'    =>  false,
@@ -198,12 +198,12 @@ class Cashbook extends RestController
                     );
                     $this->response($message, RestController::HTTP_NOT_FOUND);
                 } else {
-                    if ($brand_code_data[0]->brand_code == "ALL" || $brand_code_data[0]->brand_code == $data['recipt_brand']) {
+                    if ($branch_code_data[0]->branch_code == "ALL" || $branch_code_data[0]->branch_code == $data['recipt_branch']) {
                         $receipt_data = [
                             'code'                      => $data['receipt_code'],
                             'customer_code'             => $data['receipt_customer_code'],
                             'value'                     => $data['receipt_value'],
-                            'brand'                     => $data['receipt_brand'],
+                            'branch'                     => $data['receipt_branch'],
                             'created_by'                => $user_data->full_name,
                             'type'                      => 1
                         ];
@@ -251,7 +251,7 @@ class Cashbook extends RestController
             $this->load->model('cms/UserModel');
 
             $user_data = $this->authorization_token->userData();
-            $brand_code_data = $this->UserModel->get_brandcode_of_user($user_data->id);
+            $branch_code_data = $this->UserModel->get_branchcode_of_user($user_data->id);
             $permission_data = $this->UserModel->get_permission_of_user($user_data->id);
 
             if ($permission_data[0]->permission == "1" || $permission_data[0]->permission == "2") {
@@ -262,7 +262,7 @@ class Cashbook extends RestController
                 $this->form_validation->set_rules('receipt_code', 'Mã phiếu thu', 'trim|required|max_length[20]|alpha_numeric');
                 $this->form_validation->set_rules('receipt_customer_code', 'Mã khách hàng', 'trim|required|max_length[20]|alpha_numeric');
                 $this->form_validation->set_rules('receipt_value', 'Giá trị ghi nhận', 'trim|required|integer|greater_than_equal_to[0]');
-                $this->form_validation->set_rules('receipt_brand', 'Mã chi nhánh', 'trim|required|max_length[5]|alpha_numeric');
+                $this->form_validation->set_rules('receipt_branch', 'Mã chi nhánh', 'trim|required|max_length[5]|alpha_numeric');
                 if ($this->form_validation->run() == FALSE) {
                     $message = array(
                         'status'    =>  false,
@@ -271,12 +271,12 @@ class Cashbook extends RestController
                     );
                     $this->response($message, RestController::HTTP_NOT_FOUND);
                 } else {
-                    if ($brand_code_data[0]->brand_code == "ALL" || $brand_code_data[0]->brand_code == $data['recipt_brand']) {
+                    if ($branch_code_data[0]->branch_code == "ALL" || $branch_code_data[0]->branch_code == $data['recipt_branch']) {
                         $receipt_data = [
                             'code'                      => $data['receipt_code'],
                             'customer_code'             => $data['receipt_customer_code'],
                             'value'                     => $data['receipt_value'],
-                            'brand'                     => $data['receipt_brand'],
+                            'branch'                     => $data['receipt_branch'],
                             'created_by'                => $user_data->full_name,
                             'type'                      => 2
                         ];

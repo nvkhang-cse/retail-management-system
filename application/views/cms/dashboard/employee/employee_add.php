@@ -76,8 +76,8 @@
                         </div>
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="employee_brand">Chi nhánh</label>
-                                <select class="form-control" id="employee_brand" name="employee_brand" required></select>
+                                <label for="employee_branch">Chi nhánh</label>
+                                <select class="form-control" id="employee_branch" name="employee_branch" required></select>
                             </div>
                             <div class="form-group">
                                 <label for="employee_permission">Vai trò</label>

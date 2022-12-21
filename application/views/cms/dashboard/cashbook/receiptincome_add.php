@@ -54,8 +54,8 @@
                         </div>
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="receipt_brand">Chọn chi nhánh</label>
-                                <select class="form-control" id="receipt_brand" name="receipt_brand" required>
+                                <label for="receipt_branch">Chọn chi nhánh</label>
+                                <select class="form-control" id="receipt_branch" name="receipt_branch" required>
                                 </select>
                             </div>
                         </div>

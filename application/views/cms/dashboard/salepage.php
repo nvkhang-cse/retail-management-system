@@ -7,7 +7,7 @@
       </div>
       <div class="col-sm-6">
         <div class="float-right">
-          <select id="brand_code" class="custom-select border border-primary">
+          <select id="branch_code" class="custom-select border border-primary">
           </select>
         </div>
       </div>

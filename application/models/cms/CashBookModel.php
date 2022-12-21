@@ -5,10 +5,10 @@ class CashBookModel extends CI_Model
 {
     protected $cashbook_table = 'cash_book';
 
-    public function get_cashbook_by_brandcode($brand_code)
+    public function get_cashbook_by_branchcode($branch_code)
     {
         $query = $this->db->from($this->cashbook_table)
-            ->where(['brand' => $brand_code])
+            ->where(['branch' => $branch_code])
             ->get();
         return $query->result();
     }

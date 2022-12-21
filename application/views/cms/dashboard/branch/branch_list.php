@@ -6,7 +6,7 @@
                 <h1 class="m-0">Danh sách chi nhánh</h1>
             </div>
             <div class="col-sm-6">
-                <a href="<?= site_url("dashboard/brand/loadbrandadd") ?>">
+                <a href="<?= site_url("dashboard/branch/loadbranchadd") ?>">
                     <button type="button" class="btn btn-primary float-right">+ Thêm chi nhánh</button>
                 </a>
             </div>
@@ -24,8 +24,8 @@
                         <h5 class="card-title text-primary">Thông tin chi nhánh</h5>
                     </div>
                     <!-- /.card-header -->
-                    <div class="card-body" id="brand_wrapper">
-                        <table id="brand_list_table" class="table table-bordered table-striped">
+                    <div class="card-body" id="branch_wrapper">
+                        <table id="branch_list_table" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
                                     <th></th>

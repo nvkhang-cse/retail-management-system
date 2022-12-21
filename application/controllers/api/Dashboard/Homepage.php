@@ -58,15 +58,15 @@ class Homepage extends RestController
             $this->load->model('cms/SaleModel');
 
             $user_data = $this->authorization_token->userData();
-            $brand_code_data = $this->UserModel->get_brandcode_of_user($user_data->id);
+            $branch_code_data = $this->UserModel->get_branchcode_of_user($user_data->id);
 
-            if ($brand_code_data[0]->brand_code == "ALL") {
-                $success_order_data = $this->SaleModel->get_new_order_by_day($data["brand_code"], date('Y-m-d'), 1);
-                $return_order_data = $this->SaleModel->get_return_order_by_day($data["brand_code"], date('Y-m-d'), 0);
+            if ($branch_code_data[0]->branch_code == "ALL") {
+                $success_order_data = $this->SaleModel->get_new_order_by_day($data["branch_code"], date('Y-m-d'), 1);
+                $return_order_data = $this->SaleModel->get_return_order_by_day($data["branch_code"], date('Y-m-d'), 0);
             } else {
-                if ($brand_code_data[0]->brand_code == $data["brand_code"]) {
-                    $success_order_data = $this->SaleModel->get_new_order_by_day($data["brand_code"], date('Y-m-d'), 1);
-                    $return_order_data = $this->SaleModel->get_return_order_by_day($data["brand_code"], date('Y-m-d'), 0);
+                if ($branch_code_data[0]->branch_code == $data["branch_code"]) {
+                    $success_order_data = $this->SaleModel->get_new_order_by_day($data["branch_code"], date('Y-m-d'), 1);
+                    $return_order_data = $this->SaleModel->get_return_order_by_day($data["branch_code"], date('Y-m-d'), 0);
                 } else {
                     $success_order_data = [];
                     $return_order_data = [];

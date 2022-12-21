@@ -1,22 +1,22 @@
 function homepage(index_2, site_url) {
-	var brand_data;
+	var branch_data;
 	var sales_report_in_day;
 
 	$.ajax({
 		type: "POST",
-		url: site_url + "api/dashboard/brand/loadbranddata",
+		url: site_url + "api/dashboard/branch/loadbranchdata",
 		dataType: "json",
 		encode: true,
 		async: false,
 		headers: { Authorization: localStorage.getItem("auth_token") },
 		success: function (response) {
-			brand_data = response.data;
+			branch_data = response.data;
 		},
 	});
 
-	brand_data.forEach((row) => {
+	branch_data.forEach((row) => {
 		$(
-			"#brand_code_for_statistic_in_date, #brand_code_for_statistic_in_time, #brand_code_for_warehouse_report"
+			"#branch_code_for_statistic_in_date, #branch_code_for_statistic_in_time, #branch_code_for_warehouse_report"
 		).append('<option value="' + row.code + '">' + row.name + "</option>");
 	});
 
@@ -24,7 +24,7 @@ function homepage(index_2, site_url) {
 		type: "POST",
 		url: site_url + "api/dashboard/homepage/loadsalesreportinday",
 		dataType: "json",
-		data: { brand_code: $("#brand_code_for_statistic_in_date").val() },
+		data: { branch_code: $("#branch_code_for_statistic_in_date").val() },
 		encode: true,
 		async: false,
 		headers: { Authorization: localStorage.getItem("auth_token") },
@@ -37,12 +37,12 @@ function homepage(index_2, site_url) {
 		},
 	});
 
-	$("#brand_code_for_statistic_in_date").on("change", function () {
+	$("#branch_code_for_statistic_in_date").on("change", function () {
 		$.ajax({
 			type: "POST",
 			url: site_url + "api/dashboard/homepage/loadsalesreportinday",
 			dataType: "json",
-			data: { brand_code: $("#brand_code_for_statistic_in_date").val() },
+			data: { branch_code: $("#branch_code_for_statistic_in_date").val() },
 			encode: true,
 			async: false,
 			headers: { Authorization: localStorage.getItem("auth_token") },

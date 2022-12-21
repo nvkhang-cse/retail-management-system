@@ -1,21 +1,21 @@
 function sale(index2, site_url) {
 	"use strict";
-	var brand_data;
+	var branch_data;
 
 	$.ajax({
 		type: "POST",
-		url: site_url + "api/dashboard/brand/loadbranddata",
+		url: site_url + "api/dashboard/branch/loadbranchdata",
 		dataType: "json",
 		encode: true,
 		async: false,
 		headers: { Authorization: localStorage.getItem("auth_token") },
 		success: function (response) {
-			brand_data = response.data;
+			branch_data = response.data;
 		},
 	});
 
-	brand_data.forEach((row) => {
-		$("#brand_code").append(
+	branch_data.forEach((row) => {
+		$("#branch_code").append(
 			'<option value="' + row.code + '">' + row.name + "</option>"
 		);
 	});
@@ -192,7 +192,7 @@ function sale(index2, site_url) {
 					final_payment: $("#customer-payment").data("value"),
 					customer_money: $("#customer-money").val(),
 					customer_change: $("#change-money").data("value"),
-					brand_code: $("#brand_code").val(),
+					branch_code: $("#branch_code").val(),
 				};
 				const order_detail = [];
 				for (let row of cart_items.data) {

@@ -3,24 +3,24 @@ function productTable(index2, site_url) {
 
 	if (index2 == 1) {
 		var table;
-		var brand_data;
+		var branch_data;
 		var product_data;
 		var category_data;
 
 		$.ajax({
 			type: "POST",
-			url: site_url + "api/dashboard/brand/loadbranddata",
+			url: site_url + "api/dashboard/branch/loadbranchdata",
 			dataType: "json",
 			encode: true,
 			async: false,
 			headers: { Authorization: localStorage.getItem("auth_token") },
 			success: function (response) {
-				brand_data = response.data;
+				branch_data = response.data;
 			},
 		});
 
-		brand_data.forEach((row) => {
-			$("#brand_code").append(
+		branch_data.forEach((row) => {
+			$("#branch_code").append(
 				'<option value="' + row.code + '">' + row.name + "</option>"
 			);
 		});
@@ -29,7 +29,7 @@ function productTable(index2, site_url) {
 			type: "POST",
 			url: site_url + "api/dashboard/product/loadproductdata",
 			dataType: "json",
-			data: { brand_code: $("#brand_code").val() },
+			data: { branch_code: $("#branch_code").val() },
 			encode: true,
 			async: false,
 			headers: { Authorization: localStorage.getItem("auth_token") },
@@ -164,12 +164,12 @@ function productTable(index2, site_url) {
 
 		table.buttons().container().appendTo("#product_wrapper .col-md-6:eq(0)");
 
-		$("#brand_code").on("change", function () {
+		$("#branch_code").on("change", function () {
 			$.ajax({
 				type: "POST",
 				url: site_url + "api/dashboard/product/loadproductdata",
 				dataType: "json",
-				data: { brand_code: $("#brand_code").val() },
+				data: { branch_code: $("#branch_code").val() },
 				encode: true,
 				async: false,
 				headers: { Authorization: localStorage.getItem("auth_token") },
@@ -182,24 +182,24 @@ function productTable(index2, site_url) {
 		});
 	} else if (index2 == 2) {
 		var table;
-		var brand_data;
+		var branch_data;
 		var warehouse_data;
 		var category_data;
 
 		$.ajax({
 			type: "POST",
-			url: site_url + "api/dashboard/brand/loadbranddata",
+			url: site_url + "api/dashboard/branch/loadbranchdata",
 			dataType: "json",
 			encode: true,
 			async: false,
 			headers: { Authorization: localStorage.getItem("auth_token") },
 			success: function (response) {
-				brand_data = response.data;
+				branch_data = response.data;
 			},
 		});
 
-		brand_data.forEach((row) => {
-			$("#brand_code").append(
+		branch_data.forEach((row) => {
+			$("#branch_code").append(
 				'<option value="' + row.code + '">' + row.name + "</option>"
 			);
 		});
@@ -208,7 +208,7 @@ function productTable(index2, site_url) {
 			type: "POST",
 			url: site_url + "api/dashboard/product/loadproductwarehousedata",
 			dataType: "json",
-			data: { brand_code: $("#brand_code").val() },
+			data: { branch_code: $("#branch_code").val() },
 			encode: true,
 			async: false,
 			headers: { Authorization: localStorage.getItem("auth_token") },
@@ -355,12 +355,12 @@ function productTable(index2, site_url) {
 		});
 		table.buttons().container().appendTo("#warehouse_wrapper .col-md-6:eq(0)");
 
-		$("#brand_code").on("change", function () {
+		$("#branch_code").on("change", function () {
 			$.ajax({
 				type: "POST",
 				url: site_url + "api/dashboard/product/loadproductwarehousedata",
 				dataType: "json",
-				data: { brand_code: $("#brand_code").val() },
+				data: { branch_code: $("#branch_code").val() },
 				encode: true,
 				async: false,
 				headers: { Authorization: localStorage.getItem("auth_token") },
@@ -453,7 +453,7 @@ function productTable(index2, site_url) {
 
 		$.ajax({
 			type: "POST",
-			url: site_url + "api/dashboard/brand/loadbranddata",
+			url: site_url + "api/dashboard/branch/loadbranchdata",
 			dataType: "json",
 			encode: true,
 			async: false,
@@ -504,24 +504,24 @@ function productTable(index2, site_url) {
 		});
 	} else if (index2 == 4) {
 		var table;
-		var brand_data;
+		var branch_data;
 		var trash_data;
 		var category_data;
 
 		$.ajax({
 			type: "POST",
-			url: site_url + "api/dashboard/brand/loadbranddata",
+			url: site_url + "api/dashboard/branch/loadbranchdata",
 			dataType: "json",
 			encode: true,
 			async: false,
 			headers: { Authorization: localStorage.getItem("auth_token") },
 			success: function (response) {
-				brand_data = response.data;
+				branch_data = response.data;
 			},
 		});
 
-		brand_data.forEach((row) => {
-			$("#brand_code").append(
+		branch_data.forEach((row) => {
+			$("#branch_code").append(
 				'<option value="' + row.code + '">' + row.name + "</option>"
 			);
 		});
@@ -530,7 +530,7 @@ function productTable(index2, site_url) {
 			type: "POST",
 			url: site_url + "api/dashboard/product/loadproducttrashdata",
 			dataType: "json",
-			data: { brand_code: $("#brand_code").val() },
+			data: { branch_code: $("#branch_code").val() },
 			encode: true,
 			async: false,
 			headers: { Authorization: localStorage.getItem("auth_token") },
@@ -677,12 +677,12 @@ function productTable(index2, site_url) {
 
 		table.buttons().container().appendTo("#trash_wrapper .col-md-6:eq(0)");
 
-		$("#brand_code").on("change", function () {
+		$("#branch_code").on("change", function () {
 			$.ajax({
 				type: "POST",
 				url: site_url + "api/dashboard/product/loadproducttrashdata",
 				dataType: "json",
-				data: { brand_code: $("#brand_code").val() },
+				data: { branch_code: $("#branch_code").val() },
 				encode: true,
 				async: false,
 				headers: { Authorization: localStorage.getItem("auth_token") },

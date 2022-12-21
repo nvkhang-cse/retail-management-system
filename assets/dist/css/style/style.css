@@ -42,7 +42,7 @@ div.dataTables_length select {
 #customer_list_table tbody td .btn-group .dropdown-menu,
 #customer_group_list_table tbody td .btn-group .dropdown-menu,
 #cashbook_list_table tbody td .btn-group .dropdown-menu,
-#brand_list_table tbody td .btn-group .dropdown-menu,
+#branch_list_table tbody td .btn-group .dropdown-menu,
 #employee_list_table tbody td .btn-group .dropdown-menu,
 #promotion_list_table tbody td .btn-group .dropdown-menu {
 	min-width: 0;

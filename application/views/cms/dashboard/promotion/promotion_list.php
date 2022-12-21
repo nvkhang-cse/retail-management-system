@@ -23,7 +23,7 @@
                     <div class="card-header">
                         <h5 class="card-title text-primary">Thông tin các chương trình khuyến mãi</h5>
                         <div class="float-sm-right">
-                            <select id="brand_code" class="custom-select border border-primary">
+                            <select id="branch_code" class="custom-select border border-primary">
                             </select>
                         </div>
                     </div>

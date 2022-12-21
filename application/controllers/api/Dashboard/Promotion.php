@@ -102,16 +102,16 @@ class Promotion extends RestController
             $this->load->model('cms/UserModel');
 
             $user_data = $this->authorization_token->userData();
-            $brand_code_data = $this->UserModel->get_brandcode_of_user($user_data->id);
+            $branch_code_data = $this->UserModel->get_branchcode_of_user($user_data->id);
             $permission_data = $this->UserModel->get_permission_of_user($user_data->id);
 
             if ($permission_data[0]->permission == "1" || $permission_data[0]->permission == "2") {
 
-                if ($brand_code_data[0]->brand_code == "ALL") {
-                    $return_data = $this->PromotionModel->get_promotion_by_brandcode($data["brand_code"]);
+                if ($branch_code_data[0]->branch_code == "ALL") {
+                    $return_data = $this->PromotionModel->get_promotion_by_branchcode($data["branch_code"]);
                 } else {
-                    if ($brand_code_data[0]->brand_code == $data["brand_code"]) {
-                        $return_data = $this->PromotionModel->get_promotion_by_brandcode($data["brand_code"]);
+                    if ($branch_code_data[0]->branch_code == $data["branch_code"]) {
+                        $return_data = $this->PromotionModel->get_promotion_by_branchcode($data["branch_code"]);
                     } else {
                         $return_data = [];
                     }
@@ -152,7 +152,7 @@ class Promotion extends RestController
             $this->load->model('cms/UserModel');
 
             $user_data = $this->authorization_token->userData();
-            $brand_code_data = $this->UserModel->get_brandcode_of_user($user_data->id);
+            $branch_code_data = $this->UserModel->get_branchcode_of_user($user_data->id);
             $permission_data = $this->UserModel->get_permission_of_user($user_data->id);
 
             if ($permission_data[0]->permission == "1" || $permission_data[0]->permission == "2") {
@@ -165,7 +165,7 @@ class Promotion extends RestController
                 $this->form_validation->set_rules('promotion_type', 'Loại khuyến mãi', 'trim|required|in_list[1,2]');
                 $this->form_validation->set_rules('promotion_start_date', 'Ngày bắt đầu', 'trim|required|max_length[10]|alpha_dash|regex_match[/[0-9]{4}\-[0-9]{2}\-[0-9]{2}/]');
                 $this->form_validation->set_rules('promotion_end_date', 'Ngày kết thúc', 'trim|required|max_length[10]|alpha_dash|regex_match[/[0-9]{4}\-[0-9]{2}\-[0-9]{2}/]');
-                $this->form_validation->set_rules('promotion_brand', 'Chi nhánh áp dụng', 'trim|required|max_length[5]|alpha_numeric');
+                $this->form_validation->set_rules('promotion_branch', 'Chi nhánh áp dụng', 'trim|required|max_length[5]|alpha_numeric');
 
                 $this->form_validation->set_rules('promotion_total_bill_from', 'Hóa đơn từ', 'trim|integer|greater_than_equal_to[0]');
                 $this->form_validation->set_rules('promotion_total_bill_to', 'Hóa đơn đến', 'trim|integer|greater_than_equal_to[0]|greater_than_equal_to[promotion_total_bill_from]');
@@ -185,14 +185,14 @@ class Promotion extends RestController
                     );
                     $this->response($message, RestController::HTTP_NOT_FOUND);
                 } else {
-                    if ($brand_code_data[0]->brand_code == "ALL" || $brand_code_data[0]->brand_code == $data['promotion_brand']) {
+                    if ($branch_code_data[0]->branch_code == "ALL" || $branch_code_data[0]->branch_code == $data['promotion_branch']) {
                         $promotion_data = [
                             'name'              => $data['promotion_name'],
                             'code'              => $data['promotion_code'],
                             'type'              => $data['promotion_type'],
                             'start_date'        => $data['promotion_start_date'],
                             'end_date'          => $data['promotion_end_date'],
-                            'brand'             => $data['promotion_brand'],
+                            'branch'             => $data['promotion_branch'],
                             'created_by'        => $user_data->id
                         ];
                         if ($data['promotion_type'] == 1) {

@@ -127,8 +127,8 @@
                         </div>
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="promotion_brand">Chọn chi nhánh áp dụng</label>
-                                <select class="form-control" id="promotion_brand" name="promotion_brand" required>
+                                <label for="promotion_branch">Chọn chi nhánh áp dụng</label>
+                                <select class="form-control" id="promotion_branch" name="promotion_branch" required>
                                     <option value="ALL">Tất cả chi nhánh</option>
                                 </select>
                             </div>
