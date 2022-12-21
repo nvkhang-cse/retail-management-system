@@ -132,7 +132,6 @@ if (typeof Object.create !== "function") {
                
                 if ($(el).text().normalize('NFD').replace(/([aeio])\u0301|(u)[\u0301\u0308]/gi,"$1$2").normalize().toUpperCase().indexOf(txt.normalize('NFD').replace(/([aeio])\u0301|(u)[\u0301\u0308]/gi,"$1$2").normalize().toUpperCase()) != -1) {
                     search = true;
-                    console.log(1)
                     var re = new RegExp("(" + txt + ")", "gi");
                     var str = $(el).text();
                     

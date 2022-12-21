@@ -23,7 +23,6 @@ function deleteCartItem(rowid) {
 		url: site_url + "api/dashboard/sale/removeCartItem",
 		dataType: "json",
 		encode: true,
-		// async: false,
 		headers: { Authorization: localStorage.getItem("auth_token") },
 		success: function (response) {
 			reloadCart();
@@ -41,8 +40,6 @@ function deleteAllItem() {
 		encode: true,
 		headers: { Authorization: localStorage.getItem("auth_token") },
 		success: function (response) {
-			// $('#detail').html('');
-			// $('#order-price').text('');
 			reloadCart();
 		},
 	});
@@ -119,6 +116,7 @@ function displayCart(product_detail) {
 				'`)"></td>' +
 				"<td>" +
 				row.subtotal +
+				" " +
 				row.currency +
 				"</td>" +
 				"<td>" +
@@ -127,6 +125,7 @@ function displayCart(product_detail) {
 				"</td>" +
 				"<td>" +
 				row.subtotal * (1 - row.percentage / 100) +
+				" " +
 				row.currency +
 				"</td>" +
 				'<td><button type="button" class="btn btn-danger btn-sm mb-2" id="delete-item" onclick="deleteCartItem(`' +
@@ -137,7 +136,7 @@ function displayCart(product_detail) {
 		output +=
 			"<tr>" +
 			"<td></td>" +
-			"<td>Tong tien</td>" +
+			"<td>Tổng tiền</td>" +
 			"<td></td>" +
 			"<td></td>" +
 			"<td></td>" +
@@ -155,16 +154,14 @@ function displayCart(product_detail) {
 	$("#detail").html(output);
 	$("#order-price").data("value", total_payment);
 	$("#order-price").text(total_payment);
-	calculateCustumerPayment(
+	calculateCustomerPayment(
 		total_payment,
 		$("#customer-discount").data("value")
 	);
-	calculateCustumerChange(
+	calculateCustomerChange(
 		$("#customer-money").val(),
 		$("#customer-payment").data("value")
 	);
-	// $('#customer-payment').data('value', fin_payment)
-	// $('#customer-payment').text(fin_payment);
 }
 
 function getCustomerDiscount(group_code) {
@@ -184,21 +181,32 @@ function getCustomerDiscount(group_code) {
 		},
 	});
 	if (discount_info.length > 0) {
-		return discount_info[0].discount;
+		return discount_info[0];
 	}
 	return 0;
 }
 
 function displayCustomerInfo(customer_info) {
 	var info = customer_info.data;
-	$("#customer-phone").text(info[0]["phone"]);
-	$("#customer-debt").text(info[0]["debt"]);
-	$("#customer-id").data("value", info[0]["id"]);
-	$("#customer-id").text(info[0]["name"]);
+	$("#customer_phone").text(info[0]["phone"]);
+	$("#customer_code").data("value", info[0]["customer_code"]);
+	$("#customer_code").text(info[0]["name"]);
+	$("#customer_address").text(info[0]["district"] + ", " + info[0]["city"]);
 	var cus_discount = getCustomerDiscount(info[0]["group_code"]);
-	$("#customer-discount").data("value", cus_discount);
-	$("#customer-discount").text(cus_discount + "%");
+	$("#customer-discount").data("value", cus_discount["discount"]);
+	$("#customer-discount").text(cus_discount["discount"] + "%");
+	$("#customer_group").text(cus_discount["name"]);
 	reloadCart();
+}
+
+function deleteCustomerInfo() {
+	$("#customer_code").data("value", 0);
+	$("#customer_code").text("Khách lẻ");
+	$("#customer_phone").text("");
+	$("#customer_address").text("");
+	$("#customer-discount").data("value", 0);
+	$("#customer-discount").text("0%");
+	$("#customer_group").text("");
 }
 
 function displayCustomerChangeMn(customer_money) {
@@ -206,13 +214,13 @@ function displayCustomerChangeMn(customer_money) {
 	reloadCart();
 }
 
-function calculateCustumerPayment(order_price, discount = 0) {
+function calculateCustomerPayment(order_price, discount = 0) {
 	var fin_payment = order_price * (1 - discount / 100);
 	$("#customer-payment").data("value", fin_payment);
 	$("#customer-payment").text(fin_payment);
 }
 
-function calculateCustumerChange(customer_money, fin_payment) {
+function calculateCustomerChange(customer_money, fin_payment) {
 	var change = customer_money - fin_payment;
 	$("#change-money").data("value", change);
 	$("#change-money").text(change);
@@ -227,12 +235,35 @@ function submitOrder(order_data) {
 		url: site_url + "api/dashboard/sale/createOrder",
 		dataType: "json",
 		encode: true,
-		// async: false,
 		headers: { Authorization: localStorage.getItem("auth_token") },
 		success: function (response) {
-			// discount_info = response.data;
-			console.log(response);
+			toastr.options = {
+				closeButton: true,
+				debug: false,
+				newestOnTop: false,
+				progressBar: false,
+				positionClass: "toast-top-right",
+				preventDuplicates: false,
+				onclick: null,
+				showDuration: "300",
+				hideDuration: "300",
+				timeOut: "2000",
+				extendedTimeOut: "1000",
+				showEasing: "swing",
+				hideEasing: "linear",
+				showMethod: "fadeIn",
+				hideMethod: "fadeOut",
+			};
+
+			toastr.success(response.message);
+
+			$("#gsearchsimple, #customersearch").val("");
+			$("#customer-money").val(0);
+			deleteCustomerInfo();
 			deleteAllItem();
+		},
+		error: function (error) {
+			toastr.error(error.responseJSON.message);
 		},
 	});
 }

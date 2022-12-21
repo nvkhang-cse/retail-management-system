@@ -25,9 +25,10 @@ function sale(index2, site_url) {
 		"max-height": "280px",
 	});
 
+	$("#product-search-result, #customer-search-result").css("display", "none");
+
 	$("#gsearchsimple").keyup(function () {
 		var query = $("#gsearchsimple").val();
-		// $('#detail').html('');
 		$("#product-search-result").css("display", "inline-block");
 		if (query.length == 2) {
 			$.ajax({
@@ -38,7 +39,6 @@ function sale(index2, site_url) {
 				encode: true,
 				headers: { Authorization: localStorage.getItem("auth_token") },
 				success: function (response) {
-					console.log(response);
 					var img;
 					var search_data = "";
 
@@ -49,14 +49,17 @@ function sale(index2, site_url) {
 							img = site_url + "/assets/upload_img/product/" + row.image;
 						}
 						search_data +=
-							'<li class="list-group-item contsearch"><div class="row">' +
-							'<div class="col-md-2 image-parent"><img src="' +
+							'<li class="list-group-item contsearch">' +
+							'<div class="row">' +
+							'<div class="col-md-2 image-parent">' +
+							'<img src="' +
 							img +
-							'" width="60" height="60" class="img-fluid"/></div>' +
+							'" width="60" height="60" class="img-fluid"/>' +
+							"</div>" +
 							'<div class="col-md-10">' +
-							'<a href="javascript:void(0)" class="gsearch list-group-item-heading" data-value="' +
-							row.id +
-							'" style="color:#333;text-decoration:none;">' +
+							'<a href="javascript:void(0)" class="gsearch list-group-item-heading text-gray-dark" data-value="' +
+							row.product_code +
+							'">' +
 							row.title +
 							"</a>" +
 							'<p class="list-group-item-text"><strong>' +
@@ -64,8 +67,10 @@ function sale(index2, site_url) {
 							" " +
 							row.currency +
 							"</strong></p>" +
-							"</div>" +
-							"</div></li>";
+							'<p class="list-group-item-text">Số lượng: ' +
+							row.quantity_sale +
+							"</p>";
+						"</div>" + "</div></li>";
 					}
 					$("#product-search-result").html(search_data);
 				},
@@ -81,7 +86,6 @@ function sale(index2, site_url) {
 		$("#customer-search-result").css({
 			display: "inline-block",
 			width: "auto",
-			// 'max-width':'360px',
 		});
 		if (query.length >= 2) {
 			$.ajax({
@@ -92,35 +96,31 @@ function sale(index2, site_url) {
 				encode: true,
 				headers: { Authorization: localStorage.getItem("auth_token") },
 				success: function (response) {
-					console.log(response);
 					var search_data = "";
 
 					for (let row of response.data) {
 						search_data +=
-							'<li class="list-group-item cussearch"><div class="row">' +
-							'<div class="col-md-2 image-parent d-flex align-items-center justify-content-center"><img src="' +
+							'<li class="list-group-item cussearch">' +
+							'<div class="row">' +
+							'<div class="col-md-2 d-flex align-items-center justify-content-center">' +
+							'<img src="' +
 							site_url +
 							"/assets/upload_img/customer-default.png" +
-							'" width="60" height="60" class="img-fluid"/></div>' +
-							'<div class="col-md-5" style="display: flex; align-items: center;flex-wrap: wrap;">' +
-							'<a href="javascript:void(0)" class="csearch list-group-item-heading" data-value="' +
-							row.id +
-							'" style="color:#333;text-decoration:none;">' +
+							'" width="100" height="100" class="img-fluid"/>' +
+							"</div>" +
+							'<div class="col-md-10">' +
+							'<a href="javascript:void(0)" class="csearch list-group-item-heading text-gray-dark" data-value="' +
+							row.customer_code +
+							'">' +
 							row.name +
 							"</a>" +
 							'<p class="list-group-item-text"><strong>' +
 							row.phone +
 							"</strong></p>" +
 							"</div>" +
-							'<div class="col-md-5 pull-right">' +
-							"<p>" +
-							row.email +
-							"</p>" +
-							"</div>" +
 							"</div></li>";
 					}
 					$("#customer-search-result").html(search_data);
-					// class="img-fluid" alt="quixote">
 				},
 			});
 		}
@@ -136,13 +136,12 @@ function sale(index2, site_url) {
 	});
 
 	$(document).on("click", ".gsearch", function () {
-		var productid = $(this).data("value");
+		var product_code = $(this).data("value");
 		var product_detail;
-		// $('#gsearchsimple').val(product);
 		$(".list-group").css("display", "none");
 		$.ajax({
 			type: "POST",
-			data: { id: productid },
+			data: { product_code: product_code },
 			url: site_url + "api/dashboard/sale/addToCart",
 			dataType: "json",
 			encode: true,
@@ -156,13 +155,12 @@ function sale(index2, site_url) {
 	});
 
 	$(document).on("click", ".csearch", function () {
-		var customer_id = $(this).data("value");
+		var customer_code = $(this).data("value");
 		var customer_info;
-		// $('#gsearchsimple').val(product);
 		$(".list-group").css("display", "none");
 		$.ajax({
 			type: "POST",
-			data: { id: customer_id },
+			data: { code: customer_code },
 			url: site_url + "api/dashboard/customer/getCustomerInfo",
 			dataType: "json",
 			encode: true,
@@ -188,17 +186,18 @@ function sale(index2, site_url) {
 		if (cart_items.data.length > 0) {
 			if ($("#change-money").data("value") >= 0) {
 				var order_info = {
-					customer: $("#customer-id").data("value"),
+					customer: $("#customer_code").data("value"),
 					total_price: $("#order-price").data("value"),
 					discount: $("#customer-discount").data("value"),
 					final_payment: $("#customer-payment").data("value"),
 					customer_money: $("#customer-money").val(),
 					customer_change: $("#change-money").data("value"),
+					brand_code: $("#brand_code").val(),
 				};
 				const order_detail = [];
 				for (let row of cart_items.data) {
 					var item = {
-						product_id: row.id,
+						product_code: row.product_code,
 						quantity: row.qty,
 						product_price: row.price,
 						subtotal_price: row.subtotal,

@@ -32,8 +32,8 @@
 
               <div class="info-box-content">
                 <span class="info-box-text">Doanh thu</span>
-                <span class="info-box-number">
-                  2,000,000
+                <span class="info-box-number" id="total_sales_in_day">
+                  0
                 </span>
               </div>
               <!-- /.info-box-content -->
@@ -47,7 +47,7 @@
 
               <div class="info-box-content">
                 <span class="info-box-text">Đơn hàng mới</span>
-                <span class="info-box-number">20</span>
+                <span class="info-box-number" id="new_order_in_day">0</span>
               </div>
               <!-- /.info-box-content -->
             </div>
@@ -64,7 +64,7 @@
 
               <div class="info-box-content">
                 <span class="info-box-text">Đơn trả hàng</span>
-                <span class="info-box-number">0</span>
+                <span class="info-box-number" id="return_order_in_day">0</span>
               </div>
               <!-- /.info-box-content -->
             </div>
@@ -110,7 +110,7 @@
 
               <div class="progress-group">
                 Doanh thu
-                <span class="float-right"><b>2,000,000</b>/10,000,000</span>
+                <span class="float-right"><b>0</b>/10,000,000</span>
                 <div class="progress progress-sm">
                   <div class="progress-bar bg-primary" style="width: 20%"></div>
                 </div>
@@ -119,7 +119,7 @@
               <!-- /.progress-group -->
               <div class="progress-group">
                 Đơn mới
-                <span class="float-right"><b>20</b>/80</span>
+                <span class="float-right"><b>0</b>/80</span>
                 <div class="progress progress-sm">
                   <div class="progress-bar bg-success" style="width: 25%"></div>
                 </div>

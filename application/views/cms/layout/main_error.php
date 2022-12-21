@@ -88,7 +88,7 @@
         <!-- Sidebar Menu -->
         <nav class="mt-2">
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-            <li class="nav-item">
+            <li class="nav-item" id="home_page">
               <a href="<?= site_url("dashboard/homepage") ?>" class="nav-link">
                 <i class="nav-icon fas fa-home"></i>
                 <p>
@@ -96,7 +96,7 @@
                 </p>
               </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" id="sale_page">
               <a href="<?= site_url("dashboard/sale") ?>" class="nav-link">
                 <i class="nav-icon fas fa-hand-holding"></i>
                 <p>
@@ -104,8 +104,8 @@
                 </p>
               </a>
             </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link">
+            <li class="nav-item" id="order_page">
+              <a href="<?= site_url("dashboard/order") ?>" class="nav-link">
                 <i class="nav-icon fas fa-clipboard-list"></i>
                 <p>
                   Đơn hàng
@@ -121,31 +121,31 @@
                 </p>
               </a>
               <ul class="nav nav-treeview">
-                <li class="nav-item">
+                <li class="nav-item" id="product_list_page">
                   <a href="<?= site_url("dashboard/product") ?>" class="nav-link">
                     <i class="fas fa-angle-right nav-icon"></i>
                     <p>Danh sách sản phẩm</p>
                   </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" id="product_warehouse_page">
                   <a href="<?= site_url("dashboard/product/loadproductwarehouse") ?>" class="nav-link">
                     <i class="fas fa-angle-right nav-icon"></i>
                     <p>Quản lý kho</p>
                   </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" id="product_import_page">
                   <a href="#" class="nav-link">
                     <i class="fas fa-angle-right nav-icon"></i>
                     <p>Nhập hàng</p>
                   </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" id="product_transfer_page">
                   <a href="#" class="nav-link">
                     <i class="fas fa-angle-right nav-icon"></i>
                     <p>Chuyển hàng</p>
                   </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" id="product_trash_page">
                   <a href="<?= site_url("dashboard/product/loadproducttrash") ?>" class="nav-link">
                     <i class="fas fa-angle-right nav-icon"></i>
                     <p>Thùng rác</p>
@@ -162,13 +162,13 @@
                 </p>
               </a>
               <ul class="nav nav-treeview">
-                <li class="nav-item">
+                <li class="nav-item" id="customer_list_page">
                   <a href="<?= site_url("dashboard/customer") ?>" class="nav-link">
                     <i class="fas fa-angle-right nav-icon"></i>
                     <p>Khách hàng</p>
                   </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" id="customer_group_list_page">
                   <a href="<?= site_url("dashboard/customergroup") ?>" class="nav-link">
                     <i class="fas fa-angle-right nav-icon"></i>
                     <p>Nhóm khách hàng</p>
@@ -176,7 +176,7 @@
                 </li>
               </ul>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" id="cashbook_wrapper_page">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-money-check-alt"></i>
                 <p>
@@ -185,19 +185,19 @@
                 </p>
               </a>
               <ul class="nav nav-treeview">
-                <li class="nav-item">
+                <li class="nav-item" id="cashbook_list_page">
                   <a href="<?= site_url("dashboard/cashbook") ?>" class="nav-link">
                     <i class="fas fa-angle-right nav-icon"></i>
                     <p>Tổng hợp sổ quỹ</p>
                   </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" id="receipt_income_page">
                   <a href="<?= site_url("dashboard/cashbook/loadreceiptincome") ?>" class="nav-link">
                     <i class="fas fa-angle-right nav-icon"></i>
                     <p>Phiếu thu</p>
                   </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" id="receipt_outcome_page">
                   <a href="<?= site_url("dashboard/cashbook/loadreceiptoutcome") ?>" class="nav-link">
                     <i class="fas fa-angle-right nav-icon"></i>
                     <p>Phiếu chi</p>
@@ -205,7 +205,7 @@
                 </li>
               </ul>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" id="report_page">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-chart-bar"></i>
                 <p>
@@ -213,7 +213,7 @@
                 </p>
               </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" id="promotion_list_page">
               <a href="<?= site_url("dashboard/promotion") ?>" class="nav-link">
                 <i class="nav-icon fas fa-share-alt-square"></i>
                 <p>
@@ -221,7 +221,7 @@
                 </p>
               </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" id="system_setting_page">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-cogs"></i>
                 <p>
@@ -230,13 +230,13 @@
                 </p>
               </a>
               <ul class="nav nav-treeview">
-                <li class="nav-item">
+                <li class="nav-item" id="branch_list_page">
                   <a href="<?= site_url("dashboard/brand") ?>" class="nav-link">
                     <i class="fas fa-angle-right nav-icon"></i>
                     <p>Chi nhánh</p>
                   </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" id="employee_list_page">
                   <a href="<?= site_url("dashboard/employee") ?>" class="nav-link">
                     <i class="fas fa-angle-right nav-icon"></i>
                     <p>Nhân viên</p>
@@ -300,12 +300,14 @@
   <!-- AdminLTE App -->
   <script src="<?php echo base_url(); ?>/assets/dist/js/adminlte.js"></script>
   <!-- My Script -->
+
   <script src="<?php echo base_url(); ?>/assets/dist/js/pages/route.js"></script>
   <script src="<?php echo base_url(); ?>/assets/dist/js/pages/logout.js"></script>
 
   <script src="<?php echo base_url(); ?>/assets/dist/js/pages/homepage.js"></script>
   <script src="<?php echo base_url(); ?>/assets/dist/js/pages/cart.js"></script>
   <script src="<?php echo base_url(); ?>/assets/dist/js/pages/sale.js"></script>
+  <script src="<?php echo base_url(); ?>/assets/dist/js/pages/order.js"></script>
   <script src="<?php echo base_url(); ?>/assets/dist/js/pages/product.js"></script>
   <script src="<?php echo base_url(); ?>/assets/dist/js/pages/customer.js"></script>
   <script src="<?php echo base_url(); ?>/assets/dist/js/pages/cashbook.js"></script>

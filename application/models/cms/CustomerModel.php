@@ -25,12 +25,18 @@ class CustomerModel extends CI_Model
         return $query->result();
     }
 
-    public function search_customer_byId($data)
+    public function search_customer_by_code($data)
     {
         $this->db->from($this->customer_table);
-        $this->db->where('id', $data);
+        $this->db->where('customer_code', $data);
 
         $query = $this->db->get();
         return $query->result();
+    }
+
+    public function update_customer_spend($customer_code, $spend)
+    {
+        $this->db->where('customer_code', $customer_code);
+        $this->db->update($this->customer_table, array('spend' => $spend));
     }
 }

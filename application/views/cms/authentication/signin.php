@@ -74,7 +74,7 @@
 					},
 					success: function(data) {
 						localStorage.setItem('auth_token', data.data.token);
-						window.location.href = '<?= site_url("dashboard/homepage") ?>';
+						window.location.href = '<?= site_url("dashboard/sale") ?>';
 					}
 				});
 				event.preventDefault();

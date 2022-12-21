@@ -396,7 +396,7 @@ class Product extends RestController
             $this->response($message, RestController::HTTP_NOT_FOUND);
         }
     }
-    public function searchproductbyid_post()
+    public function searchproductbycode_post()
     {
         $this->load->library('Authorization_Token');
         /**
@@ -407,18 +407,111 @@ class Product extends RestController
         $is_valid_token = $this->authorization_token->validateToken();
         if (!empty($is_valid_token) and $is_valid_token['status'] === TRUE) {
 
-            $result = $this->ProductModel->search_productbyId($data['id']);
+            $result = $this->ProductModel->search_product_by_code($data['product_code']);
             $message = [
                 'status' => true,
                 'data' => $result,
-                'message' => "Search product by id successful"
+                'message' => "Search product by code successful"
             ];
             $this->response($message, RestController::HTTP_OK);
         } else {
             // Login Error
             $message = [
                 'status' => FALSE,
-                'message' => "Can't search product by id"
+                'message' => "Can't search product by code"
+            ];
+            $this->response($message, RestController::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function updateproductinfobycode_post()
+    {
+        $this->load->library('Authorization_Token');
+        $data = $this->security->xss_clean($this->post());
+        $is_valid_token = $this->authorization_token->validateToken();
+        if (!empty($is_valid_token) and $is_valid_token['status'] === TRUE) {
+            $update_info = array(
+                'title'                 => $data['product-new-name'],
+                'brand'                 => $data['product-new-brand'],
+                'goods_cost'            => $data['product-new-goodscost'],
+                'retail_price'          => $data['product-new-retailprice'],
+                'quantity_warehouse'    => $data['product-new-qty'],
+                'capacity'              => $data['product-new-capacity'],
+                'unit'                  => $data['product-new-unit'],
+                'published'             => $data['product-new-status'],
+                'ingredient'            => $data['product-new-ingred'],
+                'description'           => $data['product-new-description'],
+            );
+
+            $this->ProductModel->update_productInfobyCode($data['product-code'], $update_info);
+
+            $message = [
+                'status' => true,
+                'data' => $update_info,
+                'message' => "Update product data successful"
+            ];
+            $this->response($message, RestController::HTTP_OK);
+        } else {
+            // Login Error
+            $message = [
+                'status' => FALSE,
+                'message' => "Can't update product data"
+            ];
+            $this->response($message, RestController::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function deleteproducttemp_post()
+    {
+        $this->load->library('Authorization_Token');
+        /**
+         * User Token Validation
+         */
+        $data = $this->security->xss_clean($this->post());
+
+        $is_valid_token = $this->authorization_token->validateToken();
+        if (!empty($is_valid_token) and $is_valid_token['status'] === TRUE) {
+
+            $result = $this->ProductModel->delete_product_temp($data['product_code']);
+            $message = [
+                'status' => true,
+                'data' => $result,
+                'message' => "Search product by code successful"
+            ];
+            $this->response($message, RestController::HTTP_OK);
+        } else {
+            // Login Error
+            $message = [
+                'status' => FALSE,
+                'message' => "Can't search product by code"
+            ];
+            $this->response($message, RestController::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function restoreproductitem_post()
+    {
+        $this->load->library('Authorization_Token');
+        /**
+         * User Token Validation
+         */
+        $data = $this->security->xss_clean($this->post());
+
+        $is_valid_token = $this->authorization_token->validateToken();
+        if (!empty($is_valid_token) and $is_valid_token['status'] === TRUE) {
+
+            $result = $this->ProductModel->restore_product_item($data['product_code']);
+            $message = [
+                'status' => true,
+                'data' => $result,
+                'message' => "Search product by code successful"
+            ];
+            $this->response($message, RestController::HTTP_OK);
+        } else {
+            // Login Error
+            $message = [
+                'status' => FALSE,
+                'message' => "Can't search product by code"
             ];
             $this->response($message, RestController::HTTP_NOT_FOUND);
         }

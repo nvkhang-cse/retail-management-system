@@ -18,10 +18,10 @@ class CustomerGroupModel extends CI_Model
 
     public function getCusGroupDiscount($data)
     {
-        $this->db->select('discount');
+        $this->db->select('code, name, discount');
         $this->db->from($this->customer_group_table);
         $this->db->where('code', $data);
-        
+
         $query = $this->db->get();
         return $query->result();
     }

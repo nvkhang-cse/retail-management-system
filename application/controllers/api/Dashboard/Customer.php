@@ -183,7 +183,7 @@ class Customer extends RestController
         $is_valid_token = $this->authorization_token->validateToken();
         if (!empty($is_valid_token) and $is_valid_token['status'] === TRUE) {
 
-            $result = $this->CustomerModel->search_customer_byId($data['id']);
+            $result = $this->CustomerModel->search_customer_by_code($data['code']);
             $message = [
                 'status' => true,
                 'data' => $result,

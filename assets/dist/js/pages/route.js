@@ -6,6 +6,30 @@ $(function () {
 			var index2 = $("#index2").val();
 			var site_url = window.location.origin + "/LVTNCI-3/";
 			var url_attr;
+			var permission_check;
+
+			$.ajax({
+				type: "POST",
+				url: site_url + "api/dashboard/permission/getpermission",
+				dataType: "json",
+				encode: true,
+				async: false,
+				headers: {
+					Authorization: localStorage.getItem("auth_token"),
+				},
+				success: function (response) {
+					permission_check = response.data;
+				},
+			});
+
+			if (permission_check == "1") {
+			} else if (permission_check == "2") {
+				$("#branch_list_page").hide();
+			} else {
+				$(
+					"#home_page, #product_warehouse_page, #product_import_page, #product_transfer_page, #product_trash_page, #cashbook_list_page, #receipt_income_page, #receipt_outcome_page, #report_page, #branch_list_page, #employee_list_page, #cashbook_wrapper_page,#system_setting_page, #customer_group_list_page, #promotion_list_page"
+				).hide();
+			}
 
 			if (index == 1) {
 				url_attr = site_url + "api/dashboard/homepage/loadhomepage";
@@ -40,6 +64,9 @@ $(function () {
 			} else if (index == 4) {
 				url_attr = site_url + "api/dashboard/sale/loadsalepage";
 			} else if (index == 5) {
+				if (index2 == 1) {
+					url_attr = site_url + "api/dashboard/order/loadorderlist";
+				}
 			} else if (index == 6) {
 				if (index2 == 1) {
 					url_attr = site_url + "api/dashboard/cashbook/loadcashbook";
@@ -94,6 +121,7 @@ function add_script(index, index2, site_url) {
 	} else if (index == 4) {
 		sale(index2, site_url);
 	} else if (index == 5) {
+		order(index2, site_url);
 	} else if (index == 6) {
 		cashBookTable(index2, site_url);
 	} else if (index == 7) {

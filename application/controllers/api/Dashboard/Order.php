@@ -4,15 +4,15 @@ require APPPATH . 'libraries/RestController.php';
 
 use chriskacerguis\RestServer\RestController;
 
-class Permission extends RestController
+class Order extends RestController
 {
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('cms/PermissionModel');
+        $this->load->model('cms/OrderModel');
     }
 
-    public function loadpermissiondata_post()
+    public function loadorderlist_post()
     {
         $this->load->library('Authorization_Token');
         /**
@@ -20,33 +20,25 @@ class Permission extends RestController
          */
         $is_valid_token = $this->authorization_token->validateToken();
         if (!empty($is_valid_token) and $is_valid_token['status'] === TRUE) {
-            $this->load->model('cms/UserModel');
 
-            $user_data = $this->authorization_token->userData();
-            $permission_data = $this->UserModel->get_permission_of_user($user_data->id);
-
-            if ($permission_data[0]->permission == "1") {
-                $return_data = $this->PermissionModel->get_permission_list_by_admin();
-            } else if ($permission_data[0]->permission == 2) {
-                $return_data = $this->PermissionModel->get_permission_list_by_manager();
-            }
+            $return_data = $this->load->view('cms/dashboard/order/order_list', '', true);
 
             $message = [
                 'status' => true,
                 'data' => $return_data,
-                'message' => "Load data successful"
+                'message' => "Load order list successful"
             ];
             $this->response($message, RestController::HTTP_OK);
         } else {
             $message = [
                 'status' => false,
-                'message' => "Can't load data"
+                'message' => "Can't load order list"
             ];
             $this->response($message, RestController::HTTP_NOT_FOUND);
         }
     }
 
-    public function getpermission_post()
+    public function loadorderdata_post()
     {
         $this->load->library('Authorization_Token');
         /**
@@ -54,14 +46,25 @@ class Permission extends RestController
          */
         $is_valid_token = $this->authorization_token->validateToken();
         if (!empty($is_valid_token) and $is_valid_token['status'] === TRUE) {
+            $data = $this->security->xss_clean($this->post());
             $this->load->model('cms/UserModel');
 
             $user_data = $this->authorization_token->userData();
-            $permission_data = $this->UserModel->get_permission_of_user($user_data->id);
+            $brand_code_data = $this->UserModel->get_brandcode_of_user($user_data->id);
+
+            if ($brand_code_data[0]->brand_code == "ALL") {
+                $return_data = $this->OrderModel->get_order_by_brandcode($data["brand_code"]);
+            } else {
+                if ($brand_code_data[0]->brand_code == $data["brand_code"]) {
+                    $return_data = $this->OrderModel->get_order_by_brandcode($data["brand_code"]);
+                } else {
+                    $return_data = [];
+                }
+            }
 
             $message = [
                 'status' => true,
-                'data' => $permission_data[0]->permission,
+                'data' => $return_data,
                 'message' => "Load data successful"
             ];
             $this->response($message, RestController::HTTP_OK);

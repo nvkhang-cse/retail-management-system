@@ -105,7 +105,7 @@ function productTable(index2, site_url) {
 				{ data: "expired_date" },
 				{
 					data: null,
-					defaultContent: `<div class="btn-group"><button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown"></button><div class="dropdown-menu"><a class="dropdown-item">Chi tiết</a><a class="dropdown-item">Sửa</a><a class="dropdown-item">Xoá</a></div></div>`,
+					defaultContent: `<div class="btn-group"><button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown"></button><div class="dropdown-menu"><a class="dropdown-item">Chi tiết</a></div></div>`,
 					className: "dt-body-center",
 					searchable: false,
 					orderable: false,
@@ -273,8 +273,31 @@ function productTable(index2, site_url) {
 					},
 				},
 				{
-					data: null,
-					defaultContent: `<div class="btn-group"><button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown"></button><div class="dropdown-menu"><a class="dropdown-item">Chi tiết</a><a class="dropdown-item">Sửa</a><a class="dropdown-item">Xoá</a></div></div>`,
+					data: "product_code",
+					render: function (data, type, row, meta) {
+						var item = `<div class="btn-group">
+								<button
+									type="button"
+									class="btn btn-default dropdown-toggle dropdown-icon"
+									data-toggle="dropdown"
+								></button>
+								<div class="dropdown-menu">
+									<a
+										class="dropdown-item edit-product-info"
+										href="#"
+										data-value="${row.product_code}"
+									>Chỉnh sửa
+									</a>
+									<a
+										class="dropdown-item delete-product-temp"
+										href="#"
+										data-value="${row.product_code}"
+									>Xóa
+									</a>
+								</div>
+							</div>`;
+						return item;
+					},
 					className: "dt-body-center",
 					searchable: false,
 					orderable: false,
@@ -347,6 +370,70 @@ function productTable(index2, site_url) {
 			});
 
 			table.clear().rows.add(warehouse_data.data).draw();
+		});
+
+		$(".edit-product-info").on("click", function () {
+			var product_code = $(this).data("value");
+			var product_info = getProductDataByCode(product_code);
+			$("#product-code").val(product_code);
+			$("#product-new-name").val(product_info[0]["title"]);
+			$("#product-new-brand").val(product_info[0]["brand"]);
+			$("#product-new-goodscost").val(product_info[0]["goods_cost"]);
+			$("#product-new-retailprice").val(product_info[0]["retail_price"]);
+			$("#product-new-qty").val(product_info[0]["quantity_warehouse"]);
+			$("#product-new-capacity").val(product_info[0]["capacity"]);
+			$("#product-new-unit").val(product_info[0]["unit"]);
+			$("#product-new-ingred").val(product_info[0]["ingredient"]);
+			if (product_info[0]["published"] == 0) {
+				$("#product-unpublished").prop("checked", true);
+			} else if (product_info[0]["published"] == 1) {
+				$("#product-published").prop("checked", true);
+			}
+			$("#product-new-ingred").val(product_info[0]["ingredient"]);
+			$("#product-new-description").val(product_info[0]["description"]);
+			// $('form#editProductForm :input').prop('readonly', true);
+			// $('#submit-edit-form').prop({
+			// 	'disabled': true,
+			// 	'hidden': true
+			// });
+			// $('#open-edit-form').prop('hidden', false)
+
+			$("#editProductInfo").modal("toggle");
+		});
+
+		$("form").submit(function () {
+			var formData = new FormData(this);
+			// console.log(formData);
+
+			$.ajax({
+				url: site_url + "api/dashboard/product/updateproductinfobycode",
+				type: "POST",
+				data: formData,
+				headers: { Authorization: localStorage.getItem("auth_token") },
+				contentType: false,
+				processData: false,
+				success: function (response) {
+					// window.location.href = site_url + "dashboard/product";
+					console.log(response);
+				},
+			});
+		});
+
+		$(".delete-product-temp").on("click", function () {
+			var product_code = $(this).data("value");
+
+			$.ajax({
+				url: site_url + "api/dashboard/product/deleteproducttemp",
+				type: "POST",
+				dataType: "json",
+				data: { product_code: product_code },
+				encode: true,
+				headers: { Authorization: localStorage.getItem("auth_token") },
+				success: function (response) {
+					window.location.href =
+						site_url + "dashboard/product/loadproductwarehouse";
+				},
+			});
 		});
 	} else if (index2 == 3) {
 		var category_data;
@@ -507,8 +594,31 @@ function productTable(index2, site_url) {
 				},
 				{ data: "barcode" },
 				{
-					data: null,
-					defaultContent: `<div class="btn-group"><button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown"></button><div class="dropdown-menu"><a class="dropdown-item">Khôi phục</a><a class="dropdown-item">Xóa</a></div></div>`,
+					data: "product_code",
+					render: function (data, type, row, meta) {
+						var item = `<div class="btn-group">
+								<button
+									type="button"
+									class="btn btn-default dropdown-toggle dropdown-icon"
+									data-toggle="dropdown"
+								></button>
+								<div class="dropdown-menu">
+									<a
+										class="dropdown-item restore-product-item"
+										href="#"
+										data-value="${row.product_code}"
+									>Khôi phục
+									</a>
+									<a
+										class="dropdown-item delete-product-for"
+										href="#"
+										data-value="${row.product_code}"
+									>Xóa vĩnh viễn
+									</a>
+								</div>
+							</div>`;
+						return item;
+					},
 					className: "dt-body-center",
 					searchable: false,
 					orderable: false,
@@ -582,6 +692,23 @@ function productTable(index2, site_url) {
 			});
 
 			table.clear().rows.add(warehouse_data.data).draw();
+		});
+
+		$(".restore-product-item").on("click", function () {
+			var product_code = $(this).data("value");
+
+			$.ajax({
+				url: site_url + "api/dashboard/product/restoreproductitem",
+				type: "POST",
+				dataType: "json",
+				data: { product_code: product_code },
+				encode: true,
+				headers: { Authorization: localStorage.getItem("auth_token") },
+				success: function (response) {
+					window.location.href =
+						site_url + "dashboard/product/loadproducttrash";
+				},
+			});
 		});
 	} else if (index2 == 5) {
 		var table;
@@ -698,4 +825,23 @@ function productTable(index2, site_url) {
 			});
 		});
 	}
+}
+
+function getProductDataByCode(code) {
+	var product_data;
+	var site_url = window.location.origin + "/LVTNCI-3/";
+
+	$.ajax({
+		type: "POST",
+		data: { product_code: code },
+		url: site_url + "api/dashboard/product/searchproductbycode",
+		dataType: "json",
+		encode: true,
+		async: false,
+		headers: { Authorization: localStorage.getItem("auth_token") },
+		success: function (response) {
+			product_data = response;
+		},
+	});
+	return product_data.data;
 }

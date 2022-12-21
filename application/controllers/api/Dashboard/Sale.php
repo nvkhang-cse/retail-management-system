@@ -52,7 +52,7 @@ class Sale extends RestController
         $is_valid_token = $this->authorization_token->validateToken();
         if (!empty($is_valid_token) and $is_valid_token['status'] === TRUE) {
 
-            $product = $this->ProductModel->search_productbyId($data['id']);
+            $product = $this->ProductModel->search_product_by_code($data['product_code']);
             $data = array(
                 'id'            => $product[0]['id'],
                 'qty'           => 1,
@@ -221,24 +221,55 @@ class Sale extends RestController
 
         $is_valid_token = $this->authorization_token->validateToken();
         if (!empty($is_valid_token) and $is_valid_token['status'] === TRUE) {
+
             $user_data = $this->authorization_token->userData();
             $order_info = $data['order_info'];
             $order_detail = $data['order_detail'];
 
             $ord_code = uniqid($user_data->id . '_');
             $order_info['order_code'] = $ord_code;
-            $order_info['staff'] = $user_data->id;
-
+            $order_info['staff'] = $user_data->full_name;
 
             foreach ($order_detail as $key => $val) {
                 $order_detail[$key]['order_code'] = $ord_code;
             }
-
-
             $this->SaleModel->insert_order($order_info, $order_detail);
+
+            $this->load->model('cms/ProductModel');
+            $update_product_quantity = [];
+            foreach ($order_detail as $key => $val) {
+                $code = $order_detail[$key]['product_code'];
+                $product_data = $this->ProductModel->search_product_by_code($code);
+                $quantity = $order_detail[$key]['quantity'];
+                if ($product_data[0]["quantity_sale"] - $quantity >= 0) {
+                    $item = array(
+                        'product_code'          => $code,
+                        'quantity_warehouse'    => $product_data[0]["quantity_warehouse"] - $quantity,
+                        'quantity_sale'         => $product_data[0]["quantity_sale"] - $quantity
+                    );
+                    array_push($update_product_quantity, $item);
+                } else {
+                    $message = [
+                        'status' => false,
+                        'message' => "Quantity is not enough!"
+                    ];
+                    $this->response($message, RestController::HTTP_INTERNAL_ERROR);
+                }
+            }
+            $this->ProductModel->update_product_quantity($update_product_quantity);
+
+            if ($order_info['customer'] != 0) {
+                $this->load->model('cms/CustomerModel');
+                $customer_data = $this->CustomerModel->search_customer_by_code($order_info['customer']);
+                $spend = $customer_data[0]->spend + $order_info['final_payment'];
+
+                $this->CustomerModel->update_customer_spend($order_info['customer'], $spend);
+            } else {
+            }
+
             $message = [
-                'status' => true,
-                'data' => $order_detail,
+                'status'  => true,
+                'data'    => "",
                 'message' => "Create order successful"
             ];
             $this->response($message, RestController::HTTP_OK);

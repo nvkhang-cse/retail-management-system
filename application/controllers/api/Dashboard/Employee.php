@@ -178,7 +178,7 @@ class Employee extends RestController
                         $employee_data = [
                             'fullname'             => $data['employee_name'],
                             'email'                => $data['employee_email'],
-                            'pwd'                  => $data['employee_password'],
+                            'pwd'                  => md5($data['employee_password']),
                             'phone'                => $data['employee_phone'],
                             'birthday'             => $data['employee_birthday'],
                             'address'              => $data['employee_address'],
