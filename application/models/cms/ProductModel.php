@@ -38,7 +38,7 @@ class ProductModel extends CI_Model
     {
         $this->db->from($this->product_table);
         $this->db->like('title', $data);
-        $this->db->or_like('branch', $data);
+        $this->db->or_like('brand', $data);
 
         $query = $this->db->get();
         return $query->result();
