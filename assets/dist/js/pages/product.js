@@ -162,6 +162,61 @@ function productTable(index2, site_url) {
 		warehouse_data = getProductWarehouseData(site_url, branch_code);
 		category_data = getProductCategoryData(site_url);
 
+		category_data.forEach((row) => {
+			$("#product-filter-category").append(
+				'<option value="' + row.code + '">' + row.title + "</option>"
+			);
+		});
+
+		$.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
+			var option = $("#product-filter-category").val();
+			var category = data[3];
+			let result = category_data.find((item) => item.code == option);
+			if (option == 0 || category == result.title) {
+				return true;
+			}
+			return false;
+		});
+
+		$.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
+			var min = parseInt($("#product-filter-start-price").val(), 10);
+			var max = parseInt($("#product-filter-end-price").val(), 10);
+			var age = parseFloat(data[11]) || 0;
+
+			if (
+				(isNaN(min) && isNaN(max)) ||
+				(isNaN(min) && age <= max) ||
+				(min <= age && isNaN(max)) ||
+				(min <= age && age <= max)
+			) {
+				return true;
+			}
+			return false;
+		});
+
+		var minDate, maxDate;
+		minDate = new DateTime($("#product-filter-start-date"), {
+			format: "MMMM Do YYYY",
+		});
+		maxDate = new DateTime($("#product-filter-end-date"), {
+			format: "MMMM Do YYYY",
+		});
+		$.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
+			var min = minDate.val();
+			var max = maxDate.val();
+			var date = new Date(data[13]);
+
+			if (
+				(min === null && max === null) ||
+				(min === null && date <= max) ||
+				(min <= date && max === null) ||
+				(min <= date && date <= max)
+			) {
+				return true;
+			}
+			return false;
+		});
+
 		table = $("#warehouse_table").DataTable({
 			data: warehouse_data,
 			columnDefs: [
@@ -180,10 +235,6 @@ function productTable(index2, site_url) {
 				{
 					orderable: false,
 					targets: [1, 5, 6, 7, 8, 9, 10, 14],
-				},
-				{
-					searchable: false,
-					targets: [1, 7, 8, 9, 10, 11, 12],
 				},
 			],
 			columns: [
@@ -317,6 +368,23 @@ function productTable(index2, site_url) {
 			],
 		});
 		table.buttons().container().appendTo("#warehouse_wrapper .col-md-6:eq(0)");
+
+		$("#product-filter-start-date, #product-filter-end-date").on(
+			"change",
+			function () {
+				table.draw();
+			}
+		);
+
+		$("#product-filter-start-price, #product-filter-end-price").keyup(
+			function () {
+				table.draw();
+			}
+		);
+
+		$("#product-filter-category").on("change", function () {
+			table.draw();
+		});
 
 		$("#branch_code").on("change", function () {
 			branch_code = $("#branch_code").val();

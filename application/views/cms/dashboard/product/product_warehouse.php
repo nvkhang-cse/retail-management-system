@@ -32,6 +32,40 @@
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body" id="warehouse_wrapper">
+                        <table cellspacing="5" cellpadding="5">
+                            <tbody>
+                                <tr>
+                                    <div class="form-outline">
+                                        <td style="padding: 0;">Từ ngày:</td>
+                                        <td><input type="text" class="form-control" placeholder="Nhập ngày bắt đầu" id="product-filter-start-date"></td>
+                                    </div>
+                                    <div class="form-outline">
+                                        <td>đến:</td>
+                                        <td><input type="text" class="form-control" placeholder="Nhập ngày kết thúc" id="product-filter-end-date"></td>
+                                    </div>
+                                </tr>
+                                <tr>
+                                    <div class="form-outline">
+                                        <td style="padding: 0;">Giá từ:</td>
+                                        <td><input type="text" inputmode="numeric" placeholder="Nhập giá tối thiểu" class="form-control" id="product-filter-start-price"></td>
+                                    </div>
+                                    <div class="form-outline">
+                                        <td>đến:</td>
+                                        <td><input type="text" inputmode="numeric" placeholder="Nhập giá tối đa" class="form-control" id="product-filter-end-price"></td>
+                                    </div>
+                                </tr>
+                                <tr>
+                                    <div class="form-outline">
+                                        <td style="padding: 0;">Danh mục sản phẩm:</td>
+                                        <td>
+                                            <select class="form-control" id="product-filter-category" aria-label="Default select example">
+                                                <option value="0" selected>Chọn danh mục sản phẩm</option>
+                                            </select>
+                                        </td>
+                                    </div>
+                                </tr>
+                            </tbody>
+                        </table>
                         <table id="warehouse_table" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
