@@ -68,3 +68,13 @@ div.dataTables_length select {
 	font-weight: bold;
 	background-color: antiquewhite;
 }
+
+.list-group {
+	overflow-y: auto;
+	max-height: 280px;
+}
+
+#cart-detail {
+	overflow-y: auto;
+	max-height: 500px;
+}

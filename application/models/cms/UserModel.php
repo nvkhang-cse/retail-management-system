@@ -49,7 +49,6 @@ class UserModel extends CI_Model
     public function insert_user($data)
     {
         $this->db->insert($this->user_table, $data);
-        return $this->db->insert_id();
     }
 
     public function user_login($email, $password)

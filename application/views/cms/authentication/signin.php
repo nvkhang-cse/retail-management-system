@@ -39,9 +39,9 @@
 								<button type="submit" class="form-control btn btn-primary col-8 col-md-8 col-lg-8">Đăng nhập</button>
 							</div>
 						</form>
-						<div class="text-center mt-2">
+						<!-- <div class="text-center mt-2">
 							<a href="#" class="text-primary">Quên mật khẩu</a>
-						</div>
+						</div> -->
 						<div class="text-danger text-center">
 							<p id="login_message"></p>
 						</div>

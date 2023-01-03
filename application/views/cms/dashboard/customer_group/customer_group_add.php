@@ -22,19 +22,9 @@
               <h5 class="card-title">Thông tin nhóm khách hàng</h5>
             </div>
             <div class="card-body">
-              <div class="row">
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for="customer_group_name">Tên nhóm khách hàng</label>
-                    <input type="text" class="form-control" id="customer_group_name" name="customer_group_name" placeholder="" required maxlength="50">
-                  </div>
-                </div>
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for="customer_group_code">Mã nhóm khách hàng</label>
-                    <input type="text" class="form-control" id="customer_group_code" name="customer_group_code" placeholder="" required maxlength="5">
-                  </div>
-                </div>
+              <div class="form-group">
+                <label for="customer_group_name">Tên nhóm khách hàng</label>
+                <input type="text" class="form-control" id="customer_group_name" name="customer_group_name" placeholder="" required maxlength="50">
               </div>
               <div class="form-group">
                 <label for="customer_group_description">Mô tả</label>

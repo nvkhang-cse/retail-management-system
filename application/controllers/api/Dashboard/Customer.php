@@ -102,7 +102,6 @@ class Customer extends RestController
             $this->form_validation->set_data($data);
             $this->form_validation->set_error_delimiters('', '');
             $this->form_validation->set_rules('customer_name', 'Tên khách hàng', 'trim|required|max_length[100]');
-            $this->form_validation->set_rules('customer_code', 'Mã khách hàng', 'trim|required|max_length[20]|alpha_numeric');
             $this->form_validation->set_rules('customer_group', 'Mã nhóm khách hàng', 'trim|max_length[5]|alpha_numeric');
             $this->form_validation->set_rules('customer_phone', 'Số điện thoại', 'trim|required|max_length[20]|numeric');
             $this->form_validation->set_rules('customer_email', 'Email', 'trim|max_length[100]|valid_email');
@@ -120,7 +119,7 @@ class Customer extends RestController
             } else {
                 $customer_data = [
                     'name'              => $data['customer_name'],
-                    'customer_code'     => $data['customer_code'],
+                    'customer_code'     => strtoupper(uniqid('CS' . '_')),
                     'group_code'        => $data['customer_group'],
                     'phone'             => $data['customer_phone'],
                     'email'             => $data['customer_email'],

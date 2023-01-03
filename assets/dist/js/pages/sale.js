@@ -2,27 +2,12 @@ function sale(index2, site_url) {
 	"use strict";
 	var branch_data;
 
-	$.ajax({
-		type: "POST",
-		url: site_url + "api/dashboard/branch/loadbranchdata",
-		dataType: "json",
-		encode: true,
-		async: false,
-		headers: { Authorization: localStorage.getItem("auth_token") },
-		success: function (response) {
-			branch_data = response.data;
-		},
-	});
+	branch_data = getBranchData(site_url);
 
 	branch_data.forEach((row) => {
 		$("#branch_code").append(
 			'<option value="' + row.code + '">' + row.name + "</option>"
 		);
-	});
-
-	$(".list-group").css({
-		"overflow-y": "auto",
-		"max-height": "280px",
 	});
 
 	$("#product-search-result, #customer-search-result").css("display", "none");
@@ -33,7 +18,7 @@ function sale(index2, site_url) {
 		if (query.length == 2) {
 			$.ajax({
 				type: "POST",
-				data: { query: query },
+				data: { query: query, branch_code: $("#branch_code").val() },
 				url: site_url + "api/dashboard/product/searchproduct",
 				dataType: "json",
 				encode: true,
@@ -68,7 +53,7 @@ function sale(index2, site_url) {
 							row.currency +
 							"</strong></p>" +
 							'<p class="list-group-item-text">Số lượng: ' +
-							row.quantity_sale +
+							(row.quantity_sale != "0" ? row.quantity_sale : "Hết hàng") +
 							"</p>";
 						"</div>" + "</div></li>";
 					}

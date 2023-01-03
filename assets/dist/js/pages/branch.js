@@ -20,7 +20,7 @@ function branchTable(index2, site_url) {
 				},
 			],
 			columns: [
-				{ data: "code" },
+				{ data: null },
 				{ data: "name" },
 				{ data: "address" },
 				{ data: "district" },
@@ -47,13 +47,13 @@ function branchTable(index2, site_url) {
 								></button>
 								<div class="dropdown-menu">
 									<a
-										class="dropdown-item edit-product-info"
+										class="dropdown-item"
 										href="#"
 										data-value="${row.code}"
 									>Chỉnh sửa
 									</a>
 									<a
-										class="dropdown-item delete-product-temp"
+										class="dropdown-item"
 										href="#"
 										data-value="${row.code}"
 									>Xóa
@@ -155,7 +155,6 @@ function branchTable(index2, site_url) {
 				contentType: false,
 				processData: false,
 				success: function (data) {
-					// toastr.success(data.message);
 					window.location.href = site_url + "dashboard/branch";
 				},
 			});

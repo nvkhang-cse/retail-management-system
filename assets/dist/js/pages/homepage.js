@@ -2,17 +2,7 @@ function homepage(index_2, site_url) {
 	var branch_data;
 	var sales_report_in_day;
 
-	$.ajax({
-		type: "POST",
-		url: site_url + "api/dashboard/branch/loadbranchdata",
-		dataType: "json",
-		encode: true,
-		async: false,
-		headers: { Authorization: localStorage.getItem("auth_token") },
-		success: function (response) {
-			branch_data = response.data;
-		},
-	});
+	branch_data = getBranchData(site_url);
 
 	branch_data.forEach((row) => {
 		$(

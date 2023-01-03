@@ -54,7 +54,6 @@ class Signin extends RestController
                 // Generate Token
                 $token_data['id'] = $output->id;
                 $token_data['full_name'] = $output->fullname;
-                $token_data['username'] = $output->username;
                 $token_data['email'] = $output->email;
                 $token_data['created_at'] = $output->created_at;
                 $token_data['updated_at'] = $output->updated_at;

@@ -2,8 +2,6 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <button class="btn btn-primary">Đơn 1</button>
-                <button class="btn"><i class="fas fa-plus"></i></button>
             </div>
             <div class="col-sm-6">
                 <div class="float-right">
@@ -32,7 +30,7 @@
                     </div>
                     <div class="card-body" id="product-wrapper">
                         <button type="button" class="btn btn-primary btn-sm" id="delete_btn" onclick="deleteAllItem()">Xóa tất cả sản phẩm</button>
-                        <div id="detail" class="mt-2"></div>
+                        <div id="cart-detail" class="mt-2"></div>
                     </div>
                 </div>
             </div>

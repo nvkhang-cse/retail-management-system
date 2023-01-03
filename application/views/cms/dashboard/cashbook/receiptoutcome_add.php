@@ -25,18 +25,10 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label for="receipt_code">Mã phiếu</label>
-                                        <input type="text" class="form-control" id="receipt_code" name="receipt_code" placeholder="" required maxlength="20">
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
                                         <label for="receipt_customer_code">Người nhận</label>
                                         <input type="text" class="form-control" id="receipt_customer_code" name="receipt_customer_code" placeholder="" required maxlength="20">
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for="receipt_value">Giá trị ghi nhận</label>

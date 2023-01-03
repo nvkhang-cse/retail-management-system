@@ -6,32 +6,12 @@ function customerTable(index2, site_url) {
 		var customer_data;
 		var customer_group_data;
 
-		$.ajax({
-			type: "POST",
-			url: site_url + "api/dashboard/customer/loadcustomerdata",
-			dataType: "json",
-			encode: true,
-			async: false,
-			headers: { Authorization: localStorage.getItem("auth_token") },
-			success: function (response) {
-				customer_data = response;
-			},
-		});
+		customer_data = getCustomerData(site_url);
 
-		$.ajax({
-			type: "POST",
-			url: site_url + "api/dashboard/customergroup/loadcustomergroupdata",
-			dataType: "json",
-			encode: true,
-			async: false,
-			headers: { Authorization: localStorage.getItem("auth_token") },
-			success: function (response) {
-				customer_group_data = response;
-			},
-		});
+		customer_group_data = getCustomerGroupData(site_url);
 
 		table = $("#customer_list_table").DataTable({
-			data: customer_data.data,
+			data: customer_data,
 			columnDefs: [
 				{
 					orderable: false,
@@ -49,7 +29,7 @@ function customerTable(index2, site_url) {
 				{
 					data: "group_code",
 					render: function (data, type, row, meta) {
-						let result = customer_group_data.data.find(
+						let result = customer_group_data.find(
 							(item) => item.code == row.group_code
 						);
 						if (result == undefined) {
@@ -123,17 +103,7 @@ function customerTable(index2, site_url) {
 	} else if (index2 == 2) {
 		var customer_group_data;
 
-		$.ajax({
-			type: "POST",
-			url: site_url + "api/dashboard/customergroup/loadcustomergroupdata",
-			dataType: "json",
-			encode: true,
-			async: false,
-			headers: { Authorization: localStorage.getItem("auth_token") },
-			success: function (response) {
-				customer_group_data = response.data;
-			},
-		});
+		customer_group_data = getCustomerGroupData(site_url);
 
 		customer_group_data.forEach((row) => {
 			$("#customer_group").append(
@@ -161,20 +131,10 @@ function customerTable(index2, site_url) {
 		var table;
 		var customer_group_data;
 
-		$.ajax({
-			type: "POST",
-			url: site_url + "api/dashboard/customergroup/loadcustomergroupdata",
-			dataType: "json",
-			encode: true,
-			async: false,
-			headers: { Authorization: localStorage.getItem("auth_token") },
-			success: function (response) {
-				customer_group_data = response;
-			},
-		});
+		customer_group_data = getCustomerGroupData(site_url);
 
 		table = $("#customer_group_list_table").DataTable({
-			data: customer_group_data.data,
+			data: customer_group_data,
 			columnDefs: [
 				{
 					orderable: false,
@@ -275,4 +235,44 @@ function customerTable(index2, site_url) {
 			});
 		});
 	}
+}
+
+function getCustomerData(site_url) {
+	"use strict";
+
+	var customer_data;
+
+	$.ajax({
+		type: "POST",
+		url: site_url + "api/dashboard/customer/loadcustomerdata",
+		dataType: "json",
+		encode: true,
+		async: false,
+		headers: { Authorization: localStorage.getItem("auth_token") },
+		success: function (response) {
+			customer_data = response.data;
+		},
+	});
+
+	return customer_data;
+}
+
+function getCustomerGroupData(site_url) {
+	"use strict";
+
+	var customer_group_data;
+
+	$.ajax({
+		type: "POST",
+		url: site_url + "api/dashboard/customergroup/loadcustomergroupdata",
+		dataType: "json",
+		encode: true,
+		async: false,
+		headers: { Authorization: localStorage.getItem("auth_token") },
+		success: function (response) {
+			customer_group_data = response.data;
+		},
+	});
+
+	return customer_group_data;
 }

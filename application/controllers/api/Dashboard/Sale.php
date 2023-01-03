@@ -226,14 +226,13 @@ class Sale extends RestController
             $order_info = $data['order_info'];
             $order_detail = $data['order_detail'];
 
-            $ord_code = uniqid($user_data->id . '_');
+            $ord_code = strtoupper(uniqid('ORD' . $user_data->id . '_'));
             $order_info['order_code'] = $ord_code;
-            $order_info['staff'] = $user_data->full_name;
+            $order_info['staff'] = $user_data->id;
 
             foreach ($order_detail as $key => $val) {
                 $order_detail[$key]['order_code'] = $ord_code;
             }
-            $this->SaleModel->insert_order($order_info, $order_detail);
 
             $this->load->model('cms/ProductModel');
             $update_product_quantity = [];
@@ -251,7 +250,7 @@ class Sale extends RestController
                 } else {
                     $message = [
                         'status' => false,
-                        'message' => "Quantity is not enough!"
+                        'message' => "Số lượng sản phẩm " . ($key + 1) . " không đủ!"
                     ];
                     $this->response($message, RestController::HTTP_INTERNAL_ERROR);
                 }
@@ -264,20 +263,18 @@ class Sale extends RestController
                 $spend = $customer_data[0]->spend + $order_info['final_payment'];
 
                 $this->CustomerModel->update_customer_spend($order_info['customer'], $spend);
-            } else {
             }
 
+            $this->SaleModel->insert_order($order_info, $order_detail);
             $message = [
                 'status'  => true,
-                'data'    => "",
-                'message' => "Create order successful"
+                'message' => "Tạo đơn thành công!"
             ];
             $this->response($message, RestController::HTTP_OK);
         } else {
-            // Login Error
             $message = [
-                'status' => FALSE,
-                'message' => "Can't create order"
+                'status' => false,
+                'message' => "Yêu cầu đăng nhập!"
             ];
             $this->response($message, RestController::HTTP_NOT_FOUND);
         }

@@ -158,12 +158,12 @@ class Employee extends RestController
                 $this->form_validation->set_rules('employee_address', 'Địa chỉ', 'trim|max_length[250]');
                 $this->form_validation->set_rules('employee_city', 'Khu vực', 'trim|max_length[50]');
                 $this->form_validation->set_rules('employee_district', 'Quận huyện', 'trim|max_length[50]');
-                $this->form_validation->set_rules('employee_branch', 'Chi nhánh', 'trim|required|max_length[5]|alpha_numeric');
+                $this->form_validation->set_rules('employee_branch', 'Chi nhánh', 'trim|required|max_length[30]|alpha_dash');
 
                 if ($permission_data[0]->permission == 1) {
-                    $this->form_validation->set_rules('employee_permission', 'Phân quyền', 'trim|required|max_length[50]|in_list[2,3]');
+                    $this->form_validation->set_rules('employee_permission', 'Phân quyền', 'trim|required|in_list[2,3]');
                 } else if ($permission_data[0]->permission == 2) {
-                    $this->form_validation->set_rules('employee_permission', 'Phân quyền', 'trim|required|max_length[50]|in_list[3]');
+                    $this->form_validation->set_rules('employee_permission', 'Phân quyền', 'trim|required|in_list[3]');
                 }
 
                 if ($this->form_validation->run() == FALSE) {

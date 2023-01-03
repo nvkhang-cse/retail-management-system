@@ -6,17 +6,7 @@ function promotionTable(index2, site_url) {
 		var branch_data;
 		var promotion_data;
 
-		$.ajax({
-			type: "POST",
-			url: site_url + "api/dashboard/branch/loadbranchdata",
-			dataType: "json",
-			encode: true,
-			async: false,
-			headers: { Authorization: localStorage.getItem("auth_token") },
-			success: function (response) {
-				branch_data = response.data;
-			},
-		});
+		branch_data = getBranchData(site_url);
 
 		branch_data.forEach((row) => {
 			$("#branch_code").append(
@@ -33,12 +23,12 @@ function promotionTable(index2, site_url) {
 			async: false,
 			headers: { Authorization: localStorage.getItem("auth_token") },
 			success: function (response) {
-				promotion_data = response;
+				promotion_data = response.data;
 			},
 		});
 
 		table = $("#promotion_list_table").DataTable({
-			data: promotion_data.data,
+			data: promotion_data,
 			columnDefs: [
 				{
 					orderable: false,
@@ -137,11 +127,11 @@ function promotionTable(index2, site_url) {
 				async: false,
 				headers: { Authorization: localStorage.getItem("auth_token") },
 				success: function (response) {
-					promotion_data = response;
+					promotion_data = response.data;
 				},
 			});
 
-			table.clear().rows.add(promotion_data.data).draw();
+			table.clear().rows.add(promotion_data).draw();
 		});
 	} else if (index2 == 2) {
 		var branch_data;
@@ -163,17 +153,7 @@ function promotionTable(index2, site_url) {
 			}
 		});
 
-		$.ajax({
-			type: "POST",
-			url: site_url + "api/dashboard/branch/loadbranchdata",
-			dataType: "json",
-			encode: true,
-			async: false,
-			headers: { Authorization: localStorage.getItem("auth_token") },
-			success: function (response) {
-				branch_data = response.data;
-			},
-		});
+		branch_data = getBranchData(site_url);
 
 		branch_data.forEach((row) => {
 			$("#promotion_branch").append(

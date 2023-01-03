@@ -7,29 +7,9 @@ function order(index2, site_url) {
 		var order_data;
 		var customer_data;
 
-		$.ajax({
-			type: "POST",
-			url: site_url + "api/dashboard/branch/loadbranchdata",
-			dataType: "json",
-			encode: true,
-			async: false,
-			headers: { Authorization: localStorage.getItem("auth_token") },
-			success: function (response) {
-				branch_data = response.data;
-			},
-		});
+		branch_data = getBranchData(site_url);
 
-		$.ajax({
-			type: "POST",
-			url: site_url + "api/dashboard/customer/loadcustomerdata",
-			dataType: "json",
-			encode: true,
-			async: false,
-			headers: { Authorization: localStorage.getItem("auth_token") },
-			success: function (response) {
-				customer_data = response;
-			},
-		});
+		customer_data = getCustomerData(site_url);
 
 		branch_data.forEach((row) => {
 			$("#branch_code").append(
@@ -46,12 +26,12 @@ function order(index2, site_url) {
 			async: false,
 			headers: { Authorization: localStorage.getItem("auth_token") },
 			success: function (response) {
-				order_data = response;
+				order_data = response.data;
 			},
 		});
 
 		table = $("#order_list_table").DataTable({
-			data: order_data.data,
+			data: order_data,
 			columnDefs: [
 				{
 					orderable: false,
@@ -69,7 +49,7 @@ function order(index2, site_url) {
 				{
 					data: "customer",
 					render: function (data, type, row, meta) {
-						let result = customer_data.data.find(
+						let result = customer_data.find(
 							(item) => item.customer_code == row.customer
 						);
 						if (result == undefined) {
@@ -162,11 +142,11 @@ function order(index2, site_url) {
 				async: false,
 				headers: { Authorization: localStorage.getItem("auth_token") },
 				success: function (response) {
-					order_data = response;
+					order_data = response.data;
 				},
 			});
 
-			table.clear().rows.add(order_data.data).draw();
+			table.clear().rows.add(order_data).draw();
 		});
 	}
 }

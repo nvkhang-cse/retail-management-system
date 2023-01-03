@@ -284,7 +284,6 @@ class Product extends RestController
                 $this->form_validation->set_data($data);
                 $this->form_validation->set_error_delimiters('', '');
                 $this->form_validation->set_rules('product_name', 'Tên sản phẩm', 'trim|required|max_length[250]');
-                $this->form_validation->set_rules('product_code', 'Mã sản phẩm', 'trim|required|max_length[20]|alpha_numeric');
                 $this->form_validation->set_rules('product_brand', 'Thương hiệu', 'trim|max_length[30]');
                 $this->form_validation->set_rules('product_origin', 'Xuất sứ', 'trim|max_length[30]');
                 $this->form_validation->set_rules('product_barcode', 'Barcode', 'trim|max_length[30]|alpha_numeric');
@@ -299,8 +298,8 @@ class Product extends RestController
                 $this->form_validation->set_rules('product_wholesale', 'Giá bán buôn', 'trim|required|integer|greater_than_equal_to[0]');
                 $this->form_validation->set_rules('product_description', 'Mô tả sản phẩm', 'trim');
                 $this->form_validation->set_rules('product_ingred', 'Thành phần', 'trim');
-                $this->form_validation->set_rules('product_category', 'Loại sản phẩm', 'trim|max_length[10]|alpha_numeric');
-                $this->form_validation->set_rules('product_warehouse', 'Chi nhánh', 'trim|required|max_length[5]|alpha_numeric');
+                $this->form_validation->set_rules('product_category', 'Loại sản phẩm', 'trim|max_length[30]|alpha_numeric');
+                $this->form_validation->set_rules('product_warehouse', 'Chi nhánh', 'trim|required|max_length[30]|alpha_dash');
 
                 if ($this->form_validation->run() == FALSE) {
                     $message = array(
@@ -313,7 +312,7 @@ class Product extends RestController
                     if ($branch_code_data[0]->branch_code == "ALL" || $branch_code_data[0]->branch_code == $data['product_warehouse']) {
                         $product_data = [
                             'title'                 => $data['product_name'],
-                            'product_code'          => $data['product_code'],
+                            'product_code'          => strtoupper(uniqid('PRD' . '_')),
                             'brand'                 => $data['product_brand'],
                             'origin'                => $data['product_origin'],
                             'barcode'               => $data['product_barcode'],
@@ -380,7 +379,7 @@ class Product extends RestController
         $is_valid_token = $this->authorization_token->validateToken();
         if (!empty($is_valid_token) and $is_valid_token['status'] === TRUE) {
 
-            $result = $this->ProductModel->search_product($data['query']);
+            $result = $this->ProductModel->search_product($data['query'], $data['branch_code']);
             $message = [
                 'status' => true,
                 'data' => $result,

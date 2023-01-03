@@ -4,54 +4,24 @@ function cashBookTable(index2, site_url) {
 	if (index2 == 1) {
 		var table;
 		var branch_data;
+		var branch_code;
 		var cashbook_data;
 		var customer_data;
 
-		$.ajax({
-			type: "POST",
-			url: site_url + "api/dashboard/branch/loadbranchdata",
-			dataType: "json",
-			encode: true,
-			async: false,
-			headers: { Authorization: localStorage.getItem("auth_token") },
-			success: function (response) {
-				branch_data = response.data;
-			},
-		});
-
+		branch_data = getBranchData(site_url);
 		branch_data.forEach((row) => {
 			$("#branch_code").append(
 				'<option value="' + row.code + '">' + row.name + "</option>"
 			);
 		});
 
-		$.ajax({
-			type: "POST",
-			url: site_url + "api/dashboard/cashbook/loadcashbookdata",
-			dataType: "json",
-			data: { branch_code: $("#branch_code").val() },
-			encode: true,
-			async: false,
-			headers: { Authorization: localStorage.getItem("auth_token") },
-			success: function (response) {
-				cashbook_data = response;
-			},
-		});
+		branch_code = $("#branch_code").val();
+		cashbook_data = getCashBookData(site_url, branch_code);
 
-		$.ajax({
-			type: "POST",
-			url: site_url + "api/dashboard/customer/loadcustomerdata",
-			dataType: "json",
-			encode: true,
-			async: false,
-			headers: { Authorization: localStorage.getItem("auth_token") },
-			success: function (response) {
-				customer_data = response;
-			},
-		});
+		customer_data = getCustomerData(site_url);
 
 		table = $("#cashbook_list_table").DataTable({
-			data: cashbook_data.data,
+			data: cashbook_data,
 			columnDefs: [
 				{
 					orderable: false,
@@ -68,7 +38,7 @@ function cashBookTable(index2, site_url) {
 				{
 					data: "customer_code",
 					render: function (data, type, row, meta) {
-						let result = customer_data.data.find(
+						let result = customer_data.find(
 							(item) => item.customer_code == row.customer_code
 						);
 						if (result == undefined) {
@@ -153,35 +123,16 @@ function cashBookTable(index2, site_url) {
 		table.buttons().container().appendTo("#cashbook_wrapper .col-md-6:eq(0)");
 
 		$("#branch_code").on("change", function () {
-			$.ajax({
-				type: "POST",
-				url: site_url + "api/dashboard/cashbook/loadcashbookdata",
-				dataType: "json",
-				data: { branch_code: $("#branch_code").val() },
-				encode: true,
-				async: false,
-				headers: { Authorization: localStorage.getItem("auth_token") },
-				success: function (response) {
-					cashbook_data = response;
-				},
-			});
+			branch_code = $("#branch_code").val();
 
-			table.clear().rows.add(cashbook_data.data).draw();
+			cashbook_data = getCashBookData(site_url, branch_code);
+
+			table.clear().rows.add(cashbook_data).draw();
 		});
 	} else if (index2 == 2) {
 		var branch_data;
 
-		$.ajax({
-			type: "POST",
-			url: site_url + "api/dashboard/branch/loadbranchdata",
-			dataType: "json",
-			encode: true,
-			async: false,
-			headers: { Authorization: localStorage.getItem("auth_token") },
-			success: function (response) {
-				branch_data = response.data;
-			},
-		});
+		branch_data = getBranchData(site_url);
 
 		branch_data.forEach((row) => {
 			$("#receipt_branch").append(
@@ -208,17 +159,7 @@ function cashBookTable(index2, site_url) {
 	} else if (index2 == 3) {
 		var branch_data;
 
-		$.ajax({
-			type: "POST",
-			url: site_url + "api/dashboard/branch/loadbranchdata",
-			dataType: "json",
-			encode: true,
-			async: false,
-			headers: { Authorization: localStorage.getItem("auth_token") },
-			success: function (response) {
-				branch_data = response.data;
-			},
-		});
+		branch_data = getBranchData(site_url);
 
 		branch_data.forEach((row) => {
 			$("#receipt_branch").append(
@@ -243,4 +184,24 @@ function cashBookTable(index2, site_url) {
 			});
 		});
 	}
+}
+
+function getCashBookData(site_url, branch_code) {
+	"use strict";
+	var cashbook_data;
+
+	$.ajax({
+		type: "POST",
+		url: site_url + "api/dashboard/cashbook/loadcashbookdata",
+		dataType: "json",
+		data: { branch_code: branch_code },
+		encode: true,
+		async: false,
+		headers: { Authorization: localStorage.getItem("auth_token") },
+		success: function (response) {
+			cashbook_data = response.data;
+		},
+	});
+
+	return cashbook_data;
 }

@@ -22,19 +22,9 @@
               <h5 class="card-title">Thông tin khách hàng</h5>
             </div>
             <div class="card-body">
-              <div class="row">
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for="customer_name">Tên khách hàng</label>
-                    <input type="text" class="form-control" id="customer_name" name="customer_name" placeholder="" required>
-                  </div>
-                </div>
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for="customer_code">Mã khách hàng</label>
-                    <input type="text" class="form-control" id="customer_code" name="customer_code" placeholder="" required>
-                  </div>
-                </div>
+              <div class="form-group">
+                <label for="customer_name">Tên khách hàng</label>
+                <input type="text" class="form-control" id="customer_name" name="customer_name" placeholder="" required>
               </div>
               <div class="row">
                 <div class="col-sm-6">
@@ -74,12 +64,12 @@
                 <input type="text" class="form-control" id="customer_address" name="customer_address" placeholder="Số nhà, phường xã">
               </div>
               <div class="form-group">
-                <label for="customer_cities">Khu vực</label>
-                <input type="text" class="form-control" id="customer_cities" name="customer_city" placeholder="Khu vực, thành phố">
-              </div>
-              <div class="form-group">
                 <label for="customer_district">Quận/Huyện</label>
                 <input type="text" class="form-control" id="customer_district" name="customer_district" placeholder="Quận, huyện">
+              </div>
+              <div class="form-group">
+                <label for="customer_cities">Khu vực</label>
+                <input type="text" class="form-control" id="customer_cities" name="customer_city" placeholder="Khu vực, thành phố">
               </div>
             </div>
           </div>

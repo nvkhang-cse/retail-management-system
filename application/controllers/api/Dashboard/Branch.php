@@ -133,7 +133,6 @@ class Branch extends RestController
                 $this->form_validation->set_data($data);
                 $this->form_validation->set_error_delimiters('', '');
                 $this->form_validation->set_rules('branch_name', 'Tên chi nhánh', 'trim|required|max_length[50]');
-                $this->form_validation->set_rules('branch_code', 'Mã chi nhánh', 'trim|required|max_length[5]|alpha_numeric');
                 $this->form_validation->set_rules('branch_address', 'Địa chỉ', 'trim|max_length[250]');
                 $this->form_validation->set_rules('branch_city', 'Khu vực', 'trim|max_length[50]');
                 $this->form_validation->set_rules('branch_district', 'Quận huyện', 'trim|max_length[50]');
@@ -149,8 +148,8 @@ class Branch extends RestController
                     $this->response($message, RestController::HTTP_NOT_FOUND);
                 } else {
                     $branch_data = [
+                        'code'             => strtoupper(uniqid('BRANCH' . '_')),
                         'name'             => $data['branch_name'],
-                        'code'             => $data['branch_code'],
                         'address'          => $data['branch_address'],
                         'city'             => $data['branch_city'],
                         'district'         => $data['branch_district'],
@@ -159,7 +158,7 @@ class Branch extends RestController
                         'created_by'       => $user_data->id
                     ];
 
-                    $this->branchModel->insert_branch($branch_data);
+                    $this->BranchModel->insert_branch($branch_data);
                     $message = [
                         'status' => true,
                         'data' => 'success',

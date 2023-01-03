@@ -6,7 +6,7 @@
         <h1 class="m-0">Danh sách loại sản phẩm</h1>
       </div>
       <div class="col-sm-6">
-        <a href="<?= site_url("dashboard/product") ?>">
+        <a href="<?= site_url("dashboard/product/loadproductwarehouse") ?>">
           <button type="button" class="btn btn-outline-primary float-sm-right ml-2">Danh sách sản phẩm</button>
         </a>
         <a href="<?= site_url("dashboard/product/loadproductcategoryadd") ?>">

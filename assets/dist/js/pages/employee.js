@@ -4,20 +4,11 @@ function employeeTable(index2, site_url) {
 	if (index2 == 3) {
 		var table;
 		var branch_data;
+		var branch_code;
 		var employee_data;
 		var permission_data;
 
-		$.ajax({
-			type: "POST",
-			url: site_url + "api/dashboard/branch/loadbranchdata",
-			dataType: "json",
-			encode: true,
-			async: false,
-			headers: { Authorization: localStorage.getItem("auth_token") },
-			success: function (response) {
-				branch_data = response.data;
-			},
-		});
+		branch_data = getBranchData(site_url);
 
 		branch_data.forEach((row) => {
 			$("#branch_code").append(
@@ -25,33 +16,14 @@ function employeeTable(index2, site_url) {
 			);
 		});
 
-		$.ajax({
-			type: "POST",
-			url: site_url + "api/dashboard/employee/loademployeedata",
-			dataType: "json",
-			data: { branch_code: $("#branch_code").val() },
-			encode: true,
-			async: false,
-			headers: { Authorization: localStorage.getItem("auth_token") },
-			success: function (response) {
-				employee_data = response;
-			},
-		});
+		branch_code = $("#branch_code").val();
 
-		$.ajax({
-			type: "POST",
-			url: site_url + "api/dashboard/permission/loadpermissiondata",
-			dataType: "json",
-			encode: true,
-			async: false,
-			headers: { Authorization: localStorage.getItem("auth_token") },
-			success: function (response) {
-				permission_data = response;
-			},
-		});
+		employee_data = getEmployeeData(site_url, branch_code);
+
+		permission_data = getPermissionData(site_url);
 
 		table = $("#employee_list_table").DataTable({
-			data: employee_data.data,
+			data: employee_data,
 			columnDefs: [
 				{
 					orderable: false,
@@ -67,7 +39,7 @@ function employeeTable(index2, site_url) {
 				},
 			],
 			columns: [
-				{ data: "id" },
+				{ data: null },
 				{ data: "email" },
 				{ data: "fullname" },
 				{
@@ -87,7 +59,7 @@ function employeeTable(index2, site_url) {
 				{
 					data: "permission",
 					render: function (data, type, row, meta) {
-						let result = permission_data.data.find(
+						let result = permission_data.find(
 							(item) => item.id == row.permission
 						);
 						if (result == undefined) {
@@ -99,7 +71,7 @@ function employeeTable(index2, site_url) {
 				},
 				{
 					data: null,
-					defaultContent: `<div class="btn-group"><button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown"></button><div class="dropdown-menu"><a class="dropdown-item" href="#">Chi tiết</a><a class="dropdown-item" href="#">Sửa</a><a class="dropdown-item" href="#">Xoá</a></div></div>`,
+					defaultContent: `<div class="btn-group"><button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown"></button><div class="dropdown-menu"><a class="dropdown-item" href="#">Chỉnh sửa</a><a class="dropdown-item" href="#">Xoá</a></div></div>`,
 					className: "dt-body-center",
 					searchable: false,
 					orderable: false,
@@ -158,56 +130,27 @@ function employeeTable(index2, site_url) {
 		table.buttons().container().appendTo("#employee_wrapper .col-md-6:eq(0)");
 
 		$("#branch_code").on("change", function () {
-			$.ajax({
-				type: "POST",
-				url: site_url + "api/dashboard/employee/loademployeedata",
-				dataType: "json",
-				data: { branch_code: $("#branch_code").val() },
-				encode: true,
-				async: false,
-				headers: { Authorization: localStorage.getItem("auth_token") },
-				success: function (response) {
-					employee_data = response;
-				},
-			});
+			branch_code = $("#branch_code").val();
 
-			table.clear().rows.add(employee_data.data).draw();
+			employee_data = getEmployeeData(site_url, branch_code);
+
+			table.clear().rows.add(employee_data).draw();
 		});
 	} else if (index2 == 4) {
 		var branch_data;
 		var permission_data;
 
-		$.ajax({
-			type: "POST",
-			url: site_url + "api/dashboard/branch/loadbranchdata",
-			dataType: "json",
-			encode: true,
-			async: false,
-			headers: { Authorization: localStorage.getItem("auth_token") },
-			success: function (response) {
-				branch_data = response;
-			},
-		});
+		branch_data = getBranchData(site_url);
 
-		$.ajax({
-			type: "POST",
-			url: site_url + "api/dashboard/permission/loadpermissiondata",
-			dataType: "json",
-			encode: true,
-			async: false,
-			headers: { Authorization: localStorage.getItem("auth_token") },
-			success: function (response) {
-				permission_data = response;
-			},
-		});
+		permission_data = getPermissionData(site_url);
 
-		branch_data.data.forEach((row) => {
+		branch_data.forEach((row) => {
 			$("#employee_branch").append(
 				'<option value="' + row.code + '">' + row.name + "</option>"
 			);
 		});
 
-		permission_data.data.forEach((row) => {
+		permission_data.forEach((row) => {
 			$("#employee_permission").append(
 				'<option value="' + row.id + '">' + row.role_name + "</option>"
 			);
@@ -230,4 +173,43 @@ function employeeTable(index2, site_url) {
 			});
 		});
 	}
+}
+
+function getEmployeeData(site_url, branch_code) {
+	"use strict";
+	var employee_data;
+
+	$.ajax({
+		type: "POST",
+		url: site_url + "api/dashboard/employee/loademployeedata",
+		dataType: "json",
+		data: { branch_code: $("#branch_code").val() },
+		encode: true,
+		async: false,
+		headers: { Authorization: localStorage.getItem("auth_token") },
+		success: function (response) {
+			employee_data = response.data;
+		},
+	});
+
+	return employee_data;
+}
+
+function getPermissionData(site_url) {
+	"use strict";
+	var permission_data;
+
+	$.ajax({
+		type: "POST",
+		url: site_url + "api/dashboard/permission/loadpermissiondata",
+		dataType: "json",
+		encode: true,
+		async: false,
+		headers: { Authorization: localStorage.getItem("auth_token") },
+		success: function (response) {
+			permission_data = response.data;
+		},
+	});
+
+	return permission_data;
 }

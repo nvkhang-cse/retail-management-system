@@ -127,7 +127,6 @@ class Productcategory extends RestController
                 $this->form_validation->set_data($data);
                 $this->form_validation->set_error_delimiters('', '');
                 $this->form_validation->set_rules('category_name', 'Tên danh mục', 'trim|required|max_length[250]');
-                $this->form_validation->set_rules('category_code', 'Mã danh mục', 'trim|required|max_length[10]|alpha_numeric');
                 $this->form_validation->set_rules('category_description', 'Mô tả', 'trim');
 
                 if ($this->form_validation->run() == FALSE) {
@@ -140,7 +139,7 @@ class Productcategory extends RestController
                 } else {
                     $category_data = [
                         'title'             => $data['category_name'],
-                        'code'              => $data['category_code'],
+                        'code'              => strtoupper(uniqid('PRG' . '_')),
                         'description'       => $data['category_description'],
                         'created_by'        => $user_data->id
                     ];

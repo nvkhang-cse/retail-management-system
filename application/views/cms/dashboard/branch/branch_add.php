@@ -22,35 +22,25 @@
                             <h5 class="card-title">Thông tin chi nhánh</h5>
                         </div>
                         <div class="card-body">
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label for="branch_name">Tên chi nhánh</label>
-                                        <input type="text" class="form-control" id="branch_name" name="branch_name" placeholder="" required maxlength="50">
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label for="branch_code">Mã chi nhánh</label>
-                                        <input type="text" class="form-control" id="branch_code" name="branch_code" placeholder="" required maxlength="5">
-                                    </div>
-                                </div>
+                            <div class="form-group">
+                                <label for="branch_name">Tên chi nhánh</label>
+                                <input type="text" class="form-control" id="branch_name" name="branch_name" placeholder="" required maxlength="50">
                             </div>
                             <div class="form-group">
-                                <label for="branch_address">Địa chỉ</label>
+                                <label for="branch_address">Địa chỉ cụ thể (Số nhà, Đường, Phường xã)</label>
                                 <input type="text" class="form-control" id="branch_address" name="branch_address" placeholder="" maxlength="250">
                             </div>
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label for="branch_city">Thành phố</label>
-                                        <input type="text" class="form-control" id="branch_city" name="branch_city" placeholder="" maxlength="50">
+                                        <label for="branch_district">Quận huyện</label>
+                                        <input type="text" class="form-control" id="branch_district" name="branch_district" placeholder="" maxlength="50">
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label for="branch_district">Quận huyện</label>
-                                        <input type="text" class="form-control" id="branch_district" name="branch_district" placeholder="" maxlength="50">
+                                        <label for="branch_city">Thành phố</label>
+                                        <input type="text" class="form-control" id="branch_city" name="branch_city" placeholder="" maxlength="50">
                                     </div>
                                 </div>
                             </div>

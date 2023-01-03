@@ -1,23 +1,15 @@
 function productTable(index2, site_url) {
 	"use strict";
 
+	//Remove
 	if (index2 == 1) {
 		var table;
 		var branch_data;
+		var branch_code;
 		var product_data;
 		var category_data;
 
-		$.ajax({
-			type: "POST",
-			url: site_url + "api/dashboard/branch/loadbranchdata",
-			dataType: "json",
-			encode: true,
-			async: false,
-			headers: { Authorization: localStorage.getItem("auth_token") },
-			success: function (response) {
-				branch_data = response.data;
-			},
-		});
+		branch_data = getBranchData(site_url);
 
 		branch_data.forEach((row) => {
 			$("#branch_code").append(
@@ -25,33 +17,12 @@ function productTable(index2, site_url) {
 			);
 		});
 
-		$.ajax({
-			type: "POST",
-			url: site_url + "api/dashboard/product/loadproductdata",
-			dataType: "json",
-			data: { branch_code: $("#branch_code").val() },
-			encode: true,
-			async: false,
-			headers: { Authorization: localStorage.getItem("auth_token") },
-			success: function (response) {
-				product_data = response;
-			},
-		});
-
-		$.ajax({
-			type: "POST",
-			url: site_url + "api/dashboard/productcategory/loadproductcategorydata",
-			dataType: "json",
-			encode: true,
-			async: false,
-			headers: { Authorization: localStorage.getItem("auth_token") },
-			success: function (response) {
-				category_data = response;
-			},
-		});
+		branch_code = $("#branch_code").val();
+		product_data = getProductData(site_url, branch_code);
+		category_data = getProductCategoryData(site_url);
 
 		table = $("#product_list_table").DataTable({
-			data: product_data.data,
+			data: product_data,
 			columnDefs: [
 				{
 					orderable: false,
@@ -85,7 +56,7 @@ function productTable(index2, site_url) {
 				{
 					data: "category",
 					render: function (data, type, row, meta) {
-						let result = category_data.data.find(
+						let result = category_data.find(
 							(item) => item.code == row.category
 						);
 						if (result == undefined) {
@@ -165,38 +136,21 @@ function productTable(index2, site_url) {
 		table.buttons().container().appendTo("#product_wrapper .col-md-6:eq(0)");
 
 		$("#branch_code").on("change", function () {
-			$.ajax({
-				type: "POST",
-				url: site_url + "api/dashboard/product/loadproductdata",
-				dataType: "json",
-				data: { branch_code: $("#branch_code").val() },
-				encode: true,
-				async: false,
-				headers: { Authorization: localStorage.getItem("auth_token") },
-				success: function (response) {
-					product_data = response;
-				},
-			});
+			var branch_code = $("#branch_code").val();
+
+			product_data = getProductData(site_url, branch_code);
 
 			table.clear().rows.add(product_data.data).draw();
 		});
 	} else if (index2 == 2) {
+		//Quan ly san pham
 		var table;
 		var branch_data;
+		var branch_code;
 		var warehouse_data;
 		var category_data;
 
-		$.ajax({
-			type: "POST",
-			url: site_url + "api/dashboard/branch/loadbranchdata",
-			dataType: "json",
-			encode: true,
-			async: false,
-			headers: { Authorization: localStorage.getItem("auth_token") },
-			success: function (response) {
-				branch_data = response.data;
-			},
-		});
+		branch_data = getBranchData(site_url);
 
 		branch_data.forEach((row) => {
 			$("#branch_code").append(
@@ -204,33 +158,12 @@ function productTable(index2, site_url) {
 			);
 		});
 
-		$.ajax({
-			type: "POST",
-			url: site_url + "api/dashboard/product/loadproductwarehousedata",
-			dataType: "json",
-			data: { branch_code: $("#branch_code").val() },
-			encode: true,
-			async: false,
-			headers: { Authorization: localStorage.getItem("auth_token") },
-			success: function (response) {
-				warehouse_data = response;
-			},
-		});
-
-		$.ajax({
-			type: "POST",
-			url: site_url + "api/dashboard/productcategory/loadproductcategorydata",
-			dataType: "json",
-			encode: true,
-			async: false,
-			headers: { Authorization: localStorage.getItem("auth_token") },
-			success: function (response) {
-				category_data = response;
-			},
-		});
+		branch_code = $("#branch_code").val();
+		warehouse_data = getProductWarehouseData(site_url, branch_code);
+		category_data = getProductCategoryData(site_url);
 
 		table = $("#warehouse_table").DataTable({
-			data: warehouse_data.data,
+			data: warehouse_data,
 			columnDefs: [
 				{
 					orderable: false,
@@ -240,9 +173,21 @@ function productTable(index2, site_url) {
 					},
 					targets: 0,
 				},
+				{
+					visible: false,
+					targets: [4, 5, 6, 7, 8],
+				},
+				{
+					orderable: false,
+					targets: [1, 5, 6, 7, 8, 9, 10, 14],
+				},
+				{
+					searchable: false,
+					targets: [1, 7, 8, 9, 10, 11, 12],
+				},
 			],
 			columns: [
-				{ data: "product_code" },
+				{ data: null },
 				{
 					data: "image",
 					searchable: false,
@@ -257,11 +202,29 @@ function productTable(index2, site_url) {
 					},
 				},
 				{ data: "title" },
+				{
+					data: "category",
+					render: function (data, type, row, meta) {
+						let result = category_data.find(
+							(item) => item.code == row.category
+						);
+						if (result == undefined) {
+							return "Chưa phân loại";
+						} else {
+							return `${result.title}`;
+						}
+					},
+				},
+				{ data: "brand" },
+				{ data: "origin" },
+				{ data: "barcode" },
+				{ data: "capacity" },
+				{ data: "unit" },
 				{ data: "quantity_sale" },
 				{ data: "quantity_warehouse" },
 				{ data: "retail_price" },
 				{ data: "goods_cost" },
-				{ data: "wholesale_price" },
+				{ data: "expired_date" },
 				{
 					data: "published",
 					render: function (data, type, row, meta) {
@@ -348,7 +311,7 @@ function productTable(index2, site_url) {
 				},
 				{
 					extend: "colvis",
-					columns: [1, 2, 3, 4, 5, 6, 7, 8],
+					columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
 					text: "Hiển thị",
 				},
 			],
@@ -356,20 +319,9 @@ function productTable(index2, site_url) {
 		table.buttons().container().appendTo("#warehouse_wrapper .col-md-6:eq(0)");
 
 		$("#branch_code").on("change", function () {
-			$.ajax({
-				type: "POST",
-				url: site_url + "api/dashboard/product/loadproductwarehousedata",
-				dataType: "json",
-				data: { branch_code: $("#branch_code").val() },
-				encode: true,
-				async: false,
-				headers: { Authorization: localStorage.getItem("auth_token") },
-				success: function (response) {
-					warehouse_data = response;
-				},
-			});
-
-			table.clear().rows.add(warehouse_data.data).draw();
+			branch_code = $("#branch_code").val();
+			warehouse_data = getProductWarehouseData(site_url, branch_code);
+			table.clear().rows.add(warehouse_data).draw();
 		});
 
 		$(".edit-product-info").on("click", function () {
@@ -391,20 +343,11 @@ function productTable(index2, site_url) {
 			}
 			$("#product-new-ingred").val(product_info[0]["ingredient"]);
 			$("#product-new-description").val(product_info[0]["description"]);
-			// $('form#editProductForm :input').prop('readonly', true);
-			// $('#submit-edit-form').prop({
-			// 	'disabled': true,
-			// 	'hidden': true
-			// });
-			// $('#open-edit-form').prop('hidden', false)
-
 			$("#editProductInfo").modal("toggle");
 		});
 
 		$("form").submit(function () {
 			var formData = new FormData(this);
-			// console.log(formData);
-
 			$.ajax({
 				url: site_url + "api/dashboard/product/updateproductinfobycode",
 				type: "POST",
@@ -413,7 +356,6 @@ function productTable(index2, site_url) {
 				contentType: false,
 				processData: false,
 				success: function (response) {
-					// window.location.href = site_url + "dashboard/product";
 					console.log(response);
 				},
 			});
@@ -436,32 +378,13 @@ function productTable(index2, site_url) {
 			});
 		});
 	} else if (index2 == 3) {
+		//Them san pham
 		var category_data;
-		var warehouse_data;
+		var branch_data;
 
-		$.ajax({
-			type: "POST",
-			url: site_url + "api/dashboard/productcategory/loadproductcategorydata",
-			dataType: "json",
-			encode: true,
-			async: false,
-			headers: { Authorization: localStorage.getItem("auth_token") },
-			success: function (response) {
-				category_data = response.data;
-			},
-		});
+		category_data = getProductCategoryData(site_url);
 
-		$.ajax({
-			type: "POST",
-			url: site_url + "api/dashboard/branch/loadbranchdata",
-			dataType: "json",
-			encode: true,
-			async: false,
-			headers: { Authorization: localStorage.getItem("auth_token") },
-			success: function (response) {
-				warehouse_data = response.data;
-			},
-		});
+		branch_data = getBranchData(site_url);
 
 		category_data.forEach((row) => {
 			$("#product_category").append(
@@ -469,7 +392,7 @@ function productTable(index2, site_url) {
 			);
 		});
 
-		warehouse_data.forEach((row) => {
+		branch_data.forEach((row) => {
 			$("#product_warehouse").append(
 				'<option value="' + row.code + '">' + row.name + "</option>"
 			);
@@ -503,22 +426,13 @@ function productTable(index2, site_url) {
 			});
 		});
 	} else if (index2 == 4) {
+		//Thung rac
 		var table;
 		var branch_data;
 		var trash_data;
 		var category_data;
 
-		$.ajax({
-			type: "POST",
-			url: site_url + "api/dashboard/branch/loadbranchdata",
-			dataType: "json",
-			encode: true,
-			async: false,
-			headers: { Authorization: localStorage.getItem("auth_token") },
-			success: function (response) {
-				branch_data = response.data;
-			},
-		});
+		branch_data = getBranchData(site_url);
 
 		branch_data.forEach((row) => {
 			$("#branch_code").append(
@@ -535,24 +449,14 @@ function productTable(index2, site_url) {
 			async: false,
 			headers: { Authorization: localStorage.getItem("auth_token") },
 			success: function (response) {
-				trash_data = response;
+				trash_data = response.data;
 			},
 		});
 
-		$.ajax({
-			type: "POST",
-			url: site_url + "api/dashboard/productcategory/loadproductcategorydata",
-			dataType: "json",
-			encode: true,
-			async: false,
-			headers: { Authorization: localStorage.getItem("auth_token") },
-			success: function (response) {
-				category_data = response;
-			},
-		});
+		category_data = getProductCategoryData(site_url);
 
 		table = $("#trash_list_table").DataTable({
-			data: trash_data.data,
+			data: trash_data,
 			columnDefs: [
 				{
 					orderable: false,
@@ -582,7 +486,7 @@ function productTable(index2, site_url) {
 				{
 					data: "category",
 					render: function (data, type, row, meta) {
-						let result = category_data.data.find(
+						let result = category_data.find(
 							(item) => item.code == row.category
 						);
 						if (result == undefined) {
@@ -687,11 +591,11 @@ function productTable(index2, site_url) {
 				async: false,
 				headers: { Authorization: localStorage.getItem("auth_token") },
 				success: function (response) {
-					warehouse_data = response;
+					trash_data = response.data;
 				},
 			});
 
-			table.clear().rows.add(warehouse_data.data).draw();
+			table.clear().rows.add(trash_data).draw();
 		});
 
 		$(".restore-product-item").on("click", function () {
@@ -711,23 +615,14 @@ function productTable(index2, site_url) {
 			});
 		});
 	} else if (index2 == 5) {
+		//Danh sach loai san pham
 		var table;
 		var category_data;
 
-		$.ajax({
-			type: "POST",
-			url: site_url + "api/dashboard/productcategory/loadproductcategorydata",
-			dataType: "json",
-			encode: true,
-			async: false,
-			headers: { Authorization: localStorage.getItem("auth_token") },
-			success: function (response) {
-				category_data = response;
-			},
-		});
+		category_data = getProductCategoryData(site_url);
 
 		table = $("#product_category_list_table").DataTable({
-			data: category_data.data,
+			data: category_data,
 			columnDefs: [
 				{
 					orderable: false,
@@ -807,6 +702,7 @@ function productTable(index2, site_url) {
 			.container()
 			.appendTo("#product_category_wrapper .col-md-6:eq(0)");
 	} else if (index2 == 6) {
+		//Them loai san pham
 		$("form#product_category_data").submit(function (e) {
 			e.preventDefault();
 
@@ -840,8 +736,67 @@ function getProductDataByCode(code) {
 		async: false,
 		headers: { Authorization: localStorage.getItem("auth_token") },
 		success: function (response) {
-			product_data = response;
+			product_data = response.data;
 		},
 	});
-	return product_data.data;
+	return product_data;
+}
+
+function getProductData(site_url, branch_code) {
+	"use strict";
+	var product_data;
+
+	$.ajax({
+		type: "POST",
+		url: site_url + "api/dashboard/product/loadproductdata",
+		dataType: "json",
+		data: { branch_code: branch_code },
+		encode: true,
+		async: false,
+		headers: { Authorization: localStorage.getItem("auth_token") },
+		success: function (response) {
+			product_data = response.data;
+		},
+	});
+
+	return product_data;
+}
+
+function getProductCategoryData(site_url) {
+	"use strict";
+	var category_data;
+
+	$.ajax({
+		type: "POST",
+		url: site_url + "api/dashboard/productcategory/loadproductcategorydata",
+		dataType: "json",
+		encode: true,
+		async: false,
+		headers: { Authorization: localStorage.getItem("auth_token") },
+		success: function (response) {
+			category_data = response.data;
+		},
+	});
+
+	return category_data;
+}
+
+function getProductWarehouseData(site_url, branch_code) {
+	"use strict";
+	var warehouse_data;
+
+	$.ajax({
+		type: "POST",
+		url: site_url + "api/dashboard/product/loadproductwarehousedata",
+		dataType: "json",
+		data: { branch_code: branch_code },
+		encode: true,
+		async: false,
+		headers: { Authorization: localStorage.getItem("auth_token") },
+		success: function (response) {
+			warehouse_data = response.data;
+		},
+	});
+
+	return warehouse_data;
 }

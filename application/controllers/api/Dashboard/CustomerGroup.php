@@ -121,7 +121,6 @@ class Customergroup extends RestController
                 $this->form_validation->set_data($data);
                 $this->form_validation->set_error_delimiters('', '');
                 $this->form_validation->set_rules('customer_group_name', 'Tên nhóm khách hàng', 'trim|required|max_length[50]');
-                $this->form_validation->set_rules('customer_group_code', 'Mã nhóm khách hàng', 'trim|required|max_length[5]|alpha_numeric');
                 $this->form_validation->set_rules('customer_group_description', 'Mô tả', 'trim');
                 $this->form_validation->set_rules('customer_group_discount', 'Chiết khấu', 'trim|integer|greater_than_equal_to[0]|less_than_equal_to[1000]');
                 $this->form_validation->set_rules('customer_spend_from', 'Tiêu dùng từ', 'trim|integer|greater_than_equal_to[0]');
@@ -137,7 +136,7 @@ class Customergroup extends RestController
                 } else {
                     $customer_group_data = [
                         'name'              => $data['customer_group_name'],
-                        'code'              => $data['customer_group_code'],
+                        'code'              => strtoupper(uniqid('CSG' . '_')),
                         'description'       => $data['customer_group_description'],
                         'discount'          => $data['customer_group_discount'],
                         'spend_from'        => $data['customer_spend_from'],

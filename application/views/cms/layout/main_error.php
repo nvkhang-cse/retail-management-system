@@ -121,16 +121,16 @@
                 </p>
               </a>
               <ul class="nav nav-treeview">
-                <li class="nav-item" id="product_list_page">
+                <!-- <li class="nav-item" id="product_list_page">
                   <a href="<?= site_url("dashboard/product") ?>" class="nav-link">
                     <i class="fas fa-angle-right nav-icon"></i>
                     <p>Danh sách sản phẩm</p>
                   </a>
-                </li>
+                </li> -->
                 <li class="nav-item" id="product_warehouse_page">
                   <a href="<?= site_url("dashboard/product/loadproductwarehouse") ?>" class="nav-link">
                     <i class="fas fa-angle-right nav-icon"></i>
-                    <p>Quản lý kho</p>
+                    <p>Quản lý sản phẩm</p>
                   </a>
                 </li>
                 <li class="nav-item" id="product_import_page">

@@ -5,7 +5,7 @@
         <h1>Thêm mới sản phẩm</h1>
       </div>
       <div class="col-sm-6">
-        <a href="<?= site_url("dashboard/product") ?>">
+        <a href="<?= site_url("dashboard/product/loadproductwarehouse") ?>">
           <button type="button" class="btn btn-outline-primary float-right">Xem danh sách sản phẩm</button>
         </a>
       </div>
@@ -27,12 +27,6 @@
                 <input type="text" class="form-control" id="product_name" name="product_name" placeholder="" required maxlength="250">
               </div>
               <div class="row">
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for="product_code">Mã sản phẩm</label>
-                    <input type="text" class="form-control" id="product_code" name="product_code" placeholder="" required maxlength="20">
-                  </div>
-                </div>
                 <div class="col-sm-6">
                   <div class="form-group">
                     <label for="product_barcode">Barcode</label>
@@ -194,7 +188,7 @@
       </div>
       <div>
         <button type="submit" class="btn btn-primary mr-2">Lưu</button>
-        <a href="<?= site_url("dashboard/product") ?>">
+        <a href="<?= site_url("dashboard/product/loadproductwarehouse") ?>">
           <button type="button" class="btn btn-secondary">Hủy</button>
         </a>
       </div>

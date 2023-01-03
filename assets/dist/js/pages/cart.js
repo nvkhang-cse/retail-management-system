@@ -109,7 +109,7 @@ function displayCart(product_detail) {
 				row.capacity +
 				row.unit +
 				"</td>" +
-				'<td><input type="number" class="form-control text-center" min="1" value="' +
+				'<td><input type="number" class="form-control p-0 pl-1" min="1" value="' +
 				row.qty +
 				'" onchange="updateCartItem(this,`' +
 				row_id +
@@ -147,11 +147,12 @@ function displayCart(product_detail) {
 			'<td id="total-payment">' +
 			total_payment +
 			"</td>" +
+			"<td></td>" +
 			"</tr>";
 	}
 
 	output += "</table>";
-	$("#detail").html(output);
+	$("#cart-detail").html(output);
 	$("#order-price").data("value", total_payment);
 	$("#order-price").text(total_payment);
 	calculateCustomerPayment(

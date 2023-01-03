@@ -58,12 +58,12 @@
                             </div>
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <label for="employee_city">Thành phố</label>
-                                    <input type="text" class="form-control" id="employee_city" name="employee_city" placeholder="" maxlength="50">
-                                </div>
-                                <div class="col-sm-6">
                                     <label for="employee_district">Quận huyện</label>
                                     <input type="text" class="form-control" id="employee_district" name="employee_district" placeholder="" maxlength="50">
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="employee_city">Thành phố</label>
+                                    <input type="text" class="form-control" id="employee_city" name="employee_city" placeholder="" maxlength="50">
                                 </div>
                             </div>
                         </div>

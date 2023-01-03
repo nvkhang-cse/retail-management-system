@@ -34,10 +34,11 @@ class ProductModel extends CI_Model
         $this->db->insert($this->product_table, $data);
     }
 
-    public function search_product($data)
+    public function search_product($data, $branch_code)
     {
         $this->db->from($this->product_table);
         $this->db->like('title', $data);
+        $this->db->where('warehouse', $branch_code);
         $this->db->or_like('brand', $data);
 
         $query = $this->db->get();
