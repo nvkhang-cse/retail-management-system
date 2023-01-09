@@ -298,7 +298,7 @@ class Product extends RestController
                 $this->form_validation->set_rules('product_wholesale', 'Giá bán buôn', 'trim|required|integer|greater_than_equal_to[0]');
                 $this->form_validation->set_rules('product_description', 'Mô tả sản phẩm', 'trim');
                 $this->form_validation->set_rules('product_ingred', 'Thành phần', 'trim');
-                $this->form_validation->set_rules('product_category', 'Loại sản phẩm', 'trim|max_length[30]|alpha_numeric');
+                $this->form_validation->set_rules('product_category', 'Loại sản phẩm', 'trim|max_length[30]|alpha_dash');
                 $this->form_validation->set_rules('product_warehouse', 'Chi nhánh', 'trim|required|max_length[30]|alpha_dash');
 
                 if ($this->form_validation->run() == FALSE) {
@@ -430,17 +430,30 @@ class Product extends RestController
         $is_valid_token = $this->authorization_token->validateToken();
         if (!empty($is_valid_token) and $is_valid_token['status'] === TRUE) {
             $update_info = array(
-                'title'                 => $data['product-new-name'],
-                'brand'                 => $data['product-new-brand'],
-                'goods_cost'            => $data['product-new-goodscost'],
-                'retail_price'          => $data['product-new-retailprice'],
-                'quantity_warehouse'    => $data['product-new-qty'],
-                'capacity'              => $data['product-new-capacity'],
-                'unit'                  => $data['product-new-unit'],
-                'published'             => $data['product-new-status'],
-                'ingredient'            => $data['product-new-ingred'],
-                'description'           => $data['product-new-description'],
+                'title'                 => $data['product_name'],
+                'barcode'               => $data['product_barcode'],
+                'brand'                 => $data['product_brand'],
+                'origin'                => $data['product_origin'],
+                'expired_date'          => $data['product_expired_date'],
+                'goods_cost'            => $data['product_cost'],
+                'wholesale_price'       => $data['product_wholesale'],
+                'retail_price'          => $data['product_retail'],
+                'quantity_warehouse'    => $data['product_quantity_warehouse'],
+                'quantity_sale'         => $data['product_quantity_sale'],
+                'capacity'              => $data['product_capacity'],
+                'unit'                  => $data['product_unit'],
+                'published'             => $data['product_published'],
+                'ingredient'            => $data['product_ingred'],
+                'description'           => $data['product_description'],
+                'category'              => $data['product_category'],
+                'warehouse'             => $data['product_warehouse']
             );
+            $config['upload_path']          = 'assets/upload_img/product/';
+            $config['allowed_types']        = 'gif|jpg|png';
+            $this->load->library('upload', $config);
+            if ($this->upload->do_upload('product_file')) {
+                $update_info['image'] = $this->upload->data('file_name');
+            }
 
             $this->ProductModel->update_productInfobyCode($data['product-code'], $update_info);
 
@@ -510,6 +523,32 @@ class Product extends RestController
             // Login Error
             $message = [
                 'status' => FALSE,
+                'message' => "Can't search product by code"
+            ];
+            $this->response($message, RestController::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function deleteproductfor_post()
+    {
+        $this->load->library('Authorization_Token');
+        /**
+         * User Token Validation
+         */
+        $data = $this->security->xss_clean($this->post());
+
+        $is_valid_token = $this->authorization_token->validateToken();
+        if (!empty($is_valid_token) and $is_valid_token['status'] === TRUE) {
+
+            $this->ProductModel->delete_product_for($data['code']);
+            $message = [
+                'status' => true,
+                'message' => "Search product by code successful"
+            ];
+            $this->response($message, RestController::HTTP_OK);
+        } else {
+            $message = [
+                'status' => false,
                 'message' => "Can't search product by code"
             ];
             $this->response($message, RestController::HTTP_NOT_FOUND);

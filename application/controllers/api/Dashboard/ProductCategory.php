@@ -10,6 +10,7 @@ class Productcategory extends RestController
     {
         parent::__construct();
         $this->load->model('cms/ProductCategoryModel');
+        $this->load->library('Authorization_Token');
     }
 
     public function loadproductcategory_post()
@@ -163,6 +164,105 @@ class Productcategory extends RestController
             $message = [
                 'status' => false,
                 'message' => "Can't save new product"
+            ];
+            $this->response($message, RestController::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function searchproductcategorybycode_post()
+    {
+        $this->load->library('Authorization_Token');
+        /**
+         * User Token Validation
+         */
+        $data = $this->security->xss_clean($this->post());
+
+        $is_valid_token = $this->authorization_token->validateToken();
+        if (!empty($is_valid_token) and $is_valid_token['status'] === TRUE) {
+
+            $result = $this->ProductCategoryModel->search_product_category_by_code($data['category_code']);
+            $message = [
+                'status' => true,
+                'data' => $result,
+                'message' => "Search product category by code successful"
+            ];
+            $this->response($message, RestController::HTTP_OK);
+        } else {
+            // Login Error
+            $message = [
+                'status' => FALSE,
+                'message' => "Can't search product category by code"
+            ];
+            $this->response($message, RestController::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function updateproductcategoryinfobycode_post()
+    {
+        /**
+         * User Token Validation
+         */
+        $is_valid_token = $this->authorization_token->validateToken();
+        if (!empty($is_valid_token) and $is_valid_token['status'] === TRUE) {
+
+            $data = $this->security->xss_clean($this->post());
+
+            // Form Validation
+            $this->form_validation->set_data($data);
+            $this->form_validation->set_error_delimiters('', '');
+            $this->form_validation->set_rules('category_name', 'Tên danh mục', 'trim|required|max_length[250]');
+            $this->form_validation->set_rules('category_description', 'Mô tả', 'trim');
+
+            if ($this->form_validation->run() == FALSE) {
+                $message = array(
+                    'status'    =>  false,
+                    'error'     =>  $this->form_validation->error_array(),
+                    'message'   =>  validation_errors()
+                );
+                $this->response($message, RestController::HTTP_NOT_FOUND);
+            } else {
+                $update_info = [
+                    'title'              => $data['category_name'],
+                    'description'        => $data['category_description'],
+                ];
+                $this->ProductCategoryModel->update_category($data['product-category-code'], $update_info);
+                $message = [
+                    'status' => true,
+                    'data' => 'success',
+                    'message' => "Update successful"
+                ];
+                $this->response($message, RestController::HTTP_OK);
+            }
+        } else {
+            $message = [
+                'status' => false,
+                'message' => "Can't update data"
+            ];
+            $this->response($message, RestController::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function deleteproductcategory_post()
+    {
+        $this->load->library('Authorization_Token');
+        /**
+         * User Token Validation
+         */
+        $data = $this->security->xss_clean($this->post());
+
+        $is_valid_token = $this->authorization_token->validateToken();
+        if (!empty($is_valid_token) and $is_valid_token['status'] === TRUE) {
+
+            $this->ProductCategoryModel->delete_product_category($data['code']);
+            $message = [
+                'status' => true,
+                'message' => "Search product by code successful"
+            ];
+            $this->response($message, RestController::HTTP_OK);
+        } else {
+            $message = [
+                'status' => false,
+                'message' => "Can't search product by code"
             ];
             $this->response($message, RestController::HTTP_NOT_FOUND);
         }

@@ -95,7 +95,7 @@ class Branch extends RestController
             if ($branch_code_data[0]->branch_code == "ALL") {
                 $return_data = $this->BranchModel->get_all_branch();
             } else {
-                $return_data = $this->BranchModel->get_branch_by_branchcode($branch_code_data[0]->branch_code);
+                $return_data = $this->BranchModel->get_branch_by_code($branch_code_data[0]->branch_code);
             }
             $message = [
                 'status' => true,
@@ -103,6 +103,43 @@ class Branch extends RestController
                 'message' => "Load data successful"
             ];
             $this->response($message, RestController::HTTP_OK);
+        } else {
+            $message = [
+                'status' => false,
+                'message' => "Can't load data"
+            ];
+            $this->response($message, RestController::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function loadbranchlistdata_post()
+    {
+        $this->load->library('Authorization_Token');
+        /**
+         * User Token Validation
+         */
+        $is_valid_token = $this->authorization_token->validateToken();
+        if (!empty($is_valid_token) and $is_valid_token['status'] === TRUE) {
+            $this->load->model('cms/UserModel');
+
+            $user_data = $this->authorization_token->userData();
+            $permission_data = $this->UserModel->get_permission_of_user($user_data->id);
+
+            if ($permission_data[0]->permission == "1") {
+                $return_data = $this->BranchModel->get_branch_list_data();
+                $message = [
+                    'status' => true,
+                    'data' => $return_data,
+                    'message' => "Load data successful"
+                ];
+                $this->response($message, RestController::HTTP_OK);
+            } else {
+                $message = [
+                    'status' => false,
+                    'message' => "Not allowed!"
+                ];
+                $this->response($message, RestController::HTTP_METHOD_NOT_ALLOWED);
+            }
         } else {
             $message = [
                 'status' => false,
@@ -177,6 +214,116 @@ class Branch extends RestController
             $message = [
                 'status' => false,
                 'message' => "Can't save new branch"
+            ];
+            $this->response($message, RestController::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function getbranchinfobycode_post()
+    {
+        $this->load->library('Authorization_Token');
+        /**
+         * User Token Validation
+         */
+        $is_valid_token = $this->authorization_token->validateToken();
+        if (!empty($is_valid_token) and $is_valid_token['status'] === TRUE) {
+            $data = $this->security->xss_clean($this->post());
+            $this->load->model('cms/UserModel');
+
+            $user_data = $this->authorization_token->userData();
+            $permission_data = $this->UserModel->get_permission_of_user($user_data->id);
+
+            if ($permission_data[0]->permission == "1") {
+                $return_data = $this->BranchModel->get_branch_info_by_code($data["branch_code"]);
+
+                $message = [
+                    'status' => true,
+                    'data' => $return_data,
+                    'message' => "Load data successful"
+                ];
+                $this->response($message, RestController::HTTP_OK);
+            } else {
+                $message = [
+                    'status' => false,
+                    'message' => "Not allowed!"
+                ];
+                $this->response($message, RestController::HTTP_METHOD_NOT_ALLOWED);
+            }
+        } else {
+            $message = [
+                'status' => false,
+                'message' => "Can't load data"
+            ];
+            $this->response($message, RestController::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function updatebranchinfobycode_post()
+    {
+        $this->load->library('Authorization_Token');
+        /**
+         * User Token Validation
+         */
+        $is_valid_token = $this->authorization_token->validateToken();
+        if (!empty($is_valid_token) and $is_valid_token['status'] === TRUE) {
+
+            $data = $this->security->xss_clean($this->post());
+            $this->load->model('cms/UserModel');
+
+            $user_data = $this->authorization_token->userData();
+            $permission_data = $this->UserModel->get_permission_of_user($user_data->id);
+
+            if ($permission_data[0]->permission == "1") {
+
+                // Form Validation
+                $this->form_validation->set_data($data);
+                $this->form_validation->set_error_delimiters('', '');
+                $this->form_validation->set_rules('branch_name', 'Tên chi nhánh', 'trim|required|max_length[50]');
+                $this->form_validation->set_rules('branch_address', 'Địa chỉ', 'trim|max_length[250]');
+                $this->form_validation->set_rules('branch_city', 'Khu vực', 'trim|max_length[50]');
+                $this->form_validation->set_rules('branch_district', 'Quận huyện', 'trim|max_length[50]');
+                $this->form_validation->set_rules('branch_phone', 'Số điện thoại', 'trim|max_length[20]|numeric');
+                $this->form_validation->set_rules('branch_central', 'Trung tâm', 'trim|required|in_list[1,2]');
+                $this->form_validation->set_rules('branch_status', 'Trung tâm', 'trim|required|in_list[0,1]');
+                $this->form_validation->set_rules('branch_code', 'Mã chi nhánh', 'trim|required|max_length[30]|alpha_dash');
+
+                if ($this->form_validation->run() == FALSE) {
+                    $message = array(
+                        'status'    =>  false,
+                        'error'     =>  $this->form_validation->error_array(),
+                        'message'   =>  validation_errors()
+                    );
+                    $this->response($message, RestController::HTTP_NOT_FOUND);
+                } else {
+                    $branch_data = array(
+                        'name'             => $data['branch_name'],
+                        'address'          => $data['branch_address'],
+                        'city'             => $data['branch_city'],
+                        'district'         => $data['branch_district'],
+                        'phone'            => $data['branch_phone'],
+                        'central'          => $data['branch_central'],
+                        'status'          => $data['branch_status'],
+                    );
+
+                    $this->BranchModel->update_branch($data['branch_code'], $branch_data);
+
+                    $message = [
+                        'status' => true,
+                        'message' => "Update successful"
+                    ];
+                    $this->response($message, RestController::HTTP_OK);
+                }
+            } else {
+                $message = [
+                    'status' => false,
+                    'message' => "Not allowed!"
+                ];
+                $this->response($message, RestController::HTTP_METHOD_NOT_ALLOWED);
+            }
+        } else {
+            $message = [
+                'status' => false,
+                'message' => "Can't update branch"
             ];
             $this->response($message, RestController::HTTP_NOT_FOUND);
         }

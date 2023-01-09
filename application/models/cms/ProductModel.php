@@ -76,4 +76,10 @@ class ProductModel extends CI_Model
         $this->db->where('product_code', $product_code);
         $this->db->update($this->product_table, array('trash' => 0));
     }
+
+    public function delete_product_for($code)
+    {
+        $this->db->where('product_code', $code);
+        $this->db->delete($this->product_table);
+    }
 }

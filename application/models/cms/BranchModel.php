@@ -7,14 +7,34 @@ class BranchModel extends CI_Model
 
     public function get_all_branch()
     {
-        $query = $this->db->get($this->branch_table);
+        $this->db->select('code, name');
+        $this->db->from($this->branch_table);
 
-        if ($query->num_rows() > 0) {
-            return $query->result();
-        }
+        $query = $this->db->get();
+        return $query->result();
     }
 
-    public function get_branch_by_branchcode($branch_code)
+    public function get_branch_by_code($branch_code)
+    {
+        $query = $this->db->select('code, name')
+            ->from($this->branch_table)
+            ->where(['code' => $branch_code])
+            ->get();
+        return $query->result();
+    }
+
+    public function get_branch_list_data()
+    {
+        $query = $this->db->get($this->branch_table);
+        return $query->result();
+    }
+
+    public function insert_branch($data)
+    {
+        $this->db->insert($this->branch_table, $data);
+    }
+
+    public function get_branch_info_by_code($branch_code)
     {
         $query = $this->db->from($this->branch_table)
             ->where(['code' => $branch_code])
@@ -22,8 +42,9 @@ class BranchModel extends CI_Model
         return $query->result();
     }
 
-    public function insert_branch($data)
+    public function update_branch($branch_code, $update_info)
     {
-        $this->db->insert($this->branch_table, $data);
+        $this->db->where('code', $branch_code);
+        $this->db->update($this->branch_table, $update_info);
     }
 }

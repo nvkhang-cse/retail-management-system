@@ -49,5 +49,47 @@
     <!-- /.row -->
   </div>
   <!-- /.container-fluid -->
+
+  <div class="modal fade" id="editProductCategoryInfo" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <form id="editProductCategoryForm" action="" enctype="multipart/form-data">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Thông tin loại sản phẩm</h5>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="category_name">Tên danh mục:</label>
+              <input type="text" class="form-control" id="category_name" name="category_name" placeholder="" required>
+              <input type="text" class="form-control" name="product-category-code" id="product-category-code" value="" hidden>
+            </div>
+            <div class="form-group">
+              <label for="category_description">Mô tả</label>
+              <textarea class="form-control" id="category_description" name="category_description" rows="5" placeholder=""></textarea>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="category_created_at">Ngày tạo</label>
+                  <input type="text" class="form-control" id="category_created_at" name="category_created_at" disabled>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="category_updated_at">Ngày cập nhật</label>
+                  <input type="text" class="form-control" id="category_updated_at" name="category_updated_at" disabled>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+            <button type="submit" value="Submit" class="btn btn-primary" id="submit-edit-form">Lưu thông tin</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
 </section>
 <!-- /.content -->

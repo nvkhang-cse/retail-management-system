@@ -1,8 +1,9 @@
-function sale(index2, site_url) {
+function sale(index2) {
 	"use strict";
 	var branch_data;
+	var customer_group_data;
 
-	branch_data = getBranchData(site_url);
+	branch_data = getBranchData();
 
 	branch_data.forEach((row) => {
 		$("#branch_code").append(
@@ -120,6 +121,36 @@ function sale(index2, site_url) {
 		mark_text: "marktext",
 	});
 
+	customer_group_data = getCustomerGroupData();
+	customer_group_data.forEach((row) => {
+		$("#customer_group_new").append(
+			'<option value="' + row.code + '">' + row.name + "</option>"
+		);
+	});
+
+	$("#add_customer").on("click", function () {
+		var customer_phone = $("#customersearch").val();
+		$("#customer_phone_new").val(customer_phone);
+		$("#addCustomerInfo").modal("toggle");
+	});
+
+	$("#addCustomerForm").submit(function (e) {
+		e.preventDefault();
+		var formData = new FormData(this);
+		$.ajax({
+			url: site_url + "api/dashboard/customer/storenewcustomer",
+			type: "POST",
+			data: formData,
+			headers: { Authorization: localStorage.getItem("auth_token") },
+			contentType: false,
+			processData: false,
+			success: function (response) {
+				$("#addCustomerForm").trigger("reset");
+				$("#addCustomerInfo").modal("toggle");
+			},
+		});
+	});
+
 	$(document).on("click", ".gsearch", function () {
 		var product_code = $(this).data("value");
 		var product_detail;
@@ -146,7 +177,7 @@ function sale(index2, site_url) {
 		$.ajax({
 			type: "POST",
 			data: { code: customer_code },
-			url: site_url + "api/dashboard/customer/getCustomerInfo",
+			url: site_url + "api/dashboard/customer/getcustomerinfo",
 			dataType: "json",
 			encode: true,
 			async: false,
@@ -162,6 +193,44 @@ function sale(index2, site_url) {
 		$(".list-group").hide();
 	});
 
+	var new_date = new Date();
+	var date_to_search = new_date.toISOString().substring(0, 10);
+	var promotion_info = searchPromotion($("#branch_code").val(), date_to_search);
+	promotion_info.forEach((row) => {
+		$("#select-promotion").append(
+			'<option value="' +
+				row.code +
+				'">' +
+				row.bill_from +
+				" đến " +
+				row.bill_to +
+				" - " +
+				row.bill_value +
+				(row.bill_type == 2 ? "%" : "") +
+				"</option>"
+		);
+	});
+	$("#select-promotion").on("change", function () {
+		var code_check = $("#select-promotion").val();
+		var money = $("#order-price").data("value");
+
+		var result = promotion_info.find((item) => item.code == code_check);
+		if (
+			result != undefined &&
+			result.bill_from <= money &&
+			result.bill_to >= money
+		) {
+			$("#customer-bill-discount").data("value", result.bill_value);
+			$("#customer-bill-discount").text(
+				"" + result.bill_value + (result.bill_type == 2 ? "%" : "")
+			);
+		} else {
+			$("#customer-bill-discount").data("value", 0);
+			$("#customer-bill-discount").text("0%");
+		}
+		reloadCart();
+	});
+
 	$("#customer-money").keyup(function () {
 		displayCustomerChangeMn($("#customer-money").val());
 	});
@@ -173,7 +242,10 @@ function sale(index2, site_url) {
 				var order_info = {
 					customer: $("#customer_code").data("value"),
 					total_price: $("#order-price").data("value"),
-					discount: $("#customer-discount").data("value"),
+					discount: parseInt($("#customer-discount").data("value")),
+					discount_bill: parseInt($("#customer-bill-discount").data("value")),
+					discount_bill_type:
+						parseInt($("#customer-bill-discount").data("value")) <= 100 ? 2 : 1,
 					final_payment: $("#customer-payment").data("value"),
 					customer_money: $("#customer-money").val(),
 					customer_change: $("#change-money").data("value"),
@@ -183,6 +255,8 @@ function sale(index2, site_url) {
 				for (let row of cart_items.data) {
 					var item = {
 						product_code: row.product_code,
+						barcode: row.barcode,
+						product_name: row.product_name,
 						quantity: row.qty,
 						product_price: row.price,
 						subtotal_price: row.subtotal,
@@ -200,6 +274,43 @@ function sale(index2, site_url) {
 		} else {
 		}
 	});
+
+	$("#createorderonline").click(function () {
+		var cart_items = getAllCartItems();
+		if (cart_items.data.length > 0 && $("#customer_code").data("value") != "") {
+			var order_info = {
+				customer: $("#customer_code").data("value"),
+				total_price: $("#order-price").data("value"),
+				discount:
+					$("#customer-discount").data("value") +
+					$("#customer-bill-discount").data("value"),
+				final_payment: $("#customer-payment").data("value"),
+				customer_money: $("#customer-money").val(),
+				customer_change: $("#change-money").data("value"),
+				branch_code: $("#branch_code").val(),
+			};
+			const order_detail = [];
+			for (let row of cart_items.data) {
+				var item = {
+					product_code: row.product_code,
+					barcode: row.barcode,
+					product_name: row.product_name,
+					quantity: row.qty,
+					product_price: row.price,
+					subtotal_price: row.subtotal,
+					discount: row.percentage,
+				};
+				order_detail.push(item);
+			}
+			var order_data = {
+				order_info: order_info,
+				order_detail: order_detail,
+			};
+			createOrderOnline(order_data);
+		} else {
+		}
+	});
+
 	$(document).ready(function () {
 		deleteAllItem();
 	});

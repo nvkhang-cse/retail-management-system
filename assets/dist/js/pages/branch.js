@@ -1,11 +1,29 @@
-function branchTable(index2, site_url) {
+function branchTable(index2) {
 	"use strict";
 
 	if (index2 == 1) {
 		var table;
 		var branch_data;
 
-		branch_data = getBranchData(site_url);
+		branch_data = getBranchListData();
+
+		$.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
+			var option = $("#branch-filter-central option:selected").text();
+			var central = data[6];
+			if ($("#branch-filter-central").val() == 0 || central == option) {
+				return true;
+			}
+			return false;
+		});
+
+		$.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
+			var option = $("#branch-filter-status option:selected").text();
+			var status = data[7];
+			if ($("#branch-filter-status").val() == "" || status == option) {
+				return true;
+			}
+			return false;
+		});
 
 		table = $("#branch_list_table").DataTable({
 			data: branch_data,
@@ -17,6 +35,10 @@ function branchTable(index2, site_url) {
 						selectRow: true,
 					},
 					targets: 0,
+				},
+				{
+					orderable: false,
+					targets: [6, 7],
 				},
 			],
 			columns: [
@@ -37,6 +59,16 @@ function branchTable(index2, site_url) {
 					},
 				},
 				{
+					data: "status",
+					render: function (data, type, row, meta) {
+						if (row.status == "1") {
+							return "Mở bán";
+						} else {
+							return "Đóng cửa";
+						}
+					},
+				},
+				{
 					data: "code",
 					render: function (data, type, row, meta) {
 						var item = `<div class="btn-group">
@@ -47,16 +79,8 @@ function branchTable(index2, site_url) {
 								></button>
 								<div class="dropdown-menu">
 									<a
-										class="dropdown-item"
-										href="#"
-										data-value="${row.code}"
+										class="btn dropdown-item edit-branch-info" data-value="${row.code}"
 									>Chỉnh sửa
-									</a>
-									<a
-										class="dropdown-item"
-										href="#"
-										data-value="${row.code}"
-									>Xóa
 									</a>
 								</div>
 							</div>`;
@@ -93,7 +117,7 @@ function branchTable(index2, site_url) {
 				{
 					extend: "copy",
 					exportOptions: {
-						columns: [1, 2, 3, 4, 5, 6],
+						columns: [1, 2, 3, 4, 5, 6, 7],
 					},
 					className: "btn btn-sm",
 				},
@@ -102,7 +126,7 @@ function branchTable(index2, site_url) {
 					title: "Danh sách chi nhánh",
 					filename: "branch",
 					exportOptions: {
-						columns: [1, 2, 3, 4, 5, 6],
+						columns: [1, 2, 3, 4, 5, 6, 7],
 					},
 					className: "btn btn-sm",
 				},
@@ -111,7 +135,7 @@ function branchTable(index2, site_url) {
 					title: "Danh sách chi nhánh",
 					filename: "branch",
 					exportOptions: {
-						columns: [1, 2, 3, 4, 5, 6],
+						columns: [1, 2, 3, 4, 5, 6, 7],
 					},
 					className: "btn btn-sm",
 				},
@@ -120,7 +144,7 @@ function branchTable(index2, site_url) {
 					title: "Danh sách chi nhánh",
 					filename: "branch",
 					exportOptions: {
-						columns: [1, 2, 3, 4, 5, 6],
+						columns: [1, 2, 3, 4, 5, 6, 7],
 					},
 					className: "btn btn-sm",
 				},
@@ -129,19 +153,60 @@ function branchTable(index2, site_url) {
 					title: "Danh sách chi nhánh",
 					filename: "branch",
 					exportOptions: {
-						columns: [1, 2, 3, 4, 5, 6],
+						columns: [1, 2, 3, 4, 5, 6, 7],
 					},
 					className: "btn btn-sm",
 				},
 				{
 					extend: "colvis",
-					columns: [1, 2, 3, 4, 5, 6],
+					columns: [1, 2, 3, 4, 5, 6, 7],
 					text: "Hiển thị",
 				},
 			],
 		});
-
 		table.buttons().container().appendTo("#branch_wrapper .col-md-6:eq(0)");
+
+		$("#branch-filter-central").on("change", function () {
+			table.draw();
+		});
+
+		$("#branch-filter-status").on("change", function () {
+			table.draw();
+		});
+
+		$(".paginate_button, #branch_list_table").on("click", function () {
+			$(".edit-branch-info").on("click", function () {
+				var branch_code = $(this).data("value");
+				var branch_info = getBranchInfoByCode(branch_code);
+				$("#branch_code").val(branch_code);
+				$("#branch_name").val(branch_info[0]["name"]);
+				$("#branch_address").val(branch_info[0]["address"]);
+				$("#branch_district").val(branch_info[0]["district"]);
+				$("#branch_city").val(branch_info[0]["city"]);
+				$("#branch_phone").val(branch_info[0]["phone"]);
+				$("#branch_central").val(branch_info[0]["central"]);
+				$("#branch_status").val(branch_info[0]["status"]);
+				$("#branch_created_at").val(branch_info[0]["created_at"]);
+				$("#branch_updated_at").val(branch_info[0]["updated_at"]);
+				$("#editBranchInfo").modal("toggle");
+			});
+
+			$("#editBranchForm").submit(function (e) {
+				e.preventDefault();
+				var formData = new FormData(this);
+				$.ajax({
+					url: site_url + "api/dashboard/branch/updatebranchinfobycode",
+					type: "POST",
+					data: formData,
+					headers: { Authorization: localStorage.getItem("auth_token") },
+					contentType: false,
+					processData: false,
+					success: function (response) {
+						window.location.href = site_url + "dashboard/branch";
+					},
+				});
+			});
+		});
 	} else if (index2 == 2) {
 		$("form#branch_data").submit(function (e) {
 			e.preventDefault();
@@ -162,7 +227,7 @@ function branchTable(index2, site_url) {
 	}
 }
 
-function getBranchData(site_url) {
+function getBranchData() {
 	"use strict";
 	var branch_data;
 
@@ -170,6 +235,46 @@ function getBranchData(site_url) {
 		type: "POST",
 		url: site_url + "api/dashboard/branch/loadbranchdata",
 		dataType: "json",
+		encode: true,
+		async: false,
+		headers: { Authorization: localStorage.getItem("auth_token") },
+		success: function (response) {
+			branch_data = response.data;
+		},
+	});
+
+	return branch_data;
+}
+
+function getBranchListData() {
+	"use strict";
+	var branch_data;
+
+	$.ajax({
+		type: "POST",
+		url: site_url + "api/dashboard/branch/loadbranchlistdata",
+		dataType: "json",
+		encode: true,
+		async: false,
+		headers: { Authorization: localStorage.getItem("auth_token") },
+		success: function (response) {
+			branch_data = response.data;
+		},
+	});
+
+	return branch_data;
+}
+
+function getBranchInfoByCode(branch_code) {
+	"use strict";
+
+	var branch_data;
+
+	$.ajax({
+		type: "POST",
+		url: site_url + "api/dashboard/branch/getbranchinfobycode",
+		dataType: "json",
+		data: { branch_code: branch_code },
 		encode: true,
 		async: false,
 		headers: { Authorization: localStorage.getItem("auth_token") },

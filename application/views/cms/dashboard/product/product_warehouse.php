@@ -32,36 +32,63 @@
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body" id="warehouse_wrapper">
-                        <table cellspacing="5" cellpadding="5">
+                        <table cellspacing="5" cellpadding="5" class="mb-4">
                             <tbody>
                                 <tr>
                                     <div class="form-outline">
-                                        <td style="padding: 0;">Từ ngày:</td>
+                                        <td class="p-0">Danh mục sản phẩm:</td>
+                                        <td>
+                                            <select class="form-control" id="product-filter-category" aria-label="Default select example">
+                                                <option value="0" selected>Chọn danh mục sản phẩm</option>
+                                            </select>
+                                        </td>
+                                    </div>
+                                    <div class="form-outline">
+                                        <td class="">Số lượng bán:</td>
+                                        <td>
+                                            <select class="form-control" id="check-quantity-warehouse" aria-label="Default select example">
+                                                <option value="1">Còn hàng</option>
+                                                <option value="2">Hết hàng</option>
+                                            </select>
+                                        </td>
+                                    </div>
+                                    <div class="form-outline">
+                                        <td class="">Trạng thái:</td>
+                                        <td>
+                                            <select class="form-control" id="check-status-warehouse" aria-label="Default select example">
+                                                <option value="" selected>Chọn trạng thái</option>
+                                                <option value="1">Được bán</option>
+                                                <option value="0">Không được bán</option>
+                                            </select>
+                                        </td>
+                                    </div>
+                                </tr>
+                                <tr>
+                                    <div class="form-outline">
+                                        <td style="padding: 0;">Hạn sử dụng:</td>
                                         <td><input type="text" class="form-control" placeholder="Nhập ngày bắt đầu" id="product-filter-start-date"></td>
                                     </div>
                                     <div class="form-outline">
                                         <td>đến:</td>
                                         <td><input type="text" class="form-control" placeholder="Nhập ngày kết thúc" id="product-filter-end-date"></td>
                                     </div>
+                                    <div class="form-outline">
+                                        <td></td>
+                                        <td></td>
+                                    </div>
                                 </tr>
                                 <tr>
                                     <div class="form-outline">
-                                        <td style="padding: 0;">Giá từ:</td>
+                                        <td style="padding: 0;">Giá bản lẻ:</td>
                                         <td><input type="text" inputmode="numeric" placeholder="Nhập giá tối thiểu" class="form-control" id="product-filter-start-price"></td>
                                     </div>
                                     <div class="form-outline">
                                         <td>đến:</td>
                                         <td><input type="text" inputmode="numeric" placeholder="Nhập giá tối đa" class="form-control" id="product-filter-end-price"></td>
                                     </div>
-                                </tr>
-                                <tr>
                                     <div class="form-outline">
-                                        <td style="padding: 0;">Danh mục sản phẩm:</td>
-                                        <td>
-                                            <select class="form-control" id="product-filter-category" aria-label="Default select example">
-                                                <option value="0" selected>Chọn danh mục sản phẩm</option>
-                                            </select>
-                                        </td>
+                                        <td></td>
+                                        <td></td>
                                     </div>
                                 </tr>
                             </tbody>
@@ -109,68 +136,151 @@
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body">
-                        <div class="mb-3">
-                            <label for="product-new-name" class="col-form-label">Tên sản phẩm:</label>
-                            <input type="text" class="form-control" name="product-new-name" id="product-new-name" value="">
+                        <div class="form-group">
+                            <label for="product-name">Tên sản phẩm:</label>
+                            <input type="text" class="form-control" id="product_name" name="product_name" placeholder="" required maxlength="250">
                             <input type="text" class="form-control" name="product-code" id="product-code" value="" hidden>
                         </div>
-                        <div class="mb-3">
-                            <label class="col-form-label">Thương hiệu:</label>
-                            <input type="text" class="form-control" name="product-new-brand" id="product-new-brand" value="">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="product_barcode">Barcode</label>
+                                    <input type="text" class="form-control" id="product_barcode" name="product_barcode" placeholder="Mã vạch sản phẩm" maxlength="30">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="product_brand">Thương hiệu</label>
+                                    <input type="text" class="form-control" id="product_brand" name="product_brand" placeholder="" maxlength="30">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="product_origin">Xuất sứ</label>
+                                    <input type="text" class="form-control" id="product_origin" name="product_origin" placeholder="" maxlength="30">
+                                </div>
+                            </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-6">
-                                <label for="product-new-goodscost" class="col-form-label">Giá nhập:</label>
-                                <input class="form-control" name="product-new-goodscost" id="product-new-goodscost" value="">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="product_quantity_warehouse">Số lượng trong kho</label>
+                                    <input type="number" class="form-control" id="product_quantity_warehouse" name="product_quantity_warehouse" placeholder="Số lượng khởi tạo ban đầu" required min="0">
+                                </div>
                             </div>
-                            <div class="col-md-6">
-                                <label for="product-new-retailprice" class="col-form-label">Giá bán:</label>
-                                <input class="form-control" name="product-new-retailprice" id="product-new-retailprice">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="product_quantity_sale">Số lượng được bán</label>
+                                    <input type="number" class="form-control" id="product_quantity_sale" name="product_quantity_sale" placeholder="Số lượng cho phép bán" required min="0">
+                                </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-4">
-                                <label class="col-form-label">Số lượng:</label>
-                                <input type="text" class="form-control" name="product-new-qty" id="product-new-qty" value="">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="product_capacity">Dung tích</label>
+                                    <input type="number" class="form-control" id="product_capacity" name="product_capacity" placeholder="" min="0">
+                                </div>
                             </div>
-                            <div class="col-md-4">
-                                <label class="col-form-label">Dung tích:</label>
-                                <input type="text" class="form-control" name="product-new-capacity" id="product-new-capacity" value="">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="product_unit">Đơn vị</label>
+                                    <select class="form-control" id="product_unit" name="product_unit">
+                                        <option value="Không">Không</option>
+                                        <option value="ml">ml</option>
+                                        <option value="l">L</option>
+                                        <option value="g">g</option>
+                                        <option value="kg">Kg</option>
+                                    </select>
+                                </div>
                             </div>
-                            <div class="col-md-4">
-                                <label class="col-form-label">Đơn vị:</label>
-                                <input type="text" class="form-control" name="product-new-unit" id="product-new-unit" value="">
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="product_expired_date">Ngày hết hạn</label>
+                                    <input type="date" class="form-control" pattern="\d{4}-\d{2}-\d{2}" id="product_expired_date" name="product_expired_date" placeholder="2025-01-30">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="product_published">Trạng thái</label>
+                                    <select class="form-control" id="product_published" name="product_published">
+                                        <option value="0">Không được bán</option>
+                                        <option value="1">Được bán</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                        <div class="mb-3">
-                            <label class="col-form-label">Trạng thái:</label><br>
-                            <input type="radio" name="product-new-status" id="product-published" value="1">
-                            <label>Mở bán</label><br>
-
-                            <input type="radio" name="product-new-status" id="product-unpublished" value="0">
-                            <label>Khóa</label><br>
-
-                            <!-- <input type="radio" class="form-control" id=""> -->
-
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="product_cost">Giá nhập</label>
+                                    <input type="number" class="form-control" id="product_cost" name="product_cost" placeholder="" min="0">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="product_wholesale">Giá bán buôn</label>
+                                    <input type="number" class="form-control" id="product_wholesale" name="product_wholesale" placeholder="" min="0">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="product_retail">Giá bán lẻ</label>
+                                    <input type="number" class="form-control" id="product_retail" name="product_retail" placeholder="" min="0">
+                                </div>
+                            </div>
                         </div>
-                        <div class="mb-3">
-                            <label class="col-form-label">Thành phần:</label>
-                            <input type="text" class="form-control" name="product-new-ingred" id="product-new-ingred" value="">
+                        <div class="form-group">
+                            <label for="product_description">Mô tả sản phẩm</label>
+                            <textarea class="form-control" id="product_description" name="product_description" rows="5" placeholder="Mô tả về công dụng, thương hiệu, chi tiết,..."></textarea>
                         </div>
-                        <div class="mb-3">
-                            <label class="col-form-label">Mô tả:</label>
-                            <input type="text" class="form-control" name="product-new-description" id="product-new-description" value="">
+                        <div class="form-group">
+                            <label for="product_ingred">Thành phần</label>
+                            <textarea class="form-control" id="product_ingred" name="product_ingred" rows="5" placeholder=""></textarea>
                         </div>
-                        <!-- <button class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                        <button type="submit" value="Submit" class="btn btn-primary" id="submit-edit-form" disabled hidden>Lưu thông tin</button>
-                        <button class="btn btn-primary" id="open-edit-form">Chỉnh sửa thông tin</button> -->
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="product_category">Loại sản phẩm</label>
+                                    <select class="form-control" id="product_category" name="product_category">
+                                        <option value="0">Chưa phân loại</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="product_warehouse">Chọn chi nhánh</label>
+                                    <select class="form-control" id="product_warehouse" name="product_warehouse">
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="file" id="product_file" name="product_file" class="d-none">
+                            <label for="product_file" class="text-primary">+ Thêm ảnh</label><br>
+                            <img src="<?php echo base_url(); ?>/assets/dist/img/product/default_photo.jpg" id="product_photo" class="img-rounded img-fluid">
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="product_created_at">Ngày tạo</label>
+                                    <input type="text" class="form-control" id="product_created_at" name="product_created_at" disabled>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="product_updated_at">Ngày cập nhật</label>
+                                    <input type="text" class="form-control" id="product_updated_at" name="product_updated_at" disabled>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-
                     <div class="modal-footer">
                         <button class="btn btn-secondary" data-dismiss="modal">Đóng</button>
                         <button type="submit" value="Submit" class="btn btn-primary" id="submit-edit-form">Lưu thông tin</button>
                     </div>
-
                 </div>
             </div>
         </form>

@@ -29,16 +29,10 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label for="promotion_code">Mã khuyến mãi</label>
-                                        <input type="text" class="form-control" id="promotion_code" name="promotion_code" placeholder="" required maxlength="10">
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
                                         <label for="promotion_type">Loại khuyến mãi</label>
                                         <select class="form-control" id="promotion_type" name="promotion_type" required>
                                             <option value="1">Hóa đơn</option>
-                                            <option value="2">Giảm giá sản phẩm</option>
+                                            <!-- <option value="2">Giảm giá sản phẩm</option> -->
                                         </select>
                                     </div>
                                 </div>
@@ -98,7 +92,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class=" card card-lightblue d-none" id="promotion_product_wrapper">
+                    <!-- <div class=" card card-lightblue d-none" id="promotion_product_wrapper">
                         <div class="card-header">
                             <h5 class="card-title">Giảm giá sản phẩm</h5>
                         </div>
@@ -118,7 +112,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="col-md-4">
                     <div class="card card-lightblue">

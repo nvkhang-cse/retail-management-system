@@ -1,6 +1,5 @@
 function updateCartItem(obj, rowid) {
 	"use strict";
-	var site_url = window.location.origin + "/LVTNCI-3/";
 	$.ajax({
 		type: "POST",
 		data: { rowid: rowid, qty: obj.value },
@@ -16,7 +15,6 @@ function updateCartItem(obj, rowid) {
 
 function deleteCartItem(rowid) {
 	"use strict";
-	var site_url = window.location.origin + "/LVTNCI-3/";
 	$.ajax({
 		type: "POST",
 		data: { rowid: rowid },
@@ -32,7 +30,6 @@ function deleteCartItem(rowid) {
 
 function deleteAllItem() {
 	"use strict";
-	var site_url = window.location.origin + "/LVTNCI-3/";
 	$.ajax({
 		type: "POST",
 		url: site_url + "api/dashboard/sale/removeAllItem",
@@ -46,7 +43,6 @@ function deleteAllItem() {
 }
 
 function getAllCartItems() {
-	var site_url = window.location.origin + "/LVTNCI-3/";
 	var cartItems;
 	$.ajax({
 		type: "POST",
@@ -157,7 +153,8 @@ function displayCart(product_detail) {
 	$("#order-price").text(total_payment);
 	calculateCustomerPayment(
 		total_payment,
-		$("#customer-discount").data("value")
+		parseInt($("#customer-discount").data("value")),
+		parseInt($("#customer-bill-discount").data("value"))
 	);
 	calculateCustomerChange(
 		$("#customer-money").val(),
@@ -166,13 +163,11 @@ function displayCart(product_detail) {
 }
 
 function getCustomerDiscount(group_code) {
-	var site_url = window.location.origin + "/LVTNCI-3/";
-
 	var discount_info;
 	$.ajax({
 		type: "POST",
 		data: { group_code: group_code },
-		url: site_url + "api/dashboard/customer/getCustomerDiscount",
+		url: site_url + "api/dashboard/customer/getcustomerdiscount",
 		dataType: "json",
 		encode: true,
 		async: false,
@@ -194,8 +189,13 @@ function displayCustomerInfo(customer_info) {
 	$("#customer_code").text(info[0]["name"]);
 	$("#customer_address").text(info[0]["district"] + ", " + info[0]["city"]);
 	var cus_discount = getCustomerDiscount(info[0]["group_code"]);
-	$("#customer-discount").data("value", cus_discount["discount"]);
-	$("#customer-discount").text(cus_discount["discount"] + "%");
+	$("#customer-discount").data(
+		"value",
+		cus_discount != 0 ? cus_discount["discount"] : 0
+	);
+	$("#customer-discount").text(
+		(cus_discount != 0 ? cus_discount["discount"] : 0) + "%"
+	);
 	$("#customer_group").text(cus_discount["name"]);
 	reloadCart();
 }
@@ -215,8 +215,17 @@ function displayCustomerChangeMn(customer_money) {
 	reloadCart();
 }
 
-function calculateCustomerPayment(order_price, discount = 0) {
-	var fin_payment = order_price * (1 - discount / 100);
+function calculateCustomerPayment(
+	order_price,
+	discount = 0,
+	discount_bill = 0
+) {
+	var fin_payment;
+	if (discount_bill <= 100) {
+		fin_payment = order_price * (1 - (discount + discount_bill) / 100);
+	} else {
+		fin_payment = order_price * (1 - discount / 100) - discount_bill;
+	}
 	$("#customer-payment").data("value", fin_payment);
 	$("#customer-payment").text(fin_payment);
 }
@@ -228,12 +237,50 @@ function calculateCustomerChange(customer_money, fin_payment) {
 }
 
 function submitOrder(order_data) {
-	var site_url = window.location.origin + "/LVTNCI-3/";
-
 	$.ajax({
 		type: "POST",
 		data: order_data,
 		url: site_url + "api/dashboard/sale/createOrder",
+		dataType: "json",
+		encode: true,
+		headers: { Authorization: localStorage.getItem("auth_token") },
+		success: function (response) {
+			toastr.options = {
+				closeButton: true,
+				debug: false,
+				newestOnTop: false,
+				progressBar: false,
+				positionClass: "toast-top-right",
+				preventDuplicates: false,
+				onclick: null,
+				showDuration: "300",
+				hideDuration: "300",
+				timeOut: "2000",
+				extendedTimeOut: "1000",
+				showEasing: "swing",
+				hideEasing: "linear",
+				showMethod: "fadeIn",
+				hideMethod: "fadeOut",
+			};
+
+			toastr.success(response.message);
+
+			$("#gsearchsimple, #customersearch").val("");
+			$("#customer-money").val(0);
+			deleteCustomerInfo();
+			deleteAllItem();
+		},
+		error: function (error) {
+			toastr.error(error.responseJSON.message);
+		},
+	});
+}
+
+function createOrderOnline(order_data) {
+	$.ajax({
+		type: "POST",
+		data: order_data,
+		url: site_url + "api/dashboard/sale/createOrderOnline",
 		dataType: "json",
 		encode: true,
 		headers: { Authorization: localStorage.getItem("auth_token") },

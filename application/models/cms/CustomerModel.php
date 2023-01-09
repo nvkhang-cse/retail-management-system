@@ -16,6 +16,18 @@ class CustomerModel extends CI_Model
         $this->db->insert($this->customer_table, $data);
     }
 
+    public function update_customer($customer_code, $update_info)
+    {
+        $this->db->where('customer_code', $customer_code);
+        $this->db->update($this->customer_table, $update_info);
+    }
+
+    public function delete_customer_by_code($customer_code)
+    {
+        $this->db->where('customer_code', $customer_code);
+        $this->db->delete($this->customer_table);
+    }
+
     public function search_customer($data)
     {
         $this->db->from($this->customer_table);
@@ -38,5 +50,14 @@ class CustomerModel extends CI_Model
     {
         $this->db->where('customer_code', $customer_code);
         $this->db->update($this->customer_table, array('spend' => $spend));
+    }
+
+    public function get_customer_by_group_code($code)
+    {
+        $this->db->from($this->customer_table);
+        $this->db->where('group_code', $code);
+
+        $query = $this->db->get();
+        return $query->result();
     }
 }

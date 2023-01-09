@@ -68,8 +68,8 @@
                 <input type="text" class="form-control" id="customer_district" name="customer_district" placeholder="Quận, huyện">
               </div>
               <div class="form-group">
-                <label for="customer_cities">Khu vực</label>
-                <input type="text" class="form-control" id="customer_cities" name="customer_city" placeholder="Khu vực, thành phố">
+                <label for="customer_city">Khu vực</label>
+                <input type="text" class="form-control" id="customer_city" name="customer_city" placeholder="Khu vực, thành phố">
               </div>
             </div>
           </div>

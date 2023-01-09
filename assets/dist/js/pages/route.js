@@ -1,10 +1,12 @@
+const site_url = window.location.origin + "/LVTNCI-3/";
+
 $(function () {
 	"use strict";
 	$(document).ready(function () {
 		if (localStorage.getItem("auth_token")) {
 			var index = $("#index").val();
 			var index2 = $("#index2").val();
-			var site_url = window.location.origin + "/LVTNCI-3/";
+
 			var url_attr;
 			var permission_check;
 
@@ -101,7 +103,7 @@ $(function () {
 				headers: { Authorization: localStorage.getItem("auth_token") },
 				success: function (response) {
 					$("#page_content").html(response.data);
-					$("#page_content").on("load", add_script(index, index2, site_url));
+					$("#page_content").on("load", add_script(index, index2));
 				},
 			});
 		} else {
@@ -110,28 +112,28 @@ $(function () {
 	});
 });
 
-function add_script(index, index2, site_url) {
+function add_script(index, index2) {
 	if (index == 1) {
 		$.getScript(site_url + "assets/dist/js/barChart.js");
-		homepage(index2, site_url);
+		homepage(index2);
 	} else if (index == 2) {
-		productTable(index2, site_url);
+		productTable(index2);
 	} else if (index == 3) {
-		customerTable(index2, site_url);
+		customerTable(index2);
 	} else if (index == 4) {
-		sale(index2, site_url);
+		sale(index2);
 	} else if (index == 5) {
-		order(index2, site_url);
+		order(index2);
 	} else if (index == 6) {
-		cashBookTable(index2, site_url);
+		cashBookTable(index2);
 	} else if (index == 7) {
 	} else if (index == 8) {
-		promotionTable(index2, site_url);
+		promotionTable(index2);
 	} else if (index == 9) {
 		if (index2 == 1 || index2 == 2) {
-			branchTable(index2, site_url);
+			branchTable(index2);
 		} else if (index2 == 3 || index2 == 4) {
-			employeeTable(index2, site_url);
+			employeeTable(index2);
 		}
 	}
 }

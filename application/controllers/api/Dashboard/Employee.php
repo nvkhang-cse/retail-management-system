@@ -220,4 +220,212 @@ class Employee extends RestController
             $this->response($message, RestController::HTTP_NOT_FOUND);
         }
     }
+
+    public function getemployeename_post()
+    {
+        $this->load->library('Authorization_Token');
+        /**
+         * User Token Validation
+         */
+        $data = $this->security->xss_clean($this->post());
+
+        $is_valid_token = $this->authorization_token->validateToken();
+        if (!empty($is_valid_token) and $is_valid_token['status'] === TRUE) {
+
+            $result = $this->UserModel->get_user_name($data['employee_id']);
+            $message = [
+                'status' => true,
+                'data' => $result,
+                'message' => "Get name successful"
+            ];
+            $this->response($message, RestController::HTTP_OK);
+        } else {
+            $message = [
+                'status' => false,
+                'message' => "Can't get name of user"
+            ];
+            $this->response($message, RestController::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function getemployeeinfo_post()
+    {
+        $this->load->library('Authorization_Token');
+        /**
+         * User Token Validation
+         */
+        $data = $this->security->xss_clean($this->post());
+
+        $is_valid_token = $this->authorization_token->validateToken();
+        if (!empty($is_valid_token) and $is_valid_token['status'] === TRUE) {
+            $this->load->model('cms/UserModel');
+
+            $user_data = $this->authorization_token->userData();
+            $permission_data = $this->UserModel->get_permission_of_user($user_data->id);
+            $branch_code_data = $this->UserModel->get_branchcode_of_user($user_data->id);
+
+            if ($permission_data[0]->permission == "1") {
+                $return_data = $this->UserModel->get_user_info_by_admin($data["employee_id"]);
+                $return_data["0"]->pwd = "";
+            } else if ($permission_data[0]->permission == "2") {
+                $return_data = $this->UserModel->get_user_info_by_manager($data["employee_id"], $branch_code_data);
+                $return_data["0"]->pwd = "";
+            } else {
+                $message = [
+                    'status' => false,
+                    'message' => "Not allowed!"
+                ];
+                $this->response($message, RestController::HTTP_METHOD_NOT_ALLOWED);
+            }
+            $message = [
+                'status' => true,
+                'data' => $return_data,
+                'message' => "Load data successful"
+            ];
+            $this->response($message, RestController::HTTP_OK);
+        } else {
+            $message = [
+                'status' => false,
+                'message' => "Can't load data"
+            ];
+            $this->response($message, RestController::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function updateemployeeinfobycode_post()
+    {
+        $this->load->library('Authorization_Token');
+        /**
+         * User Token Validation
+         */
+        $is_valid_token = $this->authorization_token->validateToken();
+        if (!empty($is_valid_token) and $is_valid_token['status'] === TRUE) {
+
+            $data = $this->security->xss_clean($this->post());
+            $this->load->model('cms/UserModel');
+
+            $user_data = $this->authorization_token->userData();
+            $branch_code_data = $this->UserModel->get_branchcode_of_user($user_data->id);
+            $permission_data = $this->UserModel->get_permission_of_user($user_data->id);
+
+
+            if ($permission_data[0]->permission == 1 || $permission_data[0]->permission == 2) {
+                // Form Validation
+                $this->form_validation->set_data($data);
+                $this->form_validation->set_error_delimiters('', '');
+                $this->form_validation->set_rules('employee_name', 'Tên nhân viên', 'trim|required|max_length[250]');
+                $this->form_validation->set_rules('employee_email', 'Email', 'trim|required|max_length[100]|valid_email');
+                if ($data["employee_password"] != "" || $data["employee_password"] != "") {
+                    $this->form_validation->set_rules('employee_password', 'Mật khẩu', 'trim|required|min_length[6]|max_length[150]|alpha_numeric');
+                    $this->form_validation->set_rules('employee_confirm', 'Nhập lại mật khẩu', 'trim|required|min_length[6]|max_length[150]|alpha_numeric|matches[employee_password]');
+                }
+                $this->form_validation->set_rules('employee_phone', 'Số điện thoại', 'trim|max_length[20]|numeric');
+                $this->form_validation->set_rules('employee_birthday', 'Sinh nhật', 'trim|max_length[15]|regex_match[/[0-9]{4}\-[0-9]{2}\-[0-9]{2}/]');
+                $this->form_validation->set_rules('employee_address', 'Địa chỉ', 'trim|max_length[250]');
+                $this->form_validation->set_rules('employee_city', 'Khu vực', 'trim|max_length[50]');
+                $this->form_validation->set_rules('employee_district', 'Quận huyện', 'trim|max_length[50]');
+                $this->form_validation->set_rules('employee_branch', 'Chi nhánh', 'trim|required|max_length[30]|alpha_dash');
+
+                if ($permission_data[0]->permission == 1) {
+                    $this->form_validation->set_rules('employee_permission', 'Phân quyền', 'trim|required|in_list[2,3]');
+                } else if ($permission_data[0]->permission == 2) {
+                    $this->form_validation->set_rules('employee_permission', 'Phân quyền', 'trim|required|in_list[3]');
+                }
+
+                if ($this->form_validation->run() == FALSE) {
+                    $message = array(
+                        'status'    =>  false,
+                        'error'     =>  $this->form_validation->error_array(),
+                        'message'   =>  validation_errors()
+                    );
+                    $this->response($message, RestController::HTTP_NOT_FOUND);
+                } else {
+                    if ($branch_code_data[0]->branch_code == "ALL" || $branch_code_data[0]->branch_code == $data['employee_branch']) {
+                        $update_data = [
+                            'fullname'             => $data['employee_name'],
+                            'email'                => $data['employee_email'],
+                            'phone'                => $data['employee_phone'],
+                            'birthday'             => $data['employee_birthday'],
+                            'address'              => $data['employee_address'],
+                            'city'                 => $data['employee_city'],
+                            'district'             => $data['employee_district'],
+                            'branch_code'          => $data['employee_branch'],
+                            'permission'           => $data['employee_permission'],
+                            'state'                => $data['employee_status'],
+                        ];
+                        if ($data["employee_password"] != "") {
+                            $update_data['pwd'] = md5($data['employee_password']);
+                        }
+
+                        $this->UserModel->update_user($data['employee_code'], $update_data);
+                        $message = [
+                            'status' => true,
+                            'data' => 'success',
+                            'message' => "Save employee successful"
+                        ];
+                        $this->response($message, RestController::HTTP_OK);
+                    } else {
+                        $message = [
+                            'status' => false,
+                            'message' => "Not allowed!"
+                        ];
+                        $this->response($message, RestController::HTTP_METHOD_NOT_ALLOWED);
+                    }
+                }
+            } else {
+                $message = [
+                    'status' => false,
+                    'message' => "Not allowed!"
+                ];
+                $this->response($message, RestController::HTTP_METHOD_NOT_ALLOWED);
+            }
+        } else {
+            $message = [
+                'status' => false,
+                'message' => "Can't save employee"
+            ];
+            $this->response($message, RestController::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function deleteemployeebycode_post()
+    {
+        $this->load->library('Authorization_Token');
+        /**
+         * User Token Validation
+         */
+        $is_valid_token = $this->authorization_token->validateToken();
+        if (!empty($is_valid_token) and $is_valid_token['status'] === TRUE) {
+            $data = $this->security->xss_clean($this->post());
+            $this->load->model('cms/UserModel');
+
+            $user_data = $this->authorization_token->userData();
+            $permission_data = $this->UserModel->get_permission_of_user($user_data->id);
+            $branch_code_data = $this->UserModel->get_branchcode_of_user($user_data->id);
+
+            if ($permission_data[0]->permission == "1") {
+                $this->UserModel->delete_employee_by_admin($data["employee_code"]);
+            } else if ($permission_data[0]->permission == "2") {
+                $this->UserModel->delete_employee_by_manager($data["employee_code"], $branch_code_data[0]->branch_code);
+            } else {
+                $message = [
+                    'status' => false,
+                    'message' => "Not allowed!"
+                ];
+                $this->response($message, RestController::HTTP_METHOD_NOT_ALLOWED);
+            }
+
+            $message = [
+                'status' => true,
+                'message' => "Load data successful"
+            ];
+            $this->response($message, RestController::HTTP_OK);
+        } else {
+            $message = [
+                'status' => false,
+                'message' => "Can't load data"
+            ];
+            $this->response($message, RestController::HTTP_NOT_FOUND);
+        }
+    }
 }
