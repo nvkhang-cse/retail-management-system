@@ -29,7 +29,7 @@ $(function () {
 				$("#branch_list_page").hide();
 			} else {
 				$(
-					"#home_page, #product_warehouse_page, #product_import_page, #product_transfer_page, #product_trash_page, #cashbook_list_page, #receipt_income_page, #receipt_outcome_page, #report_page, #branch_list_page, #employee_list_page, #cashbook_wrapper_page,#system_setting_page, #customer_group_list_page, #promotion_list_page"
+					"#home_page, #product_warehouse_page, #product_import_page, #product_transfer_page, #product_trash_page, #cashbook_list_page, #receipt_income_page, #receipt_outcome_page, #report_page, #branch_list_page, #employee_list_page, #cashbook_wrapper_page,#system_setting_page, #customer_group_list_page, #promotion_list_page, #product_page"
 				).hide();
 			}
 

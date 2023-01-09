@@ -205,12 +205,8 @@ function productTable(index2) {
 		});
 
 		var minDate, maxDate;
-		minDate = new DateTime($("#product-filter-start-date"), {
-			format: "MMMM Do YYYY",
-		});
-		maxDate = new DateTime($("#product-filter-end-date"), {
-			format: "MMMM Do YYYY",
-		});
+		minDate = new DateTime($("#product-filter-start-date"));
+		maxDate = new DateTime($("#product-filter-end-date"));
 		$.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
 			var min = minDate.val();
 			var max = maxDate.val();
@@ -465,7 +461,8 @@ function productTable(index2) {
 					}
 				});
 
-				$("form").submit(function () {
+				$("#editProductForm").submit(function (e) {
+					e.preventDefault();
 					var formData = new FormData(this);
 					$.ajax({
 						url: site_url + "api/dashboard/product/updateproductinfobycode",
@@ -474,6 +471,7 @@ function productTable(index2) {
 						headers: { Authorization: localStorage.getItem("auth_token") },
 						contentType: false,
 						processData: false,
+						encode: true,
 						success: function (response) {
 							window.location.href =
 								site_url + "dashboard/product/loadproductwarehouse";

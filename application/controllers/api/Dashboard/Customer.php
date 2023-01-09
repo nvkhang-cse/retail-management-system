@@ -102,7 +102,7 @@ class Customer extends RestController
             $this->form_validation->set_data($data);
             $this->form_validation->set_error_delimiters('', '');
             $this->form_validation->set_rules('customer_name', 'Tên khách hàng', 'trim|required|max_length[100]');
-            $this->form_validation->set_rules('customer_group', 'Mã nhóm khách hàng', 'trim|max_length[5]|alpha_numeric');
+            $this->form_validation->set_rules('customer_group', 'Mã nhóm khách hàng', 'trim|max_length[30]|alpha_dash');
             $this->form_validation->set_rules('customer_phone', 'Số điện thoại', 'trim|required|max_length[20]|numeric');
             $this->form_validation->set_rules('customer_email', 'Email', 'trim|max_length[100]|valid_email');
             $this->form_validation->set_rules('customer_city', 'Khu vực', 'trim|max_length[50]');
@@ -238,7 +238,7 @@ class Customer extends RestController
             $this->form_validation->set_data($data);
             $this->form_validation->set_error_delimiters('', '');
             $this->form_validation->set_rules('customer_name', 'Tên khách hàng', 'trim|required|max_length[100]');
-            $this->form_validation->set_rules('customer_group', 'Mã nhóm khách hàng', 'trim|max_length[5]|alpha_numeric');
+            $this->form_validation->set_rules('customer_group', 'Mã nhóm khách hàng', 'trim|max_length[30]|alpha_dash');
             $this->form_validation->set_rules('customer_phone', 'Số điện thoại', 'trim|required|max_length[20]|numeric');
             $this->form_validation->set_rules('customer_email', 'Email', 'trim|max_length[100]|valid_email');
             $this->form_validation->set_rules('customer_city', 'Khu vực', 'trim|max_length[50]');

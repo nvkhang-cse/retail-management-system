@@ -187,7 +187,7 @@ function displayCustomerInfo(customer_info) {
 	$("#customer_phone").text(info[0]["phone"]);
 	$("#customer_code").data("value", info[0]["customer_code"]);
 	$("#customer_code").text(info[0]["name"]);
-	$("#customer_address").text(info[0]["district"] + ", " + info[0]["city"]);
+	$("#customer_address").text(info[0]["district"] + " " + info[0]["city"]);
 	var cus_discount = getCustomerDiscount(info[0]["group_code"]);
 	$("#customer-discount").data(
 		"value",

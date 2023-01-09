@@ -113,7 +113,7 @@
                 </p>
               </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" id="product_page">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-box"></i>
                 <p>
@@ -134,7 +134,7 @@
                     <p>Quản lý sản phẩm</p>
                   </a>
                 </li>
-                <li class="nav-item" id="product_import_page">
+                <!-- <li class="nav-item" id="product_import_page">
                   <a href="#" class="nav-link">
                     <i class="fas fa-angle-right nav-icon"></i>
                     <p>Nhập hàng</p>
@@ -145,7 +145,7 @@
                     <i class="fas fa-angle-right nav-icon"></i>
                     <p>Chuyển hàng</p>
                   </a>
-                </li>
+                </li> -->
                 <li class="nav-item" id="product_trash_page">
                   <a href="<?= site_url("dashboard/product/loadproducttrash") ?>" class="nav-link">
                     <i class="fas fa-angle-right nav-icon"></i>

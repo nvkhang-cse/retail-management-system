@@ -426,9 +426,10 @@ class Product extends RestController
     public function updateproductinfobycode_post()
     {
         $this->load->library('Authorization_Token');
-        $data = $this->security->xss_clean($this->post());
+
         $is_valid_token = $this->authorization_token->validateToken();
         if (!empty($is_valid_token) and $is_valid_token['status'] === TRUE) {
+            $data = $this->security->xss_clean($this->post());
             $update_info = array(
                 'title'                 => $data['product_name'],
                 'barcode'               => $data['product_barcode'],
