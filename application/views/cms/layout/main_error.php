@@ -70,7 +70,7 @@
             <img src="<?php echo base_url(); ?>/assets/dist/img/user8-128x128.jpg" class="img-circle elevation-2" alt="User Image">
           </div>
           <div class="info">
-            <a href="#" class="d-block">Nguyễn Duy Kiên</a>
+            <a href="#" class="d-block" id="user_full_name">Loading</a>
           </div>
         </div>
 

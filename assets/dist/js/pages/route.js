@@ -102,6 +102,7 @@ $(function () {
 				encode: true,
 				headers: { Authorization: localStorage.getItem("auth_token") },
 				success: function (response) {
+					$("#user_full_name").text(localStorage.getItem("full_name"));
 					$("#page_content").html(response.data);
 					$("#page_content").on("load", add_script(index, index2));
 				},

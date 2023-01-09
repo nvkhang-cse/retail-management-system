@@ -63,6 +63,7 @@ class Signin extends RestController
 
                 $return_data = [
                     'token' => $user_token,
+                    'full_name' => $output->fullname,
                 ];
 
                 // Login Success
